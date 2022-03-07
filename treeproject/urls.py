@@ -26,6 +26,7 @@ import account
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('account/',include('account.urls')),
+    path('projects/',include('projects.urls')),
     path('social-auth/',include('social_django.urls',namespace='social')),
     path('',account.views.home,name='index'),
     path('dashboard/',account.views.dashboard,name='dashboard'),

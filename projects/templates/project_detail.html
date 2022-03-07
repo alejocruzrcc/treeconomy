@@ -1,0 +1,16 @@
+{% block content %}
+  <h1>Name: {{ project.name }}</h1>
+
+  <p><strong>Coordinates:</strong> {{ project.coordinates }}</p> 
+  <p><strong>Number of trees:</strong> {{ project.n_trees }}</p>
+  <p><strong>Plantation date:</strong> {{ project.plantation_date }}</p> 
+  <p><strong>Tree type:</strong> {{ project.tree_type }}</p>  
+  <p><strong>Number of hectares:</strong> {{ project.n_hectares }}</p>  
+  <p><strong>Trees left:</strong> {{ project.trees_left }}</p>  
+  <p><strong>Link to Google Earth:</strong> <a href=""> {{ project.project_link }} </a></p> 
+
+
+  <div> 
+    <p><a href="{% url 'home' %}">Go home</a></p>
+  </div>  
+{% endblock %}

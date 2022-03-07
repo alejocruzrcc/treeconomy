@@ -15,7 +15,6 @@ DATABASES = {
     'default': {
         'ENGINE': 'djongo',
         'NAME': env('DB_NAME'),
-        'ENFORCE_SCHEMA': False,
         'CLIENT': {
             'host': 'mongodb://localhost:27017',
             'uuidRepresentation': 'standard',

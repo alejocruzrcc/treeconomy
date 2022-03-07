@@ -17,6 +17,7 @@ from pathlib import Path
 import os
 import environ
 
+
 env = environ.Env(
     # set casting, default value
     DEBUG=(bool, False)
@@ -36,7 +37,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 THIRD_PARTY_APPS = []
 
-LOCAL_APPS = []
+LOCAL_APPS = ['projects', 'billing']
 
 DJANGO_APPS = [
     'account.apps.AccountConfig',
@@ -49,6 +50,7 @@ DJANGO_APPS = [
     'social_django',
     'django_extensions',
     'widget_tweaks',
+    'phonenumber_field',
     
 ]
 
@@ -70,7 +72,7 @@ ROOT_URLCONF = 'treeproject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [(os.path.join(BASE_DIR, '../templates')),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

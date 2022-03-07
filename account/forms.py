@@ -2,6 +2,8 @@ from django import forms
 from django.contrib.auth.models import User
 from .models import Profile
 from django.contrib.auth.forms import PasswordResetForm
+from .models import Subscription, ProjectByInvestor
+OPTIONS = (('Active', 'Active'), ('Closed', 'Closed'), ('On hold', 'On hold'))
 
 class EmailValidationOnForgotPassword(PasswordResetForm):
 
@@ -51,7 +53,22 @@ class UserEditForm(forms.ModelForm):
 class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ('date_of_birth','photo')
+        fields = '__all__'
+
+class SubscriptionForm(forms.ModelForm):
+    status = forms.ChoiceField(choices=OPTIONS, required=True) 
+
+    class Meta:
+        model = Subscription
+        fields = ('investor', 'current_payment', 'next_payment', 'status', 'total', 'start_date', 'last_order_date', 'n_projects')
+    
+    def clean_status(self):
+        status = self.cleaned_data['status']
+        if not status:
+            raise forms.ValidationError('You have to provide a status for this subscription')
+        
+        return status
+
 
 
 

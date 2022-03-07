@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Projects{% endblock %}
+
+{% block content %}
+  <h1>Projects List</h1>
+  {% if project_list %}
+  <ul>
+    {% for project in project_list %}
+        <div class="card text-left">
+          <img class="card-img-top" src="holder.js/100px180/" alt="">
+          <div class="card-body">
+            <h4 class="card-title"><a href="{{ project.get_absolute_url }}">{{ project.name }}</a> </h4>
+            <p class="card-text">Trees: ({{project.trees_left}})</p>
+            
+          </div>
+        </div>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are not available projects.</p>
+  {% endif %}      
+
+{% endblock %}
