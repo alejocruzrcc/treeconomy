@@ -3,20 +3,36 @@
 {% block title %}Projects{% endblock %}
 
 {% block content %}
-  <h1>Projects List</h1>
+  
+  <div class="row">
+    <div class="col-6">
+      <h1>Projects List</h1>
+    </div>
+     <div class="col-6">
+      <a name="" id="" class="btn btn-success " href="{% url 'crear' %}" role="button"> Create a project</a>
+    </div>
+  </div>
+
+ 
   {% if project_list %}
-  <ul>
+  <div class="row row-cols-1 row-cols-md-2">
     {% for project in project_list %}
-        <div class="card text-left">
-          <img class="card-img-top" src="holder.js/100px180/" alt="">
-          <div class="card-body">
-            <h4 class="card-title"><a href="{{ project.get_absolute_url }}">{{ project.name }}</a> </h4>
-            <p class="card-text">Trees: ({{project.trees_left}})</p>
-            
-          </div>
-        </div>
+    <div class="col mb-4">
+    <div class="card text-left">
+      {% if project.image %}
+        <img class="card-img-top" src="{{project.image.url}}" height="200">
+      {% endif %}
+      <div class="card-body">
+        <h4 class="card-title"><a href="{{ project.get_absolute_url }}">{{ project.name }}</a> </h4>
+        <p class="card-text">Trees: ({{project.trees_left}})</p> 
+        <a class="btn btn-success" href="{% url 'editar' project.pk  %}"role="button">Edit</a>
+        <a class="btn btn-danger" href="{% url 'eliminar' project.pk %}" role="button">Delete</a>
+      </div>
+    </div>
+  </div>
     {% endfor %}
-  </ul>
+  </div>
+
   {% else %}
     <p>There are not available projects.</p>
   {% endif %}      

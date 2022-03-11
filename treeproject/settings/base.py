@@ -51,6 +51,8 @@ DJANGO_APPS = [
     'django_extensions',
     'widget_tweaks',
     'phonenumber_field',
+    'bootstrap5',
+
     
 ]
 
@@ -67,6 +69,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+
 ROOT_URLCONF = 'treeproject.urls'
 
 TEMPLATES = [
@@ -77,6 +80,7 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
+                'django.template.context_processors.media', 
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',

@@ -49,11 +49,21 @@ class UserEditForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('first_name','last_name','email')
+    def __init__(self, *args, **kwargs):
+        super(UserEditForm, self).__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-control'
 
 class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = '__all__'
+        exclude = ['user']
+        
+    def __init__(self, *args, **kwargs):
+        super(ProfileEditForm, self).__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-control'
 
 class SubscriptionForm(forms.ModelForm):
     status = forms.ChoiceField(choices=OPTIONS, required=True) 

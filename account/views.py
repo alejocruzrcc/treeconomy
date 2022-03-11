@@ -103,14 +103,18 @@ def edit(request):
         user_form = UserEditForm(instance=request.user,data=request.POST)
         profile_form = ProfileEditForm(instance=request.user.profile,
                                        data=request.POST,files=request.FILES)
+        #import pdb; pdb.set_trace()
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
-            messages.success(request,'Profile Updated Successfully')
+            return redirect('profile')
         else:
             messages.error(request, 'Error in Updating your Profile.')
     else:
         user_form = UserEditForm(instance=request.user)
         profile_form = ProfileEditForm(instance=request.user.profile)
-    return render(request,'account/edit.html',{'user_form':user_form,'profile_form':profile_form})
+    return render(request,'account/edit.html',{'user_form':user_form,'profile_form':profile_form, 'user': request.user})
 
+@login_required
+def profile(request):
+    return render(request,'account/profile.html', {'user': request.user})

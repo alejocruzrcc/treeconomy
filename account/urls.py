@@ -21,6 +21,7 @@ urlpatterns = [
     #path('reset/done/',auth_views.PasswordResetCompleteView.as_view(),name='password_reset_complete'),
     path('',include('django.contrib.auth.urls')),
     path('register/',views.register,name='register'),
+    path('profile',views.profile,name='profile'),
     path('edit/',views.edit,name='edit'),
     path('activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
         views.activate_account, name='activate'),

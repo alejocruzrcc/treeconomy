@@ -1,16 +1,32 @@
+
+{% extends "base.html" %}
+
+{% block title %}Project{% endblock %}
+
 {% block content %}
-  <h1>Name: {{ project.name }}</h1>
+<div class="card">
+  <div class="card-header">
+    {% if project.image %}
+      <img class="card-img-top" src="{{project.image.url}}" height="300">
+    {% endif %}
 
-  <p><strong>Coordinates:</strong> {{ project.coordinates }}</p> 
-  <p><strong>Number of trees:</strong> {{ project.n_trees }}</p>
-  <p><strong>Plantation date:</strong> {{ project.plantation_date }}</p> 
-  <p><strong>Tree type:</strong> {{ project.tree_type }}</p>  
-  <p><strong>Number of hectares:</strong> {{ project.n_hectares }}</p>  
-  <p><strong>Trees left:</strong> {{ project.trees_left }}</p>  
-  <p><strong>Link to Google Earth:</strong> <a href=""> {{ project.project_link }} </a></p> 
+  </div>
+  <div class="card-body">
+    <h2 class="card-title">{{ project.name }}</h2>
+    <p class="card-text"><strong>Coordinates:</strong> {{ project.coordinates }}</p> 
+    <p class="card-text"><strong>Number of trees:</strong> {{ project.n_trees }}</p>
+    <p class="card-text"><strong>Plantation date:</strong> {{ project.plantation_date }}</p> 
+    <p class="card-text"><strong>Tree type:</strong> {{ project.tree_type }}</p>  
+    <p class="card-text"><strong>Number of hectares:</strong> {{ project.n_hectares }}</p>  
+    <p class="card-text"><strong>Trees left:</strong> {{ project.trees_left }}</p>  
+    <p class="card-text"><strong>Link to Google Earth:</strong> <a href=""> {{ project.project_link }} </a></p> 
+  </div>
+  <div class="card-footer text-muted">
+    <a class="btn btn-success" href="{% url 'editar' project.pk %}" role="button">Edit</a>
+    <a class="btn btn-danger" href="{% url 'eliminar' project.pk %}" role="button">Delete</a>
+  </div>
+</div>
 
 
-  <div> 
-    <p><a href="{% url 'home' %}">Go home</a></p>
-  </div>  
+
 {% endblock %}
