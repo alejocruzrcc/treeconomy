@@ -58,7 +58,8 @@ class Project(models.Model):
     project_link        = models.URLField(max_length=120, null=True, blank=True)
     payment_collection  = models.FloatField(null=True, blank=True)
     active              = models.BooleanField(default=True)
-
+    image               = models.ImageField(verbose_name= "Imagen" ,upload_to="images/projects", null=True, blank=True)
+    
     objects = ProjectManager()
 
     def save(self, *args, **kwargs):
@@ -75,9 +76,15 @@ class Project(models.Model):
     def get_absolute_url(self):
         return reverse("project-detail", kwargs={"pk": self.pk})
 
+    def delete(self, using=None, keep_parents=False):
+        if self.image:
+            self.image.storage.delete()
+        super().delete()
+
 class PercentageRecordQuerySet(models.query.QuerySet):
     def search(self, query):
         lookups = (Q(record_date__icontains=query) 
+
                   )
 
 class PercentageRecordManager(models.Manager):

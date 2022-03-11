@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import generic
-
+from .forms import ProjectForm
 from .models import Project
+
 
 # Create your views here.
 class ProjectListView(generic.ListView):
@@ -28,6 +29,31 @@ class ProjectDetailListView(generic.DetailView):
         context["title"] = 'Detail of each project'
         return context
     
+def crear(request):
+    #import pdb; pdb.set_trace()
+    formulario = ProjectForm(request.POST or None, request.FILES or None)
+    if formulario.is_valid():
+        formulario.save()
+        return redirect('/projects')
+    return render(request, "create.html", {'formulario': formulario})
+
+def eliminar(request, pk):
+  project = Project.objects.get(pk=pk)
+  #import pdb; pdb.set_trace() 
+  project.delete()
+  return redirect('projects')
+
+def editar(request, pk):
+    project = Project.objects.get(pk=pk)
+    formulario = ProjectForm(request.POST or None, request.FILES or None, instance=project)
+     
+    if formulario.is_valid() and request.POST:
+        formulario.save()
+        return redirect('projects')
+    else:
+        errores = formulario.errors
+
+    return render(request, "edit.html", {'formulario': formulario, 'errores': errores})
     
 
     

@@ -1,0 +1,33 @@
+
+<form  method="post" enctype="multipart/form-data" novalidate>
+    {% csrf_token %}
+    {% for error in errores%}
+      <div class="alert alert-danger" role="alert">
+        {{ error }}
+      </div>
+    {% endfor %}
+    {% for campo in formulario %} 
+      <div class="mb3">
+          <label for="" class="form-label">{{ campo.label}}</label>
+          <br>
+      {% if campo.field.widget.input_type == 'file' and campo.value %}
+        <img src="{{MEDIA_URL}}/{{campo.value}}" width="100" alt="">
+      {% endif %}
+
+          <input 
+          type="{{ campo.field.widget.input_type }}"
+          name="{{ campo.name }}"
+          id=""
+          aria-describedby="helpId"
+          placeholder="{{ campo.label }}"
+          value="{{campo.value | default:''}}"
+          />
+      </div>
+      <div class="col-12 help-text">
+        {{campo.errors}}
+      </div>
+
+    {% endfor %} 
+    <button type="submit" class="btn btn-success">Submit</button>
+    <a name="" id="" class="btn btn-danger" href="{% url 'projects' %}" role="button"> Cancel</a>
+</form>

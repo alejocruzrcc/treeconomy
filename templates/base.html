@@ -1,12 +1,15 @@
 {% load static %}
+{% load bootstrap5 %}
 <!DOCTYPE html>
 <html>
 <head>
     <title>{% block title %}{% endblock %}</title>
-   
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet", type="text/css" href="{% static "account/css/base.css" %}" >
+    <link rel="stylesheet", type="text/css" href="{% static "sidebar/base.css" %}" >
     <link rel="stylesheet", type="text/css" href="{% static "css/bootstrap.css" %}" >
 </head>
+
 <body class="minimizar">
   <nav class="desktop-header sticky-top">
     <div class="container">
@@ -40,11 +43,36 @@
       </div>
     </div>
   </nav>
-    <div id="content">
-        {% block content %}
-        {% endblock %}
-    </div>
+  <div id="content">
+    <div id="mySidebar" class="sidebar" onmouseover="toggleSidebar()" onmouseout="toggleSidebar()">
+      <a href="/account/profile"><span><i class="material-icons">account_circle</i><span class="icon-text">&nbsp;&nbsp;&nbsp;&nbsp;profile</span></a><br>
+      <a href="/dashboard"><i class="material-icons">dashboard</i><span class="icon-text"></span>&nbsp;&nbsp;&nbsp;&nbsp;dashboard</a></span>
+      </a><br>
+      <a href="/projects"><i class="material-icons">forest</i><span class="icon-text"></span>&nbsp;&nbsp;&nbsp;&nbsp;projects</span></a><br>
+      <a href="#"><i class="material-icons">monetization_on</i><span class="icon-text"></span>&nbsp;&nbsp;&nbsp;&nbsp;payments<span></a>
+  </div>
 
+  <div id="main">
+    {% block content %}
+    {% endblock %}
+  </div>
+</div>
+<script>
+    var mini = true;
+
+    function toggleSidebar() {
+        if (mini) {
+            document.getElementById("mySidebar").style.width = "250px";
+            document.getElementById("main").style.marginLeft = "250px";
+            this.mini = false;
+        } else {
+            document.getElementById("mySidebar").style.width = "85px";
+            document.getElementById("main").style.marginLeft = "85px";
+            this.mini = true;
+        }
+    }
+</script>
+  </body>
   <footer class="footer">
     <div class="container">
       <div class="row">
@@ -96,7 +124,4 @@
       </div>
     </div>
   </footer>
-
-
-  </body>
 </html>

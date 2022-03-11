@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}New Project{% endblock %}
+
+{% block content %}
+<section class="container">
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">Datos del proyecto</h4>
+    {% include "form.html" %}
+  </div>
+</div>
+</section>
+
+{% endblock %}
