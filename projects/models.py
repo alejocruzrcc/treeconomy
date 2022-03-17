@@ -77,8 +77,9 @@ class Project(models.Model):
         return reverse("project-detail", kwargs={"pk": self.pk})
 
     def delete(self, using=None, keep_parents=False):
+        #import pdb; pdb.set_trace() 
         if self.image:
-            self.image.storage.delete()
+            self.image.storage.delete(self.image.name)
         super().delete()
 
 class PercentageRecordQuerySet(models.query.QuerySet):

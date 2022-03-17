@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load add_attr %}
 {% block title %}Edit your account{% endblock %}
 
 {% block content %}
@@ -61,8 +61,15 @@
                 
                 <span class="font-weight-bold">{{ user.username }}</span>
                 <span class="text-black-50">{{ user.email }}</span><span> </span></div>
-                Edit your photo: 
-            {{ profile_form.photo }}
+                <label class="labels">Profile photo</label> 
+                        {% if profile_form.photo.errors %}
+                            {{ profile_form.photo|add_attr:'is-invalid'}}
+                        {% else %}
+                            {{ profile_form.photo}}
+                        {% endif %}
+                        <div class="invalid-feedback">
+                            {{ profile_form.photo.errors }}
+                        </div>
         </div>
         <div class="col-md-5 border-right">
             <div class="p-3 py-5">
@@ -70,25 +77,133 @@
                     <h4 class="text-right">Profile Settings</h4>
                 </div>
                 <div class="row mt-2">
-                    <div class="col-md-6"><label class="labels">Name</label> {{ user_form.first_name }}</div>
-                    <div class="col-md-6"><label class="labels">Last Name</label> {{ user_form.last_name }}</div>
+                    <div class="col-md-6"><label class="labels">Name</label> 
+                        {% if user_form.first_name.errors %}
+                            {{ user_form.first_name|add_attr:'is-invalid'}}
+                        {% else %}
+                            {{ user_form.first_name }}
+                        {% endif %}
+                        <div class="invalid-feedback">
+                            {{ user_form.first_name.errors }}
+                        </div>
+                    </div>
+                    <div class="col-md-6"><label class="labels">Last Name</label> 
+                        {% if user_form.last_name.errors %}
+                            {{ user_form.last_name|add_attr:'is-invalid'}}
+                        {% else %}
+                            {{ user_form.last_name }}
+                        {% endif %}
+                        <div class="invalid-feedback">
+                            {{ user_form.last_name.errors }}
+                        </div>
+                    </div>
                 </div>
                 <div class="row mt-3">
-                    <div class="col-md-12"><label class="labels">Mobile Number</label>{{ profile_form.phone }}</div>
-                    <div class="col-md-12"><label class="labels">Birthday</label>{{ profile_form.date_of_birth }}</div>
-                    <div class="col-md-12"><label class="labels">Address</label>{{ profile_form.adress }}</div>
-                    <div class="col-md-12"><label class="labels">Zipcode</label>{{ profile_form.zipcode }}</div>
-                    <div class="col-md-12"><label class="labels">Tax register</label> {{ profile_form.tax_register }}</div>
-                    <div class="col-md-12"><label class="labels">Rut</label>{{ profile_form.rut }}</div>
-                    <div class="col-md-12"><label class="labels">Email </label>{{ user_form.email}}</div>
+                    <div class="col-md-12"><label class="labels">Mobile Number</label>
+                        {% if profile_form.phone.errors %}
+                            {{ profile_form.phone|add_attr:'is-invalid'}}
+                        {% else %}
+                            {{ profile_form.phone }}
+                        {% endif %}
+                        <div class="invalid-feedback">
+                            {{ profile_form.phone.errors }}
+                        </div>
+                    </div>
+                    <div class="col-md-12"><label class="labels">Birthday</label>
+                        {% if profile_form.date_of_birth.errors %}
+                            {{ profile_form.date_of_birth|add_attr:'is-invalid'}}
+                        {% else %}
+                            {{ profile_form.date_of_birth }}
+                        {% endif %}
+                        <div class="invalid-feedback">
+                            {{ profile_form.date_of_birth.errors }}
+                        </div>
+                    </div>
+                    <div class="col-md-12"><label class="labels">Address</label>
+                        {% if profile_form.adress.errors %}
+                            {{ profile_form.adress|add_attr:'is-invalid'}}
+                        {% else %}
+                            {{ profile_form.adress }}
+                        {% endif %}
+                        <div class="invalid-feedback">
+                            {{ profile_form.adress.errors }}
+                        </div>
+                    </div>
+                    <div class="col-md-12"><label class="labels">Zipcode</label>
+                        {% if profile_form.zipcode.errors %}
+                            {{ profile_form.zipcode|add_attr:'is-invalid'}}
+                        {% else %}
+                            {{ profile_form.zipcode }}
+                        {% endif %}
+                        <div class="invalid-feedback">
+                            {{ profile_form.zipcode.errors }}
+                        </div>
+                    </div>
+                    <div class="col-md-12"> <label class="labels">Tax register</label>
+                        {% if profile_form.tax_register.errors %}
+                            {{ profile_form.tax_register|add_attr:'is-invalid'}}
+                        {% else %}
+                            {{ profile_form.tax_register }}
+                        {% endif %}
+                        <div class="invalid-feedback">
+                            {{ profile_form.tax_register.errors }}
+                        </div>
+                    </div>
+                    <div class="col-md-12"><label class="labels">Rut</label>
+                        {% if profile_form.rut.errors %}
+                            {{ profile_form.rut|add_attr:'is-invalid'}}
+                        {% else %}
+                            {{ profile_form.rut }}
+                        {% endif %}
+                        <div class="invalid-feedback">
+                            {{ profile_form.rut.errors }}
+                        </div>
+                    </div>
+                    <div class="col-md-12"><label class="labels">Email </label>
+                        {% if user_form.email.errors %}
+                            {{ user_form.email|add_attr:'is-invalid'}}
+                        {% else %}
+                            {{ user_form.email }}
+                        {% endif %}
+                        <div class="invalid-feedback">
+                            {{ user_form.email.errors }}
+                        </div>
+                    </div>
                 </div>
                 <div class="row mt-3">
-                    <div class="col-md-4"><label class="labels">Country</label> {{ profile_form.country }}</div>
-                    <div class="col-md-4"><label class="labels">State/Region</label> {{ profile_form.state }}</div>
-                    <div class="col-md-4"><label class="labels">City</label> {{ profile_form.city }}</div>
+                    <div class="col-md-4"><label class="labels">Country</label> 
+                        {% if profile_form.country.errors %}
+                            {{ profile_form.country|add_attr:'is-invalid'}}
+                        {% else %}
+                            {{ profile_form.country }}
+                        {% endif %}
+                        <div class="invalid-feedback">
+                            {{ profile_form.country.errors }}
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4"><label class="labels">State/Region</label>
+                        {% if profile_form.state.errors %}
+                            {{ profile_form.state|add_attr:'is-invalid'}}
+                        {% else %}
+                            {{ profile_form.state }}
+                        {% endif %}
+                        <div class="invalid-feedback">
+                            {{ profile_form.city.errors }}
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="labels">City</label>
+                        {% if profile_form.city.errors %}
+                            {{ profile_form.city|add_attr:'is-invalid'}}
+                        {% else %}
+                            {{ profile_form.city }}
+                        {% endif %}
+                        <div class="invalid-feedback">
+                            {{ profile_form.city.errors }}
+                        </div>
+                    </div>
                 </div>
-                 
-        
 
                 <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Save Profile</button></div>
             </div>
@@ -96,10 +211,46 @@
         <div class="col-md-4">
             <div class="p-3 py-5">
                 <h6> Social Networks </h6>
-                <div class="col-md-12"><label class="labels">Facebook</label>{{ profile_form.facebook }}</div> <br>
-                <div class="col-md-12"><label class="labels">Instagram</label>{{ profile_form.instagram }}</div> <br>
-                <div class="col-md-12"><label class="labels">Twitter</label>{{ profile_form.twitter }}</div> <br>
-                <div class="col-md-12"><label class="labels">Web domine</label>{{ profile_form.web_domine }}</div>
+                <div class="col-md-12"><label class="labels">Facebook</label>
+                    {% if profile_form.facebook.errors %}
+                        {{ profile_form.facebook|add_attr:'is-invalid'}}
+                    {% else %}
+                        {{ profile_form.facebook }}
+                    {% endif %}
+                    <div class="invalid-feedback">
+                        {{ profile_form.facebook.errors }}
+                    </div>
+                </div> <br>
+                <div class="col-md-12"><label class="labels">Instagram</label>
+                    {% if profile_form.instagram.errors %}
+                        {{ profile_form.instagram|add_attr:'is-invalid'}}
+                    {% else %}
+                        {{ profile_form.instagram }}
+                    {% endif %}
+                    <div class="invalid-feedback">
+                        {{ profile_form.instagram.errors }}
+                    </div>    
+                </div> <br>
+                <div class="col-md-12"><label class="labels">Twitter</label>
+                    {% if profile_form.twitter.errors %}
+                        {{ profile_form.twitter|add_attr:'is-invalid'}}
+                    {% else %}
+                        {{ profile_form.twitter }}
+                    {% endif %}
+                    <div class="invalid-feedback">
+                        {{ profile_form.twitter.errors }}
+                    </div>
+                </div> <br>
+                <div class="col-md-12"><label class="labels">Web domine</label>
+                    {% if profile_form.web_domine.errors %}
+                        {{ profile_form.web_domine|add_attr:'is-invalid'}}
+                    {% else %}
+                        {{ profile_form.web_domine }}
+                    {% endif %}
+                    <div class="invalid-feedback">
+                        {{ profile_form.web_domine.errors }}
+                    </div>
+            </div>
             </div>
         </div>
     

@@ -3,6 +3,94 @@
 {% block title %}Projects{% endblock %}
 
 {% block content %}
+
+<style>
+  .tarjeta-lista {
+    width: 380px;
+    height: 268px;
+    background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 5px 10px #00000017;
+    border-radius: 21px;
+    opacity: 1;
+  }
+
+  .titulo-card {
+    width: 124px;
+    height: 41px;
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) 18px/21px Lato;
+    letter-spacing: var(--unnamed-character-spacing-0);
+    color: var(--unnamed-color-035941);
+    text-align: left;
+    font: normal normal normal 18px/21px Lato;
+    letter-spacing: 0px;
+    color: #035941;
+    opacity: 1;
+  }
+
+  .boton-fav {
+    border-radius: 60px;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    height: 40px;
+    width: 40px;
+  }
+  .button {
+
+    margin: auto;
+    display: inline-block;
+    background: #F2622E 0% 0% no-repeat padding-box;
+    color: white;
+    border: 0px solid grey;
+ 
+
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    z-index: 4;
+    vertical-align: middle;
+    
+}
+
+.button:hover {
+  background-color: #F2622E;
+  color: white !important;
+}
+
+.button:active i{
+    /*for push effect on click*/
+    transform: translate(-45%, -45%);
+}
+
+.button i {
+  /*horizontal and vertical centering*/
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+p {
+  letter-spacing: var(--unnamed-character-spacing-0);
+  color: var(--unnamed-color-5f5f5f);
+  text-align: left;
+  font: normal normal normal 12px/15px Lato;
+  letter-spacing: 0px;
+ 
+}
+
+p.verde {
+  color: #5F5F5F;
+}
+span.naranja {
+  color: #EE6635;
+}
+
+
+</style>
+
   
   <div class="row">
     <div class="col-6">
@@ -15,21 +103,41 @@
 
  
   {% if project_list %}
-  <div class="row row-cols-1 row-cols-md-2">
+  <div class="row row-cols-2 row-cols-md-3">
     {% for project in project_list %}
     <div class="col mb-4">
-    <div class="card text-left">
-      {% if project.image %}
-        <img class="card-img-top" src="{{project.image.url}}" height="200">
-      {% endif %}
-      <div class="card-body">
-        <h4 class="card-title"><a href="{{ project.get_absolute_url }}">{{ project.name }}</a> </h4>
-        <p class="card-text">Trees: ({{project.trees_left}})</p> 
-        <a class="btn btn-success" href="{% url 'editar' project.pk  %}"role="button">Edit</a>
-        <a class="btn btn-danger" href="{% url 'eliminar' project.pk %}" role="button">Delete</a>
+      <div class="card text-left tarjeta-lista">
+        <div class="card-body">
+          <div class="row">
+              <div class="col-6 mb-4">
+                {% if project.image %}
+                  <img src="{{project.image.url}}" height="200">
+                {% endif %}
+                <p style="margin-top: 8px; margin-bottom: 0px;"><span class="naranja">Vendedor:</span></p>
+                <p style= "font: normal normal normal 14px/24px Lato;"> Andrés Felipe Guzmán </p>
+              </div>
+              <div class="col-6 mb-4">
+                <div id="mainToolbar">
+                  <a class="button boton-fav" onclick="changeTool(0);">
+                      <i class="material-icons">favorite_border</i>
+                  </a>
+                </div>
+                <h3 class="card-title titulo-card">{{ project.name }}</h3>
+                <p class="verde"> Utilidad estimada: <span class="naranja"> 290% 10%</span> </p>
+                <p class="verde"> Captura del CO2: <span class="naranja"> 1.000 kg</span></p>
+                
+                
+              
+                <p class="card-text">Trees: ({{project.trees_left}})</p> 
+                <a class="button-plant" href="{{ project.get_absolute_url }}"> Ver más</a>
+                
+                <a class="btn" href="{% url 'editar' project.pk  %}"role="button">Edit</a>
+                <a class="btn" href="{% url 'eliminar' project.pk %}" role="button">Delete</a>
+              </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
     {% endfor %}
   </div>
 

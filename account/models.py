@@ -7,6 +7,8 @@ from django_countries.fields import CountryField
 from phonenumber_field.modelfields import PhoneNumberField
 from projects.models import Project
 from django.conf import settings
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 DEFAULT_ACTIVATION_DAYS = getattr(settings, 'DEFAULT_ACTIVATION_DAYS', 7)
 DAYS_PER_YEAR = 365
@@ -54,11 +56,22 @@ class Profile(models.Model):
     web_domine     = models.URLField(max_length=200, blank=True, null=True)
     photo          = models.ImageField(upload_to='users/%Y/%m/%d',blank=True, null=True)
     
+    @receiver(post_save, sender=User) #add this
+    def create_user_profile(sender, instance, created, **kwargs):
+        if created:
+            Profile.objects.create(user=instance)
+
+    @receiver(post_save, sender=User) #add this
+    def save_user_profile(sender, instance, **kwargs):
+        instance.profile.save()
+        
     def __str__(self):
         return f'Perfil para usuario {self.user.username}'
     
     class Meta:
         verbose_name_plural=u'Perfiles de Usuario'
+        
+
 
 class CommissionAgent(User):
     people_related = models.PositiveIntegerField()
