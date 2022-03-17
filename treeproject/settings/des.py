@@ -23,6 +23,7 @@ DATABASES = {
     }
 }
 
+STATIC_URL = '/static/'
 
 EMAIL_HOST = env('EMAIL_HOST')
 EMAIL_PORT = env('EMAIL_PORT')

@@ -26,6 +26,8 @@ DATABASES = {
     }
 }
 
+STATIC_URL = os.environ['STATIC_URL']
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = os.environ['EMAIL_HOST']
 EMAIL_PORT = os.environ['EMAIL_PORT']
