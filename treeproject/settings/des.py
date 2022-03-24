@@ -1,13 +1,10 @@
 from .base import *
 
-import environ
-env = environ.Env(
-    # set casting, default value
-    DEBUG=(bool, False)
-)
+
+
+DEBUG = os.environ.get('DEBUG', True)
 
 SECRET_KEY = env('SECRET_KEY')
-DEBUG = True
 ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
 
@@ -23,7 +20,6 @@ DATABASES = {
     }
 }
 
-STATIC_URL = '/static/'
 
 EMAIL_HOST = env('EMAIL_HOST')
 EMAIL_PORT = env('EMAIL_PORT')

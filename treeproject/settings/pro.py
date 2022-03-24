@@ -1,9 +1,10 @@
 import os
 from .base import *
 
+DEBUG = False
 
 SECRET_KEY = os.environ['SECRET_KEY']
-DEBUG = False
+
 
 ALLOWED_HOSTS = ["treeconomyapp.herokuapp.com",
 "app.treeconomy.com.co"]
@@ -26,7 +27,7 @@ DATABASES = {
     }
 }
 
-STATIC_URL = os.environ['STATIC_URL']
+#STATIC_URL = os.environ['STATIC_URL']
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = os.environ['EMAIL_HOST']
