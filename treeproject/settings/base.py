@@ -12,8 +12,9 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 
-from dotenv import load_dotenv, find_dotenv
+#from dotenv import load_dotenv, find_dotenv
 
+#load_dotenv(find_dotenv())
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 #BASE_DIR = Path(__file__).resolve().parent.parent
 import os
@@ -120,7 +121,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-load_dotenv(find_dotenv())
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
