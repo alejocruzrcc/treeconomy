@@ -54,7 +54,7 @@ class Profile(models.Model):
     instagram      = models.URLField(max_length=200, blank=True, null=True)
     twitter        = models.URLField(max_length=200, blank=True, null=True)
     web_domine     = models.URLField(max_length=200, blank=True, null=True)
-    photo          = models.ImageField(upload_to='users/%Y/%m/%d',blank=True, null=True)
+    photo          = models.ImageField(upload_to='images/users/%Y/%m/%d',blank=True, null=True)
     
     @receiver(post_save, sender=User) #add this
     def create_user_profile(sender, instance, created, **kwargs):
