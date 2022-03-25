@@ -96,7 +96,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'treeproject.wsgi.application'
 
-
+STATIC_URL = '/static/'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
