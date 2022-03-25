@@ -1,3 +1,4 @@
+import django_on_heroku
 import os
 from .base import *
 
@@ -11,7 +12,7 @@ ALLOWED_HOSTS = ["treeconomyapp.herokuapp.com",
 CSRF_TRUSTED_ORIGINS = ['https://treeconomyapp.herokuapp.com',
 'https://app.treeconomy.com.co']
 
-STATIC_ROOT = os.path.join(BASE_DIR , "static")
+
 
 
 AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
@@ -66,3 +67,5 @@ SOCIAL_AUTH_FACEBOOK_SECRET= os.environ['SOCIAL_AUTH_FACEBOOK_SECRET']
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY= os.environ['SOCIAL_AUTH_GOOGLE_OAUTH2_KEY']
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET= os.environ['SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET']
+
+django_on_heroku.settings(locals(), staticfiles=False)
