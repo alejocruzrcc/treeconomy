@@ -232,7 +232,7 @@
                 <div class="col-lg-6">
                     <div class="about-avatar">
                       {% if user.profile.photo %}
-                        <img src="{{MEDIA_URL}}{{ user.profile.photo}}" width="400px">
+                        <img src="{{user.profile.photo.url}}" width="400px">
                       {% else %}
                       <img src="https://bootdey.com/img/Content/avatar/avatar7.png" title="" alt="">
                       {% endif %}
