@@ -19,6 +19,8 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
 from .token_generator import account_activation_token
 from django.core.mail import EmailMessage
+from rolepermissions.roles import assign_role
+
 
 
 def home(request):
@@ -90,8 +92,11 @@ def activate_account(request, uidb64, token, backend='django.contrib.auth.backen
         login(request, user, backend='django.contrib.auth.backends.ModelBackend')
         #return HttpResponse('Your account has been activate successfully')
         # Crear el perfil del usuario 
-        new_profile = Profile(user=user)
-        new_profile.save()
+        if not user.profile:
+          new_profile = Profile(user=user)
+          new_profile.save()
+        # Asigna rol inversioniste
+        assign_role(user, 'inversor')
         return render(request,'account/register_done.html',{'new_user': user})
     else:
         return HttpResponse('Activation link is invalid!')

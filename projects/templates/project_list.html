@@ -91,16 +91,17 @@ span.naranja {
 
 </style>
 
-  
   <div class="row">
     <div class="col-6">
       <h1>Projects List</h1>
     </div>
      <div class="col-6">
-      <a name="" id="" class="btn btn-success " href="{% url 'crear' %}" role="button"> Create a project</a>
+      {% load permission_tags %}
+      {% if user|can:'manage_a_project' %}
+        <a name="" id="" class="btn btn-success " href="{% url 'crear' %}" role="button"> Create a project</a>
+      {% endif %}
     </div>
   </div>
-
  
   {% if project_list %}
   <div class="row row-cols-2 row-cols-md-3">
@@ -118,21 +119,36 @@ span.naranja {
               </div>
               <div class="col-6 mb-4">
                 <div id="mainToolbar">
-                  <a class="button boton-fav" onclick="changeTool(0);">
-                      <i class="material-icons">favorite_border</i>
+                  <a class="button boton-fav" id="shareProject" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" >
+                      <i class="material-icons">ios_share</i>
                   </a>
+                  <ul class="dropdown-menu" aria-labelledby="shareProject">
+                    {% with request.build_absolute_uri|add:project.get_absolute_url as varname %}
+                      <li><a class="dropdown-item shareButton copy-btn" data-project={{ varname }}>Copy to Clipboard</a></li>
+                    {% endwith %}
+                    
+                    {% load social_share %}
+                    <li><a class="dropdown-item" href="{{ whatsapp_url }}" class="{{ link_class }}" target="_blank">Whatsapp</a></li>
+                    
+                  </ul>
                 </div>
+                
                 <h3 class="card-title titulo-card">{{ project.name }}</h3>
                 <p class="verde"> Utilidad estimada: <span class="naranja"> 290% 10%</span> </p>
                 <p class="verde"> Captura del CO2: <span class="naranja"> 1.000 kg</span></p>
                 
+                  
                 
+               
               
                 <p class="card-text">Trees: ({{project.trees_left}})</p> 
                 <a class="button-plant" href="{{ project.get_absolute_url }}"> Ver más</a>
                 
-                <a class="btn" href="{% url 'editar' project.pk  %}"role="button">Edit</a>
-                <a class="btn" href="{% url 'eliminar' project.pk %}" role="button">Delete</a>
+                {% load permission_tags %}
+                {% if user|can:'manage_a_project' %}
+                  <a class="btn" href="{% url 'editar' project.pk  %}"role="button">Edit</a>
+                  <a class="btn" href="{% url 'eliminar' project.pk %}" role="button">Delete</a>
+                {% endif %}
               </div>
           </div>
         </div>

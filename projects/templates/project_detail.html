@@ -22,8 +22,11 @@
     <p class="card-text"><strong>Link to Google Earth:</strong> <a href=""> {{ project.project_link }} </a></p> 
   </div>
   <div class="card-footer text-muted">
-    <a class="btn btn-success" href="{% url 'editar' project.pk %}" role="button">Edit</a>
-    <a class="btn btn-danger" href="{% url 'eliminar' project.pk %}" role="button">Delete</a>
+    {% load permission_tags %}
+    {% if user|can:'manage_a_project' %}
+      <a class="btn btn-success" href="{% url 'editar' project.pk %}" role="button">Edit</a>
+      <a class="btn btn-danger" href="{% url 'eliminar' project.pk %}" role="button">Delete</a>
+    {% endif %}
   </div>
 </div>
 
