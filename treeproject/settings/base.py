@@ -39,6 +39,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Application definition
 
 THIRD_PARTY_APPS = []
+ROLEPERMISSIONS_MODULE = 'treeproject.roles'
 
 LOCAL_APPS = ['projects', 'billing']
 
@@ -56,8 +57,8 @@ DJANGO_APPS = [
     'widget_tweaks',
     'phonenumber_field',
     'bootstrap5',
-    'rolepermissions',
     'django_social_share',
+    'rolepermissions',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -73,9 +74,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROLEPERMISSIONS_MODULE = 'treeproject.settings.roles'
+
 
 ROOT_URLCONF = 'treeproject.urls'
+
 
 TEMPLATES = [
     {
