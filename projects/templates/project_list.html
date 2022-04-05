@@ -104,7 +104,7 @@ span.naranja {
   </div>
  
   {% if project_list %}
-  <div class="row row-cols-2 row-cols-md-3">
+  <div class="row row-cols-md-2 row-cols-lg-3">
     {% for project in project_list %}
     <div class="col mb-4">
       <div class="card text-left tarjeta-lista">
@@ -123,13 +123,14 @@ span.naranja {
                       <i class="material-icons">ios_share</i>
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="shareProject">
-                    {% with request.build_absolute_uri|add:project.get_absolute_url as varname %}
+                    {% with request.build_absolute_uri|add:project.name as varname %}
                       <li><a class="dropdown-item shareButton copy-btn" data-project={{ varname }}>Copy to Clipboard</a></li>
+                                    
+                      {% load social_share %}
+                      <li>{% post_to_whatsapp varname "Share via WhatsApp" "dropdown-item" %}</li>
+                      <li>{% post_to_twitter "Invest in this project: {{project.name}}. Check it out!" varname "Post to Twitter" "dropdown-item" %}</li>
+                      <li>{% post_to_facebook varname "Post to Facebook" "dropdown-item" %}</li>
                     {% endwith %}
-                    
-                    {% load social_share %}
-                    <li><a class="dropdown-item" href="{{ whatsapp_url }}" class="{{ link_class }}" target="_blank">Whatsapp</a></li>
-                    
                   </ul>
                 </div>
                 

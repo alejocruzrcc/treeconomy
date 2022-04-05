@@ -6,9 +6,11 @@
 {% block content %}
 <div class="card">
   <div class="card-header">
+    <div  style="height: 400px; width: 600px;">
     {% if project.image %}
-      <img class="card-img-top" src="{{project.image.url}}" height="300">
+      <img class="card-img-top" style="max-height: 100%; max-width: 100%; " src="{{project.image.url}}">
     {% endif %}
+    </div>
 
   </div>
   <div class="card-body">
