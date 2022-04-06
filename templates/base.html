@@ -21,6 +21,42 @@
     height: 40px;
     width: 40px;
   }
+  .button {
+
+    margin: auto;
+    display: inline-block;
+    background: #F2622E 0% 0% no-repeat padding-box;
+    color: white;
+    border: 0px solid grey;
+ 
+
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    z-index: 4;
+    vertical-align: middle;
+    
+}
+
+.button i {
+  /*horizontal and vertical centering*/
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 24px;
+  transform: translate(-50%, -50%);
+}
+.button:hover {
+  background-color: #F2622E;
+  color: white !important;
+}
+
+.button:active i{
+    /*for push effect on click*/
+    transform: translate(-45%, -45%);
+}
 </style>
 <body class="minimizar">
   <nav class="desktop-header sticky-top">
@@ -36,10 +72,10 @@
           </div>
           <div class="col-md-3 centering-all">
             <div class="d-none d-md-flex btn-group">
-              <a href="#" class="button-plant">Plant Trees Now!</a>
+              <a href="/" class="button-plant">Plant Trees Now!</a>
             </div>
             <div class="d-md-none">
-              <a class="button boton-invest" >
+              <a class="button boton-invest" href="/">
                 <i class="material-icons" >monetization_on</i>
               </a>
             </div>

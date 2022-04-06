@@ -5,7 +5,7 @@ from django.contrib import auth
 from django.contrib.auth import authenticate,login
 from django.contrib.auth.models import User
 from django.template.context_processors import csrf
-from .forms import LoginForm, UserRegistrationForm,UserEditForm,ProfileEditForm
+from .forms import LoginForm, SubscriptionForm, UserRegistrationForm,UserEditForm,ProfileEditForm
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.template import RequestContext
@@ -124,3 +124,11 @@ def edit(request):
 @login_required
 def profile(request):
     return render(request,'account/profile.html', {'user': request.user})
+
+def create_subscription(request):
+    formulario = SubscriptionForm(request.POST or None, request.FILES or None)
+    if formulario.is_valid():
+        formulario.save()
+        return redirect('/subscription')
+    return render(request, "subscription/create.html", {'subscription_form': formulario})
+    

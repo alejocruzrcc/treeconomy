@@ -7,9 +7,9 @@ from .views import ProjectListView, ProjectDetailListView
 from . import views
 
 urlpatterns = [
-    path('', login_required(ProjectListView.as_view()), name='projects'),
+    path('', ProjectListView.as_view(), name='projects'),
     path('crear', login_required(views.crear), name='crear'),
     path('editar/<str:pk>', login_required(views.editar), name='editar'),
     path('eliminar/<str:pk>', login_required(views.eliminar), name='eliminar'),
-    path('<str:pk>', login_required(ProjectDetailListView.as_view()), name='project-detail')
+    path('<str:pk>', ProjectDetailListView.as_view(), name='project-detail')
 ]

@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% load add_attr %}
+{% block title %}Edit your account{% endblock %}
+
+{% block content %}
+
+<form method="post" enctype="multipart/form-data" novalidate>
+    {% csrf_token %}
+<div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-5 border-right">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Create a subscription</h4>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12"><label class="labels">Current payment</label>
+                        {% if subscription_form.current_payment.errors %}
+                            {{ subscription_form.current_payment|add_attr:'is-invalid'}}
+                        {% else %}
+                            {{ subscription_form.current_payment }}
+                        {% endif %}
+                        <div class="invalid-feedback">
+                            {{ subscription_form.current_payment.errors }}
+                        </div>
+                    </div>
+                    <div class="col-md-12"> <label class="labels">Next payment</label>
+                    
+                        {% if subscription_form.next_payment.errors %}
+                        {{ subscription_form.next_payment|add_attr:'is-invalid'}}
+                        {% else %}
+                            {{ subscription_form.next_payment }}
+                        {% endif %}
+                        <div class="invalid-feedback">
+                            {{ subscription_form.next_payment.errors }}
+                        </div>
+                    </div>
+                    <div class="col-md-12"><label class="labels">Status</label>
+                        {% if subscription_form.status.errors %}
+                        {{ subscription_form.status|add_attr:'is-invalid'}}
+                        {% else %}
+                            {{ subscription_form.status }}
+                        {% endif %}
+                        <div class="invalid-feedback">
+                            {{ subscription_form.status.errors }}
+                        </div>
+                    </div>
+                    <div class="col-md-12"><label class="labels">Start Date </label>
+                        {% if subscription_form.start_date.errors %}
+                        {{ subscription_form.start_date|add_attr:'is-invalid'}}
+                        {% else %}
+                            {{ subscription_form.start_date }}
+                        {% endif %}
+                        <div class="invalid-feedback">
+                            {{ subscription_form.start_date.errors }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-4"><label class="labels">Last order date</label> 
+                        {% if subscription_form.last_order_date.errors %}
+                        {{ subscription_form.last_order_date|add_attr:'is-invalid'}}
+                        {% else %}
+                            {{ subscription_form.last_order_date }}
+                        {% endif %}
+                        <div class="invalid-feedback">
+                            {{ subscription_form.last_order_date.errors }}
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4"><label class="labels">Projects</label>
+                        {% if subscription_form.n_projects.errors %}
+                        {{ subscription_form.n_projects|add_attr:'is-invalid'}}
+                        {% else %}
+                            {{ subscription_form.n_projects }}
+                        {% endif %}
+                        <div class="invalid-feedback">
+                            {{ subscription_form.n_projects.errors }}
+                        </div>
+                    </div>
+                    <div class="col-md-4"><label class="labels">Total</label>
+                        {% if subscription_form.total.errors %}
+                        {{ subscription_form.total|add_attr:'is-invalid'}}
+                        {% else %}
+                            {{ subscription_form.total }}
+                        {% endif %}
+                        <div class="invalid-feedback">
+                            {{ subscription_form.total.errors }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Subscribe</button></div>
+            </div>
+        </div>
+    
+    </div>
+</div>
+</form>
+
+{% endblock %}
