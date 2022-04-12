@@ -4,19 +4,22 @@
 <html>
 <head>
     <title>{% block title %}{% endblock %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet", type="text/css" href="{% static "account/css/base.css" %}" >
     <link rel="stylesheet", type="text/css" href="{% static "sidebar/base.css" %}" >
     <link rel="stylesheet", type="text/css" href="{% static "css/bootstrap.css" %}" >
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src={% static 'js/main.js' %} defer></script>
 </head>
 <style>
+  
   .boton-invest {
     border-radius: 60px;
     position: absolute;
-    top: 8px;
+    bottom: 8px;
     right: 8px;
     height: 40px;
     width: 40px;
@@ -52,41 +55,40 @@
   background-color: #F2622E;
   color: white !important;
 }
-
+ 
 .button:active i{
     /*for push effect on click*/
     transform: translate(-45%, -45%);
 }
+
 </style>
 <body class="minimizar">
-  <nav class="desktop-header sticky-top">
+  <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
-      <div class="search-bar">
-        <div class="row d-flex align-items-center">
-          <div class="col-md-2">
-            <a href="http  border-radius: 50%;s://treeconomy.com.co/product/melina/"><img
-                src="https://treeconomy.com.co/wp-content/themes/Treeconomy/img/app/icons/Logo-Blanco.svg" alt=""></a>
+      <a class="navbar-brand" href="http  border-radius: 50%;s://treeconomy.com.co/product/melina/"><img
+        src="https://treeconomy.com.co/wp-content/themes/Treeconomy/img/app/icons/Logo-Blanco.svg" alt=""></a>
+      
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu-db" aria-controls="menu-db" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class=" navbar-collapse" id="navbarText">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <div class="d-none d-md-flex btn-group">
+            <a href="/" class="button-plant">Plant Trees Now!</a>
           </div>
-          <div class="col-md-4 centering-all">
-            
+          <div class="d-md-none">
+            <a class="button boton-invest" href="/">
+              <i class="material-icons" >monetization_on</i>
+            </a>
           </div>
-          <div class="col-md-3 centering-all">
-            <div class="d-none d-md-flex btn-group">
-              <a href="/" class="button-plant">Plant Trees Now!</a>
-            </div>
-            <div class="d-md-none">
-              <a class="button boton-invest" href="/">
-                <i class="material-icons" >monetization_on</i>
-              </a>
-            </div>
-          </div>
-          <div class="col-md-1 centering-all">
-            <a href="#"><img
-                src="https://treeconomy.com.co/wp-content/themes/Treeconomy/img/app/icons/notificaciones.svg"
-                alt=""></a>
-          </div>
-          <div class="col-md-2 centering-all dropdown">
-                  <span class="user name-user">
+        </ul>
+
+        
+        <a href="#"><img
+          src="https://treeconomy.com.co/wp-content/themes/Treeconomy/img/app/icons/notificaciones.svg"
+          alt=""></a>
+        <div class="col-md-2 centering-all dropdown">
+          <span class="user name-user">
           {% if request.user.is_authenticated %}
             Hello {{ request.user.first_name }}
           <a class="enlace-naranja"  href="{% url "logout" %}">Salir</a>
@@ -94,12 +96,20 @@
           <a class="enlace-naranja"  href="{% url "login" %}">Iniciar Sesión</a>
           {% endif %}
           </div>
-        </div>
       </div>
     </div>
+    <div class="collapse navbar-collapse sidebarMovil" id="menu-db">
+      <ul class="list-group d-block d-sm-none">
+        <li><a href="/account/profile"><span><i class="material-icons">account_circle</i><span class="icon-text">&nbsp;&nbsp;&nbsp;&nbsp;Profile</span></a></li>
+        <li><a href="/dashboard"><i class="material-icons">dashboard</i><span class="icon-text"></span>&nbsp;&nbsp;&nbsp;&nbsp;Dashboard</a></span></a></li>
+        <li><a href="/projects"><i class="material-icons">forest</i><span class="icon-text"></span>&nbsp;&nbsp;&nbsp;&nbsp;Projects</span></a></li>
+        <li><a href="#"><i class="material-icons">monetization_on</i><span class="icon-text"></span>&nbsp;&nbsp;&nbsp;&nbsp;Payments<span></a></li>
+     </ul>
+    </div>
   </nav>
+
   <div id="content">
-    <div id="mySidebar" class="sidebar" onmouseover="toggleSidebar()" onmouseout="toggleSidebar()">
+    <div id="mySidebar" class="d-none d-sm-block sidebar" onmouseover="toggleSidebar()" onmouseout="toggleSidebar()">
       <a href="/account/profile"><span><i class="material-icons">account_circle</i><span class="icon-text">&nbsp;&nbsp;&nbsp;&nbsp;Profile</span></a><br>
       <a href="/dashboard"><i class="material-icons">dashboard</i><span class="icon-text"></span>&nbsp;&nbsp;&nbsp;&nbsp;Dashboard</a></span>
       </a><br>
@@ -111,23 +121,7 @@
     {% block content %}
     {% endblock %}
   </div>
-</div>
-<script>
-    var mini = true;
 
-    function toggleSidebar() {
-        if (mini) {
-            document.getElementById("mySidebar").style.width = "250px";
-            document.getElementById("main").style.marginLeft = "250px";
-            this.mini = false;
-        } else {
-            document.getElementById("mySidebar").style.width = "85px";
-            document.getElementById("main").style.marginLeft = "85px";
-            this.mini = true;
-        }
-    }
-</script>
-  </body>
   <footer class="footer">
     <div class="container">
       <div class="row">
@@ -175,8 +169,29 @@
         <div class="col-xl-12">
           <p> © 2022 TREEconomy. All rights reserved. </p>
           <a href="#">Terms & Conditions</a>
-        </div>
+        </div><div id="content">
       </div>
     </div>
   </footer>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+              <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+              <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+
+<script>
+  var mini = true;
+
+  function toggleSidebar() {
+      if (mini) {
+          document.getElementById("mySidebar").style.width = "250px";
+          document.getElementById("main").style.marginLeft = "250px";
+          this.mini = false;
+      } else {
+          document.getElementById("mySidebar").style.width = "85px";
+          document.getElementById("main").style.marginLeft = "85px";
+          this.mini = true;
+      }
+  }
+</script>
+
 </html>
