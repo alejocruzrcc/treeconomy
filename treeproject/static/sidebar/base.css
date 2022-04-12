@@ -12,6 +12,7 @@
     border-radius: 0px 50px 50px 0px;
     opacity: 1;
     position: absolute;
+    z-index: 1;
 }
 
 .sidebarMovil {
@@ -23,7 +24,7 @@
     opacity: 1;
     position: absolute;
     border-radius: 0px 30px 30px 0px;
-
+    z-index: 1;
 }
 .sidebar a, .sidebarMovil a{
     padding: 8px 8px 8px 32px;
@@ -66,7 +67,12 @@
 #main {
     transition: margin-left .5s;
     padding: 16px;
-    margin-left: 100px;
+    
+}
+@media only screen and (min-width: 768px) {
+	#main { 
+	    margin-left: 85px;
+	}
 }
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 

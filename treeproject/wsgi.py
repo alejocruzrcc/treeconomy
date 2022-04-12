@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'treeproject.settings.pro')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'treeproject.settings.des')
 
 application = get_wsgi_application()
