@@ -1,7 +1,5 @@
 import django_on_heroku
 import os
-
-from treeproject.settings.des import NOTIFY_EMAIL
 from .base import *
 
 DEBUG = False
