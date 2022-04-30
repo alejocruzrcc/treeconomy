@@ -1,11 +1,23 @@
 {% extends "base.html" %}
-
+{% load crispy_forms_tags %}
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<h1>Plants Trees Now!</h1>
-<h5> Select an inversion type </h5>
+<div class="site-section">
+    <div class="container">
+    <h1>Plants Trees Now!</h1>
+    <h5> Select an inversion type </h5>
+    
+    <div class="row">
+        <div class="col-md-2">
+            <a class="button-plant" href="{% url 'create_subscription' %}"> Subscription </a>
+        </div>
+        <div class="col-md-2">
+            <a class="button-plant" href=""> One payment </a>
 
-<a href="{% url 'create_subscription' %}"> Subscription </a>
-<a href=""> One payment </a>
+        </div>
+    </div>
+
+
+</div>
 {% endblock %}

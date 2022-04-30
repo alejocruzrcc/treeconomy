@@ -59,6 +59,7 @@ DJANGO_APPS = [
     'bootstrap5',
     'django_social_share',
     'rolepermissions',
+    'crispy_forms',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -161,7 +162,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # EMAIL_BACKEND = 'django.core.mail.backends.xonsole.EmailBackend'
 
-
+CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 AUTHENTICATION_BACKENDS=['django.contrib.auth.backends.ModelBackend',
                          'account.authentication.EmailAuthBackend',

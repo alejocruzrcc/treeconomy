@@ -28,6 +28,7 @@ urlpatterns = [
     path('projects/',include('projects.urls')),
     path('social-auth/',include('social_django.urls',namespace='social')),
     path('',account.views.home,name='index'),
+    path('contact/', account.views.ContactView.as_view(), name="contact"),
     path('dashboard/',account.views.dashboard,name='dashboard'),
 ] 
 if settings.DEBUG:

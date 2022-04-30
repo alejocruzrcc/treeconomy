@@ -112,7 +112,9 @@ span.naranja {
           <div class="row">
               <div class="col-6 mb-4">
                 {% if project.image %}
-                  <img src="{{project.image.url}}" height="200">
+                  <figure class="block-4-image">
+                    <img src="{{project.image.url}}" class="img-fluid">
+                  </figure>
                 {% endif %}
                 <p style="margin-top: 8px; margin-bottom: 0px;"><span class="naranja">Vendedor:</span></p>
                 <p style= "font: normal normal normal 14px/24px Lato;"> Andrés Felipe Guzmán </p>

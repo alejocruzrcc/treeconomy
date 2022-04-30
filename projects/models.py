@@ -1,13 +1,15 @@
+from __future__ import division
+from ast import arg
 from django.db import models
 from django.db.models import Q
 
 from django.urls import reverse
-
+from django.utils.text import slugify
 from django.core.validators import MinValueValidator
-
+from django.db.models.signals import pre_save
 from datetime import datetime, timedelta
 #from django.utils import timezone
-
+from django.contrib.auth.models import User
 from statistics import mean
 import math
 
@@ -45,10 +47,12 @@ class ProjectManager(models.Manager):
 
 
 class Project(models.Model):
-    name                = models.CharField(max_length=120, primary_key=True)
+    name                = models.CharField(max_length=120)
+    slug                = models.SlugField(unique=True, primary_key=True) 
     coordinates         = models.CharField(max_length=120)
     n_trees             = models.PositiveIntegerField()
     plantation_date     = models.DateField()
+    price               = models.IntegerField(default=0)
     total_invested      = models.FloatField()
     total_unit_initial  = models.FloatField()
     tree_type           = models.CharField(max_length=120)
@@ -74,14 +78,70 @@ class Project(models.Model):
         return self.coordinates
 
     def get_absolute_url(self):
-        return reverse("project-detail", kwargs={"pk": self.pk})
+        return reverse("project-detail", kwargs={"slug": self.slug})
 
     def delete(self, using=None, keep_parents=False):
         #import pdb; pdb.set_trace() 
         if self.image:
             self.image.storage.delete(self.image.name)
         super().delete()
+        
+    def get_price(self):
+        return "{:.2f}".format(int(self.price or 0) /100)
 
+class OrderItem(models.Model):
+    order = models.ForeignKey("Order", related_name='items', on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default = 1)
+    
+    def __Str__(self):
+        return f"{self.quantity} x Trees in {self.project.name}"
+
+    def get_raw_total_item_price(self):
+        return self.quantity * int(self.project.price or 0) 
+    
+    def get_total_item_price(self):
+        price = self.get_raw_total_item_price()
+        return "{:.2f}".format(int(price or 0) /100)
+    
+class Order(models.Model):
+    user = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
+    start_date = models.DateTimeField(auto_now_add=True)
+    ordered_date = models.DateTimeField(blank=True, null=True)
+    ordered = models.BooleanField(default=False)
+    
+    def __str__(self):
+        return self.reference_number
+    
+    @property
+    def reference_number(self):
+        return f"ORDER-{self.pk}"
+
+    def get_raw_subtotal(self):
+        total =  0
+        for order_item in self.items.all():
+            total += order_item.get_raw_total_item_price()
+        return total
+    def get_subtotal(self):
+        subtotal = self.get_raw_subtotal()
+        return "{:.2f}".format(int(subtotal or 0) /100)
+    
+    def get_raw_total(self):
+        subtotal = self.get_raw_subtotal()
+        discounts = 0
+        impuestos = 0
+        total =  subtotal - discounts + impuestos
+        return total
+    def get_total(self):
+        total = self.get_raw_total()
+        return "{:.2f}".format(int(total or 0) /100)
+        
+def pre_save_project_receiver(sender, instance, *args, **kwargs):
+    if not instance.slug:
+        instance.slug = slugify(instance.name)
+
+pre_save.connect(pre_save_project_receiver, sender= Project)      
+    
 class PercentageRecordQuerySet(models.query.QuerySet):
     def search(self, query):
         lookups = (Q(record_date__icontains=query) 
@@ -132,6 +192,7 @@ class PercentageRecordManager(models.Manager):
 
 class PercentageRecord(models.Model):
     project            = models.ForeignKey(Project, on_delete=models.CASCADE)
+    
     record_date        = models.DateField(unique=True)
     growth_avg         = models.FloatField(validators=[MinValueValidator(0.0)])
     dch_avg            = models.FloatField(validators=[MinValueValidator(0.0)])

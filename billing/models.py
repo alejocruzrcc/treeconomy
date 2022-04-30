@@ -2,6 +2,7 @@ from django.conf import settings
 from django.db import models
 from django.db.models.signals import post_save, pre_save
 from django.urls import reverse
+from projects.models import Order
 
 User = settings.AUTH_USER_MODEL
 
@@ -186,3 +187,20 @@ class Charge(models.Model):
     risk_level              = models.CharField(max_length=120, null=True, blank=True)
 
     objects = ChargeManager()
+
+class Payment(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='payments')
+    Payment_method = models.CharField(max_length=20, choices=(
+        ('Paypal', 'Paypal'),
+    ))
+    timestamp = models.DateTimeField(auto_now_add=True)
+    succesful = models.BooleanField(default=False)
+    amount = models.FloatField()
+    raw_respnse = models.TextField()
+    
+    def __str__(self):
+        return self.reference_number
+        
+    @property
+    def reference_number(self):
+        return f"PAYMENT-{self.order}-{self.pk}"    

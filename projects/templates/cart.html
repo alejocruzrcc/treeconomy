@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+{% block title %}Summary{% endblock %}
+
+{% block content %}
+
+<div class="site-section">
+    <div class="container">
+      <div class="row mb-5">
+        <div class="col-md-12">
+          <div class="col-md-12">
+              <div class="site-blocks-table">
+                  <table class=table>
+                    <thead>
+                      <tr>
+                        <th>Image</th>
+                        <th>Project</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in order.items.all %}
+                        <tr>
+                            <td class="product-thumbnail">
+                                <figure class="block-4-image" style="height: 100px; width: 200px">
+                                <img src="{{ item.project.image.url }}" class="img-thumbnail">
+                                </figure>
+                            </td>
+                            <td>
+                                <h2 class="h5 text-black">{{ item.project.name }}</h2>
+                            </td>
+                            <td>
+                                ${{ item.project.get_price }}
+                            </td>
+                            <td>
+                                <div class="input-group mb-3" style="max-width: 120px;">
+                                    <div class="input-group-pretend">
+                                        <a href="{% url 'decrease-quantity' item.id %}" class="btn btn-outline-primary">
+                                            &minus;
+                                        </a>
+                                    </div>
+                                    <input type="text" class="form-control text-center" value="{{ item.quantity }}">
+                                    <div class="input-group-pretend">
+                                        <a href="{% url 'increase-quantity' item.id %}" class="btn btn-outline-primary">
+                                            &plus;
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                $ {{ item.get_total_item_price }}
+                            </td>
+                            <td>
+                                <a href="{% url 'remove-from-cart' item.id %}" class="btn btn-primary btn-sm">x</a>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td>
+                                There are not Items in your cart. 
+                                <div class="d-grid gap-2">
+                                    <a class="btn btn-outline-primary btn-sm" href="{% url 'projects' %}">Continue shopping</a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                      
+                  </table>
+              </div>
+          </div>
+        </div>
+      </div>
+      {% if order.items.count > 0  %}
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row" mb-5>
+                    <div class="col-md-12">
+                        <div class="d-grid gap-2">
+                        <a class="btn btn-outline-primary btn-sm" href="{% url 'projects' %}">Continue shopping</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 pl-5">
+                <div class="row justify-content-end">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-12 text-right border-bottom mb-5">
+                                <h3 class="text-black h4 text-uppercase">Cart Total</h3>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <span class="text-black">Subtotal</span>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <strong class="text-black">${{ order.get_subtotal }}</strong>
+                            </div>
+                        </div>
+                        <div class="row mb-5">
+                            <div class="col-md-6">
+                                <span class="text-black">Total</span>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <strong class="text-black">${{ order.get_total }}</strong>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="d-grid gap-2">
+                                    <a class="button-plant btn-lg py-3 text-center" href="#">Proced to Checkout</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from .models import Profile
 from django.contrib.auth.forms import PasswordResetForm
 from .models import Subscription, ProjectByInvestor
+from phonenumber_field.formfields import PhoneNumberField
+
 OPTIONS = (('Active', 'Active'), ('Closed', 'Closed'), ('On hold', 'On hold'))
 
 class EmailValidationOnForgotPassword(PasswordResetForm):
@@ -70,7 +72,7 @@ class SubscriptionForm(forms.ModelForm):
 
     class Meta:
         model = Subscription
-        fields = ('investor', 'current_payment', 'next_payment', 'status', 'total', 'start_date', 'last_order_date', 'n_projects')
+        fields = ('investor', 'n_projects')
     
     def clean_status(self):
         status = self.cleaned_data['status']
@@ -80,5 +82,18 @@ class SubscriptionForm(forms.ModelForm):
         return status
 
 
-
+class ContactForm(forms.Form):
+    name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={
+        'placeholder': "Name"
+    }))    
+    email = forms.EmailField(widget=forms.TextInput(attrs={
+        'placeholder': "Email"
+    }))
+    phone = PhoneNumberField(widget=forms.TextInput(attrs={
+        'placeholder': "Phone"
+    }))  
+    message = forms.CharField(widget=forms.TextInput(attrs={
+        'placeholder': "Message"
+    }))
+    
 

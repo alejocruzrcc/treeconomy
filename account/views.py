@@ -1,11 +1,13 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect
-from django.shortcuts import HttpResponse
+from django.shortcuts import HttpResponse, reverse
 from django.contrib import auth
 from django.contrib.auth import authenticate,login
 from django.contrib.auth.models import User
 from django.template.context_processors import csrf
-from .forms import LoginForm, SubscriptionForm, UserRegistrationForm,UserEditForm,ProfileEditForm
+from django.conf import settings
+from projects.forms import ProjectByInvestorForm
+from .forms import LoginForm, SubscriptionForm, UserRegistrationForm,UserEditForm,ProfileEditForm, ContactForm
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.template import RequestContext
@@ -20,11 +22,43 @@ from django.template.loader import render_to_string
 from .token_generator import account_activation_token
 from django.core.mail import EmailMessage
 from rolepermissions.roles import assign_role
-
-
+from django.core import serializers
+from django.http import JsonResponse
+from django.views import generic
 
 def home(request):
     return render(request,'account/index.html',{'section':'index'})
+
+class ContactView(generic.FormView):
+    form_class = ContactForm
+    template_name = "account/contact.html"
+    
+    def get_success_url(self):
+        return reverse("contact")
+    
+    def form_valid(self, form):
+        messages.info(self.request, "Hemos recibido tu mensaje")
+        name = form.cleaned_data.get('name')
+        email = form.cleaned_data.get('email')
+        message = form.cleaned_data.get('message')
+        phone = form.cleaned_data.get('phone')
+        
+        full_message = f"""
+            
+            Mensaje recibido de {name}, {email}, {phone}
+            ------------------------------------
+            
+            {message}
+            """
+        send_mail(
+            subject="Mensaje recibido por contact form",
+            message=full_message,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[settings.NOTIFY_EMAIL]
+        )
+        return super(ContactView, self).form_valid(form)
+        
+    
 
 @login_required
 def dashboard(request):
@@ -126,9 +160,11 @@ def profile(request):
     return render(request,'account/profile.html', {'user': request.user})
 
 def create_subscription(request):
-    formulario = SubscriptionForm(request.POST or None, request.FILES or None)
+    formulario = ProjectByInvestorForm(request.POST or None, request.FILES or None)
+    print(request)
     if formulario.is_valid():
         formulario.save()
         return redirect('/subscription')
-    return render(request, "subscription/create.html", {'subscription_form': formulario})
+    
+    return render(request, "subscription/create.html", {'form': formulario})
     

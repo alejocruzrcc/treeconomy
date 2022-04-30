@@ -1,5 +1,7 @@
 import django_on_heroku
 import os
+
+from treeproject.settings.des import NOTIFY_EMAIL
 from .base import *
 
 DEBUG = False
@@ -63,6 +65,7 @@ EMAIL_USE_SSL = False
 EMAIL_USE_TLS = True
 
 DEFAULT_FROM_EMAIL = os.environ['DEFAULT_FROM_EMAIL']
+NOTIFY_EMAIL = os.environ['NOTIFY_EMAIL']
 
 SOCIAL_AUTH_FACEBOOK_KEY= os.environ['SOCIAL_AUTH_FACEBOOK_KEY']
 SOCIAL_AUTH_FACEBOOK_SECRET= os.environ['SOCIAL_AUTH_FACEBOOK_SECRET']

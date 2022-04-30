@@ -1,4 +1,6 @@
 {% load static %}
+{% load cart_template_tags %}
+
 {% load bootstrap5 %}
 <!DOCTYPE html>
 <html>
@@ -61,6 +63,7 @@
     transform: translate(-45%, -45%);
 }
 
+
 </style>
 <body class="minimizar">
   <nav class="navbar navbar-expand-lg navbar-dark">
@@ -81,12 +84,18 @@
               <i class="material-icons" >monetization_on</i>
             </a>
           </div>
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'contact' %}">Contact Us</span></a>
+          </li>
         </ul>
-
+        <a  href="{% url 'summary'%}" type="button" class="position-relative">
+          <i class="material-icons" style= "margin-right: 10px">shopping_cart</i>
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            {{ request | cart_item_count }}
+            <span class="visually-hidden">unread messages</span>
+          </span>
+        </a>
         
-        <a href="#"><img
-          src="https://treeconomy.com.co/wp-content/themes/Treeconomy/img/app/icons/notificaciones.svg"
-          alt=""></a>
         <div class="col-md-2 centering-all dropdown">
           <span class="user name-user">
           {% if request.user.is_authenticated %}
@@ -118,6 +127,16 @@
   </div>
 
   <div id="main">
+    {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        <span class="alert-inner--icon"><i class="ni ni-like-2"></i></span> 
+        <span class="alert-inner--text">{{ message }}</span>
+        <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
+      </div>
+      {% endfor %}
+    {% endif %}
+
     {% block content %}
     {% endblock %}
   </div>

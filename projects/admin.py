@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Project, Plat, ProjectTrackingRecord, PercentageRecord
+from .models import Order, OrderItem, Project, Plat, ProjectTrackingRecord, PercentageRecord
 
 class ProjectAdmin(admin.ModelAdmin):
     list_display = ('name', 'coordinates', 'n_trees', 'tree_type', 'active',)
@@ -34,6 +34,8 @@ class PercentageRecordAdmin(admin.ModelAdmin):
         model = PercentageRecord
 
 admin.site.register(Project, ProjectAdmin)
+admin.site.register(Order)
+admin.site.register(OrderItem)
 admin.site.register(Plat, PlatAdmin)
 admin.site.register(ProjectTrackingRecord, ProjectRecordAdmin)
 admin.site.register(PercentageRecord, PercentageRecordAdmin)
