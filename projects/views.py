@@ -68,13 +68,15 @@ class CartView(generic.TemplateView):
         context["order"] = get_or_set_order_session(self.request)
         return context
    
-class IncreaseQuantityView(generic.View):
-    def get(self, request, *args, **kwargs):
+
+class IncreaseQuantityCartView(generic.View):
+    def get(self, request, *args, **kwargs):    
         order_item = get_object_or_404(OrderItem, id=kwargs['pk'])
         order_item.quantity += 1
         order_item.save()
         return redirect("summary")
-class DecreaseQuantityView(generic.View):
+
+class DecreaseQuantityCartView(generic.View):
     def get(self, request, *args, **kwargs):
         order_item = get_object_or_404(OrderItem, id=kwargs['pk'])
         if order_item.quantity <= 1:

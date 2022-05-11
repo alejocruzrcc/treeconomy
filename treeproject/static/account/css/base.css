@@ -523,6 +523,12 @@ footer a {
     left: 0;
   }
   
-
+footer h2 {
+    margin-top: 25px;
+    color: #ffffff;
+    font-family: "lato-bold";
+    width: 100%;
+    text-align: center;
+}
 
   

@@ -1,6 +1,7 @@
 
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
+{% load add_attr %}
 {% block title %}Project{% endblock %}
 
 {% block content %}
@@ -34,8 +35,29 @@
         <p class="card-text"><strong>Trees price:</strong> ${{ project.get_price }}</p> 
         <form method="POST">
           {% csrf_token %}
-          {{ form|crispy }}
-          <button type="submit" class="btn btn-sm btn-primary buy-now">Add to cart</button>
+     
+         
+        <div class="input-group mb-3" style="max-width: 120px;">
+          <div class="input-group-pretend">
+              <a href="#" class="btn btn-outline-primary">
+                  &minus;
+              </a>
+          </div>
+          {% if user_form.last_name.errors %}
+              {{ form.quantity|add_attr:'is-invalid'}}
+          {% else %}
+              <input type="text" name="quantity" value="1" min="0" class="form-control text-center" required="" id="id_quantity">
+          {% endif %}
+          <div class="invalid-feedback">
+              {{ form.quantity.errors }}
+          </div>
+          <div class="input-group-pretend">
+              <a href="#" class="btn btn-outline-primary">
+                  &plus;
+              </a>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-sm btn-primary buy-now">Add to cart</button>
 
         </form>
        

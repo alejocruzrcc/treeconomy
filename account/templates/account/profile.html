@@ -8,7 +8,7 @@
         background: #f5f5f5
     }
     .section {
-        padding: 100px 0;
+        padding: 50px 0;
         position: relative;
     }
     .gray-bg {
@@ -166,107 +166,114 @@
 <section>
     <section class="section about-section gray-bg" id="about">
         <div class="container">
-            <div class="row align-items-center flex-row-reverse">
-                <div class="col-lg-6">
-                    <div class="about-text go-to">
-                        <div class="row">
-                          <div class="col-6">
-                            <h3 class="dark-color">{{ user.first_name }} {{ user.last_name }}</h3>
-                          </div>
-                          <div class="col-6">
-                            <a name="" id="" class="btn btn-primary profile-button" href="{% url 'edit' %}" role="button">Edit profile</a>
-                          </div>
-                        </div>
-                       
-                        
-                        <h6 class="theme-color lead">Investor</h6>
-                        
-                        <div class="row about-list">
-                            <div class="col-md-6">
-                                <div class="media">
-                                    <label>Birthday</label>
-                                    <p>{{ user.profile.date_of_birth }}</p>
-                                </div>
-                                <div class="media">
-                                    <label>Age</label>
-                                    <p>22 Yr</p>
-                                </div>
-                                <div class="media">
-                                    <label>Residence</label>
-                                    <p>{{ user.profile.country }}, {{ user.profile.state}}, {{ user.profile.city }}</p>
-                                </div>
-                                <div class="media">
-                                    <label>Address</label>
-                                    <p>{{ user.profile.adress }}</p>
-                                </div>
-                                <div class="media">
-                                  <label>Zip code</label>
-                                  <p>{{ user.profile.zipcode }}</p>
-                              </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="media">
-                                    <label>E-mail</label>
-                                    <p>{{ user.email }}</p>
-                                </div>
-                                <div class="media">
-                                    <label>Phone</label>
-                                    <p>{{ user.profile.phone }}</p>
-                                </div>
-                                <div class="media">
-                                  <label>Facebook</label>
-                                  <p>{{ user.profile.facebook }}</p>
-                                </div>
-                                <div class="media">
-                                  <label>Instagram</label>
-                                  <p>{{ user.profile.instagram }}</p>
-                                </div>
-                                <div class="media">
-                                    <label>Twitter</label>
-                                    <p>{{ user.profile.twitter }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="about-avatar">
-                      {% if user.profile.photo %}
-                        <img src="{{user.profile.photo.url}}" width="400px">
-                      {% else %}
-                      <img src="https://bootdey.com/img/Content/avatar/avatar7.png" title="" alt="">
-                      {% endif %}
-                    </div>
-                </div>
+          <div class="about-text text-center">
+            <div class="row">
+              <div class="col-6">
+                <h3 class="dark-color my-3">{{ user.first_name }} {{ user.last_name }}</h3>
+                <h6 class="theme-color lead">Investor</h6>
+              </div>
+              <div class="col-6">
+                <a name="" id="" class="btn btn-primary profile-button my-3" href="{% url 'edit' %}" role="button">Edit profile</a>
+              </div>
             </div>
-            <div class="counter mt-4">
-                <div class="row">
-                    <div class="col-6 col-lg-3">
+          </div>
+          <div class="row align-items-center text-center">
+            <div class="col-lg-6">
+              <div class="about-avatar">
+                {% if user.profile.photo %}
+                  <img src="{{user.profile.photo.url}}" width="400px">
+                {% else %}
+                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" title="" alt="">
+                {% endif %}
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="about-text go-to">
+                <div class="counter">
+                  <div class="row">
+                    <div class="col-6 col-lg-6">
                         <div class="count-data text-center">
                             <h6 class="count h2" data-to="500" data-speed="500">500</h6>
                             <p class="m-0px font-w-600">Earned Trees</p>
                         </div>
                     </div>
-                    <div class="col-6 col-lg-3">
+                    <div class="col-6 col-lg-6">
                         <div class="count-data text-center">
                             <h6 class="count h2" data-to="150" data-speed="150">150</h6>
                             <p class="m-0px font-w-600">Utility</p>
                         </div>
                     </div>
-                    <div class="col-6 col-lg-3">
+                  </div>
+                  <div class="row">
+                    <div class="col-6 col-lg-6">
                         <div class="count-data text-center">
-                            <h6 class="count h2" data-to="850" data-speed="850">850</h6>
+                            <h6 class="count h2" data-to="850" data-speed="850">$850</h6>
                             <p class="m-0px font-w-600">Inversion</p>
                         </div>
                     </div>
-                    <div class="col-6 col-lg-3">
+                    <div class="col-6 col-lg-6">
                         <div class="count-data text-center">
                             <h6 class="count h2" data-to="190" data-speed="190">190</h6>
                             <p class="m-0px font-w-600">Captured CO2</p>
                         </div>
                     </div>
+                  </div> 
                 </div>
+              </div>
             </div>
+          </div>
+         
+          <div class="mt-4 text-center">
+            <div class="row about-list">
+              <div class="col-md-4">
+                <div class="media">
+                    <label>Birthday</label>
+                    <p>{{ user.profile.date_of_birth }}</p>
+                </div>
+                <div class="media">
+                    <label>Age</label>
+                    <p>22 Yr</p>
+                </div>
+                <div class="media">
+                    <label>Residence</label>
+                    <p>{{ user.profile.country }}, {{ user.profile.state}}, {{ user.profile.city }}</p>
+                </div>
+                <div class="media">
+                    <label>Address</label>
+                    <p>{{ user.profile.adress }}</p>
+                </div>
+                
+              </div>
+              <div class="col-md-4">
+                  <div class="media">
+                      <label>E-mail</label>
+                      <p>{{ user.email }}</p>
+                  </div>
+                  <div class="media">
+                      <label>Phone</label>
+                      <p>{{ user.profile.phone }}</p>
+                  </div>
+                  <div class="media">
+                    <label>Zip code</label>
+                    <p>{{ user.profile.zipcode }}</p>
+                  </div>
+              </div>
+              <div class="col-md-4">
+                <div class="media">
+                  <label>Facebook</label>
+                  <p>{{ user.profile.facebook }}</p>
+                </div>
+                <div class="media">
+                  <label>Instagram</label>
+                  <p>{{ user.profile.instagram }}</p>
+                </div>
+                <div class="media">
+                    <label>Twitter</label>
+                    <p>{{ user.profile.twitter }}</p>
+                </div>
+              </div>
+          </div>
+          
         </div>
     </section>
 

@@ -38,13 +38,13 @@
                             <td>
                                 <div class="input-group mb-3" style="max-width: 120px;">
                                     <div class="input-group-pretend">
-                                        <a href="{% url 'decrease-quantity' item.id %}" class="btn btn-outline-primary">
+                                        <a href="{% url 'decrease-quantity-cart' item.id %}" class="btn btn-outline-primary">
                                             &minus;
                                         </a>
                                     </div>
                                     <input type="text" class="form-control text-center" value="{{ item.quantity }}">
                                     <div class="input-group-pretend">
-                                        <a href="{% url 'increase-quantity' item.id %}" class="btn btn-outline-primary">
+                                        <a href="{% url 'increase-quantity-cart' item.id %}" class="btn btn-outline-primary">
                                             &plus;
                                         </a>
                                     </div>

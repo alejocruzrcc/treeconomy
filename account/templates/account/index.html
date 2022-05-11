@@ -3,18 +3,68 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
+
+<style>
+.contenedor-calculadora-producto{
+    background-color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 25px;
+    -webkit-box-shadow: 10px 10px 5px -1px rgb(0 0 0 / 5%);
+    box-shadow: 10px 10px 5px -1px rgb(0 0 0 / 5%);
+    padding: 45px 20px;
+}
+
+.contenedor-contador-extra{
+    max-width: 90%;
+    display: block;
+    margin: 0 auto;
+}
+h2{
+    font-size: 30px;
+    font-family: "comfortaa-bold";
+    color: #035941;
+    text-align: center;
+    margin-bottom: 25px;
+  }
+
+  .boton-venta {
+    padding: 10px 25px;
+    border-radius: 25px;
+    background-color: #f2622e;
+    color: #fff !important;
+    -webkit-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+    text-decoration: none !important;
+    font-size: 20px;
+    display: block;
+    width: 55%;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 30px;}
+</style>
 <div class="site-section">
     <div class="container">
-    <h1>Plants Trees Now!</h1>
-    <h5> Select an inversion type </h5>
-    
-    <div class="row">
-        <div class="col-md-2">
-            <a class="button-plant" href="{% url 'create_subscription' %}"> Subscription </a>
-        </div>
-        <div class="col-md-2">
-            <a class="button-plant" href=""> One payment </a>
-
+        <h1>Plants Trees Now!</h1>
+        <h5> Select an inversion type </h5>
+        
+        <div class="row">
+            <div class="col-xl-6 order-2">
+                <div class="contenedor-calculadora-producto">
+                    <h2> Monthly Investment </h2>
+                    <div class="contenedor-contador-extra">
+                        <a class="boton-venta"  href="{% url 'summary'%}"> Subscription </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 order-2">
+                <div class="contenedor-calculadora-producto">
+                    <h2> One Time Investment </h2>
+                    <div class="contenedor-contador-extra">
+                        <a class="boton-venta"  href="{% url 'summary'%}"> Buy Now! </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

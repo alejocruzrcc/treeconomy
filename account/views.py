@@ -25,7 +25,7 @@ from rolepermissions.roles import assign_role
 from django.core import serializers
 from django.http import JsonResponse
 from django.views import generic
-from django.views.decorators.csrf import csrf_exempt
+#from django.views.decorators.csrf import csrf_exempt
 
 
 def home(request):
@@ -85,7 +85,7 @@ def user_login(request):
         form=LoginForm()
     return render(request,'account/login.html',{'form':form})
 
-@csrf_exempt
+
 def register(request):
     if request.method == 'POST':
         user_form = UserRegistrationForm(request.POST)
