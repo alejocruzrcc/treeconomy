@@ -71,4 +71,6 @@ SOCIAL_AUTH_FACEBOOK_SECRET= os.environ['SOCIAL_AUTH_FACEBOOK_SECRET']
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY= os.environ['SOCIAL_AUTH_GOOGLE_OAUTH2_KEY']
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET= os.environ['SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET']
 
-django_on_heroku.settings(locals(), staticfiles=False)
+PORT=5000
+
+django_heroku.settings(locals(), staticfiles=False, databases=False),
