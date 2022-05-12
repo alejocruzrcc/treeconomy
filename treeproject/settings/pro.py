@@ -75,6 +75,6 @@ PORT=5000
 
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
-DCS_SESSION_COOKIE_SAMESITE = "None"
+DCS_SESSION_COOKIE_SAMESITE = 'None'
 
 django_on_heroku.settings(locals(), staticfiles=False, databases=False),
