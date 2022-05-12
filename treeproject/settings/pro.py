@@ -72,5 +72,6 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_KEY= os.environ['SOCIAL_AUTH_GOOGLE_OAUTH2_KEY']
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET= os.environ['SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET']
 
 PORT=5000
+CSRF_COOKIE_SECURE=True
 
 django_on_heroku.settings(locals(), staticfiles=False, databases=False),
