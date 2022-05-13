@@ -9,6 +9,7 @@ from projects.models import Project
 from django.conf import settings
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.shortcuts import get_object_or_404
 
 DEFAULT_ACTIVATION_DAYS = getattr(settings, 'DEFAULT_ACTIVATION_DAYS', 7)
 DAYS_PER_YEAR = 365
@@ -162,7 +163,7 @@ class ProjectByInvestor(models.Model):
         verbose_name_plural = "Projects by investor"
 
     def save(self, *args, **kwargs):
-        proj = Project.objects.get_by_id(self.project)
+        proj =  get_object_or_404(Project, slug=self.project.slug)
 
         if self.co2_consumption is None:
             self.co2_consumption = round((CO2_CONSUMPTION_PER_TREE_PER_DAY * self.n_trees), 3)
@@ -175,7 +176,7 @@ class ProjectByInvestor(models.Model):
         else:
             print("There are not enough trees to buy in this project")
     def __str__(self):
-        return str(self.pk) + "_" + self.investor.rut + "_" + self.project.name
+        return str(self.pk) + "_" + self.investor.profile.rut + "_" + self.project.name
 
     def get_absolute_url(self):
         return reverse("project-investor-detail", kwargs={"pk": self.pk})
