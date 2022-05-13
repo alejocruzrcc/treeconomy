@@ -73,15 +73,5 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET= os.environ['SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET']
 
 PORT=5000
 
-SESSION_COOKIE_SAMESITE = None
-X_FRAME_OPTIONS = 'ALLOWALL'
-CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOW_CREDENTIALS = True
-CSRF_COOKIE_SECURE = False
-CSRF_COOKIE_SAMESITE = 'Lax'
-CSRF_COOKIE_HTTPONLY = False
-CSRF_TRUSTED_ORIGINS = [
-    'app.treeconomy.com',
-]
 
 django_on_heroku.settings(locals(), staticfiles=False, databases=False),
