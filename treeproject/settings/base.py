@@ -170,5 +170,5 @@ AUTHENTICATION_BACKENDS=['django.contrib.auth.backends.ModelBackend',
                         'social_core.backends.google.GoogleOAuth2',
 			 ]
         
-
+SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
 
