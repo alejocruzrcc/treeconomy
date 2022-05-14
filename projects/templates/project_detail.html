@@ -1,4 +1,4 @@
-
+git
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 {% load add_attr %}
@@ -39,10 +39,12 @@
          
         <div class="input-group mb-3" style="max-width: 120px;">
           <div class="input-group-pretend">
-              <a href="#" class="btn btn-outline-primary">
+               <a></a>
+              <a  id="disminuir_arboles" class="btn btn-outline-primary">
                   &minus;
               </a>
           </div>
+        
           {% if user_form.last_name.errors %}
               {{ form.quantity|add_attr:'is-invalid'}}
           {% else %}
@@ -52,7 +54,7 @@
               {{ form.quantity.errors }}
           </div>
           <div class="input-group-pretend">
-              <a href="#" class="btn btn-outline-primary">
+              <a id="aumentar_arboles" class="btn btn-outline-primary">
                   &plus;
               </a>
           </div>
@@ -66,6 +68,33 @@
   </div>
 </div>
 
+<script>
+  var btn_disminuir = document.getElementById("disminuir_arboles")
+  var btn_aumentar = document.getElementById("aumentar_arboles")
+  
+  btn_aumentar.addEventListener("click", function(){
+    campo_cantidad = document.getElementById("id_quantity")
+    parseInt(campo_cantidad)
+    campo_cantidad.value ++
+    
+    console.log(parseInt(campo_cantidad.value))
+    
+  })
+
+  btn_disminuir.addEventListener("click", function(){
+    campo_cantidad = document.getElementById("id_quantity")
+    
+    parseInt(campo_cantidad)
+    
+    if(campo_cantidad.value>1){
+      campo_cantidad.value --
+    }
+    
+    console.log(parseInt(campo_cantidad.value))
+  })
+
+ 
+</script>
 
 
 {% endblock %}
