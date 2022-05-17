@@ -88,6 +88,9 @@ class Project(models.Model):
         
     def get_price(self):
         return "{:.2f}".format(int(self.price or 0) /100)
+    
+    def get_trees_left_porcent(self):
+        return 100 - ((self.trees_left * 100) / int(self.n_trees or 1)) 
 
 class OrderItem(models.Model):
     order = models.ForeignKey("Order", related_name='items', on_delete=models.CASCADE)

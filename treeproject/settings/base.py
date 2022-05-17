@@ -41,7 +41,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 THIRD_PARTY_APPS = []
 ROLEPERMISSIONS_MODULE = 'treeproject.roles'
 
-LOCAL_APPS = ['projects', 'billing']
+LOCAL_APPS = ['projects', 'billing', 'dashboard']
 
 DJANGO_APPS = [
     'account.apps.AccountConfig',
