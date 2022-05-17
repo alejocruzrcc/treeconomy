@@ -19,7 +19,9 @@ from pathlib import Path
 #BASE_DIR = Path(__file__).resolve().parent.parent
 import os
 import environ
+import mimetypes
 
+mimetypes.add_type("text/css", ".css", True)
 
 env = environ.Env(
     # set casting, default value
