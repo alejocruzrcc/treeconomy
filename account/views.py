@@ -95,7 +95,6 @@ def register(request):
             new_user.set_password(user_form.cleaned_data['password'])
             user_form.save()  # guardar el usuario en la base de datos si es válido
 
-
             # Enviar un email de confirmación
             current_site = get_current_site(request)
             email_subject = 'Activate Your Account'
@@ -112,7 +111,7 @@ def register(request):
             return render(request,'registration/confirm_account.html')
             
 
-            
+         
     else:
         user_form=UserRegistrationForm()
     return render(request,'account/register.html',{'user_form': user_form})
