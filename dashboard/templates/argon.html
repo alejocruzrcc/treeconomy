@@ -7,7 +7,7 @@
 
 {% block content %}
       <!-- Argon CSS -->
-      <link rel="stylesheet"  href="{% static "assets/css/argon.css" %}" type="text/css">
+      <link rel="stylesheet"  href="{% static "dashboard/css/argon.css" %}" type="text/css">
     {% include "includes/scripts.html" %}
     <!-- Header -->
     <div class="header bg-primary pb-6">
@@ -322,7 +322,7 @@
 <!-- Specific JS goes HERE --> 
 {% block javascripts %}
 
-  <script src="{% static "assets/vendor/chart.js/dist/Chart.min.js" %}"></script>
-  <script src="{% static "assets/vendor/chart.js/dist/Chart.extension.js" %}"></script>
-  <script src="{% static "assets/js/argon.js" %}"></script>
+  <script src="{% static "dashboard/js/vendor/chart.js/dist/Chart.min.js" %}"></script>
+  <script src="{% static "dashboard/js/vendor/chart.js/dist/Chart.extension.js" %}"></script>
+  <script src="{% static "dashboard/js/argon.js" %}"></script>
 {% endblock javascripts %}
