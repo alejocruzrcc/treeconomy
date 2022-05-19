@@ -25,7 +25,7 @@ class ProjectByInvestorForm(forms.ModelForm):
 class AddToCartForm(forms.ModelForm):
     class Meta: 
         model = OrderItem
-        fields = ['quantity']
+        fields = ['quantity', 'type_inversion']
     
     def __init__(self, *args, **kwargs):
         project_id = kwargs.pop('project_id')

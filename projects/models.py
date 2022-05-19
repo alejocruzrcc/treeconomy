@@ -97,6 +97,10 @@ class OrderItem(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default = 1)
     
+    TYPE_INVERSION_CHOICES = [('M', 'Monthly subscription'), ('O', 'One payment')] 
+    type_inversion = models.CharField(verbose_name='Inversion type', choices=TYPE_INVERSION_CHOICES, default='M', max_length=1) 
+    
+    
     def __Str__(self):
         return f"{self.quantity} x Trees in {self.project.name}"
 
@@ -106,6 +110,10 @@ class OrderItem(models.Model):
     def get_total_item_price(self):
         price = self.get_raw_total_item_price()
         return "{:.2f}".format(int(price or 0) /100)
+    
+    def get_label_type_choice(self):
+        type = self.type_inversion
+        return 'Monthly subscription' if type == 'M' else 'One Payment'
     
 class Order(models.Model):
     user = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)

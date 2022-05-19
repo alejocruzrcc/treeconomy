@@ -34,9 +34,18 @@ git
         <p class="card-text"><strong>Link to Google Earth:</strong> <a href=""> {{ project.project_link }} </a></p> 
         <p class="card-text"><strong>Trees price:</strong> ${{ project.get_price }}</p> 
         <form method="POST">
-          {% csrf_token %}
-     
+        {% csrf_token %}
+  
+        {% if form..errors %}
+            {{ form.type_inversion|add_attr:'is-invalid'}}
+        {% else %}
+            {{ form.type_inversion }}
+        {% endif %}
+        <div class="invalid-feedback">
+            {{ form.type_inversion.errors }}
+        </div>
          
+        
         <div class="input-group mb-3" style="max-width: 120px;">
           <div class="input-group-pretend">
                <a></a>
@@ -44,8 +53,8 @@ git
                   &minus;
               </a>
           </div>
-        
-          {% if user_form.last_name.errors %}
+
+          {% if form.quantity.errors %}
               {{ form.quantity|add_attr:'is-invalid'}}
           {% else %}
               <input type="text" name="quantity" value="1" min="0" class="form-control text-center" required="" id="id_quantity">
