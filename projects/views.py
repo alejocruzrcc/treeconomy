@@ -36,7 +36,7 @@ class ProjectDetailListView(generic.FormView):
         return get_object_or_404(Project, slug = self.kwargs["slug"])
     
     def get_success_url(self):
-        return reverse(views.home)
+        return reverse("summary")
     
     def get_form_kwargs(self):
         kwargs = super(ProjectDetailListView, self).get_form_kwargs()
