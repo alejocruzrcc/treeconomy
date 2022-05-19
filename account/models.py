@@ -72,8 +72,6 @@ class Profile(models.Model):
     class Meta:
         verbose_name_plural=u'Perfiles de Usuario'
         
-
-
 class CommissionAgent(User):
     people_related = models.PositiveIntegerField()
     percentage_per_person = models.FloatField()

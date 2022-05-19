@@ -47,8 +47,8 @@ class ProjectDetailListView(generic.FormView):
         order = get_or_set_order_session(self.request)
         
         project = self.get_object()
-        
-        item_filter = order.items.filter(project = project)
+        type_inversion = form.cleaned_data['type_inversion']
+        item_filter = order.items.filter(project = project, type_inversion= type_inversion)
         if item_filter.exists():
             item = item_filter.first()
             item.quantity += int(form.cleaned_data['quantity'])

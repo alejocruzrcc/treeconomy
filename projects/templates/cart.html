@@ -13,7 +13,7 @@
                   <table class=table>
                     <thead>
                       <tr>
-                        <th>Image</th>
+                        <th>Inversion Type</th>
                         <th>Project</th>
                         <th>Price</th>
                         <th>Quantity</th>
@@ -25,9 +25,7 @@
                         {% for item in order.items.all %}
                         <tr>
                             <td class="product-thumbnail">
-                                <figure class="block-4-image" style="height: 100px; width: 200px">
-                                <img src="{{ item.project.image.url }}" class="img-thumbnail">
-                                </figure>
+                                {{ item.get_label_type_choice }}
                             </td>
                             <td>
                                 <h2 class="h5 text-black">{{ item.project.name }}</h2>

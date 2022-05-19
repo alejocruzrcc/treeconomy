@@ -2,6 +2,7 @@ from projects.models import Order
 
 def get_or_set_order_session(request):
     order_id= request.session.get('order_id', None)
+    
     if order_id is None:
         order = Order()
         order.save()
@@ -15,7 +16,7 @@ def get_or_set_order_session(request):
             request.session['order_id']= order.id
             
     if request.user.is_authenticated and order.user is None:
-        print("entroo")
+        
         order.user = request.user
         order.save()
     return order
