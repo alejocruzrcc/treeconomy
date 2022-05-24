@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
+{% load static %}
 {% block title %}Home{% endblock %}
 
 {% block content %}
@@ -20,14 +21,181 @@
     margin: 0 auto;
 }
 h2{
-    font-size: 30px;
+    font-size: 40px;
     font-family: "comfortaa-bold";
     color: #035941;
     text-align: center;
     margin-bottom: 25px;
   }
 
-  .boton-venta {
+.info-inicial p {
+font-family: "Lato-Bold";
+color: #013f30;
+font-size: 16px;
+text-align: center;
+margin: 0;
+}
+
+
+element.style {
+}
+.info-inicial p {
+    font-family: "Lato-Bold";
+    color: #013f30;
+    font-size: 16px;
+    text-align: center;
+    margin: 0;
+}
+.paso-1 {
+    font-size: 20px !important;
+    color: #035941;
+    text-align: center;
+    margin-top: 45px !important;
+}
+
+.calc-items-month {
+    margin-top: 60px;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 0;
+}
+
+.calc-items-month li {
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calc-items-month a:hover, .calc-items-month a.active {
+    color: #fff;
+    background: #f2622e;
+}
+
+.calc-items-month a {
+    font-size: 20px;
+    text-decoration: none;
+    font-family: "Comfortaa-bold";
+    color: #035941;
+    margin: 0px 10px;
+    padding: 14px 100px;
+    background: #fff;
+    border-radius: 12px;
+    -webkit-box-shadow: 0px 0px 13px 1px rgb(0 0 0 / 10%);
+    -moz-box-shadow: 0px 0px 13px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 13px 1px rgb(0 0 0 / 10%);
+    transition: all 0.3s;
+}
+
+.fade.show {
+    opacity: 1;
+}
+.tab-pane {
+    font-family: "lato-bold";
+    font-size: 20px;
+    color: #013f30;
+    text-align: center;
+    margin: 45px 0;
+}
+.fade {
+    opacity: 0;
+    transition: opacity .15s linear;
+}
+
+.calc-items {
+    margin-top: 60px;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 0;
+}
+.nav {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+
+.calc-items li {
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    font-family: "Comfortaa-bold";
+    color: #035941;
+    margin: 0px 10px;
+    padding: 14px;
+    background: #fff;
+    border-radius: 12px;
+    -webkit-box-shadow: 0px 0px 13px 1px rgb(0 0 0 / 10%);
+    -moz-box-shadow: 0px 0px 13px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 13px 1px rgb(0 0 0 / 10%);
+    transition: all 0.3s;
+}
+.img-prev-item {
+    background-color: #f2622e;
+    border-radius: 12px;
+    margin: 0px 10px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.calc-items li a {
+    font-size: 20px;
+    font-family: "Comfortaa-bold";
+    color: #035941;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+.formulario-chart {
+    margin-top: 50px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 0;
+    list-style: none;
+    width: 100%;
+}
+.formulario-chart li {
+    width: 25%;
+    margin: 0px 15px;
+}
+.formulario-chart li label {
+    font-family: "lato-regular";
+    font-size: 15px;
+    color: #5f5f5f;
+}
+label {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+}
+.formulario-chart li input {
+    width: 100%;
+    border-radius: 25px;
+    border: 0;
+    outline: 0;
+    background-color: #f5f5f4;
+    padding: 10px;
+    padding-left: 20px;
+    font-family: "lato-regular";
+    font-size: 15px;
+    color: #5f5f5f;
+}
+.calcular button {
+    justify-content: center;
+    font-size: 20px;
     padding: 10px 25px;
     border-radius: 25px;
     background-color: #f2622e;
@@ -36,38 +204,267 @@ h2{
     -o-transition: all 0.3s;
     transition: all 0.3s;
     text-decoration: none !important;
-    font-size: 20px;
+    border: 0;
+    outline: 0;
+}
+.graficas-op {
+    display: none;
+}
+
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
+div {
     display: block;
-    width: 55%;
+}
+.tab-pane {
+    font-family: "lato-bold";
+    font-size: 20px;
+    color: #013f30;
     text-align: center;
-    margin: 0 auto;
-    margin-top: 30px;}
+    margin: 45px 0;
+}
+.contenedor-botones-inversion {
+    margin-top: 50px;
+}
+
+.contenedor-botones-inversion .estilo-1 {
+    justify-content: center;
+    font-size: 20px;
+    padding: 10px 25px;
+    border-radius: 25px;
+    background-color: #f2622e;
+    color: #fff !important;
+    -webkit-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+    text-decoration: none !important;
+}
+.contenedor-botones-inversion .estilo-2 {
+    justify-content: start;
+    font-size: 14px;
+    color: #f2622e;
+    text-decoration: underline #f2622e !important;
+    border: 0;
+    outline: 0;
+    background-color: #fff;
+}
 </style>
-<div class="site-section">
-    <div class="container">
-        <h1>Plants Trees Now!</h1>
-        <h5> Select an inversion type </h5>
-        
-        <div class="row">
-            <div class="col-xl-6 order-2">
-                <div class="contenedor-calculadora-producto">
-                    <h2> Monthly Investment </h2>
-                    <div class="contenedor-contador-extra">
-                        <a class="boton-venta"  href="{% url 'summary'%}"> Subscription </a>
+
+<div class="info-inicial">
+    <h2>Dreams Investment calculator</h2>
+    <p>Do you know how much you must save to fulfill your dreams? Check it out with our investment Calculator!</p>
+    <p class="paso-1">Step 1: choose your type of investment</p>
+</div>
+
+<div class="col-xl-12">
+    <ul class="calc-items-month nav">
+        <li id="home-item">
+            <a data-toggle="tab" href="#nav-monthly" role="tab" class="active show" aria-selected="true">Monthly Investment</a>
+        </li>
+        <li id="university-item">
+            <a data-toggle="tab" href="#nav-onetime" role="tab" class="" aria-selected="false">One time investment</a>
+        </li>
+    </ul>
+</div>
+
+<div class="row">
+    <div class="col-xl-12">
+
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade active show" id="nav-monthly" role="tabpanel" aria-labelledby="nav-monthly-tab">
+
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="info-inicial info-2">
+                            <p class="paso-1">Step 2: Choose your Dream</p>
+                        </div>
+                        <ul class="calc-items nav">
+                            <li id="home-item">
+                                <div class="img-prev-item"><img src="https://www.treeconomy.com.co/wp-content/themes/Treeconomy/img/home.svg" alt=""></div><a data-toggle="tab" href="#nav-home" role="tab">Dream Home</a>
+                            </li>
+                            <li id="university-item">
+                                <div class="img-prev-item"><img src="https://www.treeconomy.com.co/wp-content/themes/Treeconomy/img/university.svg" alt=""></div><a data-toggle="tab" href="#nav-profile" role="tab">Children's University</a>
+                            </li>
+                            <li id="car-item">
+                                <div class="img-prev-item"><img src="https://www.treeconomy.com.co/wp-content/themes/Treeconomy/img/internet-of-things.svg" alt=""></div><a data-toggle="tab" href="#nav-car" role="tab">Wealth Planning</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">Step 3: Let’s work together to make your dream home a reality! Pick a monthly amount that you can invest, click calculate and your total investment plus profits will appear. Easy and reliable!</div>
+                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">Step 3: You can proactively plan for your children’s education! Pick a monthly investment and secure the future of your loved ones. Easy and fulfilling!</div>
+                    <div class="tab-pane fade" id="nav-car" role="tabpanel" aria-labelledby="nav-car-tab">Step 3: Investing in reforestation not only gives you the advantage of innovative investing, but it will propel you to become a contributor to helping our planet while becoming financially successful!</div>
+                    <div class="tab-pane fade" id="nav-other" role="tabpanel" aria-labelledby="nav-other-tab"></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="info-inicial info-2">
+                            <p class="paso-1">Step 4:  Enter your Monthly Investment</p>
+                        </div>
+                        <form action="">
+                            <ul class="formulario-chart">
+                                <li>
+                                    <label for="Pricetwo">Monthly Investment</label><br>
+                                    <input type="text" name="currency-field" id="valor_mensual" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="$500">
+                                </li>
+                                <li>
+                                    <label for="PriceThree">Total months:</label><br>
+                                    <input type="number" id="meses_global" value="120" disabled="true">
+                                </li>
+                                <li style="display: none;">
+                                    <label for="PriceFour">Valor total anual</label><br>
+                                    <input type="text" name="currency-field" id="valor_anual" class="currency-field" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="$9,999.96">
+                                </li>
+                                <li>
+                                    <label for="PriceFive">Annual returns: 12% recommended</label><br>
+                                    <input type="number" id="rentabilidad" value="12" placeholder="12">
+                                </li>
+                                <li>
+                                    <div class="calcular">
+                                        <button type="button" onclick="updateChart()">Calculate</button>
+                                    </div>
+                                </li>
+                                <li>
+                                    <label for="PriceOne">Total Revenue Generated</label><br>
+                                    <input type="text" name="currency-field" id="valor_global" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="$100,000.00">
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="row graficas-op">
+                    <div class="col-xl-7 col-12">
+                        <h3 class="tittle-graph">Profitability Time Line</h3>
+                        <div class="box-chart-bar">
+                            <canvas id="myChartBar" height="0" class="chartjs-render-monitor" style="display: block; width: 0px; height: 0px;" width="0"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-xl-5 col-12">
+                        <h3 class="tittle-graph">Total Revenue Generated</h3>
+                        <div class="box-chart-pie">
+                            <canvas id="myChartPie" height="0" class="chartjs-render-monitor" style="display: block; width: 0px; height: 0px;" width="0"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contenedor-botones-inversion">
+                    <div class="row d-flex align-items-center">
+                        <div class="col-xl-6 col-6 d-flex justify-content-end">
+                            <a class="estilo-1" href="https://treeconomy.com.co/en/product/melina/" target="_blank">Start montlhy investment </a>
+                        </div>
+                        <div class="col-xl-6 col-6">
+                            <button type="button" class="estilo-2" data-toggle="modal" data-target="#exampleModalCenter">Check investment plan</button>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-xl-6 order-2">
-                <div class="contenedor-calculadora-producto">
-                    <h2> One Time Investment </h2>
-                    <div class="contenedor-contador-extra">
-                        <a class="boton-venta"  href="{% url 'summary'%}"> Buy Now! </a>
+
+            <div class="tab-pane fade" id="nav-onetime" role="tabpanel" aria-labelledby="nav-onetime-tab">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="info-inicial info-2">
+                            <p class="paso-1">Step 2: Choose your Dream</p>
+                        </div>
+                        <ul class="calc-items nav">
+                            <li id="home-item">
+                                <div class="img-prev-item"><img src="https://www.treeconomy.com.co/wp-content/themes/Treeconomy/img/home.svg" alt=""></div><a data-toggle="tab" href="#nav-home-2" role="tab">Dream Home</a>
+                            </li>
+                            <li id="university-item">
+                                <div class="img-prev-item"><img src="https://www.treeconomy.com.co/wp-content/themes/Treeconomy/img/university.svg" alt=""></div><a data-toggle="tab" href="#nav-profile-2" role="tab">Children's University</a>
+                            </li>
+                            <li id="car-item">
+                                <div class="img-prev-item"><img src="https://www.treeconomy.com.co/wp-content/themes/Treeconomy/img/internet-of-things.svg" alt=""></div><a data-toggle="tab" href="#nav-car-2" role="tab">Wealth Planning</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade" id="nav-home-2" role="tabpanel" aria-labelledby="nav-home-tab">Step 3: Let’s work together to make your dream home a reality! Pick a monthly amount that you can invest, click calculate and your total investment plus profits will appear. Easy and reliable!</div>
+                    <div class="tab-pane fade" id="nav-profile-2" role="tabpanel" aria-labelledby="nav-profile-tab">Step 3: You can proactively plan for your children’s education! Pick a monthly investment and secure the future of your loved ones. Easy and fulfilling!</div>
+                    <div class="tab-pane fade" id="nav-car-2" role="tabpanel" aria-labelledby="nav-car-tab">Step 3: Investing in reforestation not only gives you the advantage of innovative investing, but it will propel you to become a contributor to helping our planet while becoming financially successful!</div>
+                    <div class="tab-pane fade" id="nav-other" role="tabpanel" aria-labelledby="nav-other-tab"></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12">
+                        <form action="">
+                            <ul class="formulario-chart">
+                                <li>
+                                    <label for="Pricetwo">Valor a invertir</label><br>
+                                    <input type="text" name="currency-field" id="valor_mensual_one" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="$833.33">
+                                </li>
+                                <li class="hide-this">
+                                    <label for="PriceThree">Total months:</label><br>
+                                    <input type="number" id="meses_global" value="120" disabled="true">
+                                </li>
+                                <li class="hide-this">
+                                    <label for="PriceFour">Valor total anual</label><br>
+                                    <input type="text" name="currency-field" id="valor_anual" class="currency-field" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="$9,999.96">
+                                </li>
+                                <li>
+                                    <label for="PriceFive">Annual returns: 12% recommended</label><br>
+                                    <input type="number" id="rentabilidad_one" value="12" placeholder="12">
+                                </li>
+                                <li>
+                                    <div class="calcular">
+                                        <button type="button" onclick="updateChartOne()">Calculate</button>
+                                    </div>
+                                </li>
+                                <li>
+                                    <label for="PriceOne">Total Revenue Generated</label><br>
+                                    <input type="text" name="currency-field" id="valor_global_one" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="$100,000.00">
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="row graficas-op">
+                    <div class="col-xl-7 col-12">
+                        <h3 class="tittle-graph">Profitability Time Line</h3>
+                        <div class="box-chart-bar">
+                            <canvas id="myChartBarOne" height="0" class="chartjs-render-monitor" style="display: block; width: 0px; height: 0px;" width="0"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-xl-5 col-12">
+                        <h3 class="tittle-graph">Total Revenue Generated</h3>
+                        <div class="box-chart-pie">
+                            <canvas id="myChartPieOne" height="0" class="chartjs-render-monitor" style="display: block; width: 0px; height: 0px;" width="0"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contenedor-botones-inversion">
+                    <div class="row d-flex align-items-center">
+                        <div class="col-xl-6 col-6 d-flex justify-content-end">
+                            <a class="estilo-1" href="https://treeconomy.com.co/en/product/melina/" target="_blank">Start one time investment</a>
+                        </div>
+                        <div class="col-xl-6 col-6">
+                            <button type="button" class="estilo-2" data-toggle="modal" data-target="#exampleModalCenterOne">Check investment plan</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
-
-
 </div>
 {% endblock %}
+
+{% block javascripts %}
+
+  <script src="{% static "dashboard/js/js/chartjs/Chart.min.js" %}"></script>
+  <script src="{% static "dashboard/js/js/chartjs/Chart.extension.js" %}"></script>
+ 
+  <script src="{% static "account/js/sakura.js" %}"></script>
+  <script src="{% static "account/js/sakuraOnetime.js" %}"></script>
+{% endblock javascripts %}
