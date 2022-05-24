@@ -104,11 +104,14 @@
   background-color: #fff;
 }
 
-
+li a {
+  color: #012623;
+  text-decoration: none;
+}
 
 </style>
 <body class="minimizar">
-  <nav class="navbar navbarmenuabajo navbar-expand-lg navbar-dark fixed-bottom">
+  <nav class="navbar navbarmenuabajo navbar-expand-lg navbar-dark fixed-bottom d-block d-sm-none">
     <div class="container">
       <div class="nav navbar-nav menu-down">
         <div class="container-fluid">
@@ -118,14 +121,15 @@
                       <li><a href="/projects"><i class="material-icons">forest</i><br><span>Projects</span></a></li>
                       <li><a href="#"><i class="fas fa-calculator"></i><br><span>Calculator</span></a></li>
                       <li><a href="/dashboard"><i class="material-icons">dashboard</i><br><span>Dashboard</span></a></li>
-  
-                      
                       <li>
+    
+                      <button class="navbar-toggler bg-dark" type="button" data-toggle="collapse" data-target="#menu-db" aria-controls="menu-db" aria-expanded="false" aria-label="Toggle navigation">
                         
-                      </li>
-                      <button class="navbar-toggler bg-primary" type="button" data-toggle="collapse" data-target="#menu-db" aria-controls="menu-db" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
+                      
                       </button>
+                      <br>
+                      </li>
                   </ul>
                   
               </div>
@@ -177,8 +181,7 @@
     <div class="collapse navbar-collapse sidebarMovil" id="menu-db">
       <ul class="list-group d-block d-sm-none">
         <li><a href="/account/profile"><span><i class="material-icons">account_circle</i><span class="icon-text">&nbsp;&nbsp;&nbsp;&nbsp;Profile</span></a></li>
-        <li><a href="/dashboard"><i class="material-icons">dashboard</i><span class="icon-text"></span>&nbsp;&nbsp;&nbsp;&nbsp;Dashboard</a></span></a></li>
-        <li><a href="/projects"><i class="material-icons">forest</i><span class="icon-text"></span>&nbsp;&nbsp;&nbsp;&nbsp;Projects</span></a></li>
+        
         <li><a href="#"><i class="material-icons">monetization_on</i><span class="icon-text"></span>&nbsp;&nbsp;&nbsp;&nbsp;Payments<span></a></li>
      </ul>
     </div>
