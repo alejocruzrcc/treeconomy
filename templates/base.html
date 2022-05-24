@@ -85,16 +85,54 @@
     transform: translate(-45%, -45%);
 }
 
+.menu-down ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #fff;
+}
+.menu-down ul li {
+    display: inline-block;
+    padding: 5px 10px;
+}
+
+.navbarmenuabajo {
+  background-color: #fff;
+}
+
+
 
 </style>
 <body class="minimizar">
-  <nav class="navbar navbar-expand-lg navbar-dark fixed-bottom">
+  <nav class="navbar navbarmenuabajo navbar-expand-lg navbar-dark fixed-bottom">
     <div class="container">
-      <div class="nav navbar-nav">
+      <div class="nav navbar-nav menu-down">
+        <div class="container-fluid">
+          <div class="row">
+              <div class="col-12 p-0">
+                  <ul>
+                      <li><a href="/projects"><i class="material-icons">forest</i><br><span>Projects</span></a></li>
+                      <li><a href="#"><i class="fas fa-calculator"></i><br><span>Calculator</span></a></li>
+                      <li><a href="/dashboard"><i class="material-icons">dashboard</i><br><span>Dashboard</span></a></li>
+  
+                      
+                      <li>
+                        
+                      </li>
+                      <button class="navbar-toggler bg-primary" type="button" data-toggle="collapse" data-target="#menu-db" aria-controls="menu-db" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                      </button>
+                  </ul>
+                  
+              </div>
+          </div>
       </div>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu-db" aria-controls="menu-db" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+      </div>
+    
     </div>
   </nav>
   <nav class="navbar navbar-expand-lg navbar-dark">
