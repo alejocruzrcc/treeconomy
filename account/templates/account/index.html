@@ -86,19 +86,12 @@ element.style {
     transition: all 0.3s;
 }
 
-.fade.show {
-    opacity: 1;
-}
 .tab-pane {
     font-family: "lato-bold";
     font-size: 20px;
     color: #013f30;
     text-align: center;
     margin: 45px 0;
-}
-.fade {
-    opacity: 0;
-    transition: opacity .15s linear;
 }
 
 .calc-items {
@@ -239,6 +232,15 @@ div {
 ul li {
     display: inline-block;
 }
+
+canvas {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 800px;
+}
 </style>
 
 <div class="info-inicial">
@@ -249,11 +251,11 @@ ul li {
 
 <div class="col-xl-12">
     <ul class="calc-items-month nav">
-        <li id="home-item" class="m-4">
-            <a data-toggle="tab" href="#nav-monthly" role="tab" class="active p-3">Monthly Investment</a>
+        <li id="home-item" class="my-4">
+            <a data-toggle="tab" href="#nav-monthly" role="tab" class="active p-2">Monthly Investment</a>
         </li>
-        <li id="university-item" class="m-4">
-            <a data-toggle="tab" href="#nav-onetime" role="tab" class="p-3">One time investment</a>
+        <li id="university-item" class="my-4">
+            <a data-toggle="tab" href="#nav-onetime" role="tab" class="p-2">One time investment</a>
         </li>
     </ul>
 
@@ -267,11 +269,8 @@ ul li {
 </div>
 <div class="row">
     <div class="col-xl-12">
-
         <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade active show" id="nav-monthly" role="tabpanel" aria-labelledby="nav-monthly-tab">
-
-             
+            <div class="tab-pane active" id="nav-monthly" role="tabpanel" aria-labelledby="nav-monthly-tab">
                 <div class="row">
                     <div class="col-xl-12">
                         <form action="">
@@ -317,7 +316,7 @@ ul li {
                     <div class="col-xl-5 col-12">
                         <h3 class="tittle-graph">Total Revenue Generated</h3>
                         <div class="box-chart-pie mt-5">
-                            <canvas id="myChartPie"></canvas>
+                            <canvas id="myChartPie" height="0" style="display: block; width: 0px; height: 0px;" width="0"></canvas>
                         </div>
                     </div>
                 </div>
@@ -330,7 +329,7 @@ ul li {
                         <li class="m-3">
                             <button type="button" class="estilo-2" data-toggle="modal" data-target="#exampleModalCenter">Check investment plan</button>
                             <!-- Modal month-->
-                            <div class="modal fade " id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle">
                                 <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -473,7 +472,7 @@ ul li {
                 </div>
             </div>
             
-            <div class="tab-pane fade" id="nav-onetime" role="tabpanel" aria-labelledby="nav-onetime-tab">
+            <div class="tab-pane" id="nav-onetime" role="tabpanel" aria-labelledby="nav-onetime-tab">
                 <div class="row">
                     <div class="col-xl-12">
                         <form action="">
@@ -531,7 +530,7 @@ ul li {
                         <li class="m-2">
                             <button type="button" class="estilo-2" data-toggle="modal" data-target="#exampleModalCenterOne">Check investment plan</button>
                             <!-- one time modal -->
-                            <div class="modal fade " id="exampleModalCenterOne" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal" id="exampleModalCenterOne" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
