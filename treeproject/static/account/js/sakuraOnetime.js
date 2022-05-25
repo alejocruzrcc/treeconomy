@@ -41,12 +41,12 @@ var myChartBarOne = new Chart(ctx, {
 		options: {
 
 				scales: {
-						xAxes: [{
+						x: [{
 								cornerRadius: 20,
 								stacked: true,
 								barPercentage: 0.4
 						}],
-						yAxes: [{
+						y: [{
 								ticks: {
 										beginAtZero: true,
 										stepSize: 500,
@@ -76,8 +76,8 @@ var myChartBarOne = new Chart(ctx, {
 				}
 });
 highestVal = yAxesticks[0];
-var ctx = document.getElementById('myChartPieOne');
-var myChartPieOne = new Chart(ctx, {
+var ctx2 = document.getElementById('myChartPieOne');
+var myChartPieOne = new Chart(ctx2, {
 		type: 'pie',
 		data: {
 				labels: ["Inversión Inicial", "Intereses ganados"],
@@ -169,7 +169,7 @@ function updateChartOne(){
 	myChartBarOne.update();
 
 	myChartPieOne.data.datasets[0].data  = [inflacionAñoUnoOne, total_ganancia_one];
-	myChartPie.update();
+	myChartPieOne.update();
 
 
 	jQuery(".graficas-op").css('display', 'flex');

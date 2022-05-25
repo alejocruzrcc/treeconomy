@@ -2,82 +2,82 @@ var ctx = document.getElementById('myChartBar');
 var yAxesticks = [];
 var highestVal;
 var myChartBar = new Chart(ctx, {
-		type: 'bar',
-		data: {
-				labels: ['1 año', '2 años', '3 años', '4 años', '5 años', '6 años', '7 años', '8 años', '9 años', '10 años'],
-				datasets: [{
-						label: 'Inversion anual',
-						data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
-						backgroundColor: [
-								'rgba(1, 134, 105, 1)',
-								'rgba(1, 134, 105, 1)',
-								'rgba(1, 134, 105, 1)',
-								'rgba(1, 134, 105, 1)',
-								'rgba(1, 134, 105, 1)',
-								'rgba(1, 134, 105, 1)',
-								'rgba(1, 134, 105, 1)',
-								'rgba(1, 134, 105, 1)',
-								'rgba(1, 134, 105, 1)',
-								'rgba(1, 134, 105, 1)'
-						]
-				}, {
-						label: 'Total ingresos',
-						data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-						backgroundColor: [
-								'rgba(249, 224, 158, 1)',
-								'rgba(249, 224, 158, 1)',
-								'rgba(249, 224, 158, 1)',
-								'rgba(249, 224, 158, 1)',
-								'rgba(249, 224, 158, 1)',
-								'rgba(249, 224, 158, 1)',
-								'rgba(249, 224, 158, 1)',
-								'rgba(249, 224, 158, 1)',
-								'rgba(249, 224, 158, 1)',
-								'rgba(249, 224, 158, 1)'
-						]
-				}],
+	type: 'bar',
+	data: {
+			labels: ['1 año', '2 años', '3 años', '4 años', '5 años', '6 años', '7 años', '8 años', '9 años', '10 años'],
+			datasets: [{
+					label: 'Inversion anual',
+					data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+					backgroundColor: [
+							'rgba(1, 134, 105, 1)',
+							'rgba(1, 134, 105, 1)',
+							'rgba(1, 134, 105, 1)',
+							'rgba(1, 134, 105, 1)',
+							'rgba(1, 134, 105, 1)',
+							'rgba(1, 134, 105, 1)',
+							'rgba(1, 134, 105, 1)',
+							'rgba(1, 134, 105, 1)',
+							'rgba(1, 134, 105, 1)',
+							'rgba(1, 134, 105, 1)'
+					]
+			}, {
+					label: 'Total ingresos',
+					data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					backgroundColor: [
+							'rgba(249, 224, 158, 1)',
+							'rgba(249, 224, 158, 1)',
+							'rgba(249, 224, 158, 1)',
+							'rgba(249, 224, 158, 1)',
+							'rgba(249, 224, 158, 1)',
+							'rgba(249, 224, 158, 1)',
+							'rgba(249, 224, 158, 1)',
+							'rgba(249, 224, 158, 1)',
+							'rgba(249, 224, 158, 1)',
+							'rgba(249, 224, 158, 1)'
+					]
+			}],
 
+	},
+	options: {
+		scales: {
+			xAxes: [{
+				cornerRadius: 20,
+				stacked: true,
+				barPercentage: 0.4
+			}],
+			yAxes: [{
+				ticks: {
+						beginAtZero: true,
+						stepSize: 20000,
+						// Return an empty string to draw the tick line but hide the tick label
+						// Return `null` or `undefined` to hide the tick line entirely
+						userCallback: function(value, index, values) {
+							// Convert the number to a string and splite the string every 3 charaters from the end
+							yAxesticks = values;
+							value = value.toString();
+							value = value.split(/(?=(?:...)*$)/);
+
+							// Convert the array to a string and format the output
+							value = value.join('.');
+							return '$' + value;
+						}		
+					}
+					
+				}]
 		},
-		options: {
-
-				scales: {
-						xAxes: [{
-								cornerRadius: 20,
-								stacked: true,
-								barPercentage: 0.4
-						}],
-						yAxes: [{
-								ticks: {
-										beginAtZero: true,
-										stepSize: 20000,
-										// Return an empty string to draw the tick line but hide the tick label
-										// Return `null` or `undefined` to hide the tick line entirely
-										userCallback: function(value, index, values) {
-											// Convert the number to a string and splite the string every 3 charaters from the end
-											yAxesticks = values;
-											value = value.toString();
-											value = value.split(/(?=(?:...)*$)/);
-
-											// Convert the array to a string and format the output
-											value = value.join('.');
-											return '$' + value;
-										}		
-									}
-									
-								}]
-							},
-							tooltips: { 
-								callbacks: {
-												label: function(tooltipItem, data) {
-													return " $ " + tooltipItem.yLabel;
-												},
-											}
-									}
-				}
+		tooltips: { 
+			callbacks: {
+				label: function(tooltipItem, data) {
+					return " $ " + tooltipItem.yLabel;
+				},
+			}
+		}
+	}
 });
+
 highestVal = yAxesticks[0];
-var ctx = document.getElementById('myChartPie');
-var myChartPie = new Chart(ctx, {
+var ctx2 = document.getElementById('myChartPie');
+var myChartPie = new Chart(ctx2, {
 		type: 'pie',
 		data: {
 				labels: ["Inversión Inicial", "Utilidad"],
@@ -97,94 +97,18 @@ var myChartPie = new Chart(ctx, {
 		}
 });
 
-var ctx = document.getElementById('myChartBarTest');
-window.onload = function() {
-	var myChartBarTest = new Chart(ctx, {
-			type: 'bar',
-			data: {
-					labels: ['1 año', '2 años', '3 años', '4 años', '5 años', '6 años', '8 años', '9 años', '10 años'],
-					datasets: [{
-							label: 'Inversion anual',
-							data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
-							backgroundColor: [
-									'rgba(1, 134, 105, 1)',
-									'rgba(1, 134, 105, 1)',
-									'rgba(1, 134, 105, 1)',
-									'rgba(1, 134, 105, 1)',
-									'rgba(1, 134, 105, 1)',
-									'rgba(1, 134, 105, 1)',
-									'rgba(1, 134, 105, 1)',
-									'rgba(1, 134, 105, 1)',
-									'rgba(1, 134, 105, 1)',
-									'rgba(1, 134, 105, 1)'
-							]
-					}, {
-							label: 'Total ingresos',
-							data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-							backgroundColor: [
-									'rgba(249, 224, 158, 1)',
-									'rgba(249, 224, 158, 1)',
-									'rgba(249, 224, 158, 1)',
-									'rgba(249, 224, 158, 1)',
-									'rgba(249, 224, 158, 1)',
-									'rgba(249, 224, 158, 1)',
-									'rgba(249, 224, 158, 1)',
-									'rgba(249, 224, 158, 1)',
-									'rgba(249, 224, 158, 1)',
-									'rgba(249, 224, 158, 1)'
-							]
-					}],
 
-			},
-			options: {
 
-					scales: {
-							xAxes: [{
-									cornerRadius: 20,
-									stacked: true,
-									barPercentage: 0.4
-							}],
-							yAxes: [{
-									ticks: {
-											beginAtZero: true,
-											stepSize: 20000,
-											max: 100000,
-											// Return an empty string to draw the tick line but hide the tick label
-											// Return `null` or `undefined` to hide the tick line entirely
-											userCallback: function(value, index, values) {
-												// Convert the number to a string and splite the string every 3 charaters from the end
-												value = value.toString();
-												value = value.split(/(?=(?:...)*$)/);
-
-												// Convert the array to a string and format the output
-												value = value.join('.');
-												return '$' + value;
-											}		
-										}
-										
-									}]
-								},
-								tooltips: { 
-									callbacks: {
-													label: function(tooltipItem, data) {
-														return " $ " + tooltipItem.yLabel;
-													},
-												}
-										}
-					}
-	});
-};
 function rellenarForm(){
 	
 }
 
-
 function updateChart(){
+	
 	//obtener valores
 	var nyears = 10;
 	var nmonths = 12;
 	var valor_global = jQuery("#valor_global").val();
-	var meses_global = jQuery("#meses_global").val();
 	var meses_global = jQuery("#meses_global").val();
 	var valor_anual = jQuery("#valor_anual").val();
 	var input_value = jQuery("#valor_mensual").val();
@@ -203,6 +127,7 @@ function updateChart(){
 	
 
 	//convertir currency  e imprimir
+	
 	jQuery("#valor_mensual").val('$' + parseFloat(valor_mensual_neto, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
 	jQuery("#valor_anual").val('$' + parseFloat(total_anual, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
 
@@ -294,7 +219,7 @@ function updateChart(){
 	var sumaInversionTotal = (parseFloat(inflacionAñoUno) + parseFloat(inflacionAñoDos) + parseFloat(inflacionAñoTres) + parseFloat(inflacionAñoCuatro) + parseFloat(inflacionAñoCinco) + parseFloat(inflacionAñoSeis) + parseFloat(inflacionAñoSiete) + parseFloat(inflacionAñoOcho) + parseFloat(inflacionAñoNueve) + parseFloat(inflacionAñoDiez)).toFixed(2);
 	var sumaInteresesTotal = (parseFloat(interesAñoUno) + parseFloat(interesAñoDos) + parseFloat(interesAñoTres) + parseFloat(interesAñoCuatro) + parseFloat(interesAñoCinco) + parseFloat(interesAñoSeis) + parseFloat(interesAñoSiete) + parseFloat(interesAñoOcho) + parseFloat(interesAñoNueve) + parseFloat(interesAñoDiez)).toFixed(2);
 
-
+	
 	myChartBar.data.datasets[0].data  = [inflacionAñoUno, inflacionAñoDos, inflacionAñoTres, inflacionAñoCuatro, inflacionAñoCinco, inflacionAñoSeis, inflacionAñoSiete, inflacionAñoOcho, inflacionAñoNueve, inflacionAñoDiez];
 	myChartBar.data.datasets[1].data  = [totalAñoUno, totalAñoDos, totalAñoTres, totalAñoCuatro, totalAñoCinco, totalAñoSeis, totalAñoSiete, totalAñoOcho, totalAñoNueve, totalAñoDiez];
 	myChartBar.update();

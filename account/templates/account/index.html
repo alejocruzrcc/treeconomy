@@ -57,15 +57,12 @@ element.style {
     margin-top: 60px;
     width: 100%;
     text-align: center;
-    display: flex;
     align-items: center;
     justify-content: center;
     padding-left: 0;
 }
 
 .calc-items-month li {
-    width: 40%;
-    display: flex;
     justify-content: center;
     align-items: center;
 }
@@ -81,7 +78,6 @@ element.style {
     font-family: "Comfortaa-bold";
     color: #035941;
     margin: 0px 10px;
-    padding: 14px 100px;
     background: #fff;
     border-radius: 12px;
     -webkit-box-shadow: 0px 0px 13px 1px rgb(0 0 0 / 10%);
@@ -109,25 +105,14 @@ element.style {
     margin-top: 60px;
     width: 100%;
     text-align: center;
-    display: flex;
     align-items: center;
     justify-content: center;
     padding-left: 0;
 }
-.nav {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    padding-left: 0;
-    margin-bottom: 0;
-    list-style: none;
-}
+
 
 .calc-items li {
     width: 30%;
-    display: flex;
     justify-content: center;
     align-items: center;
     font-size: 20px;
@@ -148,7 +133,6 @@ element.style {
     margin: 0px 10px;
     width: 40px;
     height: 40px;
-    display: flex;
     align-items: center;
     justify-content: center;
 }
@@ -160,17 +144,13 @@ element.style {
     transition: all 0.3s;
 }
 .formulario-chart {
-    margin-top: 50px;
-    display: flex;
-    align-items: flex-end;
     justify-content: center;
     padding: 0;
     list-style: none;
     width: 100%;
 }
 .formulario-chart li {
-    width: 25%;
-    margin: 0px 15px;
+    margin: 15px 50px;
 }
 .formulario-chart li label {
     font-family: "lato-regular";
@@ -232,7 +212,7 @@ div {
 .contenedor-botones-inversion .estilo-1 {
     justify-content: center;
     font-size: 20px;
-    padding: 10px 25px;
+    padding: 10px;
     border-radius: 25px;
     background-color: #f2622e;
     color: #fff !important;
@@ -243,12 +223,21 @@ div {
 }
 .contenedor-botones-inversion .estilo-2 {
     justify-content: start;
-    font-size: 14px;
+    font-size: 20px;
     color: #f2622e;
-    text-decoration: underline #f2622e !important;
+    text-decoration: none;
     border: 0;
     outline: 0;
     background-color: #fff;
+}
+@media (max-width: 767px) {
+    ul li {
+        display: block !important;
+    }
+}
+
+ul li {
+    display: inline-block;
 }
 </style>
 
@@ -260,58 +249,36 @@ div {
 
 <div class="col-xl-12">
     <ul class="calc-items-month nav">
-        <li id="home-item">
-            <a data-toggle="tab" href="#nav-monthly" role="tab" class="active show" aria-selected="true">Monthly Investment</a>
+        <li id="home-item" class="m-4">
+            <a data-toggle="tab" href="#nav-monthly" role="tab" class="active p-3">Monthly Investment</a>
         </li>
-        <li id="university-item">
-            <a data-toggle="tab" href="#nav-onetime" role="tab" class="" aria-selected="false">One time investment</a>
+        <li id="university-item" class="m-4">
+            <a data-toggle="tab" href="#nav-onetime" role="tab" class="p-3">One time investment</a>
         </li>
     </ul>
-</div>
 
+</div>
+<div class="row">
+    <div class="col-xl-12">
+        <div class="info-inicial info-2">
+            <p class="paso-1">Step 2: Calculate your investment</p>
+        </div>
+    </div>
+</div>
 <div class="row">
     <div class="col-xl-12">
 
         <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade active show" id="nav-monthly" role="tabpanel" aria-labelledby="nav-monthly-tab">
 
+             
                 <div class="row">
                     <div class="col-xl-12">
-                        <div class="info-inicial info-2">
-                            <p class="paso-1">Step 2: Choose your Dream</p>
-                        </div>
-                        <ul class="calc-items nav">
-                            <li id="home-item">
-                                <div class="img-prev-item"><img src="https://www.treeconomy.com.co/wp-content/themes/Treeconomy/img/home.svg" alt=""></div><a data-toggle="tab" href="#nav-home" role="tab">Dream Home</a>
-                            </li>
-                            <li id="university-item">
-                                <div class="img-prev-item"><img src="https://www.treeconomy.com.co/wp-content/themes/Treeconomy/img/university.svg" alt=""></div><a data-toggle="tab" href="#nav-profile" role="tab">Children's University</a>
-                            </li>
-                            <li id="car-item">
-                                <div class="img-prev-item"><img src="https://www.treeconomy.com.co/wp-content/themes/Treeconomy/img/internet-of-things.svg" alt=""></div><a data-toggle="tab" href="#nav-car" role="tab">Wealth Planning</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-
-                <div class="tab-content" id="nav-tabContent">
-                    <div class="tab-pane fade" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">Step 3: Let’s work together to make your dream home a reality! Pick a monthly amount that you can invest, click calculate and your total investment plus profits will appear. Easy and reliable!</div>
-                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">Step 3: You can proactively plan for your children’s education! Pick a monthly investment and secure the future of your loved ones. Easy and fulfilling!</div>
-                    <div class="tab-pane fade" id="nav-car" role="tabpanel" aria-labelledby="nav-car-tab">Step 3: Investing in reforestation not only gives you the advantage of innovative investing, but it will propel you to become a contributor to helping our planet while becoming financially successful!</div>
-                    <div class="tab-pane fade" id="nav-other" role="tabpanel" aria-labelledby="nav-other-tab"></div>
-                </div>
-
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="info-inicial info-2">
-                            <p class="paso-1">Step 4:  Enter your Monthly Investment</p>
-                        </div>
                         <form action="">
                             <ul class="formulario-chart">
                                 <li>
                                     <label for="Pricetwo">Monthly Investment</label><br>
-                                    <input type="text" name="currency-field" id="valor_mensual" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="$500">
+                                    <input type="text" name="currency-field" id="valor_mensual" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="$500" data-type="currency">
                                 </li>
                                 <li>
                                     <label for="PriceThree">Total months:</label><br>
@@ -319,11 +286,11 @@ div {
                                 </li>
                                 <li style="display: none;">
                                     <label for="PriceFour">Valor total anual</label><br>
-                                    <input type="text" name="currency-field" id="valor_anual" class="currency-field" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="$9,999.96">
+                                    <input type="text" name="currency-field" id="valor_anual" class="currency-field" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="$9,999.96" data-type="currency">
                                 </li>
                                 <li>
                                     <label for="PriceFive">Annual returns: 12% recommended</label><br>
-                                    <input type="number" id="rentabilidad" value="12" placeholder="12">
+                                    <input type="number" id="rentabilidad" value="12">
                                 </li>
                                 <li>
                                     <div class="calcular">
@@ -332,7 +299,7 @@ div {
                                 </li>
                                 <li>
                                     <label for="PriceOne">Total Revenue Generated</label><br>
-                                    <input type="text" name="currency-field" id="valor_global" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="$100,000.00">
+                                    <input type="text" name="currency-field" id="valor_global" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="$100,000.00" data-type="currency">
                                 </li>
                             </ul>
                         </form>
@@ -343,64 +310,37 @@ div {
                     <div class="col-xl-7 col-12">
                         <h3 class="tittle-graph">Profitability Time Line</h3>
                         <div class="box-chart-bar">
-                            <canvas id="myChartBar" height="0" class="chartjs-render-monitor" style="display: block; width: 0px; height: 0px;" width="0"></canvas>
+                            <canvas id="myChartBar" class="chartjs-render-monitor" style="display: block;"></canvas>
                         </div>
                     </div>
                     <div class="col-xl-5 col-12">
                         <h3 class="tittle-graph">Total Revenue Generated</h3>
-                        <div class="box-chart-pie">
+                        <div class="box-chart-pie mt-5">
                             <canvas id="myChartPie" height="0" class="chartjs-render-monitor" style="display: block; width: 0px; height: 0px;" width="0"></canvas>
                         </div>
                     </div>
                 </div>
 
                 <div class="contenedor-botones-inversion">
-                    <div class="row d-flex align-items-center">
-                        <div class="col-xl-6 col-6 d-flex justify-content-end">
-                            <a class="estilo-1" href="https://treeconomy.com.co/en/product/melina/" target="_blank">Start montlhy investment </a>
-                        </div>
-                        <div class="col-xl-6 col-6">
+                    <ul>
+                        <li class="m-3">
+                            <a class="estilo-1" href="{% url 'projects' %}">Start montlhy investment </a>
+                        </li>
+                        <li class="m-3">
                             <button type="button" class="estilo-2" data-toggle="modal" data-target="#exampleModalCenter">Check investment plan</button>
-                        </div>
-                    </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
-
+            
             <div class="tab-pane fade" id="nav-onetime" role="tabpanel" aria-labelledby="nav-onetime-tab">
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="info-inicial info-2">
-                            <p class="paso-1">Step 2: Choose your Dream</p>
-                        </div>
-                        <ul class="calc-items nav">
-                            <li id="home-item">
-                                <div class="img-prev-item"><img src="https://www.treeconomy.com.co/wp-content/themes/Treeconomy/img/home.svg" alt=""></div><a data-toggle="tab" href="#nav-home-2" role="tab">Dream Home</a>
-                            </li>
-                            <li id="university-item">
-                                <div class="img-prev-item"><img src="https://www.treeconomy.com.co/wp-content/themes/Treeconomy/img/university.svg" alt=""></div><a data-toggle="tab" href="#nav-profile-2" role="tab">Children's University</a>
-                            </li>
-                            <li id="car-item">
-                                <div class="img-prev-item"><img src="https://www.treeconomy.com.co/wp-content/themes/Treeconomy/img/internet-of-things.svg" alt=""></div><a data-toggle="tab" href="#nav-car-2" role="tab">Wealth Planning</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-
-                <div class="tab-content" id="nav-tabContent">
-                    <div class="tab-pane fade" id="nav-home-2" role="tabpanel" aria-labelledby="nav-home-tab">Step 3: Let’s work together to make your dream home a reality! Pick a monthly amount that you can invest, click calculate and your total investment plus profits will appear. Easy and reliable!</div>
-                    <div class="tab-pane fade" id="nav-profile-2" role="tabpanel" aria-labelledby="nav-profile-tab">Step 3: You can proactively plan for your children’s education! Pick a monthly investment and secure the future of your loved ones. Easy and fulfilling!</div>
-                    <div class="tab-pane fade" id="nav-car-2" role="tabpanel" aria-labelledby="nav-car-tab">Step 3: Investing in reforestation not only gives you the advantage of innovative investing, but it will propel you to become a contributor to helping our planet while becoming financially successful!</div>
-                    <div class="tab-pane fade" id="nav-other" role="tabpanel" aria-labelledby="nav-other-tab"></div>
-                </div>
-
                 <div class="row">
                     <div class="col-xl-12">
                         <form action="">
                             <ul class="formulario-chart">
                                 <li>
                                     <label for="Pricetwo">Valor a invertir</label><br>
-                                    <input type="text" name="currency-field" id="valor_mensual_one" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="$833.33">
+                                    <input type="text" name="currency-field" id="valor_mensual_one" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="$833.33" data-type="currency">
                                 </li>
                                 <li class="hide-this">
                                     <label for="PriceThree">Total months:</label><br>
@@ -408,11 +348,11 @@ div {
                                 </li>
                                 <li class="hide-this">
                                     <label for="PriceFour">Valor total anual</label><br>
-                                    <input type="text" name="currency-field" id="valor_anual" class="currency-field" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="$9,999.96">
+                                    <input type="text" name="currency-field" id="valor_anual" class="currency-field" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="$9,999.96" data-type="currency">
                                 </li>
                                 <li>
                                     <label for="PriceFive">Annual returns: 12% recommended</label><br>
-                                    <input type="number" id="rentabilidad_one" value="12" placeholder="12">
+                                    <input type="number" id="rentabilidad_one" value="12">
                                 </li>
                                 <li>
                                     <div class="calcular">
@@ -421,7 +361,7 @@ div {
                                 </li>
                                 <li>
                                     <label for="PriceOne">Total Revenue Generated</label><br>
-                                    <input type="text" name="currency-field" id="valor_global_one" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="$100,000.00">
+                                    <input type="text" name="currency-field" id="valor_global_one" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="$100,000.00" data-type="currency">
                                 </li>
                             </ul>
                         </form>
@@ -432,39 +372,271 @@ div {
                     <div class="col-xl-7 col-12">
                         <h3 class="tittle-graph">Profitability Time Line</h3>
                         <div class="box-chart-bar">
-                            <canvas id="myChartBarOne" height="0" class="chartjs-render-monitor" style="display: block; width: 0px; height: 0px;" width="0"></canvas>
+                            <canvas id="myChartBarOne"></canvas>
                         </div>
                     </div>
                     <div class="col-xl-5 col-12">
                         <h3 class="tittle-graph">Total Revenue Generated</h3>
-                        <div class="box-chart-pie">
-                            <canvas id="myChartPieOne" height="0" class="chartjs-render-monitor" style="display: block; width: 0px; height: 0px;" width="0"></canvas>
+                        <div class="box-chart-pie mt-5">
+                            <canvas id="myChartPieOne" height="0" style="display: block; width: 0px; height: 0px;" width="0"></canvas>
                         </div>
                     </div>
                 </div>
 
                 <div class="contenedor-botones-inversion">
-                    <div class="row d-flex align-items-center">
-                        <div class="col-xl-6 col-6 d-flex justify-content-end">
-                            <a class="estilo-1" href="https://treeconomy.com.co/en/product/melina/" target="_blank">Start one time investment</a>
-                        </div>
-                        <div class="col-xl-6 col-6">
+                    <ul>
+                        <li class="m-2">
+                            <a class="estilo-1" href="{% url 'projects' %}">Start one time investment</a>
+                        </li>
+                        <li class="m-2">
                             <button type="button" class="estilo-2" data-toggle="modal" data-target="#exampleModalCenterOne">Check investment plan</button>
-                        </div>
-                    </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
 
     </div>
 </div>
+<!-- Modal month-->
+<div class="modal fade " id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+                <h5 class="modal-title">Plan de inversión</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<div class="container">
+					<div class="row">
+						<div class="col-xl-12">
+							<form action="">
+								<ul class="formulario-chart centered-wea">
+									<li>
+										<label for="Pricetwo">Valor del aporte</label><br>
+										<input type="text" name="currency-field" id="valor_mensual_month_pop" disabled="disabled" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="$833.33">
+									</li>
+									<li>
+										<label for="PriceFive">Número de meses</label><br>
+										<input type="number" id="rentabilidad_pop" value="12" placeholder="12" disabled="disabled">
+									</li>
+									<li>
+										<label for="PriceOne">Total ingreso</label><br>
+										<input type="text" name="currency-field" id="valor_global_pop" disabled="disabled" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="$100,000.00">
+									</li>
+									<li>
+										<button type="button" class="Button-descargar" disabled="disabled">Descargar</button>
+									</li>
+								</ul>
+							</form>
+						</div>
+					</div>
+					<div class="row">
+						<table class="table">
+							<thead class="thead-dark">
+								<tr>
+									<!-- <th scope="col">Inflación</th> -->
+									<th scope="col">Año</th>
+									<th scope="col">Inversión</th>
+									<th scope="col">Utilidad</th>
+									<th scope="col">Saldo</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<!-- <td id="inflacionUnoMonth">0</td> -->
+									<td>1</td>
+									<td id='inversionUnoMonth'>0</td>
+									<td id="interesesUnoMonth">0</td>
+									<td id="saldoUnoMonth">0</td>
+								</tr>
+								<tr>
+									<!-- <td id="inflacionDosMonth">0</td> -->
+									<td>2</td>
+									<td id='inversionDosMonth'>0</td>
+									<td id="interesesDosMonth">0</td>
+									<td id="saldoDosMonth">0</td>
+								</tr>
+								<tr>
+									<!-- <td id="inflacionTresMonth">0</td> -->
+									<td>3</td>
+									<td id='inversionTresMonth'>0</td>
+									<td id="interesesTresMonth">0</td>
+									<td id="saldoTresMonth">0</td>
+								</tr>
+								<tr>
+									<!-- <td id="inflacionCuatroMonth">0</td> -->
+									<td>4</td>
+									<td id='inversionCuatroMonth'>0</td>
+									<td id="interesesCuatroMonth">0</td>
+									<td id="saldoCuatroMonth">0</td>
+								</tr>
+								<tr>
+									<!-- <td id="inflacionCincoMonth">0</td> -->
+									<td>5</td>
+									<td id='inversionCincoMonth'>0</td>
+									<td id="interesesCincoMonth">0</td>
+									<td id="saldoCincoMonth">0</td>
+								</tr>
+								<tr>
+								<!-- <td id="inflacionSeisMonth">0</td> -->
+									<td>6</td>
+									<td id='inversionSeisMonth'>0</td>
+									<td id="interesesSeisMonth">0</td>
+									<td id="saldoSeisMonth">0</td>
+								</tr>
+								<tr>
+								<!-- <td id="inflacionSieteMonth">0</td> -->
+									<td>7</td>
+									<td id='inversionSieteMonth'>0</td>
+									<td id="interesesSieteMonth">0</td>
+									<td id="saldoSieteMonth">0</td>
+								</tr>
+								<tr>
+									<!-- <td id="inflacionOchoMonth">0</td> -->
+									<td>8</td>
+									<td id='inversionOchoMonth'>0</td>
+									<td id="interesesOchoMonth">0</td>
+									<td id="saldoOchoMonth">0</td>
+								</tr>
+								<tr>
+								<!-- <td id="inflacionNueveMonth">0</td> -->
+									<td>9</td>
+									<td id='inversionNueveMonth'>0</td>
+									<td id="interesesNueveMonth">0</td>
+									<td id="saldoNueveMonth">0</td>
+								</tr>
+								<tr>
+								<!-- <td id="inflacionDiezMonth">0</td> -->
+									<td>10</td>
+									<td id='inversionDiezMonth'>0</td>
+									<td id="interesesDiezMonth">0</td>
+									<td id="saldoDiezMonth">0</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- one time modal -->
+<div class="modal fade " id="exampleModalCenterOne" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+                <h5 class="modal-title">Plan de inversión</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<div class="container">
+					<div class="row">
+						<div class="col-xl-12">
+							<form action="">
+								<ul class="formulario-chart centered-wea">
+									<li>
+										<label for="Pricetwo">Valor del aporte</label><br>
+										<input type="text" name="currency-field" id="valor_mensual_one_pop" disable="disable" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="$833.33">
+									</li>
+									<li>
+										<label for="PriceFive">Número de meses</label><br>
+										<input type="number" id="rentabilidad_one_pop" value="12" placeholder="12" disable="disable">
+									</li>
+									<li>
+										<label for="PriceOne">Total ingreso</label><br>
+										<input type="text" name="currency-field" id="valor_global_one_pop" disable="disable" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="$100,000.00">
+									</li>
+									<li>
+										<button type="button" class="Button-descargar" disabled="disabled" >Descargar</button>
+									</li>
+								</ul>
+							</form>
+						</div>
+					</div>
+					<div class="row">
+						<table class="table">
+							<thead class="thead-dark">
+								<tr>
+									<th scope="col">Año</th>
+									<th scope="col">Inversión</th>
+									<th scope="col">Utilidad</th>
+									<th scope="col">Saldo</th>
+								</tr>
+							</thead>
+							<tbody>
+							<tr>
+									<td>1</td>
+									<td id='inversionUnoOne'>0</td>
+									<td id="interesesUnoOne">0</td>
+									<td id="saldoUnoOne">0</td>
+								</tr>
+								<tr>
+									<td>2</td>
+									<td id='inversionDosOne'>0</td>
+									<td id="interesesDosOne">0</td>
+									<td id="saldoDosOne">0</td>
+								</tr>
+								<tr>
+									<td>3</td>
+									<td id='inversionTresOne'>0</td>
+									<td id="interesesTresOne">0</td>
+									<td id="saldoTresOne">0</td>
+								</tr>
+								<tr>
+									<td>4</td>
+									<td id='inversionCuatroOne'>0</td>
+									<td id="interesesCuatroOne">0</td>
+									<td id="saldoCuatroOne">0</td>
+								</tr>
+								<tr>
+									<td>5</td>
+									<td id='inversionCincoOne'>0</td>
+									<td id="interesesCincoOne">0</td>
+									<td id="saldoCincoOne">0</td>
+								</tr>
+								<tr>
+									<td>6</td>
+									<td id='inversionSeisOne'>0</td>
+									<td id="interesesSeisOne">0</td>
+									<td id="saldoSeisOne">0</td>
+								</tr>
+								<tr>
+									<td>7</td>
+									<td id='inversionSieteOne'>0</td>
+									<td id="interesesSieteOne">0</td>
+									<td id="saldoSieteOne">0</td>
+								</tr>
+								<tr>
+									<td>8</td>
+									<td id='inversionOchoOne'>0</td>
+									<td id="interesesOchoOne">0</td>
+									<td id="saldoOchoOne">0</td>
+								</tr>
+								<tr>
+									<td>9</td>
+									<td id='inversionNueveOne'>0</td>
+									<td id="interesesNueveOne">0</td>
+									<td id="saldoNueveOne">0</td>
+								</tr>
+								<tr>
+									<td>10</td>
+									<td id='inversionDiezOne'>0</td>
+									<td id="interesesDiezOne">0</td>
+									<td id="saldoDiezOne">0</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src={% static 'account/js/sakura.js' %}></script>
+<script src={% static 'account/js/sakuraOnetime.js' %}></script>
+
 {% endblock %}
 
-{% block javascripts %}
-
-  <script src="{% static "dashboard/js/js/chartjs/Chart.min.js" %}"></script>
-  <script src="{% static "dashboard/js/js/chartjs/Chart.extension.js" %}"></script>
- 
-  <script src="{% static "account/js/sakura.js" %}"></script>
-  <script src="{% static "account/js/sakuraOnetime.js" %}"></script>
-{% endblock javascripts %}

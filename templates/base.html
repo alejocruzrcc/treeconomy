@@ -22,6 +22,8 @@
       src="https://code.jquery.com/jquery-3.6.0.min.js"
       integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
       crossorigin="anonymous"></script>
+    <script src={% static "dashboard/js/js/chartjs/Chart.min.js" %}></script>
+    <script src={% static "dashboard/js/js/chartjs/Chart.extension.js" %}></script>
     <script src={% static 'js/main.js' %} defer></script>
 
       <!-- Favicon - loaded as static -->
@@ -119,7 +121,7 @@ li a {
               <div class="col-12 p-0">
                   <ul>
                       <li><a href="/projects"><i class="material-icons">forest</i><br><span>Projects</span></a></li>
-                      <li><a href="#"><i class="fas fa-calculator"></i><br><span>Calculator</span></a></li>
+                      <li><a href="/"><i class="fas fa-calculator"></i><br><span>Calculator</span></a></li>
                       <li><a href="/dashboard"><i class="material-icons">dashboard</i><br><span>Dashboard</span></a></li>
                       <li>
     
