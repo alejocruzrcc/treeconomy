@@ -299,16 +299,17 @@ ul li {
                                 </li>
                                 <li>
                                     <label for="PriceOne">Total Revenue Generated</label><br>
-                                    <input type="text" name="currency-field" id="valor_global" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="$100,000.00" data-type="currency">
+                                    <input type="text" name="currency-field" id="valor_global" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="$131,557.54" data-type="currency">
                                 </li>
                             </ul>
                         </form>
                     </div>
                 </div>
-
+               
                 <div class="row graficas-op">
                     <div class="col-xl-7 col-12">
                         <h3 class="tittle-graph">Profitability Time Line</h3>
+                        <p>Nota: La inversion anual tiene un incremento del 3% de la inflación del año anterior</p>
                         <div class="box-chart-bar">
                             <canvas id="myChartBar" class="chartjs-render-monitor" style="display: block;"></canvas>
                         </div>
@@ -316,7 +317,7 @@ ul li {
                     <div class="col-xl-5 col-12">
                         <h3 class="tittle-graph">Total Revenue Generated</h3>
                         <div class="box-chart-pie mt-5">
-                            <canvas id="myChartPie" height="0" class="chartjs-render-monitor" style="display: block; width: 0px; height: 0px;" width="0"></canvas>
+                            <canvas id="myChartPie"></canvas>
                         </div>
                     </div>
                 </div>
@@ -328,6 +329,145 @@ ul li {
                         </li>
                         <li class="m-3">
                             <button type="button" class="estilo-2" data-toggle="modal" data-target="#exampleModalCenter">Check investment plan</button>
+                            <!-- Modal month-->
+                            <div class="modal fade " id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Plan de inversión</h5>
+                                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col-xl-12">
+                                                        <form action="">
+                                                            
+                                                            <ul class="formulario-chart centered-wea">
+                                                                <li>
+                                                                    <label for="Pricetwo">Valor del aporte</label><br>
+                                                                    <input type="text" name="currency-field" id="valor_mensual_month_pop" disabled="disabled" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="$833.33">
+                                                                </li>
+                                                                <li>
+                                                                    <label for="PriceFive">Número de meses</label><br>
+                                                                    <input type="number" id="rentabilidad_pop" value="12" placeholder="12" disabled="disabled">
+                                                                </li>
+                                                                <li>
+                                                                    <label for="PriceOne">Total ingreso</label><br>
+                                                                    <input type="text" name="currency-field" id="valor_global_pop" disabled="disabled" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="$100,000.00">
+                                                                </li>
+                                                                <li>
+                                                                    <button type="button" class="Button-descargar" disabled="disabled">Descargar</button>
+                                                                </li>
+                                                            </ul>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="row">
+                                                    <p style="font-size: 15px;">Nota: La inversion anual tiene un incremento del 3% de la inflación del año anterior</p>
+                                                    <table class="table">
+                                                        <thead class="thead-dark">
+                                                            <tr>
+                                                                <!-- <th scope="col">Inflación</th> -->
+                                                                <th scope="col">Año</th>
+                                                                <th scope="col">Inversión anual </th>
+                                                                <th scope="col">Inversión total</th>
+                                                                <th scope="col">Utilidad</th>
+                                                                <th scope="col">Saldo</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <!-- <td id="inflacionUnoMonth">0</td> -->
+                                                                <td>1</td>
+                                                                <td id='inversionAnualUnoMonth'>0</td>
+                                                                <td id='inversionUnoMonth'>0</td>
+                                                                <td id="interesesUnoMonth">0</td>
+                                                                <td id="saldoUnoMonth">0</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <!-- <td id="inflacionDosMonth">0</td> -->
+                                                                <td>2</td>
+                                                                <td id='inversionAnualDosMonth'>0</td>
+                                                                <td id='inversionDosMonth'>0</td>
+                                                                <td id="interesesDosMonth">0</td>
+                                                                <td id="saldoDosMonth">0</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <!-- <td id="inflacionTresMonth">0</td> -->
+                                                                <td>3</td>
+                                                                <td id='inversionAnualTresMonth'>0</td>
+                                                                <td id='inversionTresMonth'>0</td>
+                                                                <td id="interesesTresMonth">0</td>
+                                                                <td id="saldoTresMonth">0</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <!-- <td id="inflacionCuatroMonth">0</td> -->
+                                                                <td>4</td>
+                                                                <td id='inversionAnualCuatroMonth'>0</td>
+                                                                <td id='inversionCuatroMonth'>0</td>
+                                                                <td id="interesesCuatroMonth">0</td>
+                                                                <td id="saldoCuatroMonth">0</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <!-- <td id="inflacionCincoMonth">0</td> -->
+                                                                <td>5</td>
+                                                                <td id='inversionAnualCincoMonth'>0</td>
+                                                                <td id='inversionCincoMonth'>0</td>
+                                                                <td id="interesesCincoMonth">0</td>
+                                                                <td id="saldoCincoMonth">0</td>
+                                                            </tr>
+                                                            <tr>
+                                                            <!-- <td id="inflacionSeisMonth">0</td> -->
+                                                                <td>6</td>
+                                                                <td id='inversionAnualSeisMonth'>0</td>
+                                                                <td id='inversionSeisMonth'>0</td>
+                                                                <td id="interesesSeisMonth">0</td>
+                                                                <td id="saldoSeisMonth">0</td>
+                                                            </tr>
+                                                            <tr>
+                                                            <!-- <td id="inflacionSieteMonth">0</td> -->
+                                                                <td>7</td>
+                                                                <td id='inversionAnualSieteMonth'>0</td>
+                                                                <td id='inversionSieteMonth'>0</td>
+                                                                <td id="interesesSieteMonth">0</td>
+                                                                <td id="saldoSieteMonth">0</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <!-- <td id="inflacionOchoMonth">0</td> -->
+                                                                <td>8</td>
+                                                                <td id='inversionAnualOchoMonth'>0</td>
+                                                                <td id='inversionOchoMonth'>0</td>
+                                                                <td id="interesesOchoMonth">0</td>
+                                                                <td id="saldoOchoMonth">0</td>
+                                                            </tr>
+                                                            <tr>
+                                                            <!-- <td id="inflacionNueveMonth">0</td> -->
+                                                                <td>9</td>
+                                                                <td id='inversionAnualNueveMonth'>0</td>
+                                                                <td id='inversionNueveMonth'>0</td>
+                                                                <td id="interesesNueveMonth">0</td>
+                                                                <td id="saldoNueveMonth">0</td>
+                                                            </tr>
+                                                            <tr>
+                                                            <!-- <td id="inflacionDiezMonth">0</td> -->
+                                                                <td>10</td>
+                                                                <td id='inversionAnualDiezMonth'>0</td>
+                                                                <td id='inversionDiezMonth'>0</td>
+                                                                <td id="interesesDiezMonth">0</td>
+                                                                <td id="saldoDiezMonth">0</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
                         </li>
                     </ul>
                 </div>
@@ -361,7 +501,7 @@ ul li {
                                 </li>
                                 <li>
                                     <label for="PriceOne">Total Revenue Generated</label><br>
-                                    <input type="text" name="currency-field" id="valor_global_one" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="$100,000.00" data-type="currency">
+                                    <input type="text" name="currency-field" id="valor_global_one" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="$2,588.19" data-type="currency">
                                 </li>
                             </ul>
                         </form>
@@ -390,6 +530,118 @@ ul li {
                         </li>
                         <li class="m-2">
                             <button type="button" class="estilo-2" data-toggle="modal" data-target="#exampleModalCenterOne">Check investment plan</button>
+                            <!-- one time modal -->
+                            <div class="modal fade " id="exampleModalCenterOne" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Plan de inversión</h5>
+                                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col-xl-12">
+                                                        <form action="">
+                                                            <ul class="formulario-chart centered-wea">
+                                                                <li>
+                                                                    <label for="Pricetwo">Valor del aporte</label><br>
+                                                                    <input type="text" name="currency-field" id="valor_mensual_one_pop" disable="disable" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="$833.33">
+                                                                </li>
+                                                                <li>
+                                                                    <label for="PriceFive">Número de meses</label><br>
+                                                                    <input type="number" id="rentabilidad_one_pop" value="12" placeholder="12" disable="disable">
+                                                                </li>
+                                                                <li>
+                                                                    <label for="PriceOne">Total ingreso</label><br>
+                                                                    <input type="text" name="currency-field" id="valor_global_one_pop" disable="disable" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="$100,000.00">
+                                                                </li>
+                                                                <li>
+                                                                    <button type="button" class="Button-descargar" disabled="disabled" >Descargar</button>
+                                                                </li>
+                                                            </ul>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <table class="table">
+                                                        <thead class="thead-dark">
+                                                            <tr>
+                                                                <th scope="col">Año</th>
+                                                                <th scope="col">Inversión</th>
+                                                                <th scope="col">Utilidad</th>
+                                                                <th scope="col">Saldo</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr>
+                                                                <td>1</td>
+                                                                <td id='inversionUnoOne'>0</td>
+                                                                <td id="interesesUnoOne">0</td>
+                                                                <td id="saldoUnoOne">0</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>2</td>
+                                                                <td id='inversionDosOne'>0</td>
+                                                                <td id="interesesDosOne">0</td>
+                                                                <td id="saldoDosOne">0</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>3</td>
+                                                                <td id='inversionTresOne'>0</td>
+                                                                <td id="interesesTresOne">0</td>
+                                                                <td id="saldoTresOne">0</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>4</td>
+                                                                <td id='inversionCuatroOne'>0</td>
+                                                                <td id="interesesCuatroOne">0</td>
+                                                                <td id="saldoCuatroOne">0</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>5</td>
+                                                                <td id='inversionCincoOne'>0</td>
+                                                                <td id="interesesCincoOne">0</td>
+                                                                <td id="saldoCincoOne">0</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>6</td>
+                                                                <td id='inversionSeisOne'>0</td>
+                                                                <td id="interesesSeisOne">0</td>
+                                                                <td id="saldoSeisOne">0</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>7</td>
+                                                                <td id='inversionSieteOne'>0</td>
+                                                                <td id="interesesSieteOne">0</td>
+                                                                <td id="saldoSieteOne">0</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>8</td>
+                                                                <td id='inversionOchoOne'>0</td>
+                                                                <td id="interesesOchoOne">0</td>
+                                                                <td id="saldoOchoOne">0</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>9</td>
+                                                                <td id='inversionNueveOne'>0</td>
+                                                                <td id="interesesNueveOne">0</td>
+                                                                <td id="saldoNueveOne">0</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10</td>
+                                                                <td id='inversionDiezOne'>0</td>
+                                                                <td id="interesesDiezOne">0</td>
+                                                                <td id="saldoDiezOne">0</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -398,242 +650,7 @@ ul li {
 
     </div>
 </div>
-<!-- Modal month-->
-<div class="modal fade " id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-                <h5 class="modal-title">Plan de inversión</h5>
-                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="modal-body">
-				<div class="container">
-					<div class="row">
-						<div class="col-xl-12">
-							<form action="">
-								<ul class="formulario-chart centered-wea">
-									<li>
-										<label for="Pricetwo">Valor del aporte</label><br>
-										<input type="text" name="currency-field" id="valor_mensual_month_pop" disabled="disabled" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="$833.33">
-									</li>
-									<li>
-										<label for="PriceFive">Número de meses</label><br>
-										<input type="number" id="rentabilidad_pop" value="12" placeholder="12" disabled="disabled">
-									</li>
-									<li>
-										<label for="PriceOne">Total ingreso</label><br>
-										<input type="text" name="currency-field" id="valor_global_pop" disabled="disabled" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="$100,000.00">
-									</li>
-									<li>
-										<button type="button" class="Button-descargar" disabled="disabled">Descargar</button>
-									</li>
-								</ul>
-							</form>
-						</div>
-					</div>
-					<div class="row">
-						<table class="table">
-							<thead class="thead-dark">
-								<tr>
-									<!-- <th scope="col">Inflación</th> -->
-									<th scope="col">Año</th>
-									<th scope="col">Inversión</th>
-									<th scope="col">Utilidad</th>
-									<th scope="col">Saldo</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<!-- <td id="inflacionUnoMonth">0</td> -->
-									<td>1</td>
-									<td id='inversionUnoMonth'>0</td>
-									<td id="interesesUnoMonth">0</td>
-									<td id="saldoUnoMonth">0</td>
-								</tr>
-								<tr>
-									<!-- <td id="inflacionDosMonth">0</td> -->
-									<td>2</td>
-									<td id='inversionDosMonth'>0</td>
-									<td id="interesesDosMonth">0</td>
-									<td id="saldoDosMonth">0</td>
-								</tr>
-								<tr>
-									<!-- <td id="inflacionTresMonth">0</td> -->
-									<td>3</td>
-									<td id='inversionTresMonth'>0</td>
-									<td id="interesesTresMonth">0</td>
-									<td id="saldoTresMonth">0</td>
-								</tr>
-								<tr>
-									<!-- <td id="inflacionCuatroMonth">0</td> -->
-									<td>4</td>
-									<td id='inversionCuatroMonth'>0</td>
-									<td id="interesesCuatroMonth">0</td>
-									<td id="saldoCuatroMonth">0</td>
-								</tr>
-								<tr>
-									<!-- <td id="inflacionCincoMonth">0</td> -->
-									<td>5</td>
-									<td id='inversionCincoMonth'>0</td>
-									<td id="interesesCincoMonth">0</td>
-									<td id="saldoCincoMonth">0</td>
-								</tr>
-								<tr>
-								<!-- <td id="inflacionSeisMonth">0</td> -->
-									<td>6</td>
-									<td id='inversionSeisMonth'>0</td>
-									<td id="interesesSeisMonth">0</td>
-									<td id="saldoSeisMonth">0</td>
-								</tr>
-								<tr>
-								<!-- <td id="inflacionSieteMonth">0</td> -->
-									<td>7</td>
-									<td id='inversionSieteMonth'>0</td>
-									<td id="interesesSieteMonth">0</td>
-									<td id="saldoSieteMonth">0</td>
-								</tr>
-								<tr>
-									<!-- <td id="inflacionOchoMonth">0</td> -->
-									<td>8</td>
-									<td id='inversionOchoMonth'>0</td>
-									<td id="interesesOchoMonth">0</td>
-									<td id="saldoOchoMonth">0</td>
-								</tr>
-								<tr>
-								<!-- <td id="inflacionNueveMonth">0</td> -->
-									<td>9</td>
-									<td id='inversionNueveMonth'>0</td>
-									<td id="interesesNueveMonth">0</td>
-									<td id="saldoNueveMonth">0</td>
-								</tr>
-								<tr>
-								<!-- <td id="inflacionDiezMonth">0</td> -->
-									<td>10</td>
-									<td id='inversionDiezMonth'>0</td>
-									<td id="interesesDiezMonth">0</td>
-									<td id="saldoDiezMonth">0</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
 
-<!-- one time modal -->
-<div class="modal fade " id="exampleModalCenterOne" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-                <h5 class="modal-title">Plan de inversión</h5>
-                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="modal-body">
-				<div class="container">
-					<div class="row">
-						<div class="col-xl-12">
-							<form action="">
-								<ul class="formulario-chart centered-wea">
-									<li>
-										<label for="Pricetwo">Valor del aporte</label><br>
-										<input type="text" name="currency-field" id="valor_mensual_one_pop" disable="disable" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="$833.33">
-									</li>
-									<li>
-										<label for="PriceFive">Número de meses</label><br>
-										<input type="number" id="rentabilidad_one_pop" value="12" placeholder="12" disable="disable">
-									</li>
-									<li>
-										<label for="PriceOne">Total ingreso</label><br>
-										<input type="text" name="currency-field" id="valor_global_one_pop" disable="disable" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="$100,000.00">
-									</li>
-									<li>
-										<button type="button" class="Button-descargar" disabled="disabled" >Descargar</button>
-									</li>
-								</ul>
-							</form>
-						</div>
-					</div>
-					<div class="row">
-						<table class="table">
-							<thead class="thead-dark">
-								<tr>
-									<th scope="col">Año</th>
-									<th scope="col">Inversión</th>
-									<th scope="col">Utilidad</th>
-									<th scope="col">Saldo</th>
-								</tr>
-							</thead>
-							<tbody>
-							<tr>
-									<td>1</td>
-									<td id='inversionUnoOne'>0</td>
-									<td id="interesesUnoOne">0</td>
-									<td id="saldoUnoOne">0</td>
-								</tr>
-								<tr>
-									<td>2</td>
-									<td id='inversionDosOne'>0</td>
-									<td id="interesesDosOne">0</td>
-									<td id="saldoDosOne">0</td>
-								</tr>
-								<tr>
-									<td>3</td>
-									<td id='inversionTresOne'>0</td>
-									<td id="interesesTresOne">0</td>
-									<td id="saldoTresOne">0</td>
-								</tr>
-								<tr>
-									<td>4</td>
-									<td id='inversionCuatroOne'>0</td>
-									<td id="interesesCuatroOne">0</td>
-									<td id="saldoCuatroOne">0</td>
-								</tr>
-								<tr>
-									<td>5</td>
-									<td id='inversionCincoOne'>0</td>
-									<td id="interesesCincoOne">0</td>
-									<td id="saldoCincoOne">0</td>
-								</tr>
-								<tr>
-									<td>6</td>
-									<td id='inversionSeisOne'>0</td>
-									<td id="interesesSeisOne">0</td>
-									<td id="saldoSeisOne">0</td>
-								</tr>
-								<tr>
-									<td>7</td>
-									<td id='inversionSieteOne'>0</td>
-									<td id="interesesSieteOne">0</td>
-									<td id="saldoSieteOne">0</td>
-								</tr>
-								<tr>
-									<td>8</td>
-									<td id='inversionOchoOne'>0</td>
-									<td id="interesesOchoOne">0</td>
-									<td id="saldoOchoOne">0</td>
-								</tr>
-								<tr>
-									<td>9</td>
-									<td id='inversionNueveOne'>0</td>
-									<td id="interesesNueveOne">0</td>
-									<td id="saldoNueveOne">0</td>
-								</tr>
-								<tr>
-									<td>10</td>
-									<td id='inversionDiezOne'>0</td>
-									<td id="interesesDiezOne">0</td>
-									<td id="saldoDiezOne">0</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
 
 <script src={% static 'account/js/sakura.js' %}></script>
 <script src={% static 'account/js/sakuraOnetime.js' %}></script>

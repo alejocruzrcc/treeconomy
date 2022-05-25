@@ -143,6 +143,8 @@ function updateChart(){
 	var inflacionAñoNueve = (inflacionAñoOcho * 1.03).toFixed(2);
 	var inflacionAñoDiez = (inflacionAñoNueve * 1.03).toFixed(2);
 
+
+
 	//calculos año uno inversion
 	var añoUnoInit = total_anual ;
 	var interesAñoUno = (total_anual * rate).toFixed(2);
@@ -240,16 +242,17 @@ function updateChart(){
 	jQuery("#valor_mensual_month_pop").val('$' + parseFloat(valor_mensual_neto, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
 	jQuery("#rentabilidad_pop").val(rentabilidad);
 
-	jQuery("#inflacionUnoMonth").text('$' + parseFloat(inflacionAñoUno, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
-	jQuery("#inflacionDosMonth").text('$' + parseFloat(inflacionAñoDos, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
-	jQuery("#inflacionTresMonth").text('$' + parseFloat(inflacionAñoTres, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
-	jQuery("#inflacionCuatroMonth").text('$' + parseFloat(inflacionAñoCuatro, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
-	jQuery("#inflacionCincoMonth").text('$' + parseFloat(inflacionAñoCinco, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
-	jQuery("#inflacionSeisMonth").text('$' + parseFloat(inflacionAñoSeis, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
-	jQuery("#inflacionSieteMonth").text('$' + parseFloat(inflacionAñoSiete, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
-	jQuery("#inflacionOchoMonth").text('$' + parseFloat(inflacionAñoOcho, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
-	jQuery("#inflacionNueveMonth").text('$' + parseFloat(inflacionAñoNueve, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
-	jQuery("#inflacionDiezMonth").text('$' + parseFloat(inflacionAñoDiez, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
+	jQuery("#inversionAnualUnoMonth").text('$' + parseFloat(inflacionAñoUno, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
+	jQuery("#inversionAnualDosMonth").text('$' + parseFloat(inflacionAñoDos, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
+	jQuery("#inversionAnualTresMonth").text('$' + parseFloat(inflacionAñoTres, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
+	jQuery("#inversionAnualCuatroMonth").text('$' + parseFloat(inflacionAñoCuatro, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
+	jQuery("#inversionAnualCincoMonth").text('$' + parseFloat(inflacionAñoCinco, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
+	jQuery("#inversionAnualSeisMonth").text('$' + parseFloat(inflacionAñoSeis, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
+	jQuery("#inversionAnualSieteMonth").text('$' + parseFloat(inflacionAñoSiete, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
+	jQuery("#inversionAnualOchoMonth").text('$' + parseFloat(inflacionAñoOcho, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
+	jQuery("#inversionAnualNueveMonth").text('$' + parseFloat(inflacionAñoNueve, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
+	jQuery("#inversionAnualDiezMonth").text('$' + parseFloat(inflacionAñoDiez, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
+
 
 
 	jQuery("#inversionUnoMonth").text('$' + parseFloat(añoUnoInit, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
