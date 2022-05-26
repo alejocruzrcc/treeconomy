@@ -35,14 +35,14 @@
           	<div class="card shadow-2-strong texto-tree" style="border-radius: 1rem;">
             <div class="card-body p-5 text-center">
 
-            <h2>Your account</h2>
+            <h2>Tu cuenta</h2>
 
             {% if form.errors %}
               <div class="alert alert-danger" role="alert">
-                  <p>Your username and password didn't match. Please try again.</p>
+                  <p>Su nombre de usuario y contraseña no coinciden. Inténtalo de nuevo.</p>
               </div>   
             {% else %}
-              <p>Please, use the following form to log-in. If you don't have an account <a class="enlace-naranja" href="{% url "register" %}">register here</a></p>
+              <p>Por favor, utilice el siguiente formulario para iniciar sesión. Si no tienes una cuenta <a class="enlace-naranja" href="{% url "register" %}">Registrarse aqui</a></p>
             {% endif %}
             
             
@@ -67,7 +67,7 @@
               <input type="hidden" name="next" value="{{ next }}" />
         
             <div class="forgot">
-                <p><a class="enlace-naranja" href="{% url "password_reset" %}">Forgotten your password?</a></p>
+                <p><a class="enlace-naranja" href="{% url "password_reset" %}">Recordar contraseña?</a></p>
             </div>
 
             <button class="btn-lg button-plant " type="submit">Login</button>

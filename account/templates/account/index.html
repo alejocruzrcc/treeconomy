@@ -303,11 +303,13 @@ canvas {
                         <form action="">
                             <ul class="formulario-chart">
                                 <li>
+
                                     <label for="Pricetwo">Monthly Investment</label><br>
                                     <input type="text" name="currency-field" id="valor_mensual" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="$100" data-type="currency">
+
                                 </li>
                                 <li>
-                                    <label for="PriceThree">Total months:</label><br>
+                                    <label for="PriceThree">Total meses:</label><br>
                                     <input type="number" id="meses_global" value="120" disabled="true">
                                 </li>
                                 <li style="display: none;">
@@ -315,7 +317,7 @@ canvas {
                                     <input type="text" name="currency-field" id="valor_anual" class="currency-field" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="$9,999.96" data-type="currency">
                                 </li>
                                 <li>
-                                    <label for="PriceFive">Annual returns: 12% recommended</label><br>
+                                    <label for="PriceFive">Rentabilidad anual: 12% recomendado</label><br>
                                     <input type="number" id="rentabilidad" value="12">
                                 </li>
                                 <li>
@@ -324,8 +326,10 @@ canvas {
                                     </div>
                                 </li>
                                 <li>
+
                                     <label for="PriceOne">Total Revenue Generated</label><br>
                                     <input type="text" name="currency-field" id="valor_global" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="$23,585.50" data-type="currency">
+
                                 </li>
                             </ul>
                         </form>
@@ -334,14 +338,14 @@ canvas {
                
                 <div class="row graficas-op">
                     <div class="col-xl-7 col-12">
-                        <h3 class="tittle-graph">Profitability Time Line</h3>
+                        <h3 class="tittle-graph">Línea de tiempo de rentabilidad</h3>
                         <p style="font-size: 15px">Nota: La inversion anual tiene un incremento del 3% de la inflación del año anterior</p>
                         <div class="box-chart-bar">
                             <canvas id="myChartBar" class="chartjs-render-monitor" style="display: block;"></canvas>
                         </div>
                     </div>
                     <div class="col-xl-5 col-12">
-                        <h3 class="tittle-graph">Total Revenue Generated</h3>
+                        <h3 class="tittle-graph">Ingresos totales generados</h3>
                         <div class="box-chart-pie mt-5">
                             <canvas id="myChartPie" height="0" style="display: block; width: 0px; height: 0px;" width="0"></canvas>
                         </div>
@@ -510,7 +514,7 @@ canvas {
                                     <input type="text" name="currency-field" id="valor_mensual_one" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="$833.33" data-type="currency">
                                 </li>
                                 <li class="hide-this">
-                                    <label for="PriceThree">Total months:</label><br>
+                                    <label for="PriceThree">Total meses:</label><br>
                                     <input type="number" id="meses_global" value="120" disabled="true">
                                 </li>
                                 <li class="hide-this">
@@ -518,7 +522,7 @@ canvas {
                                     <input type="text" name="currency-field" id="valor_anual" class="currency-field" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="$9,999.96" data-type="currency">
                                 </li>
                                 <li>
-                                    <label for="PriceFive">Annual returns: 12% recommended</label><br>
+                                    <label for="PriceFive">Rentabilidad anual: 12% recomendado</label><br>
                                     <input type="number" id="rentabilidad_one" value="12">
                                 </li>
                                 <li>
@@ -527,7 +531,7 @@ canvas {
                                     </div>
                                 </li>
                                 <li>
-                                    <label for="PriceOne">Total Revenue Generated</label><br>
+                                    <label for="PriceOne">Ingresos totales generados</label><br>
                                     <input type="text" name="currency-field" id="valor_global_one" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="$2,588.19" data-type="currency">
                                 </li>
                             </ul>
@@ -537,13 +541,13 @@ canvas {
 
                 <div class="row graficas-op">
                     <div class="col-xl-7 col-12">
-                        <h3 class="tittle-graph">Profitability Time Line</h3>
+                        <h3 class="tittle-graph">Línea de tiempo de rentabilidad</h3>
                         <div class="box-chart-bar">
                             <canvas id="myChartBarOne"></canvas>
                         </div>
                     </div>
                     <div class="col-xl-5 col-12">
-                        <h3 class="tittle-graph">Total Revenue Generated</h3>
+                        <h3 class="tittle-graph">Ingresos totales generados</h3>
                         <div class="box-chart-pie mt-5">
                             <canvas id="myChartPieOne" height="0" style="display: block; width: 0px; height: 0px;" width="0"></canvas>
                         </div>
