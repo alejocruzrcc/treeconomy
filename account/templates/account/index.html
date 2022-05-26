@@ -243,21 +243,24 @@ canvas {
     display: block;
     width: 800px;
 }
+table {
+    font-size: 2.5vw;
+}
 </style>
 
 <div class="info-inicial">
     <h2>Calculadora para invertir en tus sueños</h2>
     <p>¿Sabes cuánto debes ahorrar para cumplir tus sueños? ¡Compruébalo con nuestra Calculadora de inversiones!</p>
-    <p class="paso-1">Step 1: Escoge tu tipo de inversión</p>
+    <p class="paso-1">Paso 1: Escoge tu tipo de inversión</p>
 </div>
 
 <div class="col-xl-12">
     <ul class="calc-items-month nav">
         <li id="home-item" class="my-4">
-            <a data-toggle="tab" href="#nav-monthly" role="tab" class="active p-2">Monthly Investment</a>
+            <a data-toggle="tab" href="#nav-monthly" role="tab" class="active p-2">Inversión mensual</a>
         </li>
         <li id="university-item" class="my-4">
-            <a data-toggle="tab" href="#nav-onetime" role="tab" class="p-2">One time investment</a>
+            <a data-toggle="tab" href="#nav-onetime" role="tab" class="p-2">Única inversión</a>
         </li>
     </ul>
 
@@ -269,13 +272,13 @@ canvas {
         </div>
         <ul class="calc-items">
             <li id="home-item">
-                <div class="img-prev-item"><img src="https://www.treeconomy.com.co/wp-content/themes/Treeconomy/img/home.svg" alt=""></div><a data-toggle="tab" href="#nav-home" role="tab">Dream Home</a>
+                <div class="img-prev-item"><img src="https://www.treeconomy.com.co/wp-content/themes/Treeconomy/img/home.svg" alt=""></div><a data-toggle="tab" href="#nav-home" role="tab">Casa de tus sueños</a>
             </li>
             <li id="university-item">
-                <div class="img-prev-item"><img src="https://www.treeconomy.com.co/wp-content/themes/Treeconomy/img/university.svg" alt=""></div><a data-toggle="tab" href="#nav-profile" role="tab">Children's University</a>
+                <div class="img-prev-item"><img src="https://www.treeconomy.com.co/wp-content/themes/Treeconomy/img/university.svg" alt=""></div><a data-toggle="tab" href="#nav-profile" role="tab">Universidad de tus hijos</a>
             </li>
             <li id="car-item">
-                <div class="img-prev-item"><img src="https://www.treeconomy.com.co/wp-content/themes/Treeconomy/img/internet-of-things.svg" alt=""></div><a data-toggle="tab" href="#nav-car" role="tab">Wealth Planning</a>
+                <div class="img-prev-item"><img src="https://www.treeconomy.com.co/wp-content/themes/Treeconomy/img/internet-of-things.svg" alt=""></div><a data-toggle="tab" href="#nav-car" role="tab">Planificación patrimonial</a>
             </li>
         </ul>
     </div>
@@ -319,7 +322,7 @@ canvas {
                                 </li>
                                 <li>
                                     <div class="calcular">
-                                        <button type="button" onclick="updateChart()">Calculate</button>
+                                        <button type="button" onclick="updateChart()">Calcular</button>
                                     </div>
                                 </li>
                                 <li>
@@ -352,7 +355,7 @@ canvas {
                         
                         <li class="m-3">
                            
-                            <button type="button" class="estilo-2" data-toggle="modal" data-target="#exampleModalCenter">Check investment plan</button>
+                            <button type="button" class="estilo-2" data-toggle="modal" data-target="#exampleModalCenter">Revisa tu plan de inversión</button>
                             <!-- Modal month-->
                             <div class="modal" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle">
                                 <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -493,7 +496,7 @@ canvas {
                         </li>
                         <li class="m-3">
                             <p class="paso-1">Paso 5: Comienza a plantar tus árboles</p>
-                            <a class="estilo-1" href="{% url 'projects' %}">Start montlhy investment </a>
+                            <a class="estilo-1" href="{% url 'projects' %}">¡A plantar! </a>
                         </li>
                     </ul>
                 </div>
@@ -522,7 +525,7 @@ canvas {
                                 </li>
                                 <li>
                                     <div class="calcular">
-                                        <button type="button" onclick="updateChartOne()">Calculate</button>
+                                        <button type="button" onclick="updateChartOne()">Calcular</button>
                                     </div>
                                 </li>
                                 <li>
@@ -552,7 +555,7 @@ canvas {
                 <div class="contenedor-botones-inversion">
                     <ul>
                         <li class="m-2">
-                            <button type="button" class="estilo-2" data-toggle="modal" data-target="#exampleModalCenterOne">Check investment plan</button>
+                            <button type="button" class="estilo-2" data-toggle="modal" data-target="#exampleModalCenterOne">Revisa tu plan de inversión</button>
                             <!-- one time modal -->
                             <div class="modal" id="exampleModalCenterOne" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -668,7 +671,7 @@ canvas {
                         </li>
                         <li class="m-2">
                             <p class="paso-1">Paso 5: Comienza a plantar tus árboles</p>
-                            <a class="estilo-1" href="{% url 'projects' %}">Start montlhy investment </a>
+                            <a class="estilo-1" href="{% url 'projects' %}">¡A plantar!</a>
                         </li>
                     </ul>
                 </div>
