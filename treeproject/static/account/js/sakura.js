@@ -133,15 +133,15 @@ function updateChart(){
 
 	//calculos anual inflacion
 	var inflacionAñoUno = total_anual;
-	var inflacionAñoDos = (inflacionAñoUno * 1.03).toFixed(2);
-	var inflacionAñoTres = (inflacionAñoDos * 1.03).toFixed(2);
-	var inflacionAñoCuatro = (inflacionAñoTres * 1.03).toFixed(2);
-	var inflacionAñoCinco = (inflacionAñoCuatro * 1.03).toFixed(2);
-	var inflacionAñoSeis = (inflacionAñoCinco * 1.03).toFixed(2);
-	var inflacionAñoSiete = (inflacionAñoSeis * 1.03).toFixed(2);
-	var inflacionAñoOcho = (inflacionAñoSiete * 1.03).toFixed(2);
-	var inflacionAñoNueve = (inflacionAñoOcho * 1.03).toFixed(2);
-	var inflacionAñoDiez = (inflacionAñoNueve * 1.03).toFixed(2);
+	var inflacionAñoDos = total_anual;
+	var inflacionAñoTres = total_anual;
+	var inflacionAñoCuatro = total_anual;
+	var inflacionAñoCinco = total_anual;
+	var inflacionAñoSeis = total_anual;
+	var inflacionAñoSiete = total_anual;
+	var inflacionAñoOcho = total_anual;
+	var inflacionAñoNueve = total_anual;
+	var inflacionAñoDiez = total_anual;
 
 
 
