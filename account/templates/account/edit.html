@@ -74,10 +74,10 @@
         <div class="col-md-5 border-right">
             <div class="p-3 py-5">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4 class="text-right">Profile Settings</h4>
+                    <h4 class="text-right">Configuracion perfil</h4>
                 </div>
                 <div class="row mt-2">
-                    <div class="col-md-6"><label class="labels">Name</label> 
+                    <div class="col-md-6"><label class="labels">Nombres</label> 
                         {% if user_form.first_name.errors %}
                             {{ user_form.first_name|add_attr:'is-invalid'}}
                         {% else %}
@@ -87,7 +87,7 @@
                             {{ user_form.first_name.errors }}
                         </div>
                     </div>
-                    <div class="col-md-6"><label class="labels">Last Name</label> 
+                    <div class="col-md-6"><label class="labels">Apellidos</label> 
                         {% if user_form.last_name.errors %}
                             {{ user_form.last_name|add_attr:'is-invalid'}}
                         {% else %}
@@ -99,7 +99,7 @@
                     </div>
                 </div>
                 <div class="row mt-3">
-                    <div class="col-md-12"><label class="labels">Mobile Number</label>
+                    <div class="col-md-12"><label class="labels">Numero de Telefono</label>
                         {% if profile_form.phone.errors %}
                             {{ profile_form.phone|add_attr:'is-invalid'}}
                         {% else %}
@@ -109,7 +109,7 @@
                             {{ profile_form.phone.errors }}
                         </div>
                     </div>
-                    <div class="col-md-12"><label class="labels">Birthday</label>
+                    <div class="col-md-12"><label class="labels">Fecha nacimiento</label>
                         {% if profile_form.date_of_birth.errors %}
                             {{ profile_form.date_of_birth|add_attr:'is-invalid'}}
                         {% else %}
@@ -119,7 +119,7 @@
                             {{ profile_form.date_of_birth.errors }}
                         </div>
                     </div>
-                    <div class="col-md-12"><label class="labels">Address</label>
+                    <div class="col-md-12"><label class="labels">Direccion</label>
                         {% if profile_form.adress.errors %}
                             {{ profile_form.adress|add_attr:'is-invalid'}}
                         {% else %}
@@ -139,7 +139,7 @@
                             {{ profile_form.zipcode.errors }}
                         </div>
                     </div>
-                    <div class="col-md-12"> <label class="labels">Tax register</label>
+                    <div class="col-md-12"> <label class="labels">registro de impuestos</label>
                         {% if profile_form.tax_register.errors %}
                             {{ profile_form.tax_register|add_attr:'is-invalid'}}
                         {% else %}
@@ -149,7 +149,7 @@
                             {{ profile_form.tax_register.errors }}
                         </div>
                     </div>
-                    <div class="col-md-12"><label class="labels">Rut</label>
+                    <div class="col-md-12"><label class="labels">Ruta</label>
                         {% if profile_form.rut.errors %}
                             {{ profile_form.rut|add_attr:'is-invalid'}}
                         {% else %}
@@ -159,7 +159,7 @@
                             {{ profile_form.rut.errors }}
                         </div>
                     </div>
-                    <div class="col-md-12"><label class="labels">Email </label>
+                    <div class="col-md-12"><label class="labels">Correo</label>
                         {% if user_form.email.errors %}
                             {{ user_form.email|add_attr:'is-invalid'}}
                         {% else %}
@@ -171,7 +171,7 @@
                     </div>
                 </div>
                 <div class="row mt-3">
-                    <div class="col-md-4"><label class="labels">Country</label> 
+                    <div class="col-md-4"><label class="labels">Ciudad</label> 
                         {% if profile_form.country.errors %}
                             {{ profile_form.country|add_attr:'is-invalid'}}
                         {% else %}
@@ -182,7 +182,7 @@
                         </div>
                     </div>
                     
-                    <div class="col-md-4"><label class="labels">State/Region</label>
+                    <div class="col-md-4"><label class="labels">Estado/Region</label>
                         {% if profile_form.state.errors %}
                             {{ profile_form.state|add_attr:'is-invalid'}}
                         {% else %}
@@ -205,7 +205,7 @@
                     </div>
                 </div>
 
-                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Save Profile</button></div>
+                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Subir perfil</button></div>
             </div>
         </div>
         <div class="col-md-4">
