@@ -2510,6 +2510,17 @@ input[type="button"].btn-block {
 .collapse:not(.show) {
   display: none; }
 
+.collapsing {
+  max-height: 0;
+    overflow: hidden;
+    font-family: 'Oswald', sans-serif; 
+    padding: 0 0 0 50px;
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .collapsing {
+      transition: none; } }
+      
 
 
 .dropup,
