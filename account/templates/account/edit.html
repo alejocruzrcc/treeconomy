@@ -171,7 +171,7 @@
                     </div>
                 </div>
                 <div class="row mt-3">
-                    <div class="col-md-4"><label class="labels">Ciudad</label> 
+                    <div class="col-md-4"><label class="labels">País</label> 
                         {% if profile_form.country.errors %}
                             {{ profile_form.country|add_attr:'is-invalid'}}
                         {% else %}
@@ -182,7 +182,7 @@
                         </div>
                     </div>
                     
-                    <div class="col-md-4"><label class="labels">Estado/Region</label>
+                    <div class="col-md-4"><label class="labels">Estado/Región</label>
                         {% if profile_form.state.errors %}
                             {{ profile_form.state|add_attr:'is-invalid'}}
                         {% else %}
@@ -193,7 +193,7 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <label class="labels">City</label>
+                        <label class="labels">Ciudad</label>
                         {% if profile_form.city.errors %}
                             {{ profile_form.city|add_attr:'is-invalid'}}
                         {% else %}

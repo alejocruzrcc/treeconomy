@@ -43,7 +43,7 @@ class Profile(models.Model):
     
     #gender         = models.IntegerField(choices=GENDER_CHOICES, blank=True, null=True)
     country        = CountryField(default="Co")
-    city           = models.CharField(max_length=50, blank=True, null=True)
+    city           = models.CharField(max_length=50, blank=True, null=True, verbose_name = "Ciudad")
     state          = models.CharField(max_length=50, blank=True, null=True)
     adress         = models.CharField(max_length=50, blank=True, null=True)
     zipcode        = models.CharField(max_length=100, blank=True, null=True)
@@ -68,6 +68,8 @@ class Profile(models.Model):
         
     def __str__(self):
         return f'Perfil para usuario {self.user.username}'
+    
+    
     
     class Meta:
         verbose_name_plural=u'Perfiles de Usuario'

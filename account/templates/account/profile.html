@@ -3,6 +3,7 @@
 {% block title %}Perfil{% endblock %}
 
 {% block content %}
+{% load verbose_name_template %}
 <style>
     body {
         background: #f5f5f5
@@ -256,6 +257,10 @@
                   <div class="media">
                     <label>Zip code</label>
                     <p>{{ user.profile.zipcode }}</p>
+                  </div>
+                  <div class="media">
+                    <label>{{ user.profile|verbose_name:"city" }}</label>
+                    <p>{{ user.profile.city }}</p>
                   </div>
               </div>
               <div class="col-md-4">
