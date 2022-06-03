@@ -158,7 +158,7 @@ li a {
             </a>
           </div>
           <li class="nav-item active">
-            <a class="nav-link" href="{% url 'contact' %}">Contáctanos</span></a>
+            <a class="nav-link" href="{% url 'contact' %}">Contactanos</span></a>
           </li>
         </ul>
         <a href="{% url 'summary'%}" type="button" class="position-relative">
@@ -195,7 +195,7 @@ li a {
       <a href="/dashboard"><i class="material-icons">dashboard</i><span class="icon-text"></span>&nbsp;&nbsp;&nbsp;&nbsp;Dashboard</a></span>
       </a><br>
       <a href="/projects"><i class="material-icons">forest</i><span class="icon-text"></span>&nbsp;&nbsp;&nbsp;&nbsp;Proyectos</span></a><br>
-      <a href="/billing/cartera"><i class="material-icons">monetization_on</i><span class="icon-text"></span>&nbsp;&nbsp;&nbsp;&nbsp;Cartera<span></a>
+      <a href="#"><i class="material-icons">monetization_on</i><span class="icon-text"></span>&nbsp;&nbsp;&nbsp;&nbsp;Cartera<span></a>
   </div>
 
   <div id="main" class="main-content">
@@ -208,6 +208,15 @@ li a {
       </div>
       {% endfor %}
     {% endif %}
+    <script src="https://bluebird-web-agent.s3.us-east-2.amazonaws.com/keybe.js"></script>
+    <script>
+    window.addEventListener('load', function () {
+      var configChat = {
+        apiKey: '2a492cd19901427da2e9b38fcf6eee9c'
+      }
+      window.keybe.webchatConversationsUiLoad(configChat)
+    })
+    </script>
 
     {% block content %}
 
