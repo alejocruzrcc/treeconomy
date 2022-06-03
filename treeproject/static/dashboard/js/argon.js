@@ -910,10 +910,10 @@ var SalesChart = (function() {
               var content = '';
 
               if (data.datasets.length > 1) {
-                content += '<span class="popover-body-label mr-auto">' + label + '</span>';
+                content +=  label;
               }
 
-              content += '<span class="popover-body-value">$' + yLabel + 'k</span>';
+              content += '$' + yLabel + 'k';
               return content;
             }
           }
