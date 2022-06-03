@@ -11,6 +11,9 @@ stripe.api_key = STRIPE_SECRET_KEY
 
 from .models import BillingProfile, Card
 
+def cartera_view(request):
+    return render(request,'billing/cartera.html',{'section':'cartera'})
+
 def payment_method_view(request):
     #next_url = 
     # if request.user.is_authenticated():

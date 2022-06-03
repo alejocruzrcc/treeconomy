@@ -192,7 +192,7 @@ var Charts = (function() {
 		},
 		theme: {
 			'default': '#172b4d',
-			'primary': '#5e72e4',
+			'primary': '#f2622e',
 			'secondary': '#f4f5f7',
 			'info': '#11cdef',
 			'success': '#2dce89',
@@ -209,6 +209,8 @@ var Charts = (function() {
 
 	// Chart.js global options
 	function chartOptions() {
+
+		
 
 		// Options
 		var options = {
@@ -849,6 +851,8 @@ var BarsChart = (function() {
 				}]
 			}
 		});
+		
+
 
 		// Save to jQuery object
 		$chart.data('chart', ordersChart);
@@ -872,7 +876,7 @@ var SalesChart = (function() {
 
   // Variables
 
-  var $chart = $('#chart-sales-dark');
+  var $chart = $('#chart-sales');
 
 
   // Methods
@@ -919,8 +923,15 @@ var SalesChart = (function() {
         labels: ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
         datasets: [{
           label: 'Performance',
-          data: [0, 20, 10, 30, 15, 40, 20, 60, 60]
-        }]
+          data: [10, 20, 40, 50, 55, 60, 70, 80, 85],
+		  borderColor: "#f2622e"
+        },
+		{
+			label: 'Inversion inicial',
+			data: [10, 10, 10, 10, 10, 20, 30, 40, 50],
+			borderColor: "#018669"
+		  }	
+	]
       }
     });
 
@@ -1085,4 +1096,42 @@ var Scrollbar = (function() {
 		init();
 	}
 
+
+})();
+
+// GRafica circular de utilidades vs inversion
+var PieChart = (function() {
+	var $piechart = $('#myChartPieDb');
+	
+	function init($piechart) {
+		
+		var myChartPieDb = new Chart($piechart, {
+			type: 'pie',
+			data: {
+					labels: ["Inversión Inicial", "Utilidad"],
+					datasets: [{
+							label: "Ganancias totales)",
+							backgroundColor: ["#018669", "#F9E09E"],
+							data: [50,50]
+					}]
+			},
+			options: {
+					title: {
+							display: false
+					},
+					legend: {
+							position: 'bottom',
+					}
+			}
+		});
+		// Save to jQuery object
+
+		$piechart.data('chart', myChartPieDb);
+	}
+
+	// Events
+
+	if ($piechart.length) {
+		init($piechart);
+	  }
 })();

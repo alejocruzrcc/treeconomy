@@ -2,9 +2,11 @@ from django.contrib import admin
 from django.urls import path, re_path
 from django.conf.urls import url, include
 
-from .views import payment_method_view, payment_method_createview
+from .views import payment_method_view, payment_method_createview, cartera_view
 
 urlpatterns = [ 
     path('billing/payment-method', payment_method_view, name='payment-method'),
+    path('cartera', cartera_view, name='cartera'),
     re_path('billing/payment-method/create/$', payment_method_createview, name='billing-payment-method-endpoint',)
 ]
+  
