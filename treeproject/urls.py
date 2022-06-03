@@ -26,6 +26,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('account/',include('account.urls')),
     path('projects/',include('projects.urls')),
+    path('billing/',include('billing.urls')),
     path('social-auth/',include('social_django.urls',namespace='social')),
     path('',account.views.home,name='index'),
     path('contact/', account.views.ContactView.as_view(), name="contact"),
