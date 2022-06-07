@@ -229,6 +229,17 @@
           </div>
         </div>
       </div>
+      <div class="card">
+        <div class="card-body">
+          <h2>Descargue documentos de su interés</h2>
+          <div class="row mb-3">
+            <a href="{% static "account/css/terminoses.pdf" %}" class="btn btn-outline-success" type="button" target="_blank">Tu contrato</a>            
+            <a href="{% static "account/css/terminoses.pdf" %}" class="btn btn-outline-success" type="button" target="_blank">Certificado ICA</a>
+            <a href="{% static "account/css/terminoses.pdf" %}" class="btn btn-outline-success" type="button" target="_blank">Contrato de Arrendamiento de tierras</a>
+            <a href="{% static "account/css/terminoses.pdf" %}" class="btn btn-outline-success" type="button" target="_blank">Documentos</a>   
+          </div>  
+        </div>
+      </div>
 
     </div>
     
@@ -237,4 +248,5 @@
 <!-- Specific JS goes HERE --> 
 {% block javascripts %}
   <script src="{% static "dashboard/js/argon.js" %}"></script>
+      
 {% endblock javascripts %}
