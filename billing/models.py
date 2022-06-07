@@ -13,6 +13,7 @@ STRIPE_SECRET_KEY = getattr(settings, "STRIPE_SECRET_KEY", 'sk_test_EHJpOxVYLVcH
 stripe.api_key = STRIPE_SECRET_KEY
 
 
+
 class BillingProfileManager(models.Manager):
     def new_or_get(self, request):
         user = request.user
@@ -174,7 +175,6 @@ class ChargeManager(models.Manager):
         )
         new_charge_obj.save()
         return new_charge_obj.paid, new_charge_obj.seller_message
-
 
 class Charge(models.Model):
     billing_profile         = models.ForeignKey(BillingProfile, on_delete=models.CASCADE)

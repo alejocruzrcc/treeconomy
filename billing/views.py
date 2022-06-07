@@ -32,8 +32,6 @@ def payment_method_view(request):
     return render(request, 'billing/payment-method.html', {"publish_key": STRIPE_PUB_KEY, "next_url": next_url})
 
 
-
-
 def payment_method_createview(request):
     if request.method == "POST" and request.is_ajax():
         print('im in create')
