@@ -2,7 +2,6 @@ from __future__ import division
 from ast import arg
 from django.db import models
 from django.db.models import Q
-
 from django.urls import reverse
 from django.utils.text import slugify
 from django.core.validators import MinValueValidator
@@ -11,6 +10,7 @@ from datetime import datetime, timedelta
 #from django.utils import timezone
 from django.contrib.auth.models import User
 from statistics import mean
+#from billing.models import Bill
 import math
 
 DAYS_PER_YEAR = 365
@@ -18,6 +18,20 @@ TREES_PER_HECTARE = 500
 CO2_CONSUMPTION_PER_HECTARE_PER_YEAR = 35000
 CO2_CONSUMPTION_PER_TREE_PER_YEAR = (CO2_CONSUMPTION_PER_HECTARE_PER_YEAR / TREES_PER_HECTARE)
 CO2_CONSUMPTION_PER_TREE_PER_DAY = (CO2_CONSUMPTION_PER_TREE_PER_YEAR / DAYS_PER_YEAR)
+
+class Bill(models.Model):
+    id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    default = models.BooleanField(default=False)
+    
+    city = models.CharField(max_length=100)
+    zip_code = models.CharField(max_length=100)
+        
+    def __str(self):
+        return f"{self.city}, {self.zip_code}"
+    
+    class Meta:
+        verbose_name_plural= "Bills"
 
 # Create your models here.
 class ProjectQuerySet(models.query.QuerySet):
@@ -28,7 +42,7 @@ class ProjectQuerySet(models.query.QuerySet):
         lookups = (Q(coordinates__icontains=query) | 
                    Q(name__icontains=query) 
                   )
-
+        
 class ProjectManager(models.Manager):
     def get_queryset(self):
         return ProjectQuerySet(self.model, using=self._db)
@@ -44,7 +58,6 @@ class ProjectManager(models.Manager):
     
     def search(self, query):
         return self.get_queryset().active().search(query)
-
 
 class Project(models.Model):
     name                = models.CharField(max_length=120)
@@ -117,6 +130,7 @@ class OrderItem(models.Model):
     
 class Order(models.Model):
     user = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
+    bill = models.ForeignKey(Bill, related_name='bill', blank=True, null=True, on_delete=models.SET_NULL)
     start_date = models.DateTimeField(auto_now_add=True)
     ordered_date = models.DateTimeField(blank=True, null=True)
     ordered = models.BooleanField(default=False)
@@ -146,7 +160,9 @@ class Order(models.Model):
     def get_total(self):
         total = self.get_raw_total()
         return "{:.2f}".format(int(total or 0) /100)
-        
+  
+
+              
 def pre_save_project_receiver(sender, instance, *args, **kwargs):
     if not instance.slug:
         instance.slug = slugify(instance.name)

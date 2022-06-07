@@ -1,8 +1,7 @@
 from django.forms import ModelForm 
 from django.urls import reverse
 from django import forms
-from .models import OrderItem, Project
-
+from .models import OrderItem, Project, Bill
 from account.models import ProjectByInvestor, User
 
 class ProjectForm(forms.ModelForm):  
@@ -32,6 +31,16 @@ class AddToCartForm(forms.ModelForm):
         project = Project.objects.get(name=project_id)
         super().__init__(*args, **kwargs)
         
+class BillForm(forms.ModelForm):
+    class Meta:
+        model = Bill
+        fields = "__all__"
+        exclude= ('user',)
+      
+    def __init__(self, *args, **kwargs):
+        user_id = kwargs.pop('user_id')
+        super().__init__(*args, **kwargs)
+
         
         
         

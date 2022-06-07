@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.views import generic
-from .forms import ProjectForm, AddToCartForm
-from .models import Project, OrderItem
+from .forms import ProjectForm, AddToCartForm, BillForm
+from .models import Project, OrderItem, Bill
 from rolepermissions.decorators import has_role_decorator
 from billing.utils import get_or_set_order_session
 from account import views
+from django.contrib import messages
 
 # Create your views here.
 class ProjectListView(generic.ListView):
@@ -68,7 +69,6 @@ class CartView(generic.TemplateView):
         context["order"] = get_or_set_order_session(self.request)
         return context
    
-
 class IncreaseQuantityCartView(generic.View):
     def get(self, request, *args, **kwargs):    
         order_item = get_object_or_404(OrderItem, id=kwargs['pk'])
@@ -91,7 +91,35 @@ class RemoveFromCartView(generic.View):
         order_item = get_object_or_404(OrderItem, id=kwargs['pk'])
         order_item.delete()
         return redirect("summary")
+ 
+class CheckoutView(generic.FormView):
+    model = Bill
+    template_name= 'checkout.html'
+    form_class = BillForm
+
+    def get_success_url(self):
+        return reverse("index") #TODO: payment
     
+    def form_valid(self, form):
+        order = get_or_set_order_session(self.request)
+        info_default = form.cleaned_data['default']
+        order.save()
+        new_bill = form.save(commit=False)
+        new_bill.order = order
+        new_bill.save()
+        messages.info(self.request, "Agregaste exitosamente tu información de facturación")
+        return super(CheckoutView, self).form_valid(form)
+    
+    def get_form_kwargs(self):
+        kwargs = super(CheckoutView, self).get_form_kwargs()
+        kwargs['user_id'] = self.request.user.id
+        return kwargs
+    
+    def get_context_data(self, *args, **kwargs):
+        context = super(CheckoutView, self). get_context_data(**kwargs)
+        context["order"] = get_or_set_order_session(self.request)
+        return context
+   
 @has_role_decorator('admin')   
 def crear(request):
     #import pdb; pdb.set_trace()
