@@ -152,9 +152,16 @@ sup {
 a {
   text-decoration: none;
   background-color: transparent; }
-  a:hover {
-    color: #233dd2;
-    text-decoration: none; }
+
+.boton-documento:hover {
+  color: #fff;
+  background-color: #018669;
+  
+}
+
+.boton-documento {
+  color: #fff;
+  background-color: #012623; }
 
 a:not([href]) {
   color: inherit;
@@ -1863,13 +1870,13 @@ textarea.form-control {
 .btn {
   display: inline-block;
   font-weight: 600;
-  color: #525f7f;
+  color: #fff;
   text-align: center;
   vertical-align: middle;
   cursor: pointer;
   -webkit-user-select: none;
           user-select: none;
-  background-color: transparent;
+  
   border: 1px solid transparent;
   padding: 0.625rem 1.25rem;
   font-size: 0.875rem;
@@ -1880,7 +1887,7 @@ textarea.form-control {
     .btn {
       transition: none; } }
   .btn:hover {
-    color: #525f7f;
+    color: #fff;
     text-decoration: none; }
   .btn:focus, .btn.focus {
     outline: 0;
