@@ -3,14 +3,14 @@ from django.db import models
 from django.db.models.signals import post_save, pre_save
 from django.urls import reverse
 from projects.models import Order
+from django.contrib.auth.models import User
 
-User = settings.AUTH_USER_MODEL
 
 # Create your models here.
 import stripe 
 
-STRIPE_SECRET_KEY = getattr(settings, "STRIPE_SECRET_KEY", 'sk_test_EHJpOxVYLVcHnv6WpVadsWct00lDPscWIx')
-stripe.api_key = STRIPE_SECRET_KEY
+STRIPE_PRIVATE_KEY = getattr(settings, "STRIPE_PRIVATE_KEY", 'sk_test_EHJpOxVYLVcHnv6WpVadsWct00lDPscWIx')
+stripe.api_key = STRIPE_PRIVATE_KEY
 
 
 

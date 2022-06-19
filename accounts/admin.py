@@ -1,15 +1,10 @@
 from django.contrib import admin
 from django.contrib.auth.models import Permission
-from .models import Profile
-from .forms import SubscriptionForm
-from .models import Subscription, ProjectByInvestor
 
-class SubscriptionAdmin(admin.ModelAdmin):
-    form = SubscriptionForm
-    search_fields = ['status', 'investor']
-    
-    class Meta:
-        model = Subscription
+from .models import Profile, User
+
+from .models import ProjectByInvestor
+
 
 class ProjectInvestorAdmin(admin.ModelAdmin):
     search_fields = ['active', 'project', 'investor']
@@ -19,5 +14,4 @@ class ProjectInvestorAdmin(admin.ModelAdmin):
 
 admin.site.register(Profile)
 admin.site.register(Permission)
-admin.site.register(Subscription, SubscriptionAdmin)
 admin.site.register(ProjectByInvestor, ProjectInvestorAdmin)

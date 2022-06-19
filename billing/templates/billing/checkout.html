@@ -1,0 +1,415 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %}Checkout{% endblock %}
+
+{% block extra_head %}
+  <link rel="stylesheet" href="{% static 'css/stripe.css' %}" />
+  <script src="https://js.stripe.com/v3/"></script>
+
+{% endblock extra_head%}
+
+
+{% block content %}
+<div class="site-section">
+    <div class="container">
+        {% if not request.user.is_authenticated %}
+        <div class="row mb-5">
+            <div class="col-md-12">
+                <div class="border p-4 rounded" role="alert">
+                    Estás cerca de completar tu orden.
+                    Para finalizar, <a href="">Inicia sesión</a> o <a href="">Regístrate</a>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar" role="prohressbar" style="width: 90%;" aria-label="90" aria-valuemin="0" aria-valuemax="100">
+                        90% Completado
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% else %}
+
+        <div class="row">
+            <div class="col-md-6 mb-md-0">
+                <h2 class="h3 mb-3 text-black teext-center">Tu orden</h2>
+                <hr>
+                <table class="table site-block-order-table mb-5">
+                    <thead>
+                        <tr>
+                        <th>Árboles</th>
+                        <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in order.items.all %}
+                        <tr>
+                            <td>
+                                <h2 class="h5 text-black">{{ item.project.name }}</h2>
+                                <strong class="mx-2">x</strong>{{ item.quantity}}
+                            </td>
+                            
+                            
+                            <td>
+                                $ {{ item.get_total_item_price }}
+                            </td>
+                            
+                        </tr>
+                        
+                        {% endfor %}
+                        <tr>
+                            <td><strong>Subtotal</strong></td>
+                            <td>${{ order.get_subtotal }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Total</strong></td>
+                            <td><strong class="text-black font-weight-bold">${{ order.get_total }}</strong></td>
+                        </tr>
+                    </tbody>  
+                </table>
+                <div class="mt-3">
+                    <legend class="block text-sm font-medium text-gray-700">Card Details</legend>
+                    <div class="mt-1 bg-white rounded-md shadow-sm -space-y-px">
+                        <form id="subscription-form" class="focus:ring-indigo-500 focus:border-indigo-500 relative block w-full rounded-none rounded-t-md bg-transparent focus:z-10 sm:text-sm border-gray-300">
+                            {% csrf_token %}
+                            <div id="card-element"><!--Stripe.js injects the Card Element--></div>
+                            <button id="submit" type="submit">
+                                <div class="spinner hidden" id="spinner"></div>
+                                <span id="button-text">Continúa con tu pago</span>
+                            </button>
+                            <p id="card-errors" role="alert"></p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row" mb-5>
+                    <div class="col-md-12">
+                        <div class="col-12 p-5">
+                        <img src="https://d1wqzb5bdbcre6.cloudfront.net/6be7f28f283df8ac445ca75302a594914ad20665cd4eb42af4aa1bcb2c3d4d59/68747470733a2f2f66696c65732e7374726970652e636f6d2f6c696e6b732f666c5f746573745f474b446a514a36375a7651314c50526f6c35664c71543343"
+                            alt="">
+                        </div>
+                        
+                </div>
+            </div>
+        </div> 
+        
+    </div>
+    {% endif%}
+</div>
+
+{% endblock %}
+
+
+
+{% block javascripts %}
+    <script>
+        console.log("hola desde stripe js")
+        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        
+        var stripe = Stripe("{{ STRIPE_PUBLIC_KEY }}");
+
+        var elements = stripe.elements();
+        
+        // Set up Stripe.js and Elements to use in checkout form
+        var style = {
+          base: {
+            color: "#32325d",
+            fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+            fontSmoothing: "antialiased",
+            fontSize: "16px",
+            "::placeholder": {
+              color: "#aab7c4"
+            }
+          },
+          invalid: {
+            color: "#fa755a",
+            iconColor: "#fa755a"
+          }
+        };
+        
+        var order = "{{ order }}"
+        var card = elements.create("card", { style: style });
+        card.mount("#card-element");
+        
+        card.on('change', showCardError);
+        let displayError = document.getElementById('card-errors');
+        
+        function showCardError(event) {  
+          console.log(displayError)
+          if (event.error) {
+            displayError.textContent = event.error.message;
+          } else {
+            displayError.textContent = '';
+          }
+        }
+        
+        var form = document.getElementById('subscription-form');
+        
+        form.addEventListener('submit', function (ev) {
+          ev.preventDefault();
+          changeLoadingState(true);
+        
+          // If a previous payment was attempted, get the latest invoice
+          const latestInvoicePaymentIntentStatus = localStorage.getItem(
+            'latestInvoicePaymentIntentStatus'
+          );
+        
+          if (latestInvoicePaymentIntentStatus === 'requires_payment_method') {
+            const invoiceId = localStorage.getItem('latestInvoiceId');
+            const isPaymentRetry = true;
+            // create new payment method & retry payment on invoice with new payment method
+            createPaymentMethod({
+              card,
+              isPaymentRetry,
+              invoiceId,
+            });
+          } else {
+            // create new payment method & create subscription
+            createPaymentMethod({ card });
+          }
+        });
+        
+        function createPaymentMethod({ card, isPaymentRetry, invoiceId }) {
+          // Set up payment method for recurring usage
+          
+          stripe
+            .createPaymentMethod({
+              type: 'card',
+              card: card,
+            })
+            .then((result) => {
+              if (result.error) {
+                changeLoadingState(false);
+                displayError.textContent = result.error;
+              } else {
+                if (isPaymentRetry) {
+                  // Update the payment method and retry invoice payment
+                  retryInvoiceWithNewPaymentMethod({
+                    paymentMethodId: result.paymentMethod.id,
+                    invoiceId: invoiceId,
+                    order: order,
+                  });
+                } else {
+                  // Create the subscription
+                  createSubscription({
+                    paymentMethodId: result.paymentMethod.id,
+                    order: order,
+                  });
+                }
+              }
+            });
+        }
+        
+        function createSubscription({ paymentMethodId, order }) {
+          return (
+            fetch("{% url 'billing:create-subscription' %}", {
+              method: 'post',
+              headers: {
+                'Content-Type': "application/json",
+                'X-CSRFToken': csrftoken
+              },
+              body: JSON.stringify({
+                paymentMethodId: paymentMethodId,
+                order: order,
+              }),
+            })
+              .then((response) => {
+                console.log(response);
+                return response.json();
+              })
+              // If the card is declined, display an error to the user.
+              .then((result) => {
+                if (result.error) {
+                  // The card had an error when trying to attach it to a customer.
+                  throw result;
+                }
+                return result;
+              })
+              // Normalize the result to contain the object returned by Stripe.
+              // Add the additional details we need.
+              .then((result) => {
+                return {
+                  paymentMethodId: paymentMethodId,
+                  order: order,
+                  subscription: result,
+                };
+              })
+              // Some payment methods require a customer to be on session
+              // to complete the payment process. Check the status of the
+              // payment intent to handle these actions.
+              .then(handlePaymentThatRequiresCustomerAction)
+              // If attaching this card to a Customer object succeeds,
+              // but attempts to charge the customer fail, you
+              // get a requires_payment_method error.
+              .then(handleRequiresPaymentMethod)
+              // No more actions required. Provision your service for the user.
+              .then(onSubscriptionComplete)
+              .catch((error) => {
+                changeLoadingState(false);
+                // An error has happened. Display the failure to the user here.
+                // We utilize the HTML element we created.
+                showCardError(error);
+              })
+          );
+        }
+        
+        function handlePaymentThatRequiresCustomerAction({
+          subscription,
+          invoice,
+          order,
+          paymentMethodId,
+          isRetry,
+        }) {
+          if (subscription && subscription.status === 'active') {
+            // Subscription is active, no customer actions required.
+            return { subscription, order, paymentMethodId };
+          }
+        
+          // If it's a first payment attempt, the payment intent is on the subscription latest invoice.
+          // If it's a retry, the payment intent will be on the invoice itself.
+          let paymentIntent = invoice ? invoice.payment_intent : subscription.latest_invoice.payment_intent;
+        
+          if (
+            paymentIntent.status === 'requires_action' ||
+            (isRetry === true && paymentIntent.status === 'requires_payment_method')
+          ) {
+            return stripe
+              .confirmCardPayment(paymentIntent.client_secret, {
+                payment_method: paymentMethodId,
+              })
+              .then((result) => {
+                if (result.error) {
+                  // Start code flow to handle updating the payment details.
+                  // Display error message in your UI.
+                  // The card was declined (i.e. insufficient funds, card has expired, etc).
+                  throw result;
+                } else {
+                  if (result.paymentIntent.status === 'succeeded') {
+                    // Show a success message to your customer.
+                    // There's a risk of the customer closing the window before the callback.
+                    // We recommend setting up webhook endpoints later in this guide.
+                    return {
+                      order: order,
+                      subscription: subscription,
+                      invoice: invoice,
+                      paymentMethodId: paymentMethodId,
+                    };
+                  }
+                }
+              })
+              .catch((error) => {
+                changeLoadingState(false);
+                displayError(error);
+              });
+          } else {
+            // No customer action needed.
+            return { subscription, order, paymentMethodId };
+          }
+        }
+        
+        function handleRequiresPaymentMethod({
+          subscription,
+          paymentMethodId,
+          order,
+        }) {
+          if (subscription.status === 'active') {
+            // subscription is active, no customer actions required.
+            return { subscription, order, paymentMethodId };
+          } else if (
+            subscription.latest_invoice.payment_intent.status ===
+            'requires_payment_method'
+          ) {
+            // Using localStorage to manage the state of the retry here,
+            // feel free to replace with what you prefer.
+            // Store the latest invoice ID and status.
+            localStorage.setItem('latestInvoiceId', subscription.latest_invoice.id);
+            localStorage.setItem(
+              'latestInvoicePaymentIntentStatus',
+              subscription.latest_invoice.payment_intent.status
+            );
+            throw { error: { message: 'Your card was declined.' } };
+          } else {
+            return { subscription, order, paymentMethodId };
+          }
+        }
+        
+        function onSubscriptionComplete(result) {
+          // Payment was successful.
+          if (result.subscription.status === 'active') {
+              console.log("Complete");
+              window.location.href = "{% url 'billing:success' %}"
+            // Change your UI to show a success message to your customer.
+            // Call your backend to grant access to your service based on
+            // `result.subscription.items.data[0].price.product` the customer subscribed to.
+          }
+        }
+        
+        function retryInvoiceWithNewPaymentMethod({
+          paymentMethodId,
+          invoiceId,
+          order
+        }) {
+          return (
+            fetch("{% url 'billing:retry-invoice' %}", {
+              method: 'post',
+              headers: {
+                'Content-Type': "application/json",
+                'X-CSRFToken': csrftoken
+              },
+              body: JSON.stringify({
+                paymentMethodId: paymentMethodId,
+                invoiceId: invoiceId,
+              }),
+            })
+              .then((response) => {
+                return response.json();
+              })
+              // If the card is declined, display an error to the user.
+              .then((result) => {
+                if (result.error) {
+                  // The card had an error when trying to attach it to a customer.
+                  throw result;
+                }
+                return result;
+              })
+              // Normalize the result to contain the object returned by Stripe.
+              // Add the additional details we need.
+              .then((result) => {
+                return {
+                  // Use the Stripe 'object' property on the
+                  // returned result to understand what object is returned.
+                  invoice: result,
+                  paymentMethodId: paymentMethodId,
+                  order: order,
+                  isRetry: true,
+                };
+              })
+              // Some payment methods require a customer to be on session
+              // to complete the payment process. Check the status of the
+              // payment intent to handle these actions.
+              .then(handlePaymentThatRequiresCustomerAction)
+              // No more actions required. Provision your service for the user.
+              .then(onSubscriptionComplete)
+              .catch((error) => {
+                changeLoadingState(false);
+                // An error has happened. Display the failure to the user here.
+                // We utilize the HTML element we created.
+                displayError(error);
+              })
+          );
+        }
+        
+        function changeLoadingState(isLoading) {
+          if (isLoading) {
+            document.querySelector('#button-text').classList.add('hidden');
+            document.querySelector('#spinner').classList.remove('hidden');
+            document.querySelector('#subscription-form button').disabled = true;
+          } else {
+            document.querySelector('#button-text').classList.remove('hidden');
+            document.querySelector('#spinner').classList.add('hidden');
+            document.querySelector('#subscription-form button').disabled = false;
+          }
+        }
+    </script>
+{% endblock javascripts %}
+

@@ -1,7 +1,8 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Order, OrderItem, Project, Plat, ProjectTrackingRecord, PercentageRecord, Bill
+from .models import Order, OrderItem, Project, Pricing, Plat, ProjectTrackingRecord, PercentageRecord, Bill, Subscription
+from .forms import SubscriptionForm
 
 class ProjectAdmin(admin.ModelAdmin):
     list_display = ('name', 'coordinates', 'n_trees', 'tree_type', 'active',)
@@ -33,10 +34,22 @@ class PercentageRecordAdmin(admin.ModelAdmin):
     class Meta:
         model = PercentageRecord
         
-admin.site.register(Bill)
+class BillAdmin(admin.ModelAdmin):
+    list_display = [
+        'address_line_1',
+        'address_line_2',
+        'zip_code',
+        'city',
+        'address_type',
+    ]
+    
+
+admin.site.register(Bill, BillAdmin)
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Order)
 admin.site.register(OrderItem)
 admin.site.register(Plat, PlatAdmin)
 admin.site.register(ProjectTrackingRecord, ProjectRecordAdmin)
 admin.site.register(PercentageRecord, PercentageRecordAdmin)
+admin.site.register(Pricing)
+admin.site.register(Subscription)

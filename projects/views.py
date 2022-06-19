@@ -4,7 +4,8 @@ from .forms import ProjectForm, AddToCartForm, BillForm
 from .models import Project, OrderItem, Bill
 from rolepermissions.decorators import has_role_decorator
 from billing.utils import get_or_set_order_session
-from account import views
+from accounts import views 
+from accounts.models import User
 from django.contrib import messages
 
 # Create your views here.
@@ -65,7 +66,7 @@ class CartView(generic.TemplateView):
     template_name = 'cart.html'
     
     def get_context_data(self, *args, **kwargs):
-        context = super(CartView, self). get_context_data(**kwargs)
+        context = super(CartView, self).get_context_data(**kwargs)
         context["order"] = get_or_set_order_session(self.request)
         return context
    
@@ -92,31 +93,55 @@ class RemoveFromCartView(generic.View):
         order_item.delete()
         return redirect("summary")
  
-class CheckoutView(generic.FormView):
-    model = Bill
-    template_name= 'checkout.html'
+class FacturacionView(generic.FormView): 
+    template_name= 'facturacion.html'
     form_class = BillForm
 
     def get_success_url(self):
-        return reverse("index") #TODO: payment
-    
+        return reverse("billing:checkout")
+
     def form_valid(self, form):
         order = get_or_set_order_session(self.request)
-        info_default = form.cleaned_data['default']
+        selected_shipping_address = form.cleaned_data.get('selected_shipping_address')
+        selected_billing_address =form.cleaned_data.get('selected_billing_address')
+        
+        if selected_shipping_address:
+            order.shipping_address = selected_shipping_address
+        else:
+            address = Bill.objects.create(
+                address_type = 'S',
+                user =self.request.user,
+                address_line_1=form.cleaned_data['shipping_address_line_1'],
+                address_line_2=form.cleaned_data['shipping_address_line_2'],
+                zip_code=form.cleaned_data['shipping_zip_code'],
+                city=form.cleaned_data['shipping_city'],
+            )
+            order.shipping_address = address
+        
+        if selected_billing_address:
+            order.billing_address = selected_billing_address
+        else:
+            address = Bill.objects.create(
+                address_type = 'B',
+                user =self.request.user,
+                address_line_1=form.cleaned_data['billing_address_line_1'],
+                address_line_2=form.cleaned_data['billing_address_line_2'],
+                zip_code=form.cleaned_data['billing_zip_code'],
+                city=form.cleaned_data['billing_city'],
+            )
+            order.billing_address = address
+            
         order.save()
-        new_bill = form.save(commit=False)
-        new_bill.order = order
-        new_bill.save()
         messages.info(self.request, "Agregaste exitosamente tu información de facturación")
-        return super(CheckoutView, self).form_valid(form)
+        return super(FacturacionView, self).form_valid(form)
     
     def get_form_kwargs(self):
-        kwargs = super(CheckoutView, self).get_form_kwargs()
+        kwargs = super(FacturacionView, self).get_form_kwargs()
         kwargs['user_id'] = self.request.user.id
         return kwargs
     
     def get_context_data(self, *args, **kwargs):
-        context = super(CheckoutView, self). get_context_data(**kwargs)
+        context = super(FacturacionView, self).get_context_data(**kwargs)
         context["order"] = get_or_set_order_session(self.request)
         return context
    

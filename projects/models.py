@@ -9,10 +9,12 @@ from django.db.models.signals import pre_save
 from datetime import datetime, timedelta
 #from django.utils import timezone
 from django.contrib.auth.models import User
+from django.conf import settings
 from statistics import mean
-#from billing.models import Bill
 import math
+import stripe
 
+stripe.api_key = settings.STRIPE_PRIVATE_KEY
 DAYS_PER_YEAR = 365
 TREES_PER_HECTARE = 500
 CO2_CONSUMPTION_PER_HECTARE_PER_YEAR = 35000
@@ -20,15 +22,23 @@ CO2_CONSUMPTION_PER_TREE_PER_YEAR = (CO2_CONSUMPTION_PER_HECTARE_PER_YEAR / TREE
 CO2_CONSUMPTION_PER_TREE_PER_DAY = (CO2_CONSUMPTION_PER_TREE_PER_YEAR / DAYS_PER_YEAR)
 
 class Bill(models.Model):
+    ADDRESS_CHOICES= (
+        ('B', 'Billing'),
+        ('S', 'Shipping'),
+    )
+    
     id = models.AutoField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    address_line_1 = models.CharField(max_length=150)
+    address_line_2 = models.CharField(max_length=150)
+    address_type = models.CharField(max_length=1, choices=ADDRESS_CHOICES)
     default = models.BooleanField(default=False)
     
     city = models.CharField(max_length=100)
     zip_code = models.CharField(max_length=100)
         
     def __str(self):
-        return f"{self.city}, {self.zip_code}"
+        return f"{self.address_line_1}, {self.address_line_2}, {self.city}, {self.zip_code}"
     
     class Meta:
         verbose_name_plural= "Bills"
@@ -59,13 +69,43 @@ class ProjectManager(models.Manager):
     def search(self, query):
         return self.get_queryset().active().search(query)
 
+class Pricing(models.Model):
+    name= models.CharField(max_length=100)
+    slug = models.SlugField(unique=True)
+    stripe_price_id = models.CharField(max_length=50)
+    price = models.IntegerField(default=0)
+    currency = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+    
+class Subscription(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    pricing = models.ForeignKey(Pricing, on_delete=models.CASCADE, related_name='subscriptions')
+    created = models.DateTimeField(auto_now_add=True)
+    stripe_subscription_id = models.CharField(max_length=50)
+    status = models.CharField(max_length=100)
+    n_projects      = models.PositiveIntegerField()
+
+    class Meta:
+        verbose_name = "Subscription"
+        verbose_name_plural = "Subscriptions"
+        ordering = ['-created']
+
+    def __str__(self):
+        return self.user.email
+
+    @property
+    def is_active(self):
+        return self.status == "active" or self.status == "closed"
+
 class Project(models.Model):
     name                = models.CharField(max_length=120)
     slug                = models.SlugField(unique=True, primary_key=True) 
     coordinates         = models.CharField(max_length=120)
     n_trees             = models.PositiveIntegerField()
     plantation_date     = models.DateField()
-    price               = models.IntegerField(default=0)
+    price               = models.ForeignKey(Pricing, related_name='projects', blank=True, null=True, on_delete=models.SET_NULL)
     total_invested      = models.FloatField()
     total_unit_initial  = models.FloatField()
     tree_type           = models.CharField(max_length=120)
@@ -100,7 +140,7 @@ class Project(models.Model):
         super().delete()
         
     def get_price(self):
-        return "{:.2f}".format(int(self.price or 0) /100)
+        return "{:.2f}".format(int(self.price.price or 0) /100)
     
     def get_trees_left_porcent(self):
         return 100 - ((self.trees_left * 100) / int(self.n_trees or 1)) 
@@ -118,7 +158,7 @@ class OrderItem(models.Model):
         return f"{self.quantity} x Trees in {self.project.name}"
 
     def get_raw_total_item_price(self):
-        return self.quantity * int(self.project.price or 0) 
+        return self.quantity * int(self.project.price.price or 0) 
     
     def get_total_item_price(self):
         price = self.get_raw_total_item_price()
@@ -134,6 +174,11 @@ class Order(models.Model):
     start_date = models.DateTimeField(auto_now_add=True)
     ordered_date = models.DateTimeField(blank=True, null=True)
     ordered = models.BooleanField(default=False)
+    
+    billing_address = models.ForeignKey(
+        Bill, related_name='billing_address', blank=True, null=True, on_delete=models.SET_NULL)
+    shipping_address = models.ForeignKey(
+        Bill, related_name='shipping_address', blank=True, null=True, on_delete=models.SET_NULL)
     
     def __str__(self):
         return self.reference_number
@@ -161,7 +206,6 @@ class Order(models.Model):
         total = self.get_raw_total()
         return "{:.2f}".format(int(total or 0) /100)
   
-
               
 def pre_save_project_receiver(sender, instance, *args, **kwargs):
     if not instance.slug:
@@ -374,3 +418,5 @@ class ProjectTrackingRecord(models.Model):
                                   volume_growth_pctg=volume_pctg * 100,
                                   total_unit_current=total_unit_current) 
             pr.save()
+
+

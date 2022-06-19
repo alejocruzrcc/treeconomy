@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
+{% load static %}
 {% block title %}Checkout{% endblock %}
-
 {% block content %}
 
 <div class="site-section">
@@ -33,7 +33,7 @@
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-success btn-lg py-3 btn-block">
-                        Procede a realizar tu pago
+                            Procede a realizar tu pago
                         </button>
                     </div>
                 </div>
@@ -42,7 +42,11 @@
                         <div class="col-md-12">
                            <h2 class="h3 mb-3 text-black teext-center">Tu orden</h2>
                            <hr>
-                           <div class="p-3 p-lg-5">
+                           <div class="col-12 p-5">
+                            <img src="https://d1wqzb5bdbcre6.cloudfront.net/6be7f28f283df8ac445ca75302a594914ad20665cd4eb42af4aa1bcb2c3d4d59/68747470733a2f2f66696c65732e7374726970652e636f6d2f6c696e6b732f666c5f746573745f474b446a514a36375a7651314c50526f6c35664c71543343"
+                                alt="">
+                           </div>
+                           <div>
                             <table class="table site-block-order-table mb-5">
                                 <thead>
                                   <tr>
@@ -86,3 +90,9 @@
 </div>
 
 {% endblock %}
+
+{% block scripts %}
+<script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+<script src="https://js.stripe.com/v3/"></script>
+
+{% endblock scripts %}

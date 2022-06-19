@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.template.context_processors import csrf
 from django.conf import settings
 from projects.forms import ProjectByInvestorForm
-from .forms import LoginForm, SubscriptionForm, UserRegistrationForm,UserEditForm,ProfileEditForm, ContactForm
+from .forms import LoginForm, UserRegistrationForm,UserEditForm,ProfileEditForm, ContactForm
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.template import RequestContext
@@ -25,8 +25,6 @@ from rolepermissions.roles import assign_role
 from django.core import serializers
 from django.http import JsonResponse
 from django.views import generic
-#from django.views.decorators.csrf import csrf_exempt
-
 
 def home(request):
     return render(request,'account/index.html',{'section':'index'})
@@ -133,6 +131,7 @@ def activate_account(request, uidb64, token, backend='django.contrib.auth.backen
           new_profile.save()
         # Asigna rol inversioniste
         assign_role(user, 'inversor')
+        
         return render(request,'account/register_done.html',{'new_user': user})
     else:
         return HttpResponse('Activation link is invalid!')
@@ -161,12 +160,5 @@ def edit(request):
 def profile(request):
     return render(request,'account/profile.html', {'user': request.user})
 
-def create_subscription(request):
-    formulario = ProjectByInvestorForm(request.POST or None, request.FILES or None)
-    print(request)
-    if formulario.is_valid():
-        formulario.save()
-        return redirect('/subscription')
-    
-    return render(request, "subscription/create.html", {'form': formulario})
+
     
