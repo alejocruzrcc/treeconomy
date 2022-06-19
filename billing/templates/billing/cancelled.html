@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block title %}Cancelado{% endblock %}
+{% block extra_head %}
+  <link rel="stylesheet" href="{% static 'css/stripe.css' %}" />
+{% endblock extra_head%}
+
+{% block content %}
+
+<section class="section">
+  
+  <p>Picked the wrong subscription? Shop around then come back to pay!</p>
+</section>
+{% endblock content %}

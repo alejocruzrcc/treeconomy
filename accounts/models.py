@@ -5,11 +5,15 @@ from django.core.validators import MinValueValidator
 import datetime
 from django_countries.fields import CountryField
 from phonenumber_field.modelfields import PhoneNumberField
-from projects.models import Project
-from django.conf import settings
+from projects.models import Project, Subscription, Pricing
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.shortcuts import get_object_or_404
+from django.conf import settings
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+import stripe
+
 
 DEFAULT_ACTIVATION_DAYS = getattr(settings, 'DEFAULT_ACTIVATION_DAYS', 7)
 DAYS_PER_YEAR = 365
@@ -18,9 +22,11 @@ CO2_CONSUMPTION_PER_HECTARE_PER_YEAR = 35000
 CO2_CONSUMPTION_PER_TREE_PER_YEAR = (CO2_CONSUMPTION_PER_HECTARE_PER_YEAR / TREES_PER_HECTARE)
 CO2_CONSUMPTION_PER_TREE_PER_DAY = (CO2_CONSUMPTION_PER_TREE_PER_YEAR / DAYS_PER_YEAR)
 
+
+
 class Profile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
-   
+    stripe_customer_id = models.CharField(max_length=50)
     # ROLES DE USUARIO 
     VISITOR = 1 ## Unicamente ve información y dahboard de ejemplo
     ONETIME_INVESTOR = 2 ## Es inversionista de pago único
@@ -85,22 +91,6 @@ class CommissionAgent(User):
     def __str__(self):
         return self.name + " " + self.last_name
 
-class Subscription(models.Model):
-    investor        = models.ForeignKey(User, on_delete=models.CASCADE)
-    current_payment = models.FloatField(validators=[MinValueValidator(0.0)])
-    next_payment    = models.DateField(auto_now=False, auto_now_add=False)
-    status          = models.CharField(max_length=50)
-    total           = models.FloatField(validators=[MinValueValidator(0.0)])
-    start_date      = models.DateField(auto_now=False, auto_now_add=False)
-    last_order_date = models.DateField(auto_now=False, auto_now_add=False)
-    n_projects      = models.PositiveIntegerField()
-
-    class Meta:
-        verbose_name = "Subscription"
-        verbose_name_plural = "Subscriptions"
-
-    def __str__(self):
-        return str(self.pk) + "_" + self.investor.rut + "_" + self.start_date
 
 class ProjectByInvestorQuerySet(models.query.QuerySet):
     def active(self):
@@ -180,4 +170,34 @@ class ProjectByInvestor(models.Model):
 
     def get_absolute_url(self):
         return reverse("project-investor-detail", kwargs={"pk": self.pk})
+
+@receiver(post_save, sender=User)
+def post_email_confirmed(sender, instance, created, **kwargs):
+    print("entrooo")
+    if created:
+        user = instance
+        free_trial_pricing = Pricing.objects.get(name='Free')
+        
+        subscription = Subscription.objects.create(
+            user=user,
+            pricing=free_trial_pricing
+        )
+
+        #Crear cliente en stripe
+        stripe_customer = stripe.Customer.create(
+            email=user.email
+        )
+
+        stripe_subscription = stripe.Subscription.create(
+            customer=stripe_customer["id"],
+            items=[{'price': 'price_1LB5yVJUacQRIX890kzKsUYJ'}],
+            trial_period_days=20
+        )
+
+        subscription.status=stripe_subscription["status"]
+        subscription.stripe_subscription_id = stripe_subscription["id"]
+        subscription.save()
+        profile = Profile.objects.get(user_id=user.id)
+        profile.stripe_customer_id=stripe_customer["id"]
+        profile.save()
 

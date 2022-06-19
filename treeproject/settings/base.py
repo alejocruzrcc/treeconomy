@@ -46,7 +46,7 @@ ROLEPERMISSIONS_MODULE = 'treeproject.roles'
 LOCAL_APPS = ['projects', 'billing', 'dashboard']
 
 DJANGO_APPS = [
-    'account.apps.AccountConfig',
+    'accounts.apps.AccountsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -55,6 +55,7 @@ DJANGO_APPS = [
     'django.contrib.staticfiles',
     'social_django',
     'django_extensions',
+    'rest_framework',
     'storages',
     'widget_tweaks',
     'phonenumber_field',
@@ -62,9 +63,22 @@ DJANGO_APPS = [
     'django_social_share',
     'rolepermissions',
     'crispy_forms',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount'
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATON_CLASSES":(
+        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.TokenAuthentication",
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -126,8 +140,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -154,6 +166,7 @@ STATICFILES_DIRS = [
 
 
 LOGIN_REDIRECT_URL = 'dashboard'
+
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 
@@ -167,10 +180,18 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 AUTHENTICATION_BACKENDS=['django.contrib.auth.backends.ModelBackend',
-                         'account.authentication.EmailAuthBackend',
+                         'allauth.account.auth_backends.AuthenticationBackend',
+                         'accounts.authentication.EmailAuthBackend',
                          'social_core.backends.facebook.FacebookOAuth2',
-                        'social_core.backends.google.GoogleOAuth2',
+                         'social_core.backends.google.GoogleOAuth2',
 			 ]
         
 SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
 
+## PAYPAL
+
+PAYPAL_CLIENT_ID= ""
+
+
+
+SITE_ID =1

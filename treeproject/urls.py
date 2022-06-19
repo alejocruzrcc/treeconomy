@@ -18,18 +18,16 @@ from django.urls import path,include
 from django.conf import settings
 from django.views import static
 from django.conf.urls.static import static
-import account
-
-
+import accounts
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('account/',include('account.urls')),
+    path('account/',include('accounts.urls')),
     path('projects/',include('projects.urls')),
     path('billing/',include('billing.urls')),
     path('social-auth/',include('social_django.urls',namespace='social')),
-    path('',account.views.home,name='index'),
-    path('contact/', account.views.ContactView.as_view(), name="contact"),
+    path('',accounts.views.home,name='index'),
+    path('contact/', accounts.views.ContactView.as_view(), name="contact"),
     #path('dashboard/',account.views.dashboard,name='dashboard'),
     path('dashboard/', include('dashboard.urls')),
 ] 

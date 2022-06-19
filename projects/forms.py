@@ -1,8 +1,8 @@
 from django.forms import ModelForm 
 from django.urls import reverse
 from django import forms
-from .models import OrderItem, Project, Bill
-from account.models import ProjectByInvestor, User
+from .models import OrderItem, Project, Bill, Subscription
+from accounts.models import ProjectByInvestor, User
 
 class ProjectForm(forms.ModelForm):  
     class Meta:
@@ -31,16 +31,83 @@ class AddToCartForm(forms.ModelForm):
         project = Project.objects.get(name=project_id)
         super().__init__(*args, **kwargs)
         
-class BillForm(forms.ModelForm):
+class SubscriptionForm(forms.ModelForm):
+    OPTIONS = (('Active', 'active'), ('Closed', 'closed'), ('On hold', 'On hold'))
+    status = forms.ChoiceField(choices=OPTIONS, required=True) 
+
     class Meta:
-        model = Bill
-        fields = "__all__"
-        exclude= ('user',)
+        model = Subscription
+        fields = ('user', 'n_projects')
+    
+    def clean_status(self):
+        status = self.cleaned_data['status']
+        if not status:
+            raise forms.ValidationError('You have to provide a status for this subscription')
+        
+        return status
+
+class BillForm(forms.Form):
+    
+    shipping_address_line_1 = forms.CharField()
+    shipping_address_line_2 = forms.CharField()
+    shipping_zip_code = forms.CharField()
+    shipping_city = forms.CharField()
+    
+    billing_address_line_1 = forms.CharField()
+    billing_address_line_2 = forms.CharField()
+    billing_zip_code = forms.CharField()
+    billing_city = forms.CharField()
+    
+    selected_shipping_address = forms.ModelChoiceField(
+        Bill.objects.none(), required=False
+    )
+    
+    selected_billing_address = forms.ModelChoiceField(
+        Bill.objects.none(), required=False
+    )
+    
       
     def __init__(self, *args, **kwargs):
         user_id = kwargs.pop('user_id')
         super().__init__(*args, **kwargs)
+        if user_id:       
+            user = User.objects.get(id=user_id)
+            
+            shipping_address_qs = Bill.objects.filter(
+                user=user,
+                address_type='S'
+            )
+            billing_address_qs = Bill.objects.filter(
+                user=user,
+                address_type='B'
+            )
+            
+            self.fields['selected_shipping_address'].queryset = shipping_address_qs
+            self.fields['selected_billing_address'].queryset = billing_address_qs
 
+    def clean(self):
+        data = self.cleaned_data
         
+        selected_shipping_address = data.get('selected_shipping_address', None)
+        if selected_shipping_address is None:
+            if not data.get('shipping_address_line_1', None):
+                self.add_error("shipping_address_line_1", "Por favor rellena este campo")
+            if not data.get('shipping_address_line_2', None):
+                self.add_error("shipping_address_line_2", "Por favor rellena este campo")
+            if not data.get('shipping_zip_code', None):
+                self.add_error("shipping_zip_code", "Por favor rellena este campo")
+            if not data.get('shipping_city', None):
+                self.add_error("shipping_city", "Por favor rellena este campo")
+        
+        selected_billing_address = data.get('selected_billing_address', None)
+        if selected_billing_address is None:
+            if not data.get('billing_address_line_1', None):
+                self.add_error("billing_address_line_1", "Por favor rellena este campo")
+            if not data.get('billing_address_line_2', None):
+                self.add_error("billing_address_line_2", "Por favor rellena este campo")
+            if not data.get('billing_zip_code', None):
+                self.add_error("billing_zip_code", "Por favor rellena este campo")
+            if not data.get('billing_city', None):
+                self.add_error("billing_city", "Por favor rellena este campo")
         
         

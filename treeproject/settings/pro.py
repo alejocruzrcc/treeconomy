@@ -85,3 +85,8 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 
 django_on_heroku.settings(locals(), staticfiles=False, databases=False),
+
+DOMINIO_URL = "https://app.treeconomy.com" 
+
+STRIPE_PUBLIC_KEY =os.environ['STRIPE_PUBLIC_KEY_PRO']
+STRIPE_PRIVATE_KEY =os.environ['STRIPE_PRIVATE_PRO']

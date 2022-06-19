@@ -3,7 +3,7 @@ from django.urls import path
 from django.conf.urls import url, include
 
 from django.contrib.auth.decorators import login_required
-from .views import ProjectListView, ProjectDetailListView, CartView, IncreaseQuantityCartView, DecreaseQuantityCartView, RemoveFromCartView, CheckoutView
+from .views import ProjectListView, ProjectDetailListView, CartView, IncreaseQuantityCartView, DecreaseQuantityCartView, RemoveFromCartView, FacturacionView
 from . import views
 
 urlpatterns = [
@@ -19,5 +19,5 @@ urlpatterns = [
          DecreaseQuantityCartView.as_view(), name='decrease-quantity-cart'),
     path('remove-from-cart/<pk>/', 
          RemoveFromCartView.as_view(), name='remove-from-cart'),
-    path('checkout', CheckoutView.as_view(), name='checkout'),
+    path('facturacion', FacturacionView.as_view(), name='facturacion'),
 ]

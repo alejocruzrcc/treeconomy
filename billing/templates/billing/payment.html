@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %} <!-- new -->
+{% block title %}Payment{% endblock %}
+{% block extra_head %}
+  <link rel="stylesheet" href="{% static 'css/stripe.css' %}" />
+{% endblock extra_head%}
+
+{% block javascripts %}
+  <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+  <script src="https://js.stripe.com/v3/"></script>
+  <script src={% static 'billing/js/stripe.js' %} defer></script>
+{% endblock javascripts %}
+
+{% block content %}
+
+<section>
+  <div class="product">
+    <div class="description">
+      <h3>Suscripciones:</h3>
+      <h5>$8.00 / month</h5>
+    </div>
+  </div>
+  <form action="/create-checkout-session" method="POST">
+    <!-- Add a hidden field with the lookup_key of your Price -->
+    <input type="hidden" name="lookup_key" value="{{ }}" />
+    <button id="checkout-and-portal-button" type="submit">Checkout</button>
+  </form>
+</section>
+
+{% endblock content %}
+
