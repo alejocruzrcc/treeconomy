@@ -88,5 +88,5 @@ django_on_heroku.settings(locals(), staticfiles=False, databases=False),
 
 DOMINIO_URL = "https://app.treeconomy.com" 
 
-STRIPE_PUBLIC_KEY ="pk_live_lCxw52R29AAS2sJtdoyM4buw00w84Cocf7"
-STRIPE_PRIVATE_KEY ="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"
+STRIPE_PUBLIC_KEY =os.environ['STRIPE_PUBLIC_KEY_PRO']
+STRIPE_PRIVATE_KEY =os.environ['STRIPE_PRIVATE_PRO']
