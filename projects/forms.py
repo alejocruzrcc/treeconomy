@@ -48,19 +48,10 @@ class SubscriptionForm(forms.ModelForm):
 
 class BillForm(forms.Form):
     
-    shipping_address_line_1 = forms.CharField()
-    shipping_address_line_2 = forms.CharField()
-    shipping_zip_code = forms.CharField()
-    shipping_city = forms.CharField()
-    
     billing_address_line_1 = forms.CharField()
     billing_address_line_2 = forms.CharField()
     billing_zip_code = forms.CharField()
     billing_city = forms.CharField()
-    
-    selected_shipping_address = forms.ModelChoiceField(
-        Bill.objects.none(), required=False
-    )
     
     selected_billing_address = forms.ModelChoiceField(
         Bill.objects.none(), required=False
@@ -73,31 +64,15 @@ class BillForm(forms.Form):
         if user_id:       
             user = User.objects.get(id=user_id)
             
-            shipping_address_qs = Bill.objects.filter(
-                user=user,
-                address_type='S'
-            )
             billing_address_qs = Bill.objects.filter(
                 user=user,
                 address_type='B'
             )
             
-            self.fields['selected_shipping_address'].queryset = shipping_address_qs
             self.fields['selected_billing_address'].queryset = billing_address_qs
 
     def clean(self):
         data = self.cleaned_data
-        
-        selected_shipping_address = data.get('selected_shipping_address', None)
-        if selected_shipping_address is None:
-            if not data.get('shipping_address_line_1', None):
-                self.add_error("shipping_address_line_1", "Por favor rellena este campo")
-            if not data.get('shipping_address_line_2', None):
-                self.add_error("shipping_address_line_2", "Por favor rellena este campo")
-            if not data.get('shipping_zip_code', None):
-                self.add_error("shipping_zip_code", "Por favor rellena este campo")
-            if not data.get('shipping_city', None):
-                self.add_error("shipping_city", "Por favor rellena este campo")
         
         selected_billing_address = data.get('selected_billing_address', None)
         if selected_billing_address is None:

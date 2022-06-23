@@ -102,21 +102,7 @@ class FacturacionView(generic.FormView):
 
     def form_valid(self, form):
         order = get_or_set_order_session(self.request)
-        selected_shipping_address = form.cleaned_data.get('selected_shipping_address')
         selected_billing_address =form.cleaned_data.get('selected_billing_address')
-        
-        if selected_shipping_address:
-            order.shipping_address = selected_shipping_address
-        else:
-            address = Bill.objects.create(
-                address_type = 'S',
-                user =self.request.user,
-                address_line_1=form.cleaned_data['shipping_address_line_1'],
-                address_line_2=form.cleaned_data['shipping_address_line_2'],
-                zip_code=form.cleaned_data['shipping_zip_code'],
-                city=form.cleaned_data['shipping_city'],
-            )
-            order.shipping_address = address
         
         if selected_billing_address:
             order.billing_address = selected_billing_address
