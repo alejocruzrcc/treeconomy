@@ -187,10 +187,10 @@ def post_email_confirmed(sender, instance, created, **kwargs):
         stripe_customer = stripe.Customer.create(
             email=user.email
         )
-
+        
         stripe_subscription = stripe.Subscription.create(
             customer=stripe_customer["id"],
-            items=[{'price': 'price_1LB5yVJUacQRIX890kzKsUYJ'}],
+            items=[{'price': settings.STRIPE_FREE_PRICE}],
             trial_period_days=20
         )
 
