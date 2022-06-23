@@ -69,7 +69,7 @@
                 <div class="mt-3">
                     <legend class="block text-sm font-medium text-gray-700">Card Details</legend>
                     <div class="mt-1 bg-white rounded-md shadow-sm -space-y-px">
-                        <form id="subscription-form" class="focus:ring-indigo-500 focus:border-indigo-500 relative block w-full rounded-none rounded-t-md bg-transparent focus:z-10 sm:text-sm border-gray-300">
+                        <form id="subscription-form" method="POST" class="focus:ring-indigo-500 focus:border-indigo-500 relative block w-full rounded-none rounded-t-md bg-transparent focus:z-10 sm:text-sm border-gray-300">
                             {% csrf_token %}
                             <div id="card-element"><!--Stripe.js injects the Card Element--></div>
                             <button id="submit" type="submit">
@@ -214,15 +214,16 @@
               }),
             })
               .then((response) => {
-                console.log(response);
                 return response.json();
               })
               // If the card is declined, display an error to the user.
               .then((result) => {
                 if (result.error) {
                   // The card had an error when trying to attach it to a customer.
-                  throw result;
+                  window.location.href = "{% url 'billing:failed' %}"
+                  throw result.error;
                 }
+                
                 return result;
               })
               // Normalize the result to contain the object returned by Stripe.
@@ -231,7 +232,8 @@
                 return {
                   paymentMethodId: paymentMethodId,
                   order: order,
-                  subscription: result,
+                  subscription: result[0],
+                  checkout: result[1]
                 };
               })
               // Some payment methods require a customer to be on session
@@ -254,67 +256,61 @@
         }
         
         function handlePaymentThatRequiresCustomerAction({
+          checkout,
           subscription,
           invoice,
           order,
           paymentMethodId,
           isRetry,
         }) {
-          if (subscription && subscription.status === 'active') {
-            // Subscription is active, no customer actions required.
-            return { subscription, order, paymentMethodId };
-          }
-        
+          let paymentIntentOne = invoice ? invoice.payment_intent : checkout.payment_intent;
+
           // If it's a first payment attempt, the payment intent is on the subscription latest invoice.
           // If it's a retry, the payment intent will be on the invoice itself.
-          let paymentIntent = invoice ? invoice.payment_intent : subscription.latest_invoice.payment_intent;
-        
+          
+          let paymentIntentSub = invoice ? invoice.payment_intent : subscription.latest_invoice.payment_intent;
+          
           if (
-            paymentIntent.status === 'requires_action' ||
-            (isRetry === true && paymentIntent.status === 'requires_payment_method')
+            paymentIntentSub.status === 'requires_action' ||
+            (isRetry === true && paymentIntentSub.status === 'requires_payment_method')
           ) {
-            return stripe
-              .confirmCardPayment(paymentIntent.client_secret, {
-                payment_method: paymentMethodId,
-              })
-              .then((result) => {
-                if (result.error) {
-                  // Start code flow to handle updating the payment details.
-                  // Display error message in your UI.
-                  // The card was declined (i.e. insufficient funds, card has expired, etc).
-                  throw result;
-                } else {
-                  if (result.paymentIntent.status === 'succeeded') {
-                    // Show a success message to your customer.
-                    // There's a risk of the customer closing the window before the callback.
-                    // We recommend setting up webhook endpoints later in this guide.
-                    return {
-                      order: order,
-                      subscription: subscription,
-                      invoice: invoice,
-                      paymentMethodId: paymentMethodId,
-                    };
-                  }
-                }
-              })
-              .catch((error) => {
-                changeLoadingState(false);
-                displayError(error);
-              });
-          } else {
-            // No customer action needed.
-            return { subscription, order, paymentMethodId };
-          }
+              pagosub=stripe
+                .confirmCardPayment(paymentIntentSub.client_secret, {
+                  payment_method: paymentMethodId,
+                })
+                .then((result) => {
+                  if (result.error) {
+                    // Start code flow to handle updating the payment details.
+                    // Display error message in your UI.
+                    // The card was declined (i.e. insufficient funds, card has expired, etc).
+                    throw result;
+                  } 
+                })
+                .catch((error) => {
+                  changeLoadingState(false);
+                  displayError(error);
+                });
+            }
+          
+          // No customer action needed.
+          return {
+            subscription: subscription,
+            checkout: checkout,
+            invoice: invoice,
+            paymentMethodId: paymentMethodId,
+          };
         }
         
         function handleRequiresPaymentMethod({
+          priceId,
           subscription,
+          checkout,
           paymentMethodId,
           order,
         }) {
           if (subscription.status === 'active') {
             // subscription is active, no customer actions required.
-            return { subscription, order, paymentMethodId };
+            return { checkout, subscription, order, paymentMethodId };
           } else if (
             subscription.latest_invoice.payment_intent.status ===
             'requires_payment_method'
@@ -329,7 +325,7 @@
             );
             throw { error: { message: 'Your card was declined.' } };
           } else {
-            return { subscription, order, paymentMethodId };
+            return { checkout, subscription, order, paymentMethodId };
           }
         }
         

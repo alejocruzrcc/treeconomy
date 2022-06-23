@@ -105,7 +105,8 @@ class Project(models.Model):
     coordinates         = models.CharField(max_length=120)
     n_trees             = models.PositiveIntegerField()
     plantation_date     = models.DateField()
-    price               = models.ForeignKey(Pricing, related_name='projects', blank=True, null=True, on_delete=models.SET_NULL)
+    price_onepayment    = models.ForeignKey(Pricing, related_name='projects_onepayment', blank=True, null=True, on_delete=models.SET_NULL)
+    price_subscription   = models.ForeignKey(Pricing, related_name='projects_subscription', blank=True, null=True, on_delete=models.SET_NULL)
     total_invested      = models.FloatField()
     total_unit_initial  = models.FloatField()
     tree_type           = models.CharField(max_length=120)
@@ -140,7 +141,7 @@ class Project(models.Model):
         super().delete()
         
     def get_price(self):
-        return "{:.2f}".format(int(self.price.price or 0) /100)
+        return "{:.2f}".format(int(self.price_subscription.price or 0) /100)
     
     def get_trees_left_porcent(self):
         return 100 - ((self.trees_left * 100) / int(self.n_trees or 1)) 
@@ -158,7 +159,7 @@ class OrderItem(models.Model):
         return f"{self.quantity} x Trees in {self.project.name}"
 
     def get_raw_total_item_price(self):
-        return self.quantity * int(self.project.price.price or 0) 
+        return self.quantity * int(self.project.price_subscription.price or 0) 
     
     def get_total_item_price(self):
         price = self.get_raw_total_item_price()

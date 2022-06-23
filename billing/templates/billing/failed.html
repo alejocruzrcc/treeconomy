@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block title %}Rechazado{% endblock %}
+{% block extra_head %}
+  <link rel="stylesheet" href="{% static 'css/stripe.css' %}" />
+{% endblock extra_head%}
+
+{% block content %}
+
+<section class="section">
+  
+  <p>Lo sentimos, no fue posible procesar su pago </p>
+</section>
+{% endblock content %}

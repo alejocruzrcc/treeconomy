@@ -85,9 +85,8 @@ class CreateSubscriptionView(APIView):
     def post(self, request, *args, **kwargs):
         data = request.data
         profile = Profile.objects.get(user_id=request.user.id)
-        print(profile)
         customer_id = profile.stripe_customer_id
-        
+        orden =  get_or_set_order_session(self.request) 
         try:
             #vincular el metodo de pago al cliente
             stripe.PaymentMethod.attach(
@@ -96,12 +95,47 @@ class CreateSubscriptionView(APIView):
             )
 
             #configuurar metodo de pago prederterminado del cliente
-            stripe.Customer.modify(
+            iss= stripe.Customer.modify(
                 customer_id,
                 invoice_settings={
                     'default_payment_method': data['paymentMethodId'],
                 },
             )
+            
+            ## pagos unicos
+            mis_cantidades = {}
+            for item in orden.items.filter(type_inversion = 'O'):
+                mis_cantidades[item.project.price_onepayment.stripe_price_id] = item.quantity 
+                mis_precios = list(mis_cantidades.keys())
+            
+            
+            for item in list(mis_cantidades.keys()): 
+                domain_url = settings.DOMINIO_URL  
+                #session = create_checkout_session(item, mis_cantidades, customer_id)
+                try:
+                    # Create a PaymentIntent with the order amount and currency
+                    monto = Pricing.objects.filter(stripe_price_id=item)[0].price * mis_cantidades[item]
+                    print(monto)
+                    intent = stripe.PaymentIntent.create(
+                        amount= monto,
+                        currency='usd',
+                        customer=customer_id,
+                        metadata = {
+                            'price': item,
+                            'quantity': mis_cantidades[item],   
+                        },
+                        automatic_payment_methods={
+                            'enabled': True,
+                        },
+                    )
+                    stripe.PaymentIntent.confirm(
+                        intent.id,
+                        payment_method=data['paymentMethodId'],
+                       
+                        return_url= domain_url + '/billing/success/',
+                    )
+                except Exception as e:
+                    print(str(e))
 
             #crear suscripcion
             subscription =request.user.subscription
@@ -109,15 +143,15 @@ class CreateSubscriptionView(APIView):
                 subscription.stripe_subscription_id,
                 expand=['latest_invoice.payment_intent'],
             )
-            orden =  get_or_set_order_session(self.request)
+            
             
             # Buscamos los items de esa suscripcion de stripe
             items_existentes = stripe.SubscriptionItem.list(
                 subscription = stripe_subscription.id
             )
             mis_cantidades = {}
-            for item in orden.items.all():
-                mis_cantidades[item.project.price.stripe_price_id] = item.quantity 
+            for item in orden.items.filter(type_inversion = 'M'):
+                mis_cantidades[item.project.price_subscription.stripe_price_id] = item.quantity 
             mis_precios = list(mis_cantidades.keys())
             
             # Busca subscription Item o por el contrario la crea
@@ -143,9 +177,12 @@ class CreateSubscriptionView(APIView):
                 
             subscription.status=stripe_subscription["status"]
             subscription.save()   
-            data = {}
-            data.update(stripe_subscription)
+            datasub = {}
+            datach = {}
+            datasub.update(stripe_subscription)
+            #datach.update(session)
             
+            data= [datasub, datach]
             return Response(data)
         except Exception as e:
             return Response({
@@ -191,7 +228,6 @@ class RetryInvoiceView(APIView):
 class ChangeSubscriptionView(APIView):
     def post(self, request, *args, **kwargs):
         print(request.data)
-
         subscription_id = request.user.subscription.stripe_subscription_id
         subscription = stripe.Subscription.retrieve(subscription_id)
         try:
@@ -227,6 +263,10 @@ class PaymentCancelledView(generic.TemplateView):
  
 class PaymentFailedView(generic.TemplateView):
     template_name = "billing/failed.html"
+    def get_context_data(self, *args, **kwargs):
+        context = super(PaymentFailedView, self). get_context_data(**kwargs)
+        context["order"] = get_or_set_order_session(self.request)
+        return context
 
 class OrderHistoryListView(generic.TemplateView):
     pass
@@ -238,27 +278,23 @@ def stripe_config(request):
         return JsonResponse(stripe_config, safe=False)
 
 @csrf_exempt
-def create_checkout_session(request):
-    if request.method == 'GET':
-        domain_url = settings.DOMINIO_URL
-        try:
-            prices = stripe.Price.list(
-                lookup_keys=[request.form['lookup_key']],
-                expand=['data.product']
-            )
-
-            checkout_session = stripe.checkout.Session.create(
-                success_url=domain_url + 'billing/success/',
-                cancel_url=domain_url + 'billing/cancelled/',
-                line_items=[
+def create_checkout_session(item, mis_cantidades, customer_id):
+    domain_url = settings.DOMINIO_URL
+    try:
+        checkout_session = stripe.checkout.Session.create(
+            line_items=[
                     {
-                        'price': prices.data[0].id,
-                        'quantity': 1,
+                    'price': item,
+                    'quantity': mis_cantidades[item],
+                    
                     },
                 ],
-                mode='subscription',
-            )
-            
-            return JsonResponse({'sessionId': checkout_session['id']})
-        except Exception as e:
-            return JsonResponse({'error': str(e)})
+                mode='payment',
+                payment_method_types=['card',],
+                customer=customer_id,
+                success_url=domain_url + '/billing/success/',
+                cancel_url=domain_url + '/billing/cancelled/',
+        )
+        return checkout_session
+    except Exception as e:
+        return JsonResponse({'error': str(e)})
