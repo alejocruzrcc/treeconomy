@@ -44,7 +44,7 @@ class BillAdmin(admin.ModelAdmin):
     ]
     
 
-admin.site.register(Bill, BillAdmin)
+admin.site.register(Bill)
 admin.site.register(Bill2)
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Order)
