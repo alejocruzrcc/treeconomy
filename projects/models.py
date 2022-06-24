@@ -27,7 +27,6 @@ class Bill(models.Model):
         ('S', 'Shipping'),
     )
     
-    id = models.AutoField(primary_key=True, serialize=False, auto_created=True )
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     address_line_1 = models.CharField(max_length=150)
     address_line_2 = models.CharField(max_length=150)
