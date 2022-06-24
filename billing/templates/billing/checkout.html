@@ -133,9 +133,8 @@
         let displayError = document.getElementById('card-errors');
         
         function showCardError(event) {  
-          console.log(displayError)
-          if (event.error) {
-            displayError.textContent = event.error.message;
+          if (event) {
+            displayError.textContent = event.message;
           } else {
             displayError.textContent = '';
           }
@@ -219,7 +218,8 @@
                 console.log(result)
                 if (result.error) {
                   // The card had an error when trying to attach it to a customer.
-                  window.location.href = "{% url 'billing:failed' %}"
+                  //window.location.href = "{% url 'billing:failed' %}"
+                  displayError.textContent = result.error.message;
                   throw result.error;
                 }
                 
@@ -314,6 +314,7 @@
             subscription.latest_invoice.payment_intent.status ===
             'requires_payment_method'
           ) {
+            debugger
             // Using localStorage to manage the state of the retry here,
             // feel free to replace with what you prefer.
             // Store the latest invoice ID and status.

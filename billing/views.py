@@ -7,7 +7,7 @@ from django.conf import settings
 from requests import request
 from django.views.generic.base import View
 from accounts.models import Profile
-from projects.models import OrderItem, Pricing
+from projects.models import OrderItem, Pricing, Subscription
 from .utils import get_or_set_order_session
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.views import APIView
@@ -131,11 +131,17 @@ class CreateSubscriptionView(APIView):
                     print(str(e))
 
             #crear suscripcion
-            subscription =request.user.subscription
+            subscription = Subscription.objects.filter(user= request.user)[0]
+            
             stripe_subscription = stripe.Subscription.modify(
                 subscription.stripe_subscription_id,
                 expand=['latest_invoice.payment_intent'],
+                trial_end="now"
             )
+            
+            subscription.status=stripe_subscription.status
+            print(subscription.status)
+            subscription.save()  
             
             
             # Buscamos los items de esa suscripcion de stripe
@@ -168,12 +174,10 @@ class CreateSubscriptionView(APIView):
                     quantity= mis_cantidades[item]
                 )
                 
-            subscription.status=stripe_subscription["status"]
-            subscription.save()   
+            
             datasub = {}
             datach = {}
-            print(stripe_subscription)
-            print(profile)
+            
             datasub.update(stripe_subscription)
             #datach.update(session)
             
@@ -183,7 +187,6 @@ class CreateSubscriptionView(APIView):
             return Response({
                 "error": {'message': str(e)}
             })
-
 
 class RetryInvoiceView(APIView):
     def post(self, request, *args, **kwargs):
@@ -219,10 +222,9 @@ class RetryInvoiceView(APIView):
                 "error": {'message': str(e)}
             })
 
-
 class ChangeSubscriptionView(APIView):
     def post(self, request, *args, **kwargs):
-        print(request.data)
+        
         subscription_id = request.user.subscription.stripe_subscription_id
         subscription = stripe.Subscription.retrieve(subscription_id)
         try:

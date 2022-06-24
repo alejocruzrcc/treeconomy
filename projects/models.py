@@ -36,7 +36,7 @@ class Bill(models.Model):
     city = models.CharField(max_length=100)
     zip_code = models.CharField(max_length=100)
         
-    def __str(self):
+    def __str__(self):
         return f"{self.address_line_1}, {self.address_line_2}, {self.city}, {self.zip_code}"
     
     class Meta:
@@ -90,11 +90,11 @@ class Subscription(models.Model):
         ordering = ['-created']
 
     def __str__(self):
-        return self.user.email
+        return self.stripe_subscription_id
 
     @property
     def is_active(self):
-        return self.status == "active" or self.status == "closed"
+        return self.status == "active" or self.status == "trialing"
 
 class Project(models.Model):
     name                = models.CharField(max_length=120)
