@@ -17,13 +17,6 @@ from .models import BillingProfile, Card
 import stripe
 stripe.api_key = settings.STRIPE_PRIVATE_KEY
 
-charge = stripe.Charge.retrieve(
-  "ch_3LBm9ZJUacQRIX891jXvUcPl",
-  api_key="sk_test_EHJpOxVYLVcHnv6WpVadsWct00lDPscWIx"
-)
-charge.save() # Uses the same API Key.
-
-
 
 def cartera_view(request):
     return render(request,'billing/cartera.html',{'section':'cartera'})
