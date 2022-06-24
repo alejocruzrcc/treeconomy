@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Order, OrderItem, Project, Pricing, Plat, ProjectTrackingRecord, PercentageRecord, Bill, Subscription
+from .models import Order, OrderItem, Project, Pricing, Plat, ProjectTrackingRecord, PercentageRecord, Bill, Bill2, Subscription
 from .forms import SubscriptionForm
 
 class ProjectAdmin(admin.ModelAdmin):
@@ -45,6 +45,7 @@ class BillAdmin(admin.ModelAdmin):
     
 
 admin.site.register(Bill, BillAdmin)
+admin.site.register(Bill2)
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Order)
 admin.site.register(OrderItem)
