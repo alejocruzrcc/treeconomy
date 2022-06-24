@@ -42,26 +42,6 @@ class Bill(models.Model):
     class Meta:
         verbose_name_plural= "Bills"
 
-class Bill2(models.Model):
-    ADDRESS_CHOICES= (
-        ('B', 'Billing'),
-        ('S', 'Shipping'),
-    )
-    
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    address_line_1 = models.CharField(max_length=150)
-    address_line_2 = models.CharField(max_length=150)
-    address_type = models.CharField(max_length=1, choices=ADDRESS_CHOICES)
-    default = models.BooleanField(default=False)
-    
-    city = models.CharField(max_length=100)
-    zip_code = models.CharField(max_length=100)
-        
-    def __str(self):
-        return f"{self.address_line_1}, {self.address_line_2}, {self.city}, {self.zip_code}"
-    
-    class Meta:
-        verbose_name_plural= "Bills2"
 class ProjectQuerySet(models.query.QuerySet):
     def active(self):
         return self.filter(active=True)
