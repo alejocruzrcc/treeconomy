@@ -218,6 +218,7 @@
               })
               // If the card is declined, display an error to the user.
               .then((result) => {
+                console.log(result)
                 if (result.error) {
                   // The card had an error when trying to attach it to a customer.
                   window.location.href = "{% url 'billing:failed' %}"

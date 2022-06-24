@@ -180,7 +180,8 @@ def post_email_confirmed(sender, instance, created, **kwargs):
         
         subscription = Subscription.objects.create(
             user=user,
-            pricing=free_trial_pricing
+            pricing=free_trial_pricing,
+            n_projects=0
         )
 
         #Crear cliente en stripe

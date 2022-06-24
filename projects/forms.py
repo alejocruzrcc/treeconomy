@@ -56,7 +56,6 @@ class BillForm(forms.Form):
     selected_billing_address = forms.ModelChoiceField(
         Bill.objects.none(), required=False
     )
-    
       
     def __init__(self, *args, **kwargs):
         user_id = kwargs.pop('user_id')
@@ -73,7 +72,6 @@ class BillForm(forms.Form):
 
     def clean(self):
         data = self.cleaned_data
-        
         selected_billing_address = data.get('selected_billing_address', None)
         if selected_billing_address is None:
             if not data.get('billing_address_line_1', None):

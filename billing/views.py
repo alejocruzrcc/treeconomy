@@ -86,7 +86,7 @@ class CreateSubscriptionView(APIView):
         data = request.data
         profile = Profile.objects.get(user_id=request.user.id)
         customer_id = profile.stripe_customer_id
-        orden =  get_or_set_order_session(self.request) 
+        orden =  get_or_set_order_session(self.request)
         try:
             #vincular el metodo de pago al cliente
             stripe.PaymentMethod.attach(
@@ -179,6 +179,8 @@ class CreateSubscriptionView(APIView):
             subscription.save()   
             datasub = {}
             datach = {}
+            print(stripe_subscription)
+            print(profile)
             datasub.update(stripe_subscription)
             #datach.update(session)
             
