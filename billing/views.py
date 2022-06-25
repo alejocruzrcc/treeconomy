@@ -131,8 +131,8 @@ class CreateSubscriptionView(APIView):
                     print(str(e))
 
             #crear suscripcion
-            subscription = Subscription.objects.filter(user= request.user)[0]
-            
+            subscription = request.user.subscription
+            print(subscription.status)
             stripe_subscription = stripe.Subscription.modify(
                 subscription.stripe_subscription_id,
                 expand=['latest_invoice.payment_intent'],
