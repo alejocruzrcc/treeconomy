@@ -262,34 +262,36 @@
           paymentMethodId,
           isRetry,
         }) {
-          let paymentIntentOne = invoice ? invoice.payment_intent : checkout.payment_intent;
+          
 
           // If it's a first payment attempt, the payment intent is on the subscription latest invoice.
           // If it's a retry, the payment intent will be on the invoice itself.
           
           let paymentIntentSub = invoice ? invoice.payment_intent : subscription.latest_invoice.payment_intent;
+          if (paymentIntentSub != null){
+            if (
+              paymentIntentSub.status === 'requires_action' ||
+              (isRetry === true && paymentIntentSub.status === 'requires_payment_method')
+            ) {
+                pagosub=stripe
+                  .confirmCardPayment(paymentIntentSub.client_secret, {
+                    payment_method: paymentMethodId,
+                  })
+                  .then((result) => {
+                    if (result.error) {
+                      // Start code flow to handle updating the payment details.
+                      // Display error message in your UI.
+                      // The card was declined (i.e. insufficient funds, card has expired, etc).
+                      throw result;
+                    } 
+                  })
+                  .catch((error) => {
+                    changeLoadingState(false);
+                    displayError(error);
+                  });
+              }
           
-          if (
-            paymentIntentSub.status === 'requires_action' ||
-            (isRetry === true && paymentIntentSub.status === 'requires_payment_method')
-          ) {
-              pagosub=stripe
-                .confirmCardPayment(paymentIntentSub.client_secret, {
-                  payment_method: paymentMethodId,
-                })
-                .then((result) => {
-                  if (result.error) {
-                    // Start code flow to handle updating the payment details.
-                    // Display error message in your UI.
-                    // The card was declined (i.e. insufficient funds, card has expired, etc).
-                    throw result;
-                  } 
-                })
-                .catch((error) => {
-                  changeLoadingState(false);
-                  displayError(error);
-                });
-            }
+          }
           
           // No customer action needed.
           return {
@@ -314,7 +316,6 @@
             subscription.latest_invoice.payment_intent.status ===
             'requires_payment_method'
           ) {
-            debugger
             // Using localStorage to manage the state of the retry here,
             // feel free to replace with what you prefer.
             // Store the latest invoice ID and status.

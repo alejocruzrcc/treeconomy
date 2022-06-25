@@ -106,7 +106,7 @@ class CreateSubscriptionView(APIView):
                 domain_url = settings.DOMINIO_URL  
                 #session = create_checkout_session(item, mis_cantidades, customer_id)
                 try:
-                    # Create a PaymentIntent with the order amount and currency
+                    # Create a git  with the order amount and currency
                     monto = Pricing.objects.filter(stripe_price_id=item)[0].price * mis_cantidades[item]
                     print(monto)
                     intent = stripe.PaymentIntent.create(
