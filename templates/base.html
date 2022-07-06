@@ -129,11 +129,25 @@ li a {
   
 }
 .navbar-toggler{
-  margin: 10px;
+  margin: 8px;
+  padding: 3px;
 }
 .navbar-toggler-icon{
   margin: auto;
 }
+.nav{
+  flex-wrap: nowrap !important;
+  height: 48px;
+
+}
+.letra{
+  font-size:3vw;
+}
+@media screen and (min-width: 800px) {
+  .container {
+    margin: 1em 2em;
+  }
+} 
 
 </style>
 <body class="minimizar">
@@ -144,9 +158,9 @@ li a {
           <div class="row">
               <div class="col-12 p-0">
                   <ul class="nav shadow">
-                      <li class="nav-link text-center"><a href="/projects"><i class="material-icons md-15">forest</i><br><span>Proyectos</span></a></li>
-                      <li class="nav-link text-center"><a href="/"><i class="fas fa-calculator fa"></i><br><span>Calculadora</span></a></li>
-                      <li class="nav-link text-center"><a href="/dashboard"><i class="material-icons md-15">dashboard</i><br><span>Dashboard</span></a></li>
+                      <li class="nav-link text-center"><a href="/projects"><i class="material-icons md-15">forest</i><br><span class="palabra">Proyectos</span></a></li>
+                      <li class="nav-link text-center"><a href="/"><i class="fas fa-calculator fa"></i><br><span class="palabra">Calculadora</span></a></li>
+                      <li class="nav-link text-center"><a href="/dashboard"><i class="material-icons md-15">dashboard</i><br><span class="palabra">Dashboard</span></a></li>
                       <li>
                         <button class="navbar-toggler bg-light" type="button" data-toggle="collapse" data-target="#menu-db" aria-controls="menu-db" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -239,15 +253,7 @@ li a {
       </div>
       {% endfor %}
     {% endif %}
-    <script src="https://bluebird-web-agent.s3.us-east-2.amazonaws.com/keybe.js"></script>
-    <script>
-    window.addEventListener('load', function () {
-      var configChat = {
-        apiKey: '2a492cd19901427da2e9b38fcf6eee9c'
-      }
-      window.keybe.webchatConversationsUiLoad(configChat)
-
-    })
+    
     </script>
 
     {% block content %}
