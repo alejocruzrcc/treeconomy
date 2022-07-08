@@ -103,12 +103,19 @@
 }
 
 .navbarmenuabajo {
-  background-color: #012623;
+  background-color: #fff;
+  border-radius: 15px 15px 0 0;
+  box-shadow: 0px -6px 17px -2px rgb(0 0 0 / 22%);
 }
 
 li a {
-  color: #fff;
+  color: #013f30;
   text-decoration: none;
+  backgroud-color: #fff important;
+  
+}
+.palabra {
+  color: #013f30;
 }
 .material-icons.md-15 { font-size: 15px; }
 
@@ -135,37 +142,43 @@ li a {
 .navbar-toggler-icon{
   margin: auto;
 }
-.nav{
-  flex-wrap: nowrap !important;
-  height: 48px;
 
-}
 .letra{
-  font-size:3vw;
+  font-size:1vw;
 }
 @media screen and (min-width: 800px) {
   .container {
     margin: 1em 2em;
   }
 } 
+.fa, .fas {
+  font-weight: 900 !important;
+}
+#menulat {
+  backgroud-color: #fff important;
+}
+
+.navbul ul li{
+  text-align: center !important;
+  margin-left: 10px;
+}
 
 </style>
 <body class="minimizar">
-  <nav class="navbar navbarmenuabajo navbar-expand-lg fixed-bottom d-block d-sm-none">
+  <nav class="navbar navbul navbarmenuabajo fixed-bottom d-block d-sm-none">
     <div class="container">
       <div class="nav navbar-nav">
         <div class="container-fluid">
           <div class="row">
               <div class="col-12 p-0">
-                  <ul class="nav shadow">
+                  <ul class="nav">
                       <li class="nav-link text-center"><a href="/projects"><i class="material-icons md-15">forest</i><br><span class="palabra">Proyectos</span></a></li>
                       <li class="nav-link text-center"><a href="/"><i class="fas fa-calculator fa"></i><br><span class="palabra">Calculadora</span></a></li>
                       <li class="nav-link text-center"><a href="/dashboard"><i class="material-icons md-15">dashboard</i><br><span class="palabra">Dashboard</span></a></li>
-                      <li>
-                        <button class="navbar-toggler bg-light" type="button" data-toggle="collapse" data-target="#menu-db" aria-controls="menu-db" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                        </button>
-                      <br>
+                      <li class="nav-link text-center">
+                        <a id="menulat" type="button" data-toggle="collapse" data-target="#menu-db" aria-controls="menu-db" aria-expanded="false" aria-label="Toggle navigation">
+                          <i class="fas fa-bars fa palabra"></i><br><span class="palabra">Menú</span>
+                        </a>
                       </li>
                   </ul>
                   
@@ -257,15 +270,14 @@ li a {
     </script>
 
     {% block content %}
-
-    
-
-       
+ 
     {% endblock %}
    
 
     <!-- Specific JS goes HERE --> 
-    {% block javascripts %}{% endblock javascripts %}
+    {% block javascripts %}
+    
+    {% endblock javascripts %}
   
    
   </div>
@@ -274,7 +286,7 @@ li a {
     <div class="container">
       <div class="row">
         <div class="col-xl-12">
-          <h2>Manténgte informado sobre las inversiones en reforestación</h2>
+          <h2>Mantente informado sobre las inversiones de reforestación</h2>
         </div>
       </div>
 

@@ -11586,7 +11586,7 @@ a.btn-icon-only {
   border-radius: 0.4375rem; }
 
 .footer {
-  background: #f8f9fe;
+  background: #012623;
   padding: 30px 0; }
   .footer .col-footer .heading {
     color: #8898aa;
@@ -11604,7 +11604,7 @@ a.btn-icon-only {
   .footer .list-unstyled li a {
     display: inline-block;
     padding: .125rem 0;
-    color: #8898aa;
+    color: #fff;
     font-size: 0.85rem; }
     .footer .list-unstyled li a:hover {
       color: #525f7f; }
