@@ -9,15 +9,59 @@
 
 {% block content %}
 <section>
-  <div class="product Box-root">
-    <div class="description Box-root">
-      <h3>Felicidades! Ya eres un inversionista Treeconomy</h3>
+  <h3>¡Felicidades! Ya eres un inversionista Treeconomy</h3>
+  <div class="row">
+    <div class="col-md-6">
+      <p> Tu factura de compra ha sido enviada a tu correo electrónico </p>
+      <h5> Resumen de compra: </h5>
+      <table class="table site-block-order-table mb-5">
+        <thead>
+            <tr>
+            <th>Árboles</th>
+            <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in order.items.all %}
+            <tr>
+                <td>
+                    <h2 class="h5 text-black">{{ item.project.name }} x {{ item.quantity}}</h2>
+                    
+                </td>
+                
+                
+                <td>
+                    $ {{ item.get_total_item_price }}
+                </td>
+                
+            </tr>
+            
+            {% endfor %}
+            <tr>
+                <td><strong>Subtotal</strong></td>
+                <td>${{ order.get_subtotal }}</td>
+            </tr>
+            <tr>
+                <td><strong>Total</strong></td>
+                <td><strong class="text-black font-weight-bold">${{ order.get_total }}</strong></td>
+            </tr>
+        </tbody>  
+      </table>
+      <div class="d-grid gap-2">
+        <a href="/dashboard" class="btn btn-primary" type="button">Información de tu inversión</a>
+        <a href="/billing/cartera" class="btn btn-primary" type="button">Historial de pagos</a>
+      </div>
     </div>
-  </div>
-  <form action="/create-portal-session" method="POST">
-    <input type="hidden" id="session-id" name="session_id" value="" />
-    <button id="checkout-and-portal-button" type="submit">Manage your billing information</button>
-  </form>
+
+    <div class="col-md-6">
+      <div class="row" mb-5>
+          <div class="col-md-12">
+              <div class="col-12 p-5">
+              <img src="https://d1wqzb5bdbcre6.cloudfront.net/6be7f28f283df8ac445ca75302a594914ad20665cd4eb42af4aa1bcb2c3d4d59/68747470733a2f2f66696c65732e7374726970652e636f6d2f6c696e6b732f666c5f746573745f474b446a514a36375a7651314c50526f6c35664c71543343"
+                  alt="">
+          </div>    
+      </div>
+    </div>
 </section>
 
 {% endblock content %}

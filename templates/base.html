@@ -146,11 +146,7 @@ li a {
 .letra{
   font-size:1vw;
 }
-@media screen and (min-width: 800px) {
-  .container {
-    margin: 1em 2em;
-  }
-} 
+
 .fa, .fas {
   font-weight: 900 !important;
 }
@@ -166,18 +162,16 @@ li a {
       <div class="nav navbar-nav">
         <div class="container-fluid">
           <div class="row">
-              <div class="col-12 p-0">
+              <div class="col-12 col-md-12 col-sm-12 p-0">
                   <ul class="nav">
-                      <li class="nav-link"><a href="/projects"><i class="material-icons md-15">forest</i><br><span class="palabra">Proyectos</span></a></li>
+                      <li class="nav-link text-center"><a href="/projects"><i class="material-icons md-15">forest</i><br><span class="palabra">Proyectos</span></a></li>
                       <li class="nav-link text-center"><a href="/"><i class="fas fa-calculator fa"></i><br><span class="palabra">Calculadora</span></a></li>
-                      <li class="nav-link "><a href="/dashboard"><i class="material-icons md-15">dashboard</i><br><span class="palabra">Dashboard</span></a></li>
-                      <li class="nav-link text-center">
-                        <a id="menulat" type="button" data-toggle="collapse" data-target="#menu-db" aria-controls="menu-db" aria-expanded="false" aria-label="Toggle navigation">
-                          <i class="fas fa-bars fa palabra"></i><br><span class="palabra">Menú</span>
+                      <li class="nav-link text-center "><a href="/dashboard"><i class="material-icons md-15">dashboard</i><br><span class="palabra">Dashboard</span></a></li>
+                      <li class="nav-link text-center"><a data-toggle="collapse" data-target="#menu-db" aria-controls="menu-db" aria-expanded="false" aria-label="Toggle navigation">
+                          <i class="fa-bars fa palabra"></i><br><span class="palabra">Menú</span>
                         </a>
                       </li>
                   </ul>
-                  
               </div>
           </div>
       </div>
@@ -246,8 +240,7 @@ li a {
   <div id="content">
     <div id="mySidebar" class="d-none d-sm-block sidebar" onmouseover="toggleSidebar()" onmouseout="toggleSidebar()">
       <a href="/account/profile"><span><i class="material-icons">account_circle</i><span class="icon-text">&nbsp;&nbsp;&nbsp;&nbsp;Perfil</span></a><br>
-      <a href="/dashboard"><i class="material-icons">dashboard</i><span class="icon-text"></span>&nbsp;&nbsp;&nbsp;&nbsp;Dashboard</a></span>
-      </a><br>
+      <a href="/dashboard"><i class="material-icons">dashboard</i><span class="icon-text"></span>&nbsp;&nbsp;&nbsp;&nbsp;Dashboard</a></span></a><br>
       <a href="/projects"><i class="material-icons">forest</i><span class="icon-text"></span>&nbsp;&nbsp;&nbsp;&nbsp;Proyectos</span></a><br>
       <a href="/billing/cartera"><i class="material-icons">monetization_on</i><span class="icon-text"></span>&nbsp;&nbsp;&nbsp;&nbsp;Cartera<span></a>
   </div>
@@ -263,7 +256,6 @@ li a {
       {% endfor %}
     {% endif %}
     
-    </script>
 
     {% block content %}
  

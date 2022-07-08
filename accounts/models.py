@@ -186,7 +186,8 @@ def post_email_confirmed(sender, instance, created, **kwargs):
 
         #Crear cliente en stripe
         stripe_customer = stripe.Customer.create(
-            email=user.email
+            email=user.email, 
+            name= user.first_name +' ' + user.last_name 
         )
         
         stripe_subscription = stripe.Subscription.create(
