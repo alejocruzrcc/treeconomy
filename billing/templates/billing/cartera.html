@@ -9,7 +9,7 @@
 {% include "includes/scripts.html" %}
 
 <h1 style="background-color: #012623; font-family: comfortaa-bold; background-color: #f8f9fe; color: var(--bs-breadcrumb-item-active-color); font-size: var(--bs-breadcrumb-font-size)" >Cartera</h1>
-<div class="container">
+<div>
 
       <div class="card">
         <div class="card-header border-0">
@@ -34,7 +34,7 @@
                 <th scope="col">Árboles</th>
                 <th scope="col">Pago total</th>
                 <th scope="col">Estado</th>
-                <th scope="col">Tasa de crecimiento</th>
+                <!--<th scope="col">Tasa de crecimiento</th>-->
                 <th scope="col">Recibo de pago</th>
                 <th scope="col">Contrato</th>
               </tr>
@@ -66,6 +66,7 @@
                     FALLIDO O INCOMPLETO
                   {% endif%}
                 </td>
+                <!--
                 <td>
                   {% if order.ordered %}
                   <i class="fas fa-arrow-up text-success mr-3"></i> 46,53%
@@ -73,6 +74,7 @@
                   <i class="fas fa-arrow-right text-warning mr-3"></i> SIN CAMBIOS
                   {% endif%}
                 </td>
+                -->
                 <td>
                   {% if order.ordered %}
                   <a href="{% url 'billing:order-detail' pk=order.id %}" target="_blank"><i class="fa-solid fa-file-arrow-down mr-3"></i></a>
