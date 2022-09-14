@@ -64,8 +64,14 @@ def invest_json(request):
             n += 1
         api[Project.objects.get(pk=project_id).name] = api_fecha
         proyecto  = Project.objects.get(pk=project_id).name
-        resumen[proyecto] = api[proyecto][list(api[proyecto].keys())[-1]]
-        resumen_mes_anterior[proyecto] = api[proyecto][list(api[proyecto].keys())[-2]]
+        if len(api[proyecto].keys()) > 0:       
+            resumen[proyecto] = api[proyecto][list(api[proyecto].keys())[-1]]     
+            if len(api[proyecto].keys()) > 1:
+                #si hay mes anterior
+                resumen_mes_anterior[proyecto] = api[proyecto][list(api[proyecto].keys())[-2]]
+            else:
+                # Por si aún no hay mes anterior
+                resumen_mes_anterior[proyecto] = api[proyecto][list(api[proyecto].keys())[-1]]
         
         
     return [api, resumen, resumen_mes_anterior]
