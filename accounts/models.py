@@ -145,7 +145,7 @@ class ProjectByInvestor(models.Model):
 
 @receiver(post_save, sender=User)
 def post_email_confirmed(sender, instance, created, **kwargs):
-    print("entrooo")
+    print("entro a post email confirmed")
     if created:
         user = instance
         subscription = Subscription.objects.create(

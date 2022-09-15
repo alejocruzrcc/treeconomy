@@ -96,7 +96,7 @@ def register(request):
 
             # Enviar un email de confirmación
             current_site = get_current_site(request)
-            email_subject = 'Activate Your Account'
+            email_subject = 'Confirma tu registro en Treeconomy Inc.'
             message = render_to_string('registration/activate_account.html', {
                 'user': new_user,
                 'domain': current_site.domain,
@@ -105,6 +105,7 @@ def register(request):
             })
             to_email = user_form.cleaned_data.get('email')
             email = EmailMessage(email_subject, message, to=[to_email])
+            email.content_subtype = "html"
             email.send()
             #return HttpResponse('We have sent you an email, please confirm your email address to complete registration')
             return render(request,'registration/confirm_account.html')

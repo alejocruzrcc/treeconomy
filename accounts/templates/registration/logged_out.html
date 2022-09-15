@@ -3,9 +3,12 @@
 {% block title %}Salir{% endblock %}
 
 {% block content %}
-<h1>Salir</h1>
-<p>Has salido correctamente.
- <a href="{% url "login" %}">Iniciar Sesión</a>
-</p>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">¡Vuelve pronto!</h1>
+      <p class="lead">Has salido correctamente.
+        <a href="{% url "login" %}">Iniciar Sesión</a></p>
+    </div>
+</div>
 
 {% endblock %}

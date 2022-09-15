@@ -3,7 +3,11 @@
 {% block title %}Welcome{% endblock %}
 
 {% block content %}
-<h1>Welcome {{ new_user.first_name }}!</h1>
-<p>Your Account has been successfully Created</p>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">Bienvenido {{ new_user.first_name }}!</h1>
+      <p class="lead">Tu cuenta ha sido creada con éxito.</p>
+    </div>
+</div>
 
 {% endblock %}

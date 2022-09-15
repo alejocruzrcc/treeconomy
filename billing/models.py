@@ -71,12 +71,12 @@ class BillingProfile(models.Model):
 
 def billing_profile_created_receiver(sender, instance, *args, **kwargs):
     if not instance.customer_id and instance.email:
-        print("ACTUAL API REQUEST Send to stripe/braintree")
+        """print("ACTUAL API REQUEST Send to stripe/braintree")
         customer = stripe.Customer.create(
                 email = instance.email
             )
         print(customer)
-        instance.customer_id = customer.id
+        instance.customer_id = customer.id"""
 
 pre_save.connect(billing_profile_created_receiver, sender=BillingProfile)
 
