@@ -1,7 +1,7 @@
 from django.db import models
 from django.db.models import Q
 from django.contrib.auth.models import User
-from django.core.validators import MinValueValidator
+from django.core.validators import MinValueValidator, FileExtensionValidator
 import datetime
 from django_countries.fields import CountryField
 from phonenumber_field.modelfields import PhoneNumberField
@@ -24,7 +24,18 @@ CO2_CONSUMPTION_PER_HECTARE_PER_YEAR = 35000
 CO2_CONSUMPTION_PER_TREE_PER_YEAR = (CO2_CONSUMPTION_PER_HECTARE_PER_YEAR / TREES_PER_HECTARE)
 CO2_CONSUMPTION_PER_TREE_PER_DAY = (CO2_CONSUMPTION_PER_TREE_PER_YEAR / DAYS_PER_YEAR)
 
+class Video(models.Model):
+    nombre = models.CharField(max_length=50, blank=True, null=True, verbose_name="Nombre")
+    video = models.FileField(upload_to='videos_uploaded',null=True,
+                validators=[FileExtensionValidator(allowed_extensions=['MOV','avi','mp4','webm','mkv'])])
+    descripcion = models.TextField(blank=True, null=True, verbose_name="Descripción")
+    
+    class Meta:
+        verbose_name = "Video"
+        verbose_name_plural = "Videos"
 
+    def __str__(self):
+        return self.nombre
 
 class Profile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)

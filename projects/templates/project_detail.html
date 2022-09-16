@@ -241,6 +241,28 @@
               <div class="invalid-feedback">
                   {{ form.type_inversion.errors }}
               </div>
+              <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#necesitasAyuda">
+                ¿Necesitas ayuda?
+              </button>
+              
+              <!-- Modal -->
+              <div class="modal fade" id="necesitasAyuda" tabindex="-1" aria-labelledby="necesitasAyudaLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="necesitasAyudaLabel">Tipos de inversión</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <strong>¿Qué es una inversión recurrente y una inversión única?</strong>
+                    </br>
+                      <p style="text-align: justify;">
+                      Son dos formas de inversión que ofrecemos en nuestra plataforma. Bajo el modelo de inversión recurrente o suscripción mensual decides un monto a invertir o cantidad de árboles mensuales a adquirir y este será cargado a tú tarjeta de crédito mes a mes de forma automática. 
+                      Por otro lado, con la inversión de pago único se realiza una sola transacción, requiriendo volver a realizar el proceso de compra manualmente para adquirir árboles adicionales.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
              </div>
            </div>
            <br>

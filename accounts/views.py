@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect
 from django.shortcuts import HttpResponse, reverse
 from django.contrib import auth
-from django.contrib.auth import authenticate,login
+from django.contrib.auth import authenticate,login, logout
 from django.contrib.auth.models import User
 from django.template.context_processors import csrf
 from django.conf import settings
@@ -84,6 +84,10 @@ def user_login(request):
         form=LoginForm()
     return render(request,'account/login.html',{'form':form})
 
+def user_logout(request):
+    logout(request)
+    video_idea_negocio = get_object_or_404(Video, nombre="idea_negocio")
+    return render(request,'registration/logged_out.html', {'video_idea_negocio': video_idea_negocio})
 
 def register(request):
     if request.method == 'POST':
@@ -134,7 +138,9 @@ def activate_account(request, uidb64, token, backend='django.contrib.auth.backen
         # Asigna rol inversioniste
         assign_role(user, 'inversor')
         
-        return render(request,'account/register_done.html',{'new_user': user})
+        video_idea_negocio = get_object_or_404(Video, nombre="idea_negocio")
+        
+        return render(request,'account/register_done.html',{'new_user': user, 'video_idea_negocio': video_idea_negocio})
     else:
         return HttpResponse('Activation link is invalid!')
 

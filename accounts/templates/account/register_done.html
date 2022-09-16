@@ -7,7 +7,8 @@
     <div class="container">
       <h1 class="display-4">Bienvenido {{ new_user.first_name }}!</h1>
       <p class="lead">Tu cuenta ha sido creada con éxito.</p>
-      {% include "registration/info.html" %}
+  
+      {% include "registration/info.html" with video_idea_negocio=video_idea_negocio %}
     </div>
 </div>
 {% endblock %}

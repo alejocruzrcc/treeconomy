@@ -5,7 +5,7 @@ from .models import Project, OrderItem, Bill
 from rolepermissions.decorators import has_role_decorator
 from billing.utils import get_or_set_order_session
 from accounts import views 
-from accounts.models import User
+from accounts.models import User, Video
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -19,6 +19,9 @@ class ProjectListView(generic.ListView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(ProjectListView, self).get_context_data(*args, **kwargs)
+        context["video_que_es"] = get_object_or_404(Video, nombre= "que_es_treeconomy")
+        context["video_impacto"] = get_object_or_404(Video, nombre= "impacto")
+        
         context["name"] = 'Proyectos'
         return context
 
