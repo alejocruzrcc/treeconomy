@@ -38,13 +38,11 @@
 }
 .tarjeta {
   position: relative;
-  width: 21.5rem;
-  height: 15.5rem;
+  width: 100%;
   background: #012623;
   background-image: url({% static 'img/image/fondotar.png' %});
   border-radius: 20px;
   overflow: hidden;
-  text-align: center;
   box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
 }
 
@@ -95,7 +93,6 @@ a:hover{
   width: 10rem;
   height: 10.9rem;
   border-radius: 10px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .cover{
   object-fit: cover;
@@ -103,7 +100,7 @@ a:hover{
 h1{
   font-size: 26px;
 }
-h3{
+.tarjeta h3{
   
   font-size: 14px;
   display: flex;
@@ -121,7 +118,6 @@ h4{
   letter-spacing: var(--unnamed-character-spacing-0);
   font: normal normal normal 16px/24px Lato;
   color: var(--white);
-  text-align: left;
   letter-spacing: 0px;
   color: #FFFFFF;
   opacity: 1;
@@ -163,22 +159,25 @@ strong{
     left: 32px;
     grid-template-rows: 40px 4em 40px;
 }
-.alt{
-  height: 12.5rem;
-}
+
 .textbajo{
   text-align: left;
   margin-left: 20px;
   font-size:0.8rem;
 }
 .fondob{
-  background-color: #ffffff !important;
+  background-color: #f4f4f4;
+}
+
+h3 {
+  font-family: "comfortaa-bold";
+  color: #035941;
 }
 
 </style>
-<nav class="fondob"aria-label="breadcrumb">
+<nav class="fondob" aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item active" aria-current="page">Proyectos</li>
+    <li class="breadcrumb-item active" aria-current="page"><a href="/">Inicio</a> / Proyectos</li>
   </ol>
 </nav>
   <div class="row">
@@ -192,14 +191,17 @@ strong{
     </div>
     
   </div>
-  
+  {% include "videos.html" %}
+
+</br>
   
   {% if project_list %}
-  <div class="tarjetas">
+  <h3>Selecciona uno de nuestros proyectos... </h3>
+  <div class="tarjetas text-center">
     {% for project in project_list %}
       <div class="tarjeta card text-left">
         
-     <div class="row alt">
+     <div class="row">
       <div class="col-6 mb-4">
           <div class="cover">
             <img src="{{project.image.url}}">
@@ -207,7 +209,7 @@ strong{
           </div>
         </div>
       <div class="col-6">
-        <div class="contentBx">
+        <div>
           <div class="row">
             <div class="col-8">
               <h2 class="titulo1">{{ project.name }}</h2>

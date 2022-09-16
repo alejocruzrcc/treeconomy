@@ -1,14 +1,18 @@
 {% extends "base.html" %}
 
-{% block title %}Salir{% endblock %}
 
+{% block title %}Salir{% endblock %}
+{% load static %}
 {% block content %}
 <div class="jumbotron jumbotron-fluid">
-    <div class="container">
-      <h1 class="display-4">¡Vuelve pronto!</h1>
-      <p class="lead">Has salido correctamente.
-        <a href="{% url "login" %}">Iniciar Sesión</a></p>
-    </div>
+  <div class="container-fluid">
+    <h1 class="display-4">¡Vuelve pronto!</h1>
+    <p class="lead">Has salido correctamente.
+      <a href="{% url "login" %}">Iniciar Sesión</a>
+    </p>
+    {% include "registration/info.html" %}
+   
+  </div>
 </div>
 
 {% endblock %}

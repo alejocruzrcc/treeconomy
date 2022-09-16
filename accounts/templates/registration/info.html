@@ -1,0 +1,33 @@
+{% load static %}
+<style>
+    .videos h2 {
+        font-family: "comfortaa-bold";
+        font-size: 40px;
+        color: #035941;
+    }
+</style>
+   <div class="row videos">
+      <div class="col-md-6">
+        <video  style="width: 100%;" controls autoplay>
+            <source src="{% static "img/icons/TREECONOMY.mp4" %}" type="video/mp4"></source>
+            Your browser does not support the video tag.
+          </video>
+      </div>
+      <div class="col-md-6">
+        <div class="card">
+            <div class="card-body text-center" >
+                <h4 class="card-title "><img style="height: 100px;" src="https://treeconomyapp-crm-bucket.s3.amazonaws.com/static/img/image/logo_treeconomy.png" alt="treeconomy" ></h4>
+                <p style="text-align: justify;">Recuerda que en Treeconomy puedes invertir en diferentes proyectos de dos formas diferentes, haciendo una única inversión, o suscribiéndote a una inversion mensual recurrente donde irás adquiriendo nuevos árboles cada mes, ampliando tus capacidades futuras.</p>
+                <div class="row">
+                    <div class="col-lg-6 pb-2">
+                        <a href="/projects" class="button-plant">Explorar proyectos</a>
+                    </div>
+                    <div class="col-lg-6 pb-2">
+                        <a href="https://treeconomy.com.co" class="button-plant">Visitar página web</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    

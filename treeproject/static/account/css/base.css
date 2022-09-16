@@ -30,7 +30,7 @@
   img {
     max-width: 100%;
   }
-  nav, footer{
+  nav.navbar, footer{
     background-color: #012623;
     font-family: "comfortaa-bold";
   }

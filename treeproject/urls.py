@@ -19,6 +19,7 @@ from django.conf import settings
 from django.views import static
 from django.conf.urls.static import static
 import accounts
+from projects.views import ProjectListView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,7 +27,7 @@ urlpatterns = [
     path('projects/',include('projects.urls')),
     path('billing/',include('billing.urls')),
     path('social-auth/',include('social_django.urls',namespace='social')),
-    path('',accounts.views.home,name='index'),
+    path('',ProjectListView.as_view(), name='projects'),
     path('contact/', accounts.views.ContactView.as_view(), name="contact"),
     #path('dashboard/',account.views.dashboard,name='dashboard'),
     path('dashboard/', include('dashboard.urls')),

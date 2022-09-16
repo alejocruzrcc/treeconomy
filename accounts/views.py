@@ -27,8 +27,8 @@ from django.http import JsonResponse
 from django.views import generic
 from dashboard.views import invest_json, calculo_co2
 
-def home(request):
-    return render(request,'account/index.html',{'section':'index'})
+def calculadora(request):
+    return render(request,'account/calculadora.html',{'section':'calculadora'})
 
 class ContactView(generic.FormView):
     form_class = ContactForm
