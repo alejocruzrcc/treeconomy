@@ -31,16 +31,26 @@
 <div class="row videos">
   <div class="col-md-6">
     <h2>¿Qué es Treeconomy?</h2>
-    <video src="{{ video_que_es.video.url }}"  style="width: 100%;" controls>
-      Your browser does not support the video tag.
+    <video  
+    style="width: 100%;" 
+    controls="controls"
+    id="video_que_es"
+    {% if video_que_es.thumb %}
+    poster="{{ video_que_es.thumb.url }}"
+    {% endif %}
+    >
+      <source src="{{ video_que_es.video.url }}" type="video/mp4">
     </video>
   </div>
   <div class="col-md-6">
     <h2>Impacto...</h2>
-    <video  style="width: 100%;" controls>
+    <video  style="width: 100%;" controls
+    {% if video_que_es.thumb %}
+    poster="{{ video_impacto.thumb.url }}"
+    {% endif %}
+    >
         <source src="{{ video_impacto.video.url }}" type="video/mp4"></source>
         Your browser does not support the video tag.
       </video>
   </div>
 </div>
-    

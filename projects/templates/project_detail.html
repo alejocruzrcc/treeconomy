@@ -85,7 +85,7 @@
   color: #013f30;
   background-color: #f2f2f2;
   text-align: center;
-  border-radius: 25px;
+  border-radius: 20px;
 }
 .banner-producto .costo {
   text-align: right;
@@ -208,31 +208,34 @@
                   <li>Fecha de plantación: <span>{{ project.plantation_date }}</span> </li>
                   <li>Hectarias: <span>{{ project.n_hectares }}</span> </li>
                   <li>Enlace a Google Earth: <span><a href=""> {{ project.project_link }} </a></span> </li>
-                  <li>Coordenadas: <span>{{ project.coordinates }}</span> </li>
+                  <li><a class="btn" href="{{ project.coordinates }}" target="_blank"> Ver coordenadas en mapa...</a></li>
                 </ul>
               </div>
               <div class="col-xl-3 col-12">
-                <p  class="costo">Costo por arbol: <br></p>
-                  $<span id="costo">{{ project.get_price }}</span>
+                <span  class="costo">Costo por arbol: $<span id="costo">{{ project.get_price }}</span>USD.</span>
+                 
               </div>
             </div>
             <div class="row">
-              <div class="col-xl-10  col-6 p-0">
+              <div class="col-md-8 p-0">
                 <p class="gift-check">Lote {{ project.n_trees }} Árboles disponibles en este lote</p>
                 <p class="gift-check"> {{ project.trees_left }} Árboles Disponibles</p>
                 
               </div>
-              <div class="col-xl-2 col-6">
-                <p class="duracion">9 - 10 años</p>
+              <div class="col-md-4">
+                <div class="duracion p-2">
+                  Tiempo para corte:</br>
+                  4 años
+                </div>
               </div>
             </div>
           </div>
           {% if activo %}
           <form method="POST">
-           <div class="row">
-             <div class="col col-md-auto col-sm-6">
+          <div class="row align-items-center">
+            <div class="col-md-8">
               {% csrf_token %}
-    
+              <p>Tipo de inversión:</p>
               {% if form.errors %}
                   {{ form.type_inversion|add_attr:'is-invalid'}}
               {% else %}
@@ -241,10 +244,11 @@
               <div class="invalid-feedback">
                   {{ form.type_inversion.errors }}
               </div>
-              <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#necesitasAyuda">
-                ¿Necesitas ayuda?
-              </button>
-              
+            </div>
+            <div class="col-md-4">
+              <a style="cursor: help;" data-bs-toggle="modal" data-bs-target="#necesitasAyuda">
+                *¿Necesitas ayuda?
+              </a>
               <!-- Modal -->
               <div class="modal fade" id="necesitasAyuda" tabindex="-1" aria-labelledby="necesitasAyudaLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -257,25 +261,31 @@
                       <strong>¿Qué es una inversión recurrente y una inversión única?</strong>
                     </br>
                       <p style="text-align: justify;">
-                      Son dos formas de inversión que ofrecemos en nuestra plataforma. Bajo el modelo de inversión recurrente o suscripción mensual decides un monto a invertir o cantidad de árboles mensuales a adquirir y este será cargado a tú tarjeta de crédito mes a mes de forma automática. 
-                      Por otro lado, con la inversión de pago único se realiza una sola transacción, requiriendo volver a realizar el proceso de compra manualmente para adquirir árboles adicionales.</p>
+                        <ul>
+                          Son dos formas de inversión que ofrecemos en nuestra plataforma:
+                          <li>Bajo el modelo de inversión recurrente o suscripción mensual decides un monto a invertir o cantidad de árboles mensuales a adquirir y este será cargado a tú tarjeta de crédito mes a mes de forma automática. </li>
+                          <li>Por otro lado, con la inversión de pago único se realiza una sola transacción, requiriendo volver a realizar el proceso de compra manualmente para adquirir árboles adicionales.</li>
+                    
+                      </p>
                     </div>
                   </div>
                 </div>
               </div>
-             </div>
-           </div>
+            </div>
+          </div>
            <br>
-          <div class="row">
+          <div class="row  align-items-center">
             <div class="col-6 col-md-auto col-sm-6">
+              Cantidad:
               <div class="input-group mb-3" style="max-width: 120px;">
+                
                 <div class="input-group-pretend">
                     <a></a>
                     <a  id="disminuir_arboles" class="btn btn-outline-primary">
                         &minus;
                     </a>
                 </div>
-    
+                
                 {% if form.quantity.errors %}
                     {{ form.quantity|add_attr:'is-invalid'}}
                 {% else %}
@@ -294,11 +304,11 @@
             
             <div class="col-6 col-md-auto col-sm-6 text-right">
                 <span class="text-black">Total: </span>
-                $<span id="total_pdetail" class="text-black">0</span>USD.
+                <strong>$<span id="total_pdetail" class="text-black">0</span>USD.</strong>
             </div>
           
           </div>
-          <button type="submit" class="btn btn-sm btn-primary buy-now">Añadir al carrito</button>
+          <button type="submit" class="btn-sm button-plant buy-now">Añadir al carrito</button>
 
           </form>
         {% else %}

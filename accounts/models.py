@@ -28,6 +28,7 @@ class Video(models.Model):
     nombre = models.CharField(max_length=50, blank=True, null=True, verbose_name="Nombre")
     video = models.FileField(upload_to='videos_uploaded',null=True,
                 validators=[FileExtensionValidator(allowed_extensions=['MOV','avi','mp4','webm','mkv'])])
+    thumb = models.FileField(upload_to='poster_videos', blank=True, verbose_name="Imagen de portada")
     descripcion = models.TextField(blank=True, null=True, verbose_name="Descripción")
     
     class Meta:
