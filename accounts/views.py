@@ -151,13 +151,16 @@ def edit(request):
         user_form = UserEditForm(instance=request.user,data=request.POST)
         profile_form = ProfileEditForm(instance=request.user.profile,
                                        data=request.POST,files=request.FILES)
+        #profile_form.data['stripe_customer_id'] = request.user.profile.stripe_customer_id
         #import pdb; pdb.set_trace()
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
             return redirect('profile')
         else:
-            messages.error(request, 'Error in Updating your Profile.')
+            messages.error(request, user_form.errors)
+            messages.error(request, profile_form.errors)
+            
     else:
         user_form = UserEditForm(instance=request.user)
         profile_form = ProfileEditForm(instance=request.user.profile)

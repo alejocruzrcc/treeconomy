@@ -59,7 +59,7 @@ class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = '__all__'
-        exclude = ['user']
+        exclude = ['user', 'stripe_customer_id']
         
     def __init__(self, *args, **kwargs):
         super(ProfileEditForm, self).__init__(*args, **kwargs)
