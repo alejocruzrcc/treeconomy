@@ -4,6 +4,7 @@ from .models import Profile
 from django.contrib.auth.forms import PasswordResetForm
 from .models import ProjectByInvestor
 from phonenumber_field.formfields import PhoneNumberField
+from phonenumber_field.widgets import PhoneNumberPrefixWidget
 
 
 class EmailValidationOnForgotPassword(PasswordResetForm):
@@ -56,6 +57,12 @@ class UserEditForm(forms.ModelForm):
             visible.field.widget.attrs['class'] = 'form-control'
 
 class ProfileEditForm(forms.ModelForm):
+    phone= PhoneNumberField(
+        widget=PhoneNumberPrefixWidget(attrs={'placeholder': (u'Número de Teléfono'), 'class': "form-control"}),
+        label='Comprador teléfono',
+        required=False,
+        initial='+57'
+    )
     class Meta:
         model = Profile
         fields = '__all__'

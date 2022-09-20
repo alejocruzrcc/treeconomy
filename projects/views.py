@@ -138,6 +138,11 @@ class FacturacionView(generic.FormView):
         messages.info(self.request, "Agregaste exitosamente tu información de facturación")
         return super(FacturacionView, self).form_valid(form)
     
+    def form_invalid(self, form):
+        print(form.errors)
+        messages.warning(self.request, form.errors)
+        return super(FacturacionView, self).form_invalid(form)
+    
     def get_form_kwargs(self):
         kwargs = super(FacturacionView, self).get_form_kwargs()
         kwargs['user_id'] = self.request.user.id

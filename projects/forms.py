@@ -4,6 +4,7 @@ from django import forms
 from .models import OrderItem, Project, Bill, Subscription
 from accounts.models import ProjectByInvestor, User
 from phonenumber_field.formfields import PhoneNumberField
+from phonenumber_field.widgets import PhoneNumberPrefixWidget
 
 class ProjectForm(forms.ModelForm):  
     class Meta:
@@ -50,7 +51,7 @@ class SubscriptionForm(forms.ModelForm):
         return status
 
 class BillForm(forms.Form):
-    
+    error_css_class = 'is-invalid'
     #selected_billing_address = forms.ModelChoiceField(
     #    Bill.objects.none(), required=False,
     #    label="Seleccione un factura antigua:"
@@ -58,11 +59,21 @@ class BillForm(forms.Form):
     comprador_nombre = forms.CharField(label="Comprador: Nombre completo")
     comprador_id = forms.CharField(label="Comprador: Identificación")
     comprador_email = forms.EmailField(label="Comprador: Correo electrónico")
-    comprador_phone = PhoneNumberField(widget=forms.TextInput(), label="Comprador: Teléfono") 
+    comprador_phone = PhoneNumberField(
+        widget=PhoneNumberPrefixWidget(attrs={'placeholder': (u'Número de Teléfono'), 'class': "form-control"}),
+        label='Comprador teléfono',
+        required=False,
+        initial='+57'
+    )
     beneficiario_nombre = forms.CharField(label="Tercero de confianza: Nombre completo", required=False)
     beneficiario_id = forms.CharField(label="Tercero de confianza: Identificación", required=False)
     beneficiario_email = forms.EmailField(label="Tercero de confianza: Correo electrónico", required=False)
-    beneficiario_phone = PhoneNumberField(widget=forms.TextInput(), label="Tercero de confianza: Teléfono", required=False)  
+    beneficiario_phone =  PhoneNumberField(
+        widget=PhoneNumberPrefixWidget(attrs={'placeholder': (u'Número de Teléfono'), 'class': "form-control"}),
+        label='Tercero de confianza: Teléfono',
+        required=False,
+        initial='+57'
+    )  
     billing_address_line_1 = forms.CharField(label="Dirección")
     billing_address_line_2 = forms.CharField(label="Casa, Apartamento, etc.")
     billing_zip_code = forms.CharField(label="Código postal")
