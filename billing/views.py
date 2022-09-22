@@ -154,7 +154,6 @@ class CreateSubscriptionView(APIView):
         profile = Profile.objects.get(user_id=request.user.id)
         customer_id = profile.stripe_customer_id
         orden =  get_or_set_order_session(self.request)
-        print(orden.id)
         try:
             #vincular el metodo de pago al cliente
             stripe.PaymentMethod.attach(
@@ -183,7 +182,6 @@ class CreateSubscriptionView(APIView):
                     obj.save()
                     
                 except ProjectByInvestor.DoesNotExist:
-                    print("pbi")
                     obj = ProjectByInvestor.objects.create(
                         investor= request.user,
                         project = project
@@ -382,8 +380,6 @@ class ChangeSubscriptionView(APIView):
 class PaymentSuccessView(generic.TemplateView):
     
     template_name = "billing/success.html"
-    
-    
     
     def get_context_data(self, *args, **kwargs):
             context = super(PaymentSuccessView, self). get_context_data(**kwargs)

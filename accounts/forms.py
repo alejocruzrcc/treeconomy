@@ -5,7 +5,7 @@ from django.contrib.auth.forms import PasswordResetForm
 from .models import ProjectByInvestor
 from phonenumber_field.formfields import PhoneNumberField
 from phonenumber_field.widgets import PhoneNumberPrefixWidget
-
+from django.contrib.auth.forms import AuthenticationForm, UsernameField
 
 class EmailValidationOnForgotPassword(PasswordResetForm):
 
@@ -16,13 +16,19 @@ class EmailValidationOnForgotPassword(PasswordResetForm):
             self.add_error('email', msg)
         return email
 
-class LoginForm(forms.Form):
-    username= forms.CharField()
-    password=forms.CharField(widget=forms.PasswordInput)
+
+class LoginForm(AuthenticationForm):
+    username = UsernameField(
+        label='Team Name'
+    )
 
 class UserRegistrationForm(forms.ModelForm):
-    password=forms.CharField(label='Password',widget=forms.PasswordInput)
-    password2=forms.CharField(label='Repeat Password',widget=forms.PasswordInput)
+    username=forms.CharField(label='Nombre de usuario')
+    first_name=forms.CharField(label='Nombres')
+    last_name=forms.CharField(label='Apellidos')
+    email=forms.CharField(label='Correo electrónico')
+    password=forms.CharField(label='Contraseña',widget=forms.PasswordInput)
+    password2=forms.CharField(label='Confirma contraseña',widget=forms.PasswordInput)
 
     class Meta:
         model=User
@@ -31,7 +37,7 @@ class UserRegistrationForm(forms.ModelForm):
     def clean_password2(self):
         cd=self.cleaned_data
         if cd['password']!=cd['password2']:
-            raise forms.ValidationError('Passwords don\'t Match')
+            raise forms.ValidationError('Contraseñas no coinciden')
         return cd['password2']
     #clean email field
     def clean_email(self):
@@ -63,6 +69,7 @@ class ProfileEditForm(forms.ModelForm):
         required=False,
         initial='+57'
     )
+    date_of_birth = forms.DateField(widget=forms.widgets.DateInput(attrs={"type": "date"}))
     class Meta:
         model = Profile
         fields = '__all__'

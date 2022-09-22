@@ -52,25 +52,21 @@ class SubscriptionForm(forms.ModelForm):
 
 class BillForm(forms.Form):
     error_css_class = 'is-invalid'
-    #selected_billing_address = forms.ModelChoiceField(
-    #    Bill.objects.none(), required=False,
-    #    label="Seleccione un factura antigua:"
-    #)
-    comprador_nombre = forms.CharField(label="Comprador: Nombre completo")
-    comprador_id = forms.CharField(label="Comprador: Identificación")
-    comprador_email = forms.EmailField(label="Comprador: Correo electrónico")
+    comprador_nombre = forms.CharField(label="Nombre completo")
+    comprador_id = forms.CharField(label="Identificación")
+    comprador_email = forms.EmailField(label="Correo electrónico")
     comprador_phone = PhoneNumberField(
         widget=PhoneNumberPrefixWidget(attrs={'placeholder': (u'Número de Teléfono'), 'class': "form-control"}),
-        label='Comprador teléfono',
+        label='Teléfono',
         required=False,
         initial='+57'
     )
-    beneficiario_nombre = forms.CharField(label="Tercero de confianza: Nombre completo", required=False)
-    beneficiario_id = forms.CharField(label="Tercero de confianza: Identificación", required=False)
-    beneficiario_email = forms.EmailField(label="Tercero de confianza: Correo electrónico", required=False)
+    beneficiario_nombre = forms.CharField(label="Nombre completo", required=False)
+    beneficiario_id = forms.CharField(label="Identificación", required=False)
+    beneficiario_email = forms.EmailField(label="Correo electrónico", required=False)
     beneficiario_phone =  PhoneNumberField(
         widget=PhoneNumberPrefixWidget(attrs={'placeholder': (u'Número de Teléfono'), 'class': "form-control"}),
-        label='Tercero de confianza: Teléfono',
+        label='Teléfono',
         required=False,
         initial='+57'
     )  

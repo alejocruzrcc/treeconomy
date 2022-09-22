@@ -122,7 +122,7 @@
                         {% if profile_form.date_of_birth.errors %}
                             {{ profile_form.date_of_birth|add_attr:'is-invalid'}}
                         {% else %}
-                            {{ profile_form.date_of_birth }}
+                            {{ profile_form.date_of_birth}}
                         {% endif %}
                         <div class="invalid-feedback">
                             {{ profile_form.date_of_birth.errors }}

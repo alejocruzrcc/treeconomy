@@ -90,7 +90,6 @@ class Profile(models.Model):
         return f'Perfil para usuario {self.user.username}'
     
     
-    
     class Meta:
         verbose_name_plural=u'Perfiles de Usuario'
         
