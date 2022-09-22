@@ -26,6 +26,9 @@ from django.core import serializers
 from django.http import JsonResponse
 from django.views import generic
 from dashboard.views import invest_json, calculo_co2
+import stripe
+
+stripe.api_key = settings.STRIPE_PRIVATE_KEY
 
 def calculadora(request):
     return render(request,'account/calculadora.html',{'section':'calculadora'})
@@ -180,6 +183,9 @@ def profile(request):
     suma_arboles_acumulados = 0
     co2_consumption = calculo_co2(request)
     
+    ## Suscripciones
+    subscription = get_object_or_404(Subscription, user=request.user)
+    elementos = SubscriptionElement.objects.filter(subscription=subscription)
     for key in resumen:
         suma_utilidad += float(resumen[key]['utilidad'])
         suma_arboles_acumulados += resumen[key]['total_trees']
@@ -191,8 +197,29 @@ def profile(request):
         'total': total, 
         'inversion': inversion,
         'utilidad': suma_utilidad_str,
-        'co2_capturado': co2_consumption
+        'co2_capturado': co2_consumption, 
+        'elementos': elementos
         })
 
 
+class ModifySubscriptionElement(generic.View):
+    def get(self, request, *args, **kwargs):    
+        subscription = get_object_or_404(Subscription, user=request.user)
+        price = get_object_or_404(Pricing, pk=kwargs['pk'])
+        try: 
+            selem = SubscriptionElement.objects.get(subscription=subscription, price=price)
+            print(selem)
+            items_existentes = stripe.SubscriptionItem.list(
+                    subscription = subscription.stripe_subscription_id
+                )
+            for item in items_existentes:
+                if item['price']["id"] == price.stripe_price_id:
+                    stripe.SubscriptionItem.delete(
+                    item.id,
+                )
+            selem.delete()
+        except:
+            print("No fue posible cancelar la suscripción")
+        
+        return redirect("/account/profile")
     

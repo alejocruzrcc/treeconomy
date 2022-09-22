@@ -4,14 +4,14 @@
 
 {% block content %}
 {% load verbose_name_template %}
+{% load float_format %}
+{% load multiplicar %}
+
 <style>
     body {
         background: #f5f5f5
     }
-    .section {
-        padding: 50px 0;
-        position: relative;
-    }
+    
     .gray-bg {
         background-color: #f5f5f5;
     }
@@ -288,8 +288,40 @@
                 </div>
               </div>
           </div>
-          
+        </br>
+          <div class="container"  style="width: 30rem;">
+            <div class="row justify-content-md-center" >
+              <div class="col">
+                {% if elements > 0 %}
+                <h3> Tus Suscripciones </h3>
+                <ul class="list-group">
+                  {% for element in elementos %}
+                  <li class="list-group-item justify-content-between "> 
+                    <div class="row">
+                      <div class="col-md-8">
+                        <div class="ms-2 me-auto">
+                          <div class="fw-bold">{{ element.project.name }}</div>
+                          Precio del árbol: {{ element.price.price|float_format }} USD.
+                          <p class="p-0">Pago mensual: {{ element.price.price|multiplicar:element.quantity }} USD.</p>
+                          Árboles:
+                          <span class="badge bg-primary rounded-pill">{{ element.quantity }}</span>
+                        </div>
+                      </div>
+                      <div class="col-md-4 ">
+                        <a href="{% url 'modify-subscription-element' element.price.id %}" class="btn btn-sm btn-outline-secondary" type="button">
+                          Cancelar
+                        </a>
+                      </div>
+                    </div>
+                  </li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+            </div>
+          </div>
         </div>
+        
     </section>
 
 </section>

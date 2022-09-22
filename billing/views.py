@@ -151,7 +151,7 @@ class CheckoutView(View):
 class CreateSubscriptionView(APIView):
     def post(self, request, *args, **kwargs):
         data = request.data
-        profile = Profile.objects.get(user_id=request.user.id)
+        profile = get_object_or_404(Profile, user_id=request.user.id)
         customer_id = profile.stripe_customer_id
         orden =  get_or_set_order_session(self.request)
         try:
@@ -196,6 +196,7 @@ class CreateSubscriptionView(APIView):
                 mis_cantidades[item.project.price_onepayment.stripe_price_id] = item.quantity 
                 mis_precios = list(mis_cantidades.keys())
                 registrar_pbi(request.user, item.project, 0, item.quantity)
+                print("registró pbi en pago único")
             
             
             for item in list(mis_cantidades.keys()): 
@@ -204,7 +205,7 @@ class CreateSubscriptionView(APIView):
                 try:
                     # Create a git  with the order amount and currency
                     monto = Pricing.objects.filter(stripe_price_id=item)[0].price * mis_cantidades[item]
-                    print(monto)
+                    print("creó monto final para item pago unico")
                     intent = stripe.PaymentIntent.create(
                         amount= monto,
                         currency='usd',
@@ -247,14 +248,18 @@ class CreateSubscriptionView(APIView):
                 subscription = stripe_subscription.id
             )
             mis_cantidades = {}
+            mis_proyectos = {}
             for item in orden.items.filter(type_inversion = 'M'):
-                mis_cantidades[item.project.price_subscription.stripe_price_id] = item.quantity 
+                mis_cantidades[item.project.price_subscription.stripe_price_id] = item.quantity
+                mis_proyectos[item.project.price_subscription.stripe_price_id] =  item.project
                 registrar_pbi(request.user, item.project, item.quantity, 0)
+                print("registró pbi en suscripcion")
             mis_precios = list(mis_cantidades.keys())
             
             # Buscamos los items de esa suscripcion de treeconomy
             subidos_loc = []
             mis_cantidades_loc = mis_cantidades.copy()
+            mis_proyectos_loc = mis_proyectos.copy()
             elements = subscription.elements.all()
             
             for element in elements:
@@ -267,15 +272,17 @@ class CreateSubscriptionView(APIView):
             
             for k in subidos_loc:
                 mis_cantidades_loc.pop(k)
-            
+            print(mis_cantidades_loc)
             for item in list(mis_cantidades_loc.keys()):
                 subscription_element = SubscriptionElement.objects.create(
                     subscription=subscription,
-                    price= Pricing.objects.get(stripe_price_id=item),
-                    quantity= mis_cantidades_loc[item]
+                    price= get_object_or_404(Pricing, stripe_price_id=item),
+                    quantity= mis_cantidades_loc[item], 
+                    project = mis_proyectos_loc[item]
                 )
                 subscription_element.save()
             print("llego 4")
+            
             # Busca subscription Item o por el contrario la crea
             subidos= []
             print(items_existentes)

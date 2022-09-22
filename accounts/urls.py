@@ -5,7 +5,7 @@ from . import views
 from django.contrib.auth import views as auth_views
 from accounts.forms import EmailValidationOnForgotPassword
 from django.contrib.auth.decorators import login_required
-
+from .views import ModifySubscriptionElement
 
 urlpatterns = [
     #postviews
@@ -31,5 +31,6 @@ urlpatterns = [
     path('account/password_reset/', auth_views.PasswordResetView.as_view(form_class=EmailValidationOnForgotPassword), name='password_reset'),
     #path('your-projects/', ProjectByInvestorView.as_view(), name='projectsbyinvestor'),
     #path('projectsbyinvestor/<int:pk>', ProjectByInvestorDetailView.as_view(), name='project-investor-detail')
-
+    path('modify-subscription-element/<pk>/', 
+         ModifySubscriptionElement.as_view(), name='modify-subscription-element'),
 ]
