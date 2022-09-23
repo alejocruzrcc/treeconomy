@@ -14,6 +14,10 @@ from statistics import mean
 import math
 from phonenumber_field.modelfields import PhoneNumberField
 import stripe
+import uuid
+
+
+    
 
 stripe.api_key = settings.STRIPE_PRIVATE_KEY
 DAYS_PER_YEAR = 365
@@ -156,6 +160,7 @@ class Project(models.Model):
         return 100 - ((self.trees_left * 100) / int(self.n_trees or 1)) 
 
 class SubscriptionElement(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     subscription = models.ForeignKey(Subscription, related_name='elements', blank=True, null=True, on_delete=models.CASCADE)
     price =  models.ForeignKey(Pricing, related_name='elements', blank=True, null=True, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField()
