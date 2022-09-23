@@ -159,7 +159,7 @@ class SubscriptionElement(models.Model):
     subscription = models.ForeignKey(Subscription, related_name='elements', blank=True, null=True, on_delete=models.CASCADE)
     price =  models.ForeignKey(Pricing, related_name='elements', blank=True, null=True, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField()
-    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, blank=True, null=True, on_delete=models.CASCADE)
     
     class Meta:
         verbose_name = "Subscription Element"
