@@ -1,6 +1,6 @@
 .sidebar {
     height: 100%;
-    width: 85px;
+    width: 50px;
     top: 0;
     left: 0;
     background-color: #012623;
@@ -27,7 +27,7 @@
     z-index: 1;
 }
 .sidebar a, .sidebarMovil a{
-    padding: 8px 8px 8px 32px;
+    padding: 6px;
     text-decoration: none;
     color: #818181;
     display: block;
@@ -68,7 +68,7 @@
 }
 @media only screen and (min-width: 768px) {
 	#main { 
-	    margin-left: 85px;
+	    margin-left: 55px;
 	}
 }
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */

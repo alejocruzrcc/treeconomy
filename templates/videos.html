@@ -1,11 +1,7 @@
 {% load static %}
 <style>
-    .videos h2 {
-        font-family: "comfortaa-bold";
-        font-size: 40px;
-        color: #035941;
-    }
-    video {
+    video, .inicial {
+      border: 0px;
       border-radius: 25px;
       box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
     }
@@ -13,10 +9,10 @@
 
 <div class="row">
   <div class="col">
-    <div class="card mx-5">
+    <div class="card mx-5 inicial">
         <div class="card-body text-center" >
             <h4 class="card-title "><img style="height: 100px;" src="https://treeconomyapp-crm-bucket.s3.amazonaws.com/static/img/image/logo_treeconomy.png" alt="treeconomy" ></h4>
-            <p style="text-align: justify;">Esta es la plataforma de inversión para inversores Treeconomy. Aquí puedes invertir en diferentes proyectos de dos formas diferentes, haciendo una única inversión, o suscribiéndote a una inversion mensual recurrente donde irás adquiriendo nuevos árboles cada mes, ampliando tus capacidades futuras.</p>
+            <p style="text-align: justify;">Bienvenido a la plataforma de inversión Treeconomy. Aquí puedes invertir en nuestros proyectos de dos formas diferentes: haciendo una única inversión, o suscribiéndote a una inversion mensual donde irás adquiriendo nuevos árboles cada mes, ampliando tus capacidades futuras.</p>
             <div class="row">
                 <div class="col pb-2">
                     <a href="https://treeconomy.com.co/es/" class="button-plant">Visitar página web</a>
@@ -28,9 +24,9 @@
 </div>
 </br>
 
-<div class="row videos">
-  <div class="col-md-6">
-    <h2>¿Qué es Treeconomy?</h2>
+<div class="row videos" style="text-align: center;">
+  <div class="col-lg-6">
+    <h3>¿Qué es Treeconomy?</h3>
     <video  
     style="width: 100%;" 
     controls="controls"
@@ -42,8 +38,8 @@
       <source src="{{ video_que_es.video.url }}" type="video/mp4">
     </video>
   </div>
-  <div class="col-md-6">
-    <h2>Impacto...</h2>
+  <div class="col-lg-6">
+    <h3>Impacto...</h3>
     <video  style="width: 100%;" controls
     {% if video_que_es.thumb %}
     poster="{{ video_impacto.thumb.url }}"

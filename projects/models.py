@@ -112,7 +112,7 @@ class Project(models.Model):
     name                = models.CharField(max_length=120)
     slug                = models.SlugField(unique=True, primary_key=True) 
     coordinates         = models.CharField(max_length=120)
-    resena              = models.TextField(verbose_name="Descripción")
+    resena              = models.TextField(verbose_name="Descripción", blank=True, null=True)
     n_trees             = models.PositiveIntegerField()
     plantation_date     = models.DateField()
     price_onepayment    = models.ForeignKey(Pricing, related_name='projects_onepayment', blank=True, null=True, on_delete=models.SET_NULL)

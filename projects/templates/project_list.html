@@ -5,6 +5,9 @@
 {% block content %}
 
 {% load static %}
+{% load permission_tags %}
+{% load filtrar %} 
+
 
 <style>
   .tarjeta-lista {
@@ -37,12 +40,11 @@
   
 }
 .tarjeta {
-  position: relative;
-  width: 100%;
   background: #012623;
   background-image: url({% static 'img/image/fondotar.png' %});
   border-radius: 20px;
   overflow: hidden;
+  background-size: cover;
   box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
 }
 
@@ -79,9 +81,7 @@ h5 {
   margin-top: 12px;
   }
 
-a:hover{
-   color: #FFFFFF;
- }
+
  .editables {
   background-color: #008CBA !important;
   border-radius: 25px;
@@ -89,10 +89,9 @@ a:hover{
   font-size: 10px;
 }
 .cover img{
-  margin: 8px;
-  width: 10rem;
-  height: 10.9rem;
+  margin: 5px;
   border-radius: 10px;
+  object-fit: cover;
 }
 .cover{
   object-fit: cover;
@@ -144,8 +143,12 @@ strong{
 
 }
 .valores{
- text-align: left;
- font-size: 0.9rem;
+  text-align: left;
+  font-size: 0.9rem;
+  box-shadow: 0 15px 25px rgba(129, 124, 124, 0.2);
+  border-radius: 15px;
+  backdrop-filter: blur(14px);
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .ovalo{
@@ -154,10 +157,6 @@ strong{
   background-color: #F9E09E;
   font-size: small;
   width: 116px;
-  position: absolute;
-    top: 173px;
-    left: 32px;
-    grid-template-rows: 40px 4em 40px;
 }
 
 .textbajo{
@@ -175,96 +174,150 @@ h3 {
 }
 
 </style>
-<nav class="fondob" aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item active" aria-current="page"><a href="/">Inicio</a> / Proyectos</li>
-  </ol>
-</nav>
-  <div class="row">
-     <div class="col-6">
-      {% load permission_tags %}
-      {% if user|can:'manage_a_project' %}
-        <a name="" id="" class="btn editables" href="{% url 'crear' %}" role="button"> Crear un Proyecto</a>
-      {% endif %}
-      <br>
-      
-    </div>
+
+
+  <nav class="fondob" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active" aria-current="page"><a href="/">Inicio</a> / Proyectos</li>
+        
+    </ol>
     
-  </div>
+  </nav>
+  
+
+  
+
   
   {% include "videos.html" with video_que_es=video_que_es video_impacto=video_impacto %}
 
-</br>
+  {% if user|can:'manage_a_project' %}
+  <div class="mx-auto" style="width: 200px;">
+    <a name="" class="button-plant" id="" href="{% url 'crear' %}" role="button"> Crear proyecto</a>
+  </div>
+  {% endif %}
   
+  <hr>
   {% if project_list %}
-  <h3>Selecciona uno de nuestros proyectos... </h3>
-  <div class="tarjetas text-center">
-    {% for project in project_list %}
-      <div class="tarjeta card text-left">
-        
-     <div class="row">
-      <div class="col-6 mb-4">
-          <div class="cover">
-            <img src="{{project.image.url}}">
-            <div class="ovalo">Edad 9-10</div>   
+    {% if project_list|activos|length > 0 %}
+    <h3>Invierte en uno de nuestros proyectos...</h3>
+    {% endif %}
+    <div class="tarjetas text-center">
+      {% for project in project_list|activos %}
+        <div class="tarjeta card pb-2 ">
+          <div class="row">
+            <div class="col-5">
+              <div class="cover">
+                <img src="{{project.image.url}}">
+                <div class="mx-auto ovalo">Edad 9-10</div>   
+              </div>
+              <div class="my-2">
+                <div class="textbajo"><strong>Usuario Propietario: </strong><span>Treeconomy Inc. </span> </div>
+              </div>
+            </div>
+            <div class="col-7">
+              
+                <div class="row">
+                  <div class="col-8">
+                    <h2 class="titulo1">{{ project.name }}</h2>
+                    <h3>{{project.tree_type}}</h3>
+                  </div>
+                  <div class="col-6">
+                    <div id="mainToolbar">
+                      <a class="button boton-fav" id="shareProject" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" >
+                          <i class="material-icons">share</i>
+                      </a>
+                      <ul class="dropdown-menu" aria-labelledby="shareProject">
+                        {% with request.build_absolute_uri|add:project.name as varname %}
+                          <li><a class="dropdown-item shareButton copy-btn" data-project={{ varname }}>Copiar a portapapeles</a></li>
+                                        
+                          {% load social_share %}
+                          <li>{% post_to_whatsapp varname "Comparte por Whatsapp" "dropdown-item" %}</li>
+                          <li>{% post_to_twitter "Invierte en este proyecto: {{project.name}}!" varname "Postear en Twitter" "dropdown-item" %}</li>
+                          <li>{% post_to_facebook varname "Comparte por Facebook" "dropdown-item" %}</li>
+                        {% endwith %}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                
+                {% load permission_tags %}
+                {% if user|can:'manage_a_project' %}
+                  <a class="btn btn-sm editables" href="{% url 'editar' project.pk  %}"role="button">Editar</a>
+                  <a class="btn btn-sm editables" href="{% url 'eliminar' project.pk %}" role="button">Eliminar</a>
+                {% endif %}
+                <div class="card valores p-2 m-2">
+                  <div><strong>Rentabilidad: </strong><span>12% EA</span></div>
+                  <div><strong>Árboles restantes: </strong><span>{{ project.trees_left}}</span></div>
+                  <div><strong>Precio: </strong><span>USD {{ project.get_price}}</span> </div> 
+                </div>  
+                <a class="button-plant btn-invert" href="{{ project.get_absolute_url }}">Invertir Aquí</a>       
+            </div>
           </div>
         </div>
-      <div class="col-6">
-        <div>
-          <div class="row">
-            <div class="col-8">
-              <h2 class="titulo1">{{ project.name }}</h2>
-              <h3>{{project.tree_type}}</h3>
-            </div>
-            <div class="col-6">
-              <div id="mainToolbar">
-                <a class="button boton-fav" id="shareProject" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" >
-                    <i class="material-icons">share</i>
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="shareProject">
-                  {% with request.build_absolute_uri|add:project.name as varname %}
-                    <li><a class="dropdown-item shareButton copy-btn" data-project={{ varname }}>Copy to Clipboard</a></li>
-                                  
-                    {% load social_share %}
-                    <li>{% post_to_whatsapp varname "Share via WhatsApp" "dropdown-item" %}</li>
-                    <li>{% post_to_twitter "Invest in this project: {{project.name}}. Check it out!" varname "Post to Twitter" "dropdown-item" %}</li>
-                    <li>{% post_to_facebook varname "Post to Facebook" "dropdown-item" %}</li>
-                  {% endwith %}
-                </ul>
+      {% endfor %}
+    </div>
+    <hr>
+    
+    {% if project_list|inactivos|length > 0 %}
+      <h3>Proyectos cerrados...</h3>
+      <div class="tarjetas text-center">
+        {% for project in project_list|inactivos %}
+          <div class="tarjeta card pb-2" style=" filter: grayscale(100%);">
+            <div class="row">
+              <div class="col-5">
+                <div class="cover">
+                  <img src="{{project.image.url}}">
+                  <div class="mx-auto ovalo">Edad 9-10</div>   
+                </div>
+                <div class="my-2">
+                  <div class="textbajo"><strong>Usuario Propietario: </strong><span>Treeconomy Inc. </span> </div>
+                </div>
+              </div>
+              <div class="col-7">
+                
+                  <div class="row">
+                    <div class="col-8">
+                      <h2 class="titulo1">{{ project.name }}</h2>
+                      <h3>{{project.tree_type}}</h3>
+                    </div>
+                    <div class="col-6">
+                      <div id="mainToolbar">
+                        <a class="button boton-fav" id="shareProject" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" >
+                            <i class="material-icons">share</i>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="shareProject">
+                          {% with request.build_absolute_uri|add:project.name as varname %}
+                            <li><a class="dropdown-item shareButton copy-btn" data-project={{ varname }}>Copiar a portapapeles</a></li>
+                                          
+                            {% load social_share %}
+                            <li>{% post_to_whatsapp varname "Comparte por Whatsapp" "dropdown-item" %}</li>
+                            <li>{% post_to_twitter "Invierte en este proyecto: {{project.name}}!" varname "Postear en Twitter" "dropdown-item" %}</li>
+                            <li>{% post_to_facebook varname "Comparte por Facebook" "dropdown-item" %}</li>
+                          {% endwith %}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {% load permission_tags %}
+                  {% if user|can:'manage_a_project' %}
+                    <a class="btn btn-sm editables" href="{% url 'editar' project.pk  %}"role="button">Editar</a>
+                    <a class="btn btn-sm editables" href="{% url 'eliminar' project.pk %}" role="button">Eliminar</a>
+                  {% endif %}
+                  <div class="card valores p-2 m-2">
+                    <div><strong>Rentabilidad: </strong><span>12% EA</span></div>
+                    <div><strong>Árboles restantes: </strong><span>{{ project.trees_left}}</span></div>
+                    <div><strong>Precio: </strong><span>USD {{ project.get_price}}</span> </div> 
+                  </div>  
+                  <a class="button-plant btn-invert" href="{{ project.get_absolute_url }}">Ver más</a>       
               </div>
             </div>
           </div>
-          
-          {% load permission_tags %}
-          {% if user|can:'manage_a_project' %}
-            <a class="btn editables" href="{% url 'editar' project.pk  %}"role="button">Editar</a>
-            <a class="btn editables" href="{% url 'eliminar' project.pk %}" role="button">Eliminar</a>
-          {% endif %}
-              <div class="valores">
-              <div><strong>Rentabilidad: </strong><span>12% EA</span></div>
-              <div><strong>Árboles restantes: </strong><span>{{ project.trees_left}}</span></div>
-              <div><strong>Precio: </strong><span>USD {{ project.get_price}}</span> </div> 
-              </div>         
+        {% endfor %}
       </div>
-     </div>
-   </div>
-   <div class="row">
-    <div class="col-6 ">
-      <div class="textbajo"><strong>Usuario Propietario: </strong><span>Treeconomy Inc. </span> </div>
-      
-    </div>
-    <div class="col-6">
-      
-      <a class="button-plant btn-invert" href="{{ project.get_absolute_url }}">Invertir Aquí</a>
-   
-    </div>
- </div>
-</div>
-    {% endfor %}
-  </div>
-
+    {% endif %}
   {% else %}
-    <p>There are not available projects.</p>
+    <p>No hay proyectos disponibles</p>
   {% endif %}      
 
 {% endblock %}

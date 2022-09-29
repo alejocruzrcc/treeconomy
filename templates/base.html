@@ -140,6 +140,11 @@ a .palabra {
 a { text-decoration: none; 
   color: black;} 
 
+@media screen and (min-width:767px){
+  .sidebar{
+    position: fixed;
+  }
+}
 @media (max-width: 1200px){
 
   .kb-toggle-button__pulse{
@@ -149,6 +154,8 @@ a { text-decoration: none;
     top: 310px;
     height: 30px;
   }
+
+  
   
 }
 .navbar-toggler{
@@ -381,12 +388,12 @@ a { text-decoration: none;
 
   function toggleSidebar() {
       if (mini) {
-          document.getElementById("mySidebar").style.width = "250px";
-          document.getElementById("main").style.marginLeft = "250px";
+          document.getElementById("mySidebar").style.width = "200px";
+          document.getElementById("main").style.marginLeft = "200px";
           this.mini = false;
       } else {
-          document.getElementById("mySidebar").style.width = "85px";
-          document.getElementById("main").style.marginLeft = "85px";
+          document.getElementById("mySidebar").style.width = "50px";
+          document.getElementById("main").style.marginLeft = "50px";
           this.mini = true;
       }
   }
