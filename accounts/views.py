@@ -185,7 +185,9 @@ def profile(request):
     
     ## Suscripciones
     subscription = get_object_or_404(Subscription, user=request.user)
-    elementos = SubscriptionElement.objects.filter(subscription=subscription)
+    if subscription:
+        elementos = SubscriptionElement.objects.filter(subscription=subscription)
+    
     for key in resumen:
         suma_utilidad += float(resumen[key]['utilidad'])
         suma_arboles_acumulados += resumen[key]['total_trees']

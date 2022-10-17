@@ -69,24 +69,6 @@ class BillingProfile(models.Model):
         return cards_qs.filter(active=True).count()
 
 
-def billing_profile_created_receiver(sender, instance, *args, **kwargs):
-    """if not instance.customer_id and instance.email:
-        print("ACTUAL API REQUEST Send to stripe/braintree")
-        customer = stripe.Customer.create(
-                email = instance.email
-            )
-        print(instance)
-        instance.customer_id = customer.id"""
-
-pre_save.connect(billing_profile_created_receiver, sender=BillingProfile)
-
-
-def user_created_receiver(sender, instance, created, *args, **kwargs):
-    if created and instance.email:
-        BillingProfile.objects.get_or_create(user=instance, email=instance.email)
-
-post_save.connect(user_created_receiver, sender=User)
-
 
 class CardManager(models.Manager):
     def all(self, *args, **kwargs): # ModelKlass.objects.all() --> ModelKlass.objects.filter(active=True)

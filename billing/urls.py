@@ -20,6 +20,7 @@ urlpatterns = [
     path('cancelled/', PaymentCancelledView.as_view(), name='cancelled'),
     path('failed/', PaymentFailedView.as_view(), name='failed'),
     path('history/', OrderHistoryListView.as_view(), name='history'),
+    path('webhook/', views.webhook, name='webhook'),
    
 ]
   
