@@ -218,6 +218,10 @@ class CreateSubscriptionView(APIView):
             for item in orden.items.filter(type_inversion = 'O'):
                 mis_cantidades[item.project.price_onepayment.stripe_price_id] = item.quantity 
                 mis_precios = list(mis_cantidades.keys())
+                item.project.trees_left-= item.quantity
+                print(item.project.trees_left)
+                item.project.save()
+                print(item.project.trees_left)
                 registrar_pbi(request.user, item.project, 0, item.quantity)
                 print("registró pbi en pago único")
             
@@ -302,7 +306,7 @@ class CreateSubscriptionView(APIView):
                     quantity= mis_cantidades[item],
                     metadata={'order_id': orden.id,
                               'user': request.user.id
-                              }
+                              },
                 )
         
             ## Borramos la Gratis de stripe
@@ -466,10 +470,16 @@ def webhook(request):
                     if 'order_id' in item['metadata'] and item['price']["id"] != settings.STRIPE_FREE_PRICE:
                         mis_cantidades = {}
                         mis_proyectos = {}
+                        print(item)
                         user = get_object_or_404(User, pk=item['metadata']['user'])
                         orden = get_object_or_404(Order, pk=item['metadata']['order_id'])
                         order_item = orden.items.filter(type_inversion = 'M').filter(project__price_subscription__stripe_price_id=item['price']['id'])[0]
                         
+                        proj = order_item.project
+                        print(proj.trees_left)
+                        proj.trees_left -= order_item.quantity
+                        proj.save()
+                        print(proj.trees_left)
                         registrar_pbi_sus(user, order_item.project, item['quantity'], 0)
                         
                         precio_loc = get_object_or_404(Pricing, stripe_price_id= item['price']['id'])
@@ -508,7 +518,8 @@ def webhook(request):
                 precio_id = item['price']['id']
                 precio = get_object_or_404(Pricing, stripe_price_id=precio_id )
                 project = Project.objects.filter(price_subscription = precio)  
-                
+                project[0].trees_left -= item['quantity']
+                project[0].save()
                 order_item = OrderItem()
                 order_item.order = order
                 order_item.project = project[0]
