@@ -170,7 +170,25 @@ def registrar_pbi(investor, project, n_trees_subscription, n_trees_one_payment):
                     obj.n_trees_subscription = n_trees_subscription
                     obj.n_trees_one_payment = n_trees_one_payment
                     obj.save() 
-             
+            
+def registrar_pbi_sus(investor, project, n_trees_subscription, n_trees_one_payment):   
+                try:
+                    obj = ProjectByInvestor.objects.get(
+                        investor= investor,
+                        project = project)
+                    nto_actual = obj.n_trees_one_payment
+                    obj.n_trees_subscription = n_trees_subscription
+                    obj.n_trees_one_payment = nto_actual + n_trees_one_payment
+                    obj.save()
+                    
+                except ProjectByInvestor.DoesNotExist:
+                    obj = ProjectByInvestor.objects.create(
+                        investor= investor,
+                        project = project
+                    )
+                    obj.n_trees_subscription = n_trees_subscription
+                    obj.n_trees_one_payment = n_trees_one_payment
+                    obj.save()  
 
 class CreateSubscriptionView(APIView):
     def post(self, request, *args, **kwargs):
@@ -240,10 +258,7 @@ class CreateSubscriptionView(APIView):
             if estado_actual == 'trialing':
                 stripe_subscription = stripe.Subscription.modify(
                     subscription.stripe_subscription_id,
-                    expand=['latest_invoice.payment_intent'],
                     trial_end="now",
-                    proration_behavior='always_invoice',
-                    metadata={'order_id': orden.id}
                 )
                 subscription.status=stripe_subscription.status
                 subscription.save()  
@@ -283,6 +298,7 @@ class CreateSubscriptionView(APIView):
                 stripe.SubscriptionItem.create(
                     subscription=stripe_subscription.id,
                     price= item,
+                    proration_behavior='always_invoice',
                     quantity= mis_cantidades[item],
                     metadata={'order_id': orden.id,
                               'user': request.user.id
@@ -454,7 +470,7 @@ def webhook(request):
                         orden = get_object_or_404(Order, pk=item['metadata']['order_id'])
                         order_item = orden.items.filter(type_inversion = 'M').filter(project__price_subscription__stripe_price_id=item['price']['id'])[0]
                         
-                        registrar_pbi(user, order_item.project, order_item.quantity, 0)
+                        registrar_pbi_sus(user, order_item.project, item['quantity'], 0)
                         
                         precio_loc = get_object_or_404(Pricing, stripe_price_id= item['price']['id'])
                         
@@ -467,12 +483,13 @@ def webhook(request):
                             element = SubscriptionElement.objects.create(
                                 subscription = subscription,
                                 price= precio_loc,
+                                project = order_item.project,
                                 quantity = 0)
                             element.save()
                         
-                        actual_quantity_loc = element.quantity
+                        
                         new_quantity_loc = item['quantity']
-                        element.quantity = actual_quantity_loc + new_quantity_loc
+                        element.quantity = new_quantity_loc
                         element.save()
         else:
             print("entró a recurrente")

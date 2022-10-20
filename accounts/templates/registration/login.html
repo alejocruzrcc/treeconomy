@@ -42,8 +42,9 @@
               <div class="alert alert-danger" role="alert">
                   <p>Su nombre de usuario y contraseña no coinciden. Inténtalo de nuevo.</p>
               </div>   
+              
             {% else %}
-              <p>Por favor, utilice el siguiente formulario para iniciar sesión. Si no tienes una cuenta <a class="enlace-naranja" href="{% url "register" %}">Registrarse aquí</a></p>
+              <p>Utiliza el siguiente formulario para iniciar sesión. </p>
             {% endif %}
             
             
@@ -69,6 +70,7 @@
         
             <div class="forgot">
                 <p><a class="enlace-naranja" href="{% url "password_reset" %}">Recordar contraseña?</a></p>
+                <p><a class="enlace-naranja" href="{% url "register" %}">Registrarse aquí</a></p>
             </div>
 
             <button class="btn-lg button-plant " type="submit">Iniciar Sesión</button>

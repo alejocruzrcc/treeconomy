@@ -27,16 +27,16 @@
   </div>
 <div class="col-md-5">
   <div class="card" style="border-radius: 15px;">
-    <div class="card-body p-5">
-          <h2 class="text-center mb-5">Crea tu cuenta</h2>
+    <div class="card-body px-5 py-3">
+          <h2 class="text-center mb-3">Crea tu cuenta</h2>
           <form class="needs-validation" method="post" novalidate>
               {% csrf_token %}
               {{form.non_field_errors}}
     
               {% for field in user_form %}
-                  <div class="form-outline mb-4">
+                  <div class="form-outline  mb-2"> 
+                  <label class="form-label mb-0" for="{{ field.id_for_label }}">{{ field.label }}</label>
                   {{ field }}
-                  <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
                       {% if field.errors %}
                       <div class="alert alert-danger" role="alert">
                           {{ field.errors }}
@@ -58,10 +58,10 @@
                 </div>
 
               <div class="d-flex justify-content-center">
-                <button type="submit" class="button-plant">Registrar</button>
+                <button type="submit" class="button-plant mt-2">Registrar</button>
               </div>
           </form>
-          <p class="text-center text-muted mt-5 mb-0">¿Ya tienes una cuenta? <a href="/account/login" class="fw-bold text-body"><u>Inicia aquí</u></a></p>
+          <p class="text-center text-muted mt-3 mb-0">¿Ya tienes una cuenta? <a href="/account/login" class="fw-bold text-body"><u>Inicia aquí</u></a></p>
         </div>
     </div>
   </div>

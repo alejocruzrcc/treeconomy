@@ -13,7 +13,7 @@
       {% if campo.field.widget.input_type == 'file' and campo.value %}
         <img src="{{MEDIA_URL}}/{{campo.value}}" width="100" alt="">
       {% endif %}
-      {% if campo.name == "plantation_date" %}
+      {% if campo.name == "plantation_date" or campo.name == "inicioventa_date" or  campo.name == "corte_date"%}
         <input 
           type="date"
           name="{{ campo.name }}"

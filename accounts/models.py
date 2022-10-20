@@ -175,6 +175,8 @@ def post_email_confirmed(sender, instance, created, **kwargs):
             customer=stripe_customer["id"],
             items=[{'price': settings.STRIPE_FREE_PRICE}],
             trial_period_days=20,
+            expand=['latest_invoice.payment_intent'],
+            proration_behavior='always_invoice',
         )
 
         subscription.status=stripe_subscription["status"]

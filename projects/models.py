@@ -115,11 +115,14 @@ class Project(models.Model):
     resena              = models.TextField(verbose_name="Descripción", blank=True, null=True)
     n_trees             = models.PositiveIntegerField()
     plantation_date     = models.DateField()
+    inicioventa_date    = models.DateField()
+    corte_date          = models.DateField()
     price_onepayment    = models.ForeignKey(Pricing, related_name='projects_onepayment', blank=True, null=True, on_delete=models.SET_NULL)
     price_subscription  = models.ForeignKey(Pricing, related_name='projects_subscription', blank=True, null=True, on_delete=models.SET_NULL)
     total_invested      = models.FloatField()
     total_unit_initial  = models.FloatField()
-    tree_type           = models.CharField(max_length=120)
+    tree_type           = models.CharField(max_length=120, verbose_name="Tipo de arbol", blank=True, null=True)
+    especie             = models.CharField(max_length=120, verbose_name="Especie", blank=True, null=True)
     ica_register        = models.CharField(max_length=120, blank=True, null=True)
     n_hectares          = models.FloatField(validators=[MinValueValidator(0.0)])
     trees_left          = models.PositiveIntegerField(blank=True, null=True)
@@ -231,8 +234,19 @@ class Order(models.Model):
         total = self.get_raw_total()
         return "{:.2f}".format(int(total or 0) /100)
   
+
+class Rentabilidad(models.Model):
+    year = models.IntegerField(blank=True, null=True)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    valor = models.FloatField(blank=True, null=True)
     
-        
+    class Meta:
+        verbose_name = "Rentabilidad"
+        verbose_name_plural = "Rentabilidades"
+
+    def __Str__(self):
+        return f"{self.project}_{self.project.name}_{self.valor}"
+
               
 def pre_save_project_receiver(sender, instance, *args, **kwargs):
     if not instance.slug:

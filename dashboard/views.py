@@ -29,7 +29,7 @@ def invest_json(request):
     rentabilidad= 0.0094
     for project_id in projects_id:
         
-        fecha = Project.objects.get(pk=project_id).plantation_date
+        fecha = Project.objects.get(pk=project_id).inicioventa_date
         hoy = datetime.today().date()
         api_fecha = {}
         total_trees = 0
@@ -99,7 +99,7 @@ def calculo_co2(request):
     pbis = ProjectByInvestor.objects.filter(investor=usuario)
     co2_total = 0
     for pbi in pbis:
-        time_project = pbi.project.plantation_date
+        time_project = pbi.project.inicioventa_date
         hoy = date.today()
         dias = hoy - time_project
         co2_op = pbi.n_trees_subscription * dias.days * CO2_CONSUMPTION_PER_TREE_PER_DAY

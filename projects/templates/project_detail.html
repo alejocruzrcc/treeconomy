@@ -187,7 +187,7 @@
     <div class="row d-flex align-items-center">
       <div class="col-xl-4">
         
-        <h2 class="titulo-cientifico">Gmelina Arborea</h2>
+        <h2 class="titulo-cientifico">{{ project.especie }}</h2>
         <h4 class="titulo-arbol">{{ project.tree_type }}</h4>
         
       </div>
@@ -389,7 +389,7 @@
     parseInt(campo_cantidad)
     campo_cantidad.value ++
     total = parseInt(campo_cantidad.value) * parseFloat(precio.innerHTML)
-    total_pdetail_campo.innerHTML = total
+    total_pdetail_campo.innerHTML = total.toFixed(2)
   })
 
   btn_disminuir.addEventListener("click", function(){
@@ -401,7 +401,7 @@
       campo_cantidad.value --
     }
     total = parseInt(campo_cantidad.value) * parseFloat(precio.innerHTML)
-    total_pdetail_campo.innerHTML = total
+    total_pdetail_campo.innerHTML = total.toFixed(2)
     console.log(parseInt(campo_cantidad.value))
   })
 
