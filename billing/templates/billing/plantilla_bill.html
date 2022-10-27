@@ -1,4 +1,9 @@
-
+<style>
+  td {
+    text-align: center;
+    vertical-align: middle;
+  }
+</style>
 
  <div class="container">
     <h2>Factura de Pago</h2>
@@ -11,94 +16,96 @@
       </div>
       <div class="col-9">
         <h1>Treeconomy, Inc.</h1>
-        <p>+57 3133505714</p>
-        <p>invest@treeconomy.com.co</p>
+        <p>+57 3133505714 - invest@treeconomy.com.co</p>
       </div>
      
     </div>
-    <p>Felicitaciones por compra, tus arboles están ubicados en el lote XXXX, ya tienen a hoy xxx años, y recuerda ingresar a la plataforma para ver mas de cerca la información de tus arboles en crecimiento</p>
+    <p>Felicitaciones por la compra de tus árboles, puedes ingresar a la <a href="https://app.treeconomy.com.co">Aplicación web</a> para ver más de cerca la información de tu inversión y el crecimiento de tus árboles.</p>
     <hr />
   
     <div class="row fact-info mt-3">
       <div class="col-3">
+        <h4> Datos del comprador</h4>
         <h5>Facturar a</h5>
-        <p>{{ order.bill.nombre}} - {{ order.bill.identificacion}}</p>
+        <p>{{ order.bill.comprador_nombre}} - {{ order.bill.comprador_id}}</p>
+        <p>{{ order.bill.comprador_email }} </p>
       </div>
       <div class="col-3">
-        <h5>Dirección</h5>
+        <h4> Datos del tercero de confianza: </h4>
+        <p>{{ order.bill.beneficiario_nombre}} - {{ order.bill.beneficiario_id}}</p>
+        <p>{{ order.bill.beneficiario_email }} </p>
+      </div>
+      <div class="col-3">
+        <h5>Dirección: </h5>
         <p>
           {{ order.bill.address_line_1}} //
           {{ order.bill.address_line_2}}
         </p>
-        <p>
-          arianmanuel75@gmail.com
-        </p>
+        
       </div>
       <div class="col-3">
-        <h5>N° de factura</h5><p>{{ order.id}}</p>
-        <h5>Fecha</h5>
-      </div>
-      <div class="col-3">
-        <h5>103</h5>
-        <p>09/05/2019</p>
-      </div>
+        <h5>N° de factura: <p>{{ order.id}}</p></h5>
+        <h5>Fecha: {{ order.ordered_date }} </h5>
+      </div> 
+      
     </div>
   
     <div class="row my-5">
+      <table>
+        <thead>
+          <tr>
+            <th>Proyecto</th>
+            <th>Tipo de inversión </th>
+            <th>Precio Unitario</th>
+            <th>Cantidad</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in order.items.all %}
+          <tr>
+            <td>
+              <h3>{{ item.project.name }}</h3>
+            </td>         
+            <td>
+              {{ item.get_type_inversion_display }}
+            </td>
+            <td>
+              ${{ item.project.get_price}}
+            </td>
+            <td>
+              {{ item.quantity}}
+            </td>
+            <td>
+              ${{ item.get_total_item_price }}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>  
+      </table>
+      
+      <hr>
         <table>
-            <thead>
-                <tr>
-                    <th>Proyecto</th>
-                    <th>Precio Unitario</th>
-                    <th>Cantidad</th>
-                    <th>Total</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for item in order.items.all %}
-                <tr>
-                    <td>
-                        <h2 class="h5 text-black">{{ item.project.name }}</h2>
-                    </td>         
-                    
-                    <td>
-                        ${{ item.project.price_subscription.price }}
-                    </td>
-                    <td>
-                        {{ item.quantity}}
-                    </td>
-                    <td>
-                        ${{ item.get_total_item_price }}
-                    </td>
-                    
-                </tr>
-                
-                {% endfor %}
-                <tr>
-                    <td><strong>Subtotal</strong></td>
-                    <td>${{ order.get_subtotal }}</td>
-                </tr>
-                <tr>
-                    <td><strong>Total</strong></td>
-                    <td><strong class="text-black font-weight-bold">${{ order.get_total }}</strong></td>
-                </tr>
-            </tbody>  
+          <tbody>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>Subtotal</td>
+              <td>${{ order.get_subtotal }}</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td><strong>Total</strong></td>
+              <td><strong class="text-black font-weight-bold">${{ order.get_total }}</strong></td>
+            </tr>     
+          </tbody>  
         </table>
+        <hr>
     </div>
   
-    <div class="cond row">
-      <div class="col-12 mt-3">
-        <h4>Condiciones y formas de pago</h4>
-        <p>El pago se debe realizar en un plazo de 15 dias.</p>
-        <p>
-          Banco Banreserva
-          <br />
-          IBAN: DO XX 0075 XXXX XX XX XXXX XXXX
-          <br />
-          Código SWIFT: BPDODOSXXXX
-        </p>
-      </div>
-    </div>
  </div>       
 
 
