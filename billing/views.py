@@ -253,13 +253,17 @@ class CreateSubscriptionView(APIView):
                     )
                 except Exception as e:
                     print(str(e))
+                    return Response({
+                        "error": {'message': str(e)}
+                    })
 
             #crear suscripcion
-            subscription = request.user.subscription
-            stripe_subscription = stripe.Subscription.retrieve(subscription.stripe_subscription_id)
-            estado_actual = stripe_subscription.status
-            print(len(orden.items.filter(type_inversion = 'M')))
             if len(orden.items.filter(type_inversion = 'M')) > 0:
+                subscription = request.user.subscription
+                stripe_subscription = stripe.Subscription.retrieve(subscription.stripe_subscription_id)
+                estado_actual = stripe_subscription.status
+                print(len(orden.items.filter(type_inversion = 'M')))
+            
                 print("entro si hay suscripcion")
                 if estado_actual == 'trialing':
                     stripe_subscription = stripe.Subscription.modify(
@@ -269,56 +273,56 @@ class CreateSubscriptionView(APIView):
                     subscription.status=stripe_subscription.status
                     subscription.save()  
             
-            mis_cantidades = {}
-            mis_proyectos = {}
-            ## Creamos un diccionario de los productos segun codigo de precio y cantidad
-            ## Creamos un diccionario de los productos segun codigo de precio y su proyecto
-            for item in orden.items.filter(type_inversion = 'M'):
-                mis_cantidades[item.project.price_subscription.stripe_price_id] = item.quantity
-                mis_proyectos[item.project.price_subscription.stripe_price_id] =  item.project
-                #registrar_pbi(request.user, item.project, item.quantity, 0)
-            
-            # Busca subscription Item o por el contrario la crea
-            subidos= []
-            mis_precios = list(mis_cantidades.keys())
-            items_existentes = stripe.SubscriptionItem.list(
-                subscription = stripe_subscription.id
-            )
-            
-            for item in items_existentes:  
-                if item['price']["id"] in mis_precios:  
-                    new_quantity = mis_cantidades[item['price']["id"]]
-                    actual_quantity = item['quantity']
-                    stripe.SubscriptionItem.modify(
-                        item.id,
-                        quantity= actual_quantity + new_quantity,
-                        proration_behavior='always_invoice',
-                        metadata={'order_id': orden.id,
-                                  'user': request.user.id},
-                    )    
-                    subidos.append(item['price']["id"])
-            
-            for k in subidos:
-                mis_cantidades.pop(k)
-            for item in list(mis_cantidades.keys()): 
-                stripe.SubscriptionItem.create(
-                    subscription=stripe_subscription.id,
-                    price= item,
-                    proration_behavior='always_invoice',
-                    quantity= mis_cantidades[item],
-                    metadata={'order_id': orden.id,
-                              'user': request.user.id
-                              },
+                mis_cantidades = {}
+                mis_proyectos = {}
+                ## Creamos un diccionario de los productos segun codigo de precio y cantidad
+                ## Creamos un diccionario de los productos segun codigo de precio y su proyecto
+                for item in orden.items.filter(type_inversion = 'M'):
+                    mis_cantidades[item.project.price_subscription.stripe_price_id] = item.quantity
+                    mis_proyectos[item.project.price_subscription.stripe_price_id] =  item.project
+                    #registrar_pbi(request.user, item.project, item.quantity, 0)
+                
+                # Busca subscription Item o por el contrario la crea
+                subidos= []
+                mis_precios = list(mis_cantidades.keys())
+                items_existentes = stripe.SubscriptionItem.list(
+                    subscription = stripe_subscription.id
                 )
-        
-            ## Borramos la Gratis de stripe
-            if len(orden.items.filter(type_inversion = 'M')) > 0:
+                
+                for item in items_existentes:  
+                    if item['price']["id"] in mis_precios:  
+                        new_quantity = mis_cantidades[item['price']["id"]]
+                        actual_quantity = item['quantity']
+                        stripe.SubscriptionItem.modify(
+                            item.id,
+                            quantity= actual_quantity + new_quantity,
+                            proration_behavior='always_invoice',
+                            metadata={'order_id': orden.id,
+                                    'user': request.user.id},
+                        )    
+                        subidos.append(item['price']["id"])
+                
+                for k in subidos:
+                    mis_cantidades.pop(k)
+                for item in list(mis_cantidades.keys()): 
+                    stripe.SubscriptionItem.create(
+                        subscription=stripe_subscription.id,
+                        price= item,
+                        proration_behavior='always_invoice',
+                        quantity= mis_cantidades[item],
+                        metadata={'order_id': orden.id,
+                                'user': request.user.id
+                                },
+                    )
+            
+                ## Borramos la Gratis de stripe
+                
                 for item in items_existentes:  
                     if item['price']["id"] == settings.STRIPE_FREE_PRICE:
                             stripe.SubscriptionItem.delete(
                                 item['id']
                             )
-            
+                
             datasub = {}
             datach = {}
             
