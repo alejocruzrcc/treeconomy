@@ -323,16 +323,16 @@ class CreateSubscriptionView(APIView):
                                 item['id']
                             )
                 
-            datasub = {}
-            datach = {}
-            
-            datasub.update(stripe_subscription)
-            #datach.update(session)
-            
-            data= [datasub, datach]
-            
-            generar_contrato(request, orden, profile)
-            return Response(data)
+                datasub = {}
+                datach = {}
+                
+                datasub.update(stripe_subscription)
+                #datach.update(session)
+                
+                data= [datasub, datach]
+                
+                generar_contrato(request, orden, profile)
+                return Response(data)
         except Exception as e:
             return Response({
                 "error": {'message': str(e)}
