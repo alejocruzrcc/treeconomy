@@ -203,6 +203,7 @@
                   <li>Rendimientos estimados: <span>12% Anual</span> </li>
                   <li>Fecha de plantación: <span>{{ project.plantation_date }}</span> </li>
                   <li>Hectarias: <span>{{ project.n_hectares }}</span> </li>
+                  <li>Fecha de corte: <span>{{ project.corte_date }}</span> </li>
                   <li>Enlace a Google Earth: <span><a href=""> {{ project.project_link }} </a></span> </li>
                   <li><a class="btn" href="{{ project.coordinates }}" target="_blank"> Ver coordenadas en mapa...</a></li>
                 </ul>
@@ -220,8 +221,8 @@
               </div>
               <div class="col-md-4">
                 <div class="duracion p-2">
-                  Tiempo para corte:</br>
-                  4 años
+                  Edad:</br>
+                  {{ project.get_tree_age_years }}
                 </div>
               </div>
             </div>

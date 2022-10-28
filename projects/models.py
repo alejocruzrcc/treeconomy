@@ -1,5 +1,6 @@
 from __future__ import division
 from ast import arg
+from xmlrpc.client import DateTime
 from django.db import models
 from django.db.models import Q
 from django.urls import reverse
@@ -7,6 +8,7 @@ from django.utils.text import slugify
 from django.core.validators import MinValueValidator
 from django.db.models.signals import pre_save
 from datetime import datetime, timedelta
+from dateutil import relativedelta
 #from django.utils import timezone
 from django.contrib.auth.models import User
 from django.conf import settings
@@ -152,7 +154,25 @@ class Project(models.Model):
         if self.image:
             self.image.storage.delete(self.image.name)
         super().delete()
+    
+    
+    def get_tree_age_years(self):
+        d1 =  datetime.today().date()
+        d2 =  self.plantation_date
+        diff = relativedelta.relativedelta(d1, d2)
+        if int(diff.months) > 0:
+            return f"{diff.years} años y {diff.months} meses."
         
+            
+        
+    def get_tiempo_paracorte(self):
+        d1 =  self.corte_date
+        d2 =  datetime.today().date()
+        diff = relativedelta.relativedelta(d1, d2)
+        if int(diff.months) > 0:
+            return f"{diff.years} años y {diff.months} meses."
+        
+    
     def get_price(self):
         if self.price_subscription:
             return "{:.2f}".format(int(self.price_subscription.price or 0) /100)
@@ -198,6 +218,7 @@ class OrderItem(models.Model):
     def get_label_type_choice(self):
         type = self.type_inversion
         return 'Monthly subscription' if type == 'M' else 'One Payment'
+    
     
 class Order(models.Model):
     user = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
