@@ -258,14 +258,16 @@ class CreateSubscriptionView(APIView):
             subscription = request.user.subscription
             stripe_subscription = stripe.Subscription.retrieve(subscription.stripe_subscription_id)
             estado_actual = stripe_subscription.status
-            
-            if estado_actual == 'trialing':
-                stripe_subscription = stripe.Subscription.modify(
-                    subscription.stripe_subscription_id,
-                    trial_end="now",
-                )
-                subscription.status=stripe_subscription.status
-                subscription.save()  
+            print(len(orden.items.filter(type_inversion = 'M')))
+            if len(orden.items.filter(type_inversion = 'M')) > 0:
+                print("entro si hay suscripcion")
+                if estado_actual == 'trialing':
+                    stripe_subscription = stripe.Subscription.modify(
+                        subscription.stripe_subscription_id,
+                        trial_end="now",
+                    )
+                    subscription.status=stripe_subscription.status
+                    subscription.save()  
             
             mis_cantidades = {}
             mis_proyectos = {}
