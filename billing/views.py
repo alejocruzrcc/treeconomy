@@ -312,11 +312,12 @@ class CreateSubscriptionView(APIView):
                 )
         
             ## Borramos la Gratis de stripe
-            for item in items_existentes:  
-                if item['price']["id"] == settings.STRIPE_FREE_PRICE:
-                        stripe.SubscriptionItem.delete(
-                            item['id']
-                        )
+            if len(orden.items.filter(type_inversion = 'M')) > 0:
+                for item in items_existentes:  
+                    if item['price']["id"] == settings.STRIPE_FREE_PRICE:
+                            stripe.SubscriptionItem.delete(
+                                item['id']
+                            )
             
             datasub = {}
             datach = {}
