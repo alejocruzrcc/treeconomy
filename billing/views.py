@@ -33,6 +33,7 @@ from django.utils.text import slugify
 import convertapi
 import json
 from datetime import datetime
+from docx2pdf import convert
 # pdf
 
 
@@ -74,16 +75,17 @@ def generar_contrato(request, orden, perfil):
     doc.save("billing/templates/billing/contrato_editado.docx")
 
     #doc_docx = aw.Document("billing/templates/billing/contrato_editado.docx")
-    convertapi.api_secret = settings.CONVERTAPI_SECRET_KEY
-    result = convertapi.convert('pdf', { 'File': "billing/templates/billing/contrato_editado.docx" })
+    #convertapi.api_secret = settings.CONVERTAPI_SECRET_KEY
+    #result = convertapi.convert('pdf', { 'File': "billing/templates/billing/contrato_editado.docx" })
     # save to file
-    result.file.save("billing/templates/billing/contrato_editado.pdf")
+    #result = convert("billing/templates/billing/contrato_editado.docx", "billing/templates/billing/contrato_editado.pdf" )
+    #result.file.save("billing/templates/billing/contrato_editado.pdf")
     
     #doc_docx.save("billing/templates/billing/contrato_editado.pdf")
-    path = Path("billing/templates/billing/contrato_editado.pdf")
+    path = Path("billing/templates/billing/contrato_editado.docx")
     with path.open(mode='rb') as f:
         print(path.name)
-        orden.contrato = File(f, name="contrato-%s.pdf" % (slugify(factura.comprador_nombre)))
+        orden.contrato = File(f, name="contrato-%s.docx" % (slugify(factura.comprador_nombre)))
         orden.save()
     
     
@@ -196,6 +198,7 @@ class CreateSubscriptionView(APIView):
         profile = get_object_or_404(Profile, user_id=request.user.id)
         customer_id = profile.stripe_customer_id
         orden =  get_or_set_order_session(self.request)
+        
         try:
             #vincular el metodo de pago al cliente
             stripe.PaymentMethod.attach(
@@ -253,86 +256,77 @@ class CreateSubscriptionView(APIView):
                     )
                 except Exception as e:
                     print(str(e))
-                    return Response({
-                        "error": {'message': str(e)}
-                    })
+                    
 
             #crear suscripcion
-            if len(orden.items.filter(type_inversion = 'M')) > 0:
-                subscription = request.user.subscription
-                stripe_subscription = stripe.Subscription.retrieve(subscription.stripe_subscription_id)
-                estado_actual = stripe_subscription.status
-                print(len(orden.items.filter(type_inversion = 'M')))
+            datasub = {}
+            datach = {}
+            subscription = request.user.subscription
+            stripe_subscription = stripe.Subscription.retrieve(subscription.stripe_subscription_id)
+            estado_actual = stripe_subscription.status
+            mis_cantidades = {}
+            mis_proyectos = {}
             
-                print("entro si hay suscripcion")
-                if estado_actual == 'trialing':
-                    stripe_subscription = stripe.Subscription.modify(
-                        subscription.stripe_subscription_id,
-                        trial_end="now",
-                    )
-                    subscription.status=stripe_subscription.status
-                    subscription.save()  
+            items_existentes = stripe.SubscriptionItem.list(
+                subscription = stripe_subscription.id
+            )
             
-                mis_cantidades = {}
-                mis_proyectos = {}
-                ## Creamos un diccionario de los productos segun codigo de precio y cantidad
-                ## Creamos un diccionario de los productos segun codigo de precio y su proyecto
-                for item in orden.items.filter(type_inversion = 'M'):
-                    mis_cantidades[item.project.price_subscription.stripe_price_id] = item.quantity
-                    mis_proyectos[item.project.price_subscription.stripe_price_id] =  item.project
-                    #registrar_pbi(request.user, item.project, item.quantity, 0)
-                
-                # Busca subscription Item o por el contrario la crea
-                subidos= []
-                mis_precios = list(mis_cantidades.keys())
-                items_existentes = stripe.SubscriptionItem.list(
-                    subscription = stripe_subscription.id
+            if estado_actual == 'trialing':
+                stripe_subscription = stripe.Subscription.modify(
+                    subscription.stripe_subscription_id,
+                    trial_end="now",
                 )
-                
-                for item in items_existentes:  
-                    if item['price']["id"] in mis_precios:  
-                        new_quantity = mis_cantidades[item['price']["id"]]
-                        actual_quantity = item['quantity']
-                        stripe.SubscriptionItem.modify(
-                            item.id,
-                            quantity= actual_quantity + new_quantity,
-                            proration_behavior='always_invoice',
-                            metadata={'order_id': orden.id,
-                                    'user': request.user.id},
-                        )    
-                        subidos.append(item['price']["id"])
-                
-                for k in subidos:
-                    mis_cantidades.pop(k)
-                for item in list(mis_cantidades.keys()): 
-                    stripe.SubscriptionItem.create(
-                        subscription=stripe_subscription.id,
-                        price= item,
-                        proration_behavior='always_invoice',
-                        quantity= mis_cantidades[item],
-                        metadata={'order_id': orden.id,
-                                'user': request.user.id
-                                },
-                    )
+                subscription.status=stripe_subscription.status
+                subscription.save()  
             
-                ## Borramos la Gratis de stripe
-                
+            if len(orden.items.filter(type_inversion = 'M')) > 0:
                 for item in items_existentes:  
                     if item['price']["id"] == settings.STRIPE_FREE_PRICE:
                             stripe.SubscriptionItem.delete(
                                 item['id']
                             )
-                
-                datasub = {}
-                datach = {}
-                
-                datasub.update(stripe_subscription)
-                #datach.update(session)
-                
-                data= [datasub, datach]
-                
-                generar_contrato(request, orden, profile)
-                return Response(data)
+            
+            ## Creamos un diccionario de los productos segun codigo de precio y cantidad
+            ## Creamos un diccionario de los productos segun codigo de precio y su proyecto
+            for item in orden.items.filter(type_inversion = 'M'):
+                mis_cantidades[item.project.price_subscription.stripe_price_id] = item.quantity
+                mis_proyectos[item.project.price_subscription.stripe_price_id] =  item.project
+                #registrar_pbi(request.user, item.project, item.quantity, 0)
+            
+            # Busca subscription Item o por el contrario la crea
+            subidos= []
+            mis_precios = list(mis_cantidades.keys())
+                        
+            for item in items_existentes:  
+                if item['price']["id"] in mis_precios:  
+                    new_quantity = mis_cantidades[item['price']["id"]]
+                    actual_quantity = item['quantity']
+                    stripe.SubscriptionItem.modify(
+                        item.id,
+                        quantity= actual_quantity + new_quantity,
+                        proration_behavior='always_invoice',
+                        metadata={'order_id': orden.id,
+                                'user': request.user.id},
+                    )    
+                    subidos.append(item['price']["id"])
+            
+            for k in subidos:
+                mis_cantidades.pop(k)
+            for item in list(mis_cantidades.keys()): 
+                stripe.SubscriptionItem.create(
+                    subscription=stripe_subscription.id,
+                    price= item,
+                    proration_behavior='always_invoice',
+                    quantity= mis_cantidades[item],
+                    metadata={'order_id': orden.id,
+                            'user': request.user.id
+                            },
+                )
+            
+            datasub.update(stripe_subscription)
+            data= [datasub, datach]
+            generar_contrato(request, orden, profile)
+            return Response(data)
         except Exception as e:
             return Response({
                 "error": {'message': str(e)}
@@ -441,7 +435,7 @@ def webhook(request):
   # Handle the event
   if event.type == 'payment_intent.succeeded':
     print("entro a webhook intent succeded")
-    payment_intent = event.data.object # contains a stripe.PaymentIntent
+    #payment_intent = event.data.object # contains a stripe.PaymentIntent
     # Then define and call a method to handle the successful payment intent.
     # handle_payment_intent_succeeded(payment_intent)
   elif event.type == 'payment_method.attached':
