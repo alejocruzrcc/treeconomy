@@ -33,7 +33,7 @@ from django.utils.text import slugify
 import convertapi
 import json
 from datetime import datetime
-from docx2pdf import convert
+
 # pdf
 
 
