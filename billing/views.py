@@ -279,12 +279,7 @@ class CreateSubscriptionView(APIView):
                 subscription.status=stripe_subscription.status
                 subscription.save()  
             
-            if len(orden.items.filter(type_inversion = 'M')) > 0:
-                for item in items_existentes:  
-                    if item['price']["id"] == settings.STRIPE_FREE_PRICE:
-                            stripe.SubscriptionItem.delete(
-                                item['id']
-                            )
+            
             
             ## Creamos un diccionario de los productos segun codigo de precio y cantidad
             ## Creamos un diccionario de los productos segun codigo de precio y su proyecto
@@ -322,6 +317,13 @@ class CreateSubscriptionView(APIView):
                             'user': request.user.id
                             },
                 )
+            
+            if len(orden.items.filter(type_inversion = 'M')) > 0:
+                for item in items_existentes:  
+                    if item['price']["id"] == settings.STRIPE_FREE_PRICE:
+                            stripe.SubscriptionItem.delete(
+                                item['id']
+                            )
             
             datasub.update(stripe_subscription)
             data= [datasub, datach]
