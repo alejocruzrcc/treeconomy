@@ -27,26 +27,30 @@
 <div class="row videos" style="text-align: center;">
   <div class="col-lg-6">
     <h3>¿Qué es Treeconomy?</h3>
-    <video  
-    style="width: 100%;" 
-    controls="controls"
-    id="video_que_es"
-    {% if video_que_es.thumb %}
-    poster="{{ video_que_es.thumb.url }}"
+    {% if video_que_es %}
+      <video  
+      style="width: 100%;" 
+      controls="controls"
+      id="video_que_es"
+      {% if video_que_es.thumb %}
+      poster="{{ video_que_es.thumb.url }}"
+      {% endif %}
+      >
+        <source src="{{ video_que_es.video.url }}" type="video/mp4">
+      </video>
     {% endif %}
-    >
-      <source src="{{ video_que_es.video.url }}" type="video/mp4">
-    </video>
   </div>
   <div class="col-lg-6">
     <h3>Impacto...</h3>
-    <video  style="width: 100%;" controls
-    {% if video_que_es.thumb %}
-    poster="{{ video_impacto.thumb.url }}"
+    {% if video_que_es %}
+      <video  style="width: 100%;" controls
+      {% if video_impacto.thumb %}
+      poster="{{ video_impacto.thumb.url }}"
+      {% endif %}
+      >
+          <source src="{{ video_impacto.video.url }}" type="video/mp4"></source>
+          Your browser does not support the video tag.
+        </video>
     {% endif %}
-    >
-        <source src="{{ video_impacto.video.url }}" type="video/mp4"></source>
-        Your browser does not support the video tag.
-      </video>
   </div>
 </div>

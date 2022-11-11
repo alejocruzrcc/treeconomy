@@ -169,9 +169,13 @@ class Project(models.Model):
         d1 =  self.corte_date
         d2 =  datetime.today().date()
         diff = relativedelta.relativedelta(d1, d2)
-        if int(diff.months) > 0:
+    
+        if int(diff.years) == 0 and int(diff.months) == 0:
+            return f"{diff.days} días."
+        elif int(diff.years) == 0 and int(diff.months) > 0:
+            return f"{diff.months} meses y {diff.days} días."
+        else:
             return f"{diff.years} años y {diff.months} meses."
-        
     
     def get_price(self):
         if self.price_subscription:
