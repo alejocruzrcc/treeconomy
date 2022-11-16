@@ -154,23 +154,29 @@ class CheckoutView(View):
         return render(request, 'billing/checkout.html', context)
 
 def registrar_pbi(investor, project, n_trees_subscription, n_trees_one_payment):   
+                print("entro a pbi")
                 try:
                     obj = ProjectByInvestor.objects.get(
                         investor= investor,
                         project = project)
+                    print("si existe pbi 1")
                     nts_actual = obj.n_trees_subscription
                     nto_actual = obj.n_trees_one_payment
                     obj.n_trees_subscription = nts_actual + n_trees_subscription
                     obj.n_trees_one_payment = nto_actual + n_trees_one_payment
+                    print("si existe pbi")
                     obj.save()
                     
                 except ProjectByInvestor.DoesNotExist:
+                    print(f"investor: {investor} y project: {project}" )
                     obj = ProjectByInvestor.objects.create(
                         investor= investor,
-                        project = project
+                        project = project, 
+                        n_trees_subscription = n_trees_subscription,
+                        n_trees_one_payment = n_trees_one_payment
                     )
-                    obj.n_trees_subscription = n_trees_subscription
-                    obj.n_trees_one_payment = n_trees_one_payment
+                    print("no existe pbi")
+                    
                     obj.save() 
             
 def registrar_pbi_sus(investor, project, n_trees_subscription, n_trees_one_payment):   

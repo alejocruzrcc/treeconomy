@@ -13,6 +13,23 @@ class ProjectAdmin(admin.ModelAdmin):
     class Meta:
         model = Project
 
+class SubscriptionAdmin(admin.ModelAdmin):
+    list_display = ('user', 'stripe_subscription_id', 'status',)
+    search_fields = ('user',)
+    #ordering = ('name',)
+    
+    class Meta:
+        model = Subscription
+
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ('user', 'id',)
+    search_fields = ('user',)
+    list_filter = ('user',)
+    #ordering = ('name',)
+    
+    class Meta:
+        model = Order
+
 class PlatAdmin(admin.ModelAdmin):
     list_display = ('plat_id', 'project', 'n_trees',)
     search_fields = ('plat_id', 'project', 'n_trees',)
@@ -46,12 +63,12 @@ class BillAdmin(admin.ModelAdmin):
 
 admin.site.register(Bill)
 admin.site.register(Project, ProjectAdmin)
-admin.site.register(Order)
+admin.site.register(Order, OrderAdmin)
 admin.site.register(OrderItem)
 admin.site.register(Plat, PlatAdmin)
 admin.site.register(ProjectTrackingRecord, ProjectRecordAdmin)
 admin.site.register(PercentageRecord, PercentageRecordAdmin)
 admin.site.register(Pricing)
-admin.site.register(Subscription)
+admin.site.register(Subscription, SubscriptionAdmin)
 admin.site.register(SubscriptionElement)
 admin.site.register(Rentabilidad)

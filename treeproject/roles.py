@@ -3,6 +3,7 @@ from rolepermissions.roles import AbstractUserRole
 class Admin(AbstractUserRole):
     available_permissions = {
         'manage_a_project': True,
+        'generate_report': True
     }
 
 class Inversor(AbstractUserRole):

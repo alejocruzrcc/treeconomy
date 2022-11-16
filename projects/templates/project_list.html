@@ -181,11 +181,38 @@ h3 {
   <nav class="fondob" aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item active" aria-current="page"><a href="/">Inicio</a> / Proyectos</li>
-        
     </ol>
-    
   </nav>
   
+  {% if user|can:'generate_report' %}
+  <hr>
+  <div class="row">
+    <div class="col">
+      <div class="dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+          Reporte Clientes
+        </a>
+      
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <li><a class="dropdown-item" href="{% url 'exportclientsxls' %}">Excel (.xls)</a></li>
+        </ul>
+      </div>
+    </div>  
+    <div class="col">
+      <div class="dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+          Reporte Órdenes
+        </a>
+    
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <li><a class="dropdown-item" href="{% url 'exportordersxls' %}">Excel (.xls)</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <hr>
+{% endif %}
 
   {% include "videos.html" with video_que_es=video_que_es video_impacto=video_impacto %}
 

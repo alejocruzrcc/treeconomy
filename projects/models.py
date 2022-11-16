@@ -163,7 +163,9 @@ class Project(models.Model):
         if int(diff.months) > 0:
             return f"{diff.years} años y {diff.months} meses."
         
-            
+            print(d1)
+        print(d2)
+        print(diff)
         
     def get_tiempo_paracorte(self):
         d1 =  self.corte_date
@@ -238,6 +240,12 @@ class Order(models.Model):
     @property
     def reference_number(self):
         return f"ORDER-{self.pk}"
+
+    def get_status(self):
+        if self.ordered:
+            return "COMPLETADO"
+        else:
+            return "FALLIDO O INCOMPLETO"
 
     def get_raw_subtotal(self):
         total =  0

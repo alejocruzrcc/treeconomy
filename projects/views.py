@@ -185,6 +185,8 @@ def crear(request):
         return redirect('/projects')
     return render(request, "create.html", {'formulario': formulario})
 
+
+
 @has_role_decorator('admin')  
 def eliminar(request, pk):
   project = Project.objects.get(pk=pk)

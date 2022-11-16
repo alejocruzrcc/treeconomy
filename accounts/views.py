@@ -13,6 +13,7 @@ from django.core.mail import send_mail
 from django.template import RequestContext
 import hashlib, datetime, random
 from .models import *
+from projects.models import Order, OrderItem
 from django.contrib import messages
 from django.utils import timezone
 from django.utils.encoding import force_bytes, force_str
@@ -25,8 +26,14 @@ from rolepermissions.roles import assign_role
 from django.core import serializers
 from django.http import JsonResponse
 from django.views import generic
+from rolepermissions.decorators import has_role_decorator
 from dashboard.views import invest_json, calculo_co2
 import stripe
+import xlwt
+from django.http import HttpResponse
+from django.contrib.auth.models import User
+from datetime import datetime
+import pandas as pd
 
 stripe.api_key = settings.STRIPE_PRIVATE_KEY
 
@@ -172,10 +179,9 @@ def edit(request):
 
 @login_required
 def profile(request):
-    pbi = ProjectByInvestor.objects.filter(investor= request.user)
-    total = sum(list(map(lambda x: x.n_trees(), pbi )))
-    inversion_int =  sum(list(map(lambda x: x.inversion(), pbi )))
-    inversion = "{:.2f}".format(int(inversion_int or 0) /100)
+    user = request.user
+    total = user.profile.get_total_trees
+    inversion = user.profile.get_inversion
     ## Utilidad
     invest = invest_json(request)
     resumen = invest[1]
@@ -225,3 +231,89 @@ class ModifySubscriptionElement(generic.View):
         
         return redirect("/account/profile")
     
+
+
+@has_role_decorator('admin')   
+def export_clients_xls(request):
+    response = HttpResponse(content_type='application/ms-excel')
+    today = datetime.today().date()
+    response['Content-Disposition'] = f'attachment; filename="clientes-{today}.xls"'
+    
+    wb = xlwt.Workbook(encoding='utf-8')
+    ws = wb.add_sheet('Users Data') # this will make a sheet named Users Data
+
+    # Sheet header, first row
+    row_num = 0
+
+    font_style = xlwt.XFStyle()
+    font_style.font.bold = True
+
+    columns = ['Username', 'First Name', 'Last Name', 'Email Address', 'Total Árboles', 'Inversión' ]
+
+    for col_num in range(len(columns)):
+        ws.write(row_num, col_num, columns[col_num], font_style) # at 0 row 0 column 
+
+    # Sheet body, remaining rows
+    font_style = xlwt.XFStyle()
+
+    rows = User.objects.all().values_list('username', 'first_name', 'last_name', 'email')
+    users = User.objects.all()
+    data = []
+    
+    for user in users:
+        if Profile.objects.filter(user=user).exists():
+            data.append([user.username, user.first_name, user.last_name, user.email, str(user.profile.get_total_trees()), str(user.profile.get_inversion())])
+        else:
+            data.append([user.username, user.first_name, user.last_name, user.email, "Usuario sin perfil"])
+    df = pd.DataFrame(data, columns=columns)
+    
+    for index, row in df.iterrows():
+        row_num += 1
+        for col_num in range(len(row)):
+            ws.write(row_num, col_num, row[col_num], font_style)
+
+    wb.save(response)
+
+    return response
+    
+@has_role_decorator('admin')   
+def export_orders_xls(request):
+    response = HttpResponse(content_type='application/ms-excel')
+    today = datetime.today().date()
+    response['Content-Disposition'] = f'attachment; filename="orders-{today}.xls"'
+    
+    wb = xlwt.Workbook(encoding='utf-8')
+    ws = wb.add_sheet('Users Data') # this will make a sheet named Users Data
+
+    # Sheet header, first row
+    row_num = 0
+
+    font_style = xlwt.XFStyle()
+    font_style.font.bold = True
+
+    columns = ['Id', 'Date', 'Lote', 'Cantidad', 'Precio Unitario', 'Total', 'Status', 'Inversion Type', 'First Name', 'Last Name', 'Customer email', 'Ciudad', 'Año', 'Mes']
+
+    for col_num in range(len(columns)):
+        ws.write(row_num, col_num, columns[col_num], font_style) # at 0 row 0 column 
+
+    # Sheet body, remaining rows
+    font_style = xlwt.XFStyle()
+
+    orderitems = OrderItem.objects.all()
+    data = []
+    
+    for item in orderitems:
+        order = item.order
+        if order.user:
+            data.append([order.id, str(order.ordered_date) if order.ordered_date else "Sin fecha", item.project.name, item.quantity, f"${item.project.get_price()}", item.get_total_item_price(), order.get_status(), item.get_type_inversion_display(), str(order.user.first_name), str(order.user.last_name), str(order.user.email), str(order.user.profile.city), order.ordered_date.strftime('%Y') if order.ordered_date else '', order.ordered_date.strftime('%b') if order.ordered_date else ''])
+   
+    df = pd.DataFrame(data, columns=columns)
+    
+    for index, row in df.iterrows():
+        row_num += 1
+        for col_num in range(len(row)):
+            ws.write(row_num, col_num, row[col_num], font_style)
+
+    wb.save(response)
+
+    return response

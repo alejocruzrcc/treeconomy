@@ -85,6 +85,17 @@ class Profile(models.Model):
     @receiver(post_save, sender=User) #add this
     def save_user_profile(sender, instance, **kwargs):
         instance.profile.save()
+
+    def get_total_trees(self):
+        pbi = ProjectByInvestor.objects.filter(investor= self.user)
+        total = sum(list(map(lambda x: x.n_trees(), pbi )))
+        return total
+    
+    def get_inversion(self):
+        pbi = ProjectByInvestor.objects.filter(investor= self.user)
+        inversion_int =  sum(list(map(lambda x: x.inversion(), pbi )))
+        inversion = "{:.2f}".format(int(inversion_int or 0) /100)
+        return inversion
         
     def __str__(self):
         return f'Perfil para usuario {self.user.username}'
