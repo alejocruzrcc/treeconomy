@@ -33,6 +33,7 @@ from django.utils.text import slugify
 import convertapi
 import json
 from datetime import datetime
+import subprocess
 
 # pdf
 
@@ -56,11 +57,24 @@ class PlantillaOrderView(generic.TemplateView):
     def get_object(self):
         return get_object_or_404(Order, pk = self.kwargs["pk"])
     
+
+def generate_pdf(doc_path, path):
+    subprocess.call(['soffice',
+                 # '--headless',
+                 '--convert-to',
+                 'pdf',
+                 '--outdir',
+                 path,
+                 doc_path])
+    return doc_path
+
+
+
 def generar_contrato(request, orden, perfil):
     factura = orden.bill
     doc = DocxTemplate("billing/templates/billing/contrato.docx")
     context = {
-        'fecha': orden.ordered_date,
+        'fecha': str(orden.ordered_date),
         'orden': orden.id,
         'comprador_nombre': factura.comprador_nombre, 
         'comprador_id': factura.comprador_id,
@@ -82,10 +96,11 @@ def generar_contrato(request, orden, perfil):
     #result.file.save("billing/templates/billing/contrato_editado.pdf")
     
     #doc_docx.save("billing/templates/billing/contrato_editado.pdf")
-    path = Path("billing/templates/billing/contrato_editado.docx")
+    generate_pdf("billing/templates/billing/contrato_editado.docx", "billing/templates/billing")
+    path = Path("billing/templates/billing/contrato_editado.pdf")
     with path.open(mode='rb') as f:
         print(path.name)
-        orden.contrato = File(f, name="contrato-%s.docx" % (slugify(factura.comprador_nombre)))
+        orden.contrato = File(f, name="contrato-%s.pdf" % (slugify(factura.comprador_nombre)))
         orden.save()
     
     

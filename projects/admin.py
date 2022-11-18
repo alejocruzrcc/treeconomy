@@ -50,18 +50,17 @@ class PercentageRecordAdmin(admin.ModelAdmin):
 
     class Meta:
         model = PercentageRecord
-        
-class BillAdmin(admin.ModelAdmin):
-    list_display = [
-        'address_line_1',
-        'address_line_2',
-        'zip_code',
-        'city',
-        'address_type',
-    ]
-    
 
-admin.site.register(Bill)
+class BillAdmin(admin.ModelAdmin):
+    list_display = ('id', 'user', 'comprador_nombre', 'comprador_id', 'city')
+    search_fields = ('user',)
+    list_filter = ('user',)
+    #ordering = ('name',)
+    
+    class Meta:
+        model = Bill
+
+admin.site.register(Bill, BillAdmin)
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Order, OrderAdmin)
 admin.site.register(OrderItem)
