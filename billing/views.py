@@ -12,6 +12,11 @@ from accounts.models import Profile, ProjectByInvestor
 from projects.models import OrderItem, Pricing, Subscription, Order, SubscriptionElement, Bill, Project
 from .utils import get_or_set_order_session
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.sites.shortcuts import get_current_site
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.core.mail import EmailMessage
+from django.utils.encoding import force_bytes, force_str
+from accounts.token_generator import account_activation_token
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.contrib import messages
@@ -102,6 +107,19 @@ def generar_contrato(request, orden, perfil):
         print(path.name)
         orden.contrato = File(f, name="contrato-%s.pdf" % (slugify(factura.comprador_nombre)))
         orden.save()
+        current_site = get_current_site(request)
+        email_subject = 'Pago exitoso con Treeconomy.Inc'
+        message = render_to_string('registration/compra_exitosa.html', {
+            'user': request.user,
+            'domain': current_site.domain,
+            'uid': urlsafe_base64_encode(force_bytes(request.user.pk)),
+            'token': account_activation_token.make_token(request.user),
+        })
+        to_email = request.user.email
+        email = EmailMessage(email_subject, message, to=[to_email])
+        email.content_subtype = "html"
+        email.attach_file(orden.contrato.path)
+        email.send()
     
     
 class CarteraView(generic.TemplateView):
