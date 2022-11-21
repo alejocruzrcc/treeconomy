@@ -1,3 +1,4 @@
+libreoffice
 libsm6
 libice6
 libxinerama1
@@ -6,3 +7,4 @@ libharfbuzz0b
 libharfbuzz-icu0
 libx11-xcb1
 libxcb1
+libxfixes3
