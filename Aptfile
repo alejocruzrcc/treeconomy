@@ -6,3 +6,4 @@ libharfbuzz0b
 libharfbuzz-icu0
 libx11-xcb1
 libxcb1
+unoconv
