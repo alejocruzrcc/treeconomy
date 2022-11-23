@@ -40,6 +40,7 @@ import json
 from datetime import datetime
 import subprocess
 from io import BytesIO
+import os
 # pdf
 
 
@@ -131,7 +132,8 @@ def generar_contrato(request, orden, perfil):
         to_email = request.user.email
         email = EmailMessage(email_subject, message, to=[to_email])
         email.content_subtype = "html"
-        email.attach_file(orden.contrato.path)
+        contrato_path = os.path.join(settings.MEDIA_ROOT, orden.contrato.name)
+        email.attach_file(contrato_path)
         email.send()
     except Exception as e:
         print(str(e))
