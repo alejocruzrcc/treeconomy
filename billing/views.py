@@ -24,7 +24,7 @@ from .models import BillingProfile, Card
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.template.loader import render_to_string
 from django.template.loader import get_template
-from .utils import render_to_pdf
+from .utils import render_to_pdf, render_to_pdf_context
 from django.contrib.auth.decorators import login_required
 from django.db.models import F
 from docxtpl import DocxTemplate
@@ -39,17 +39,17 @@ import convertapi
 import json
 from datetime import datetime
 import subprocess
-
+from io import BytesIO
 # pdf
 
 
 
 stripe.api_key = settings.STRIPE_PRIVATE_KEY
 
+    
 def generatePdf(request,pk):
     pdf = render_to_pdf('billing/plantilla_bill.html',pk)
     return HttpResponse(pdf, content_type='application/pdf')
-
 class PlantillaOrderView(generic.TemplateView):
     model = Order
     template_name = 'billing/plantilla_bill.html'
@@ -77,7 +77,8 @@ def generate_pdf(doc_path, path):
 
 def generar_contrato(request, orden, perfil):
     factura = orden.bill
-    doc = DocxTemplate("billing/templates/billing/contrato.docx")
+    #doc = DocxTemplate("billing/templates/billing/contrato.docx")
+    #dochtml = render("billing/templates/billing/plantilla_contrato.html")
     context = {
         'fecha': str(orden.ordered_date),
         'orden': orden.id,
@@ -90,8 +91,11 @@ def generar_contrato(request, orden, perfil):
         'beneficiario_email': factura.beneficiario_email,
         'beneficiario_telefono': factura.beneficiario_phone
         }
-    doc.render(context)
-    doc.save("billing/templates/billing/contrato_editado.docx")
+    pdf = render_to_pdf_context('billing/plantilla_contrato.html',context)
+    #doc.render(context)
+    #doc.save("billing/templates/billing/contrato_editado.docx")
+
+    ## Prueba  con convertapi se avabaron las conversiones gratuiitas
 
     #doc_docx = aw.Document("billing/templates/billing/contrato_editado.docx")
     #convertapi.api_secret = settings.CONVERTAPI_SECRET_KEY
@@ -101,12 +105,21 @@ def generar_contrato(request, orden, perfil):
     #result.file.save("billing/templates/billing/contrato_editado.pdf")
     
     #doc_docx.save("billing/templates/billing/contrato_editado.pdf")
-    generate_pdf("billing/templates/billing/contrato_editado.docx", "billing/templates/billing")
+
+    ## prueba con soffice: no funciono en produccion porblema de libreoffice con heroku
+    #generate_pdf("billing/templates/billing/contrato_editado.docx", "billing/templates/billing")
+
+    #Prueba con un html similar a la generación de factura
+    
     path = Path("billing/templates/billing/contrato_editado.pdf")
-    with path.open(mode='rb') as f:
-        print(path.name)
-        orden.contrato = File(f, name="contrato-%s.pdf" % (slugify(factura.comprador_nombre)))
-        orden.save()
+    
+    filename = "contrato-%s.pdf" % (slugify(factura.comprador_nombre))
+    orden.contrato.save(filename, File(BytesIO(pdf.content)))
+    orden.save()
+    print(orden.contrato)
+    try:
+        
+        #orden.contrato = File(f, name="contrato-%s.pdf" % (slugify(factura.comprador_nombre)))
         current_site = get_current_site(request)
         email_subject = 'Pago exitoso con Treeconomy.Inc'
         message = render_to_string('registration/compra_exitosa.html', {
@@ -120,7 +133,9 @@ def generar_contrato(request, orden, perfil):
         email.content_subtype = "html"
         email.attach_file(orden.contrato.path)
         email.send()
-    
+    except Exception as e:
+        print(str(e))
+        
     
 class CarteraView(generic.TemplateView):
     template_name = 'billing/cartera.html'

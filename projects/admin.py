@@ -22,7 +22,7 @@ class SubscriptionAdmin(admin.ModelAdmin):
         model = Subscription
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('user', 'id',)
+    list_display = ('user', 'id', 'ordered')
     search_fields = ('user',)
     list_filter = ('user',)
     #ordering = ('name',)
