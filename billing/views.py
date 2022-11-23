@@ -41,6 +41,7 @@ from datetime import datetime
 import subprocess
 from io import BytesIO
 import os
+from django.utils.crypto import get_random_string
 # pdf
 
 
@@ -113,8 +114,9 @@ def generar_contrato(request, orden, perfil):
     #Prueba con un html similar a la generación de factura
     
     path = Path("billing/templates/billing/contrato_editado.pdf")
+    unique_id = get_random_string(length=16)
     
-    filename = "contrato-%s.pdf" % (slugify(factura.comprador_nombre))
+    filename = "contrato-%s.pdf" % (slugify(factura.comprador_nombre) + "-" + str(orden.id))
     orden.contrato.save(filename, File(BytesIO(pdf.content)))
     orden.save()
     print(orden.contrato)
