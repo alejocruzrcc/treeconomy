@@ -19,9 +19,11 @@ from django.conf import settings
 from django.views import static
 from django.conf.urls.static import static
 import accounts
+
 from projects.views import ProjectListView
 from django.contrib.auth.decorators import login_required
 from accounts import views as account_views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -35,6 +37,7 @@ urlpatterns = [
     path('dashboard/', include('dashboard.urls')),
     path('exportclientsxls/', login_required(account_views.export_clients_xls), name='exportclientsxls'),
     path('exportordersxls/', login_required(account_views.export_orders_xls), name='exportordersxls'),
+    
 ] 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

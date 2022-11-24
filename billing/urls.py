@@ -21,6 +21,6 @@ urlpatterns = [
     path('failed/', PaymentFailedView.as_view(), name='failed'),
     path('history/', OrderHistoryListView.as_view(), name='history'),
     path('webhook/', views.webhook, name='webhook'),
-   
+    path('enviarcontrato/', login_required(views.enviar_contrato), name='enviarcontrato'),
 ]
   

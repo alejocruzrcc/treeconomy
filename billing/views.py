@@ -42,6 +42,8 @@ import subprocess
 from io import BytesIO
 import os
 from django.utils.crypto import get_random_string
+from django.core.files.storage import default_storage
+from rolepermissions.decorators import has_role_decorator
 # pdf
 
 
@@ -120,6 +122,7 @@ def generar_contrato(request, orden, perfil):
     orden.contrato.save(filename, File(BytesIO(pdf.content)))
     orden.save()
     print(orden.contrato)
+    #orden.contrato.file.save("billing/templates/billing/contrato_editado.pdf")
     try:
         
         #orden.contrato = File(f, name="contrato-%s.pdf" % (slugify(factura.comprador_nombre)))
@@ -134,8 +137,37 @@ def generar_contrato(request, orden, perfil):
         to_email = request.user.email
         email = EmailMessage(email_subject, message, to=[to_email])
         email.content_subtype = "html"
-        contrato_path = os.path.join(settings.MEDIA_ROOT, orden.contrato.name)
-        email.attach_file(contrato_path)
+   
+        #filename = os.path.join(settings.MEDIA_ROOT, orden.contrato.name)
+        filename = orden.contrato.path
+        print(filename)
+        with default_storage.open(filename, "rb") as fh:
+            email.attach(filename, fh.read())
+        email.send()
+    except Exception as e:
+        print(str(e))
+
+
+@has_role_decorator('admin')  
+def enviar_contrato(request):
+    orden = Order.objects.get(pk=819)
+    try:
+        current_site = get_current_site(request)
+        email_subject = 'Pago exitoso con Treeconomy.Inc'
+        message = render_to_string('registration/compra_exitosa.html', {
+            'user': request.user,
+            'domain': current_site.domain,
+            'uid': urlsafe_base64_encode(force_bytes(request.user.pk)),
+            'token': account_activation_token.make_token(request.user),
+        })
+        to_email = request.user.email
+        email = EmailMessage(email_subject, message, to=[to_email])
+        email.content_subtype = "html"
+
+        filename = orden.contrato.path
+        print(filename)
+        with default_storage.open(filename, "rb") as fh:
+            email.attach(filename, fh.read())
         email.send()
     except Exception as e:
         print(str(e))
