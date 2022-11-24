@@ -164,7 +164,7 @@ def enviar_contrato(request):
         email = EmailMessage(email_subject, message, to=[to_email])
         email.content_subtype = "html"
 
-        filename = orden.contrato.path
+        filename = orden.contrato.name
         print(filename)
         with default_storage.open(filename, "rb") as fh:
             email.attach(filename, fh.read())
