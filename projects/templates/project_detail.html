@@ -10,7 +10,7 @@
 <style>
 .banner-producto {
   background-color: #018669;
-  background-image: url({% static "projects/img/fondo_project_detail.png" %});
+  background-image: url("{{project.tipoarbol.image_back.url}}");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -21,11 +21,13 @@
   font-family: "comfortaa-bold";
   color: #fff;
   font-size: 40px;
+  text-shadow: 3px 4px 7px rgba(81,67,21,1);
 }
 .banner-producto .titulo-arbol {
   font-family: "comfortaa-bold";
   color: #fff;
   font-size: 20px;
+  text-shadow: 3px 4px 7px rgba(81,67,21,1);
 }
 
 .banner-producto .contenedor-datos {
@@ -100,10 +102,10 @@
   position: absolute;
   width: 225px;
   height: 285px;
-  bottom: 10px;
-  left: -200px;
-  background-image: url("{% static 'projects/img/arbol.svg' %}");
-  background-size: 100%;
+  bottom: -30px;
+  right: 0px;
+  background: url("{{project.tipoarbol.image_tree.url}}");
+  background-size: 80%;
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -187,8 +189,8 @@
     <div class="row d-flex align-items-center">
       <div class="col-xl-4">
         
-        <h2 class="titulo-cientifico">{{ project.especie }}</h2>
-        <h4 class="titulo-arbol">{{ project.tree_type }}</h4>
+        <h2 class="titulo-cientifico">{{ project.tipoarbol.name }}</h2>
+        <h4 class="titulo-arbol">{{ project.tipoarbol.especie }}</h4>
         
       </div>
       <div class="col-xl-8">
@@ -204,8 +206,8 @@
                   <li>Fecha de plantación: <span>{{ project.plantation_date }}</span> </li>
                   <li>Hectarias: <span>{{ project.n_hectares }}</span> </li>
                   <li>Fecha de corte: <span>{{ project.corte_date }}</span> </li>
-                  <li>Enlace a Google Earth: <span><a href=""> {{ project.project_link }} </a></span> </li>
-                  <li><a class="btn" href="{{ project.coordinates }}" target="_blank"> Ver coordenadas en mapa...</a></li>
+                  <li><a class="btn" href="{{ project.project_link }}" target="_blank">Ver en mapa</a></li>
+                  <!-- <li><a class="btn" href="{{ project.coordinates }}" target="_blank"> Ver coordenadas en mapa...</a></li> -->
                 </ul>
               </div>
               <div class="col-xl-3 col-12">

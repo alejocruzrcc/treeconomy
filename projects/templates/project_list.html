@@ -57,21 +57,47 @@ h5 {
 }
 .titulo1{
   color: #FFFFFF;
-  font-size: 22px;
-  display: flex;
   opacity: 1;
   margin-top: 10px;
 }
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+  .titulo1 {
+    font-size: 20px;
+  }
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+  .titulo1 {
+    font-size: 20px;
+  }
+}
+
+@media all and (max-width: 1200px) and (min-width: 800px) {
+  /* tablets o media pantalla */
+  .titulo1 {
+    font-size: 13px;
+  }
+}
 
 
+@media (max-width: 800px) {
+  /* Celulares*/
+  .titulo1 {
+    font-size: 18px;
+  }
+}
  
 @media (min-width: 600px) {
    .tarjetas { grid-template-columns: repeat(2, 1fr); }
- }
+   
+  }
 
 @media (min-width: 900px){
    .tarjetas {grid-template-columns: repeat(3, 0.4fr); }
- }
+   
+  }
  span{
    color: #FFFFFF;
  }

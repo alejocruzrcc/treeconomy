@@ -1,11 +1,11 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Order, OrderItem, Project, Pricing, Plat, ProjectTrackingRecord, PercentageRecord, Bill, Subscription, SubscriptionElement, Rentabilidad
+from .models import Order, OrderItem, Project, Pricing, Plat, ProjectTrackingRecord, PercentageRecord, Bill, Subscription, SubscriptionElement, Rentabilidad, Tipoarbol
 from .forms import SubscriptionForm
 
 class ProjectAdmin(admin.ModelAdmin):
-    list_display = ('name', 'coordinates', 'n_trees', 'tree_type', 'active',)
+    list_display = ('name', 'coordinates', 'n_trees', 'active',)
     list_filter = ('active',)
     search_fields = ('name', 'coordinates', 'tree_type',)
     #ordering = ('name',)
@@ -71,3 +71,4 @@ admin.site.register(Pricing)
 admin.site.register(Subscription, SubscriptionAdmin)
 admin.site.register(SubscriptionElement)
 admin.site.register(Rentabilidad)
+admin.site.register(Tipoarbol)

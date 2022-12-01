@@ -13,6 +13,7 @@ from dateutil import relativedelta
 from django.contrib.auth.models import User
 from django.conf import settings
 from statistics import mean
+from djongo import models as djongomodels
 import math
 from phonenumber_field.modelfields import PhoneNumberField
 import stripe
@@ -81,6 +82,20 @@ class ProjectManager(models.Manager):
     def search(self, query):
         return self.get_queryset().search(query)
 
+class Tipoarbol(models.Model):
+    slug                = models.SlugField(unique=True, primary_key=True) 
+    name = models.CharField(max_length=100)
+    image_tree = models.ImageField(verbose_name= "Imagen del arbol" ,upload_to="images/projects", null=True, blank=True)
+    image_back = models.ImageField(verbose_name= "Imagen del fondo" ,upload_to="images/projects", null=True, blank=True)
+    especie = models.CharField(max_length=120, verbose_name="Especie", blank=True, null=True)
+
+    def __str__(self):
+        return self.name 
+
+    class Meta:
+        verbose_name= "Tipo de arbol"
+        verbose_name_plural= "Tipos de arbol"
+
 class Pricing(models.Model):
     name= models.CharField(max_length=100)
     slug = models.SlugField(unique=True)
@@ -110,6 +125,8 @@ class Subscription(models.Model):
     def is_active(self):
         return self.status == "active" or self.status == "trialing"
 
+
+
 class Project(models.Model):
     name                = models.CharField(max_length=120)
     slug                = models.SlugField(unique=True, primary_key=True) 
@@ -121,10 +138,9 @@ class Project(models.Model):
     corte_date          = models.DateField()
     price_onepayment    = models.ForeignKey(Pricing, related_name='projects_onepayment', blank=True, null=True, on_delete=models.SET_NULL)
     price_subscription  = models.ForeignKey(Pricing, related_name='projects_subscription', blank=True, null=True, on_delete=models.SET_NULL)
+    tipoarbol           = models.ForeignKey(Tipoarbol, related_name='projects', blank=True, null=True, on_delete=models.CASCADE)
     total_invested      = models.FloatField()
     total_unit_initial  = models.FloatField()
-    tree_type           = models.CharField(max_length=120, verbose_name="Tipo de arbol", blank=True, null=True)
-    especie             = models.CharField(max_length=120, verbose_name="Especie", blank=True, null=True)
     ica_register        = models.CharField(max_length=120, blank=True, null=True)
     n_hectares          = models.FloatField(validators=[MinValueValidator(0.0)])
     trees_left          = models.PositiveIntegerField(blank=True, null=True)
@@ -224,7 +240,6 @@ class OrderItem(models.Model):
     def get_label_type_choice(self):
         type = self.type_inversion
         return 'Monthly subscription' if type == 'M' else 'One Payment'
-    
     
 class Order(models.Model):
     user = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
