@@ -30,6 +30,19 @@ CO2_CONSUMPTION_PER_TREE_PER_YEAR = (CO2_CONSUMPTION_PER_HECTARE_PER_YEAR / TREE
 CO2_CONSUMPTION_PER_TREE_PER_DAY = (CO2_CONSUMPTION_PER_TREE_PER_YEAR / DAYS_PER_YEAR)
 RENTABILIDAD_BASE = 0.094
 
+class Vendedor(models.Model):
+    slug = models.SlugField(unique=True, primary_key=True) 
+    name = models.CharField(max_length=150)
+    email = models.EmailField(max_length=254, null=True, blank=True)
+    phone = PhoneNumberField(blank=True, null=True)
+
+    class Meta:
+        verbose_name = "Vendedor"
+        verbose_name_plural = "Vendedores"
+
+    def __str__(self):
+        return self.name
+
 class Bill(models.Model):
     ADDRESS_CHOICES= (
         ('B', 'Billing'),
@@ -51,6 +64,7 @@ class Bill(models.Model):
     default = models.BooleanField(default=False)
     city = models.CharField(max_length=100)
     zip_code = models.CharField(max_length=100, null=True, blank=True)
+    vendedor = models.ForeignKey(Vendedor, on_delete=models.SET_NULL, null=True, blank=True)
     
     def __str__(self):
         return f"{self.comprador_nombre}, {self.address_line_1}, {self.city}"

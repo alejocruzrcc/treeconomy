@@ -1,7 +1,7 @@
 from django.forms import ModelForm 
 from django.urls import reverse
 from django import forms
-from .models import OrderItem, Project, Bill, Subscription
+from .models import OrderItem, Project, Bill, Subscription, Vendedor
 from accounts.models import ProjectByInvestor, User
 from phonenumber_field.formfields import PhoneNumberField
 from phonenumber_field.widgets import PhoneNumberPrefixWidget
@@ -75,6 +75,7 @@ class BillForm(forms.Form):
     billing_zip_code = forms.CharField(label="Código postal")
     billing_city = forms.CharField(label="Ciudad")
     
+    vendedor = forms.ModelChoiceField(queryset=Vendedor.objects.all(), required=False)
       
     def __init__(self, *args, **kwargs):
         user_id = kwargs.pop('user_id')

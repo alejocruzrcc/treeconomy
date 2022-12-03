@@ -128,7 +128,8 @@ class FacturacionView(generic.FormView):
                 address_line_1=form.cleaned_data['billing_address_line_1'],
                 address_line_2=form.cleaned_data['billing_address_line_2'],
                 zip_code=form.cleaned_data['billing_zip_code'],
-                city=form.cleaned_data['billing_city']
+                city=form.cleaned_data['billing_city'],
+                vendedor= form.cleaned_data['vendedor']
             )
             bill.save()
             order.bill = bill

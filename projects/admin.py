@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Order, OrderItem, Project, Pricing, Plat, ProjectTrackingRecord, PercentageRecord, Bill, Subscription, SubscriptionElement, Rentabilidad, Tipoarbol
+from .models import Order, OrderItem, Project, Pricing, Plat, ProjectTrackingRecord, PercentageRecord, Bill, Subscription, SubscriptionElement, Rentabilidad, Tipoarbol, Vendedor
 from .forms import SubscriptionForm
 
 class ProjectAdmin(admin.ModelAdmin):
@@ -52,7 +52,7 @@ class PercentageRecordAdmin(admin.ModelAdmin):
         model = PercentageRecord
 
 class BillAdmin(admin.ModelAdmin):
-    list_display = ('id', 'user', 'comprador_nombre', 'comprador_id', 'city')
+    list_display = ('id', 'user', 'comprador_nombre', 'comprador_id', 'city', 'vendedor')
     search_fields = ('user',)
     list_filter = ('user',)
     #ordering = ('name',)
@@ -72,3 +72,4 @@ admin.site.register(Subscription, SubscriptionAdmin)
 admin.site.register(SubscriptionElement)
 admin.site.register(Rentabilidad)
 admin.site.register(Tipoarbol)
+admin.site.register(Vendedor)
