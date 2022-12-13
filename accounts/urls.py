@@ -3,7 +3,7 @@ from django.urls import path, include, re_path
 from accounts.models import ProjectByInvestor
 from . import views
 from django.contrib.auth import views as auth_views
-from accounts.forms import EmailValidationOnForgotPassword
+from accounts.forms import EmailValidationOnForgotPassword, PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from .views import ModifySubscriptionElement
 
@@ -29,6 +29,7 @@ urlpatterns = [
     path('activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
         views.activate_account, name='activate'),
     path('account/password_reset/', auth_views.PasswordResetView.as_view(form_class=EmailValidationOnForgotPassword), name='password_reset'),
+    path('account/password_change/', auth_views.PasswordChangeView.as_view(form_class=PasswordChangeForm), name='password_change'),
     #path('your-projects/', ProjectByInvestorView.as_view(), name='projectsbyinvestor'),
     #path('projectsbyinvestor/<int:pk>', ProjectByInvestorDetailView.as_view(), name='project-investor-detail')
     path('modify-subscription-element/<pk>/', 
