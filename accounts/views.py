@@ -34,6 +34,7 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from datetime import datetime
 import pandas as pd
+from rolepermissions.mixins import HasRoleMixin
 
 stripe.api_key = settings.STRIPE_PRIVATE_KEY
 
@@ -232,7 +233,8 @@ class ModifySubscriptionElement(generic.View):
         return redirect("/account/profile")
     
 
-class UserListView(generic.ListView):
+class UserListView(HasRoleMixin, generic.TemplateView):
+    allowed_roles = 'admin'
     model = User
     template_name = 'account/users.html'
 
