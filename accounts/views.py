@@ -232,6 +232,15 @@ class ModifySubscriptionElement(generic.View):
         return redirect("/account/profile")
     
 
+class UserListView(generic.ListView):
+    model = User
+    template_name = 'account/users.html'
+
+    
+    def get_context_data(self, *args, **kwargs):
+        context = super(UserListView, self).get_context_data(*args, **kwargs) 
+        context['usuarios'] = User.objects.all().order_by('-date_joined')     
+        return context
 
 @has_role_decorator('admin')   
 def export_clients_xls(request):
@@ -317,3 +326,6 @@ def export_orders_xls(request):
     wb.save(response)
 
     return response
+
+
+

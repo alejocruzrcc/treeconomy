@@ -210,35 +210,31 @@ h3 {
     </ol>
   </nav>
   
-  {% if user|can:'generate_report' %}
+
+  {% if user|can:'is_admin' %}
   <hr>
   <div class="row">
+    {% if user|can:'generate_report' %}
     <div class="col">
-      <div class="dropdown">
-        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-          Reporte Clientes
-        </a>
-      
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <li><a class="dropdown-item" href="{% url 'exportclientsxls' %}">Excel (.xls)</a></li>
-        </ul>
-      </div>
-    </div>  
+      <a class="button-plant my-3" href="{% url 'exportclientsxls' %}" role="button">Reporte Clientes</a>
+    </div> 
+    {% endif %}
+    {% if user|can:'generate_report' %}
     <div class="col">
-      <div class="dropdown">
-        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-          Reporte Órdenes
-        </a>
-    
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <li><a class="dropdown-item" href="{% url 'exportordersxls' %}">Excel (.xls)</a></li>
-        </ul>
-      </div>
+      <a class="button-plant my-3" href="{% url 'exportordersxls' %}" role="button">Reporte Órdenes</a>
     </div>
+    {% endif %}
+    {% if user|can:'view_userlist' %}
+    <div class="col">
+      <a class="button-plant my-3" href="/account/users" role="button">Usuarios</a>
+    </div>
+    {% endif %}
   </div>
-  
   <hr>
-{% endif %}
+  {% endif %}
+  
+ 
+
 
   {% include "videos.html" with video_que_es=video_que_es video_impacto=video_impacto %}
 
