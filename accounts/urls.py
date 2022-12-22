@@ -5,7 +5,7 @@ from . import views
 from django.contrib.auth import views as auth_views
 from accounts.forms import EmailValidationOnForgotPassword, PasswordChangeForm
 from django.contrib.auth.decorators import login_required
-from .views import ModifySubscriptionElement, UserListView
+from .views import ModifySubscriptionElement, UserListView, PauseSubscriptionElement
 urlpatterns = [
     #postviews
     #path('login/',views.user_login,name='login'),
@@ -33,5 +33,7 @@ urlpatterns = [
     #path('projectsbyinvestor/<int:pk>', ProjectByInvestorDetailView.as_view(), name='project-investor-detail')
     path('modify-subscription-element/<pk>/', 
          ModifySubscriptionElement.as_view(), name='modify-subscription-element'),
+    #path('pause-subscription-element/<pk>/', 
+         #PauseSubscriptionElement.as_view(), name='pause-subscription-element'),
     path('users/',  login_required(UserListView.as_view()), name='users'),
 ]

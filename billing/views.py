@@ -359,7 +359,9 @@ class CreateSubscriptionView(APIView):
             mis_precios = list(mis_cantidades.keys())
                         
             for item in items_existentes:  
-                if item['price']["id"] in mis_precios:  
+                if item['price']["id"] in mis_precios:
+                    print(request.user)
+                    print(request.user.id)
                     new_quantity = mis_cantidades[item['price']["id"]]
                     actual_quantity = item['quantity']
                     stripe.SubscriptionItem.modify(
@@ -552,7 +554,6 @@ def webhook(request):
                         registrar_pbi_sus(user, order_item.project, item['quantity'], 0)
                         
                         precio_loc = get_object_or_404(Pricing, stripe_price_id= item['price']['id'])
-                        
                         try:  
                             element = SubscriptionElement.objects.get(
                                 subscription = subscription,
@@ -560,6 +561,7 @@ def webhook(request):
                         
                         except SubscriptionElement.DoesNotExist:
                             element = SubscriptionElement.objects.create(
+                                stripe_id = item['id'],
                                 subscription = subscription,
                                 price= precio_loc,
                                 project = order_item.project,

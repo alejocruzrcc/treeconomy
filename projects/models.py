@@ -220,6 +220,7 @@ class Project(models.Model):
 
 class SubscriptionElement(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    stripe_id = models.CharField(max_length=150)
     subscription = models.ForeignKey(Subscription, related_name='elements', blank=True, null=True, on_delete=models.CASCADE)
     price =  models.ForeignKey(Pricing, related_name='elements', blank=True, null=True, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField()

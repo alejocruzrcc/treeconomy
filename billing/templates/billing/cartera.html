@@ -55,7 +55,7 @@
                 </td>
                 <td>
                   {% for item in order.items.all %}
-                    {{ item.project.name }} x {{ item.quantity}} <br>
+                    {{ item.project.name }} x {{ item.quantity}} {{ item.get_type_inversion_display }}<br>
                   {% endfor %}
                 <td>
                   ${{ order.get_total }}

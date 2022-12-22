@@ -207,7 +207,7 @@ def profile(request):
         'inversion': inversion,
         'utilidad': suma_utilidad_str,
         'co2_capturado': co2_consumption, 
-        'elementos': elementos
+        'elementos': elementos,
         })
 
 
@@ -231,7 +231,27 @@ class ModifySubscriptionElement(generic.View):
             print("No fue posible cancelar la suscripción")
         
         return redirect("/account/profile")
-    
+
+class PauseSubscriptionElement(generic.View):
+    def get(self, request, *args, **kwargs):    
+        subscription = get_object_or_404(Subscription, user=request.user)
+        price = get_object_or_404(Pricing, pk=kwargs['pk'])
+        try: 
+            selem = SubscriptionElement.objects.get(subscription=subscription, price=price)
+            print(selem)
+            items_existentes = stripe.SubscriptionItem.list(
+                    subscription = subscription.stripe_subscription_id
+                )
+            for item in items_existentes:
+                if item['price']["id"] == price.stripe_price_id:
+                    stripe.SubscriptionItem.delete(
+                    item.id,
+                )
+            selem.delete()
+        except:
+            print("No fue posible cancelar la suscripción")
+        
+        return redirect("/account/profile")
 
 class UserListView(HasRoleMixin, generic.TemplateView):
     allowed_roles = 'admin'
