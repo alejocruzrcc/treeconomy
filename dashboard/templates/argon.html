@@ -166,6 +166,7 @@ h5{
 }
 
 </style>
+<div class="btn-flotante">Hoy ganaste {{ utilidad_hoy }} USD</div>
 <h1 style="background-color: #012623; font-family: comfortaa-bold; background-color: #f8f9fe; color: var(--bs-breadcrumb-item-active-color); font-size: var(--bs-breadcrumb-font-size)" >Dashboard</h1>
     {% include "includes/scripts.html" %}
     <!-- Header -->
@@ -414,11 +415,11 @@ h5{
           <div class="card">
             <div id="header-bars" class="card-header bg-transparent">
               <div class="row align-items-center">
-                <div class="col">
+                <div class="col-4">
                   <h6 class="text-uppercase text-muted ls-1 mb-1">Compras</h6>
                   <h5 class="h3 mb-0">Total de árboles</h5>
                 </div>
-                <div class="col">
+                <div class="col-8">
                   <ul class="nav nav-pills justify-content-end">
                     <li class='nav-item mr-1'><a class='button-plant button-bars' href="#div-bars-gen" data-toggle='tab' role='tab' aria-controls="nav-gen" aria-selected='false'>General</a></li>
                     {% for upro in user_projects %}

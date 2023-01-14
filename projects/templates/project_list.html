@@ -200,6 +200,21 @@ h3 {
   font-family: "comfortaa-bold";
   color: #035941;
 }
+.opsadmin{
+  display: grid;
+}
+
+.opadmin{
+  padding: 5px;
+  margin: 0 auto;
+}
+
+@media (min-width: 600px){
+  .opsadmin { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 900px){
+  .opsadmin { grid-template-columns: repeat(3, 1fr); }
+}
 
 </style>
 
@@ -213,19 +228,19 @@ h3 {
 
   {% if user|can:'is_admin' %}
   <hr>
-  <div class="row">
+  <div class="opsadmin">
     {% if user|can:'generate_report' %}
-    <div class="col">
+    <div class="opadmin">
       <a class="button-plant my-3" href="{% url 'exportclientsxls' %}" role="button">Reporte Clientes</a>
     </div> 
     {% endif %}
     {% if user|can:'generate_report' %}
-    <div class="col">
+    <div class="opadmin">
       <a class="button-plant my-3" href="{% url 'exportordersxls' %}" role="button">Reporte Órdenes</a>
     </div>
     {% endif %}
     {% if user|can:'view_userlist' %}
-    <div class="col">
+    <div class="opadmin">
       <a class="button-plant my-3" href="/account/users" role="button">Usuarios</a>
     </div>
     {% endif %}

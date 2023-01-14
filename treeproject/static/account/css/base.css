@@ -111,7 +111,7 @@ footer a {
   }
   .button-plant {
     background-color: #f2622e;
-    border-radius: 25px;
+    border-radius: 5px;
     color: #fff;
     font-size: 18px;
     font-family: "comfortaa-bold";
@@ -121,7 +121,7 @@ footer a {
   }
   .button-plant:hover {
     background-color: #f2622e;
-    border-radius: 25px;
+    border-radius: 5px;
     color: #fff;
   
     text-decoration: none;

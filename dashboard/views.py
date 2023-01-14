@@ -14,6 +14,7 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 from pandas import json_normalize
 from datetime import date
+import calendar
 
 
 
@@ -27,6 +28,7 @@ def invest_json(request):
     inv_general = 0
     cap_general = 0
     rentabilidad= 0.0094
+    
     for project_id in projects_id:
         
         fecha = Project.objects.get(pk=project_id).inicioventa_date
@@ -65,7 +67,7 @@ def invest_json(request):
         api[Project.objects.get(pk=project_id).name] = api_fecha
         proyecto  = Project.objects.get(pk=project_id).name
         if len(api[proyecto].keys()) > 0:       
-            resumen[proyecto] = api[proyecto][list(api[proyecto].keys())[-1]]     
+            resumen[proyecto] = api[proyecto][list(api[proyecto].keys())[-1]]   
             if len(api[proyecto].keys()) > 1:
                 #si hay mes anterior
                 resumen_mes_anterior[proyecto] = api[proyecto][list(api[proyecto].keys())[-2]]
@@ -73,7 +75,7 @@ def invest_json(request):
                 # Por si aún no hay mes anterior
                 resumen_mes_anterior[proyecto] = api[proyecto][list(api[proyecto].keys())[-1]]
         
-        
+     
     return [api, resumen, resumen_mes_anterior]
 
 def invest_api(request):
@@ -117,6 +119,8 @@ def dashboard(request):
     datos = invest[0]
     resumen = invest[1]
     resumen_mes_anterior = invest[2]
+    rentabilidad= 0.0094
+    print(resumen)  
     ## Gráfca inversion
     user_projects = Project.objects.filter(name__in= list(datos.keys()))
     ## Gráfica torta y  ## Grafica árboles
@@ -171,6 +175,12 @@ def dashboard(request):
         comp_arboles = 0
     print(suma_capital)
     print(suma_capital_mes_anterior)
+    now = datetime.now()
+    dias_mes_actual = calendar.monthrange(now.year, now.month)[1]
+    renta_diaria = rentabilidad / dias_mes_actual
+    print(renta_diaria)
+    utilidad_hoy = suma_capital * renta_diaria
+    utilidad_hoy_str = "{:.3f}".format(utilidad_hoy)
     return render(request, 'argon.html',{
         'projects': projects,
         'user_projects': user_projects,
@@ -186,7 +196,8 @@ def dashboard(request):
         'comp_utilidad': comp_utilidad, 
         'comp_capital': comp_capital, 
         'comp_inversion': comp_inversion, 
-        'comp_arboles': comp_arboles
+        'comp_arboles': comp_arboles,
+        'utilidad_hoy': utilidad_hoy_str,
         
     })
     
