@@ -16,7 +16,8 @@ from pandas import json_normalize
 from datetime import date
 import calendar
 from statistics import mean 
-
+from dateutil.relativedelta import relativedelta
+import pytz
 
 
 def invest_json(request):
@@ -115,6 +116,7 @@ def calculo_co2(request):
     
 
 def dashboard(request):
+    usuario = request.user
     projects = Project.objects.all()
     invest = invest_json(request)
     datos = invest[0]
@@ -181,20 +183,40 @@ def dashboard(request):
     
     utilidad_hoy = suma_capital * renta_diaria
     utilidad_hoy_str = "{:.3f}".format(utilidad_hoy)
-    print(list(resumen.keys()))
+    
+    # Rentabilidades
     my_projects = Project.objects.filter(name__in = resumen.keys())
-    print(my_projects)
     hoy = datetime.today()
     year = hoy.strftime("%Y")
     month = hoy.strftime("%m")
-    print(year)
-    print(month)
+    
     rentabilidades = Rentabilidad.objects.filter(project__in=my_projects).filter(year=year).filter(month=month)
     try:
         renta_promedio = round(mean(rentabilidades.values_list('valor', flat=True)), 3)
     except:
         renta_promedio = 1.95
 
+    # Carbono en kilogramos
+    hombre= 2000
+    carro = 2145
+    camion = 2560
+    avion = 3300
+    
+
+    # CO2 por arbol en un año en kilogramos 
+    arbol_anio_co2 = 33
+
+    anios_arboles = []
+    co2_desdecompra = 0
+    # Calculo de co2
+    ordenes = Order.objects.filter(user=usuario)
+    for order in ordenes:
+        #anios = order.ordered_date.year - datetime.today().year
+        diff = (relativedelta(datetime.today().replace(tzinfo=pytz.utc), order.ordered_date).months)/12
+        for item in order.items.all():
+            co2_desdecompra += arbol_anio_co2 * diff * item.quantity
+            
+    progreso_co2 = round((float(co2_consumption) *100)/avion, 3)
     return render(request, 'argon.html',{
         'projects': projects,
         'user_projects': user_projects,
@@ -207,7 +229,9 @@ def dashboard(request):
         'arboles_total': suma_arboles_acumulados,
         'rentabilidad': renta_promedio,
         'rentabilidades': rentabilidades,
-        'co2_total': co2_consumption, 
+        'co2_consumption': co2_consumption, 
+        'co2_desdecompra': co2_desdecompra,
+        'progreso_co2': progreso_co2,
         'comp_utilidad': comp_utilidad, 
         'comp_capital': comp_capital, 
         'comp_inversion': comp_inversion, 

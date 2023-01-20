@@ -344,7 +344,7 @@ h5{
                         <div class="posicion">
                           <div class="item1">
                             <div class="borde1">
-                            <div class="avatars"><img src="{% static 'img/image/carroico.svg' %}" alt=""></div>
+                            <div class="avatars"><img src="{% static 'img/image/persona.png' %}" alt=""></div>
                             </div>  
                           </div>
                       </div>
@@ -353,7 +353,7 @@ h5{
                         <div class="posicion">
                           <div class="item2">
                             <div class="borde1">
-                            <div class="avatars"><img src="{% static 'img/image/busico.svg' %}" alt=""></div>
+                            <div class="avatars"><img src="{% static 'img/image/carroico.svg' %}" alt=""></div>
                             </div>
                           </div>
                         </div>
@@ -361,8 +361,8 @@ h5{
                       <div class="col">
                         <div class="posicion">
                           <div class="item3">
-                           <div class="borde2">
-                            <div class="avatars-off"><img src="{% static 'img/image/avionico.svg' %}" alt=""></div>
+                           <div class="borde1">
+                            <div class="avatars"><img src="{% static 'img/image/busico.svg' %}" alt=""></div>
                             </div>
                           </div>
                         </div>
@@ -370,8 +370,8 @@ h5{
                       <div class="col">
                         <div class="posicion">
                           <div class="item4">
-                            <div class="borde2">
-                            <div class="avatars-off"><img src="{% static 'img/image/cohetico.svg' %}" alt=""></div>
+                            <div class="borde1">
+                            <div class="avatars"><img src="{% static 'img/image/avionico.svg' %}" alt=""></div>
                            </div>
                           </div>
                         </div> 
@@ -380,8 +380,7 @@ h5{
                     </div>
                     
                     <div class="progress">
-                        
-                      <div class="progress-bar" style="width:50%;">
+                      <div class="progress-bar" style="width:{{ progreso_co2 }}%;">
                           <span class="progress-bar-text"></span>
                       </div>
                   </div>
@@ -390,15 +389,12 @@ h5{
                 </div>
                 <br>
                     <div class="row">
-                      <strong>CO2 Capturado</strong>
-                      <strong class="colorletra">{{ co2_total }} kg de CO2</strong>
-                      <div><strong>Periodo de compensación de CO2</strong>:
-                        <span class="colorletra">0 años/10 años</span></div>
-                        <div><strong>Remuneración media anual</strong>:
-                          <span class="colorletra">90.00Kg</span></div>
-                        </div>
-                    
-
+                      
+                      <div><strong>Desde que fueron sembrados, tus árboles han capturado:</strong>
+                      <strong class="colorletra">{{ co2_consumption }} kg de CO<sup>2</sup></strong></div>
+                      <div><strong>Desde que invertistie, tus árboles han capturado:</strong>
+                      <strong class="colorletra">{{ co2_desdecompra }} Kg de CO<sup>2</sup></strong></div>
+                    </div>
                 </div>
                 <div class="rectanguloup">
                   <p class="mt-3 mb-0 text-sm">
