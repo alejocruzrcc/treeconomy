@@ -226,18 +226,23 @@ def registrar_pbi(investor, project, n_trees_subscription, n_trees_one_payment):
                     obj.n_trees_one_payment = nto_actual + n_trees_one_payment
                     print("si existe pbi")
                     obj.save()
-                    
+    
+
                 except ProjectByInvestor.DoesNotExist:
                     print(f"investor: {investor} y project: {project}" )
+                    
                     obj = ProjectByInvestor.objects.create(
                         investor= investor,
                         project = project, 
                         n_trees_subscription = n_trees_subscription,
                         n_trees_one_payment = n_trees_one_payment
                     )
+                    obj.save()
+                    
                     print("no existe pbi")
                     
-                    obj.save() 
+                    
+     
             
 def registrar_pbi_sus(investor, project, n_trees_subscription, n_trees_one_payment):   
                 try:
@@ -292,6 +297,7 @@ class CreateSubscriptionView(APIView):
                 item.project.save()
                 print(item.project.trees_left)
                 registrar_pbi(request.user, item.project, 0, item.quantity)
+ 
                 print("registró pbi en pago único")
             
             

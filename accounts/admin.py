@@ -8,7 +8,7 @@ from .models import Video
 
 
 class ProjectByInvestorAdmin(admin.ModelAdmin):
-    list_display = ('investor', 'project', 'n_trees_subscription', 'n_trees_one_payment',)
+    list_display = ('id', 'investor', 'project', 'n_trees_subscription', 'n_trees_one_payment',)
    
     list_filter = ('project',)
     #ordering = ('name',)

@@ -18,7 +18,7 @@ import math
 from phonenumber_field.modelfields import PhoneNumberField
 import stripe
 import uuid
-
+from djongo import models as mdjongo
 
     
 
@@ -138,8 +138,6 @@ class Subscription(models.Model):
     @property
     def is_active(self):
         return self.status == "active" or self.status == "trialing"
-
-
 
 class Project(models.Model):
     name                = models.CharField(max_length=120)
@@ -297,9 +295,10 @@ class Order(models.Model):
         total = self.get_raw_total()
         return "{:.2f}".format(int(total or 0) /100)
   
-
 class Rentabilidad(models.Model):
+    slug = models.SlugField(unique=True, primary_key=True) 
     year = models.IntegerField(blank=True, null=True)
+    month = models.IntegerField(blank=True, null=True)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     valor = models.FloatField(blank=True, null=True)
     
@@ -308,7 +307,7 @@ class Rentabilidad(models.Model):
         verbose_name_plural = "Rentabilidades"
 
     def __Str__(self):
-        return f"{self.project}_{self.project.name}_{self.valor}"
+        return f"{self.project.name}_{self.valor}"
 
               
 def pre_save_project_receiver(sender, instance, *args, **kwargs):

@@ -5,7 +5,7 @@ import json
 from django.views.generic import TemplateView
 from django.http import JsonResponse
 from django.shortcuts import render
-from projects.models import Project, Order
+from projects.models import Project, Order, Rentabilidad
 from accounts.models import ProjectByInvestor
 from django.core import serializers
 from django.template import loader
@@ -15,6 +15,7 @@ from dateutil.relativedelta import relativedelta
 from pandas import json_normalize
 from datetime import date
 import calendar
+from statistics import mean 
 
 
 
@@ -173,14 +174,27 @@ def dashboard(request):
         comp_arboles = "{:.2f}".format(((suma_arboles_acumulados - suma_arboles_acumulados_mes_anterior)*100)/suma_arboles_acumulados_mes_anterior)
     else:
         comp_arboles = 0
-    print(suma_capital)
-    print(suma_capital_mes_anterior)
+  
     now = datetime.now()
     dias_mes_actual = calendar.monthrange(now.year, now.month)[1]
     renta_diaria = rentabilidad / dias_mes_actual
-    print(renta_diaria)
+    
     utilidad_hoy = suma_capital * renta_diaria
     utilidad_hoy_str = "{:.3f}".format(utilidad_hoy)
+    print(list(resumen.keys()))
+    my_projects = Project.objects.filter(name__in = resumen.keys())
+    print(my_projects)
+    hoy = datetime.today()
+    year = hoy.strftime("%Y")
+    month = hoy.strftime("%m")
+    print(year)
+    print(month)
+    rentabilidades = Rentabilidad.objects.filter(project__in=my_projects).filter(year=year).filter(month=month)
+    try:
+        renta_promedio = round(mean(rentabilidades.values_list('valor', flat=True)), 3)
+    except:
+        renta_promedio = 1.95
+
     return render(request, 'argon.html',{
         'projects': projects,
         'user_projects': user_projects,
@@ -191,7 +205,8 @@ def dashboard(request):
         'utilidad_total': resumen_general[1],
         'capital_total': resumen_general[2],
         'arboles_total': suma_arboles_acumulados,
-        'rentabilidad': '0.94 %',
+        'rentabilidad': renta_promedio,
+        'rentabilidades': rentabilidades,
         'co2_total': co2_consumption, 
         'comp_utilidad': comp_utilidad, 
         'comp_capital': comp_capital, 

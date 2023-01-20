@@ -30,6 +30,14 @@ class OrderAdmin(admin.ModelAdmin):
     class Meta:
         model = Order
 
+class OrderItemAdmin(admin.ModelAdmin):
+    list_display = ('id', 'order')
+    search_fields = ('order',)
+
+    
+    class Meta:
+        model = Order
+
 class PlatAdmin(admin.ModelAdmin):
     list_display = ('plat_id', 'project', 'n_trees',)
     search_fields = ('plat_id', 'project', 'n_trees',)
@@ -63,7 +71,7 @@ class BillAdmin(admin.ModelAdmin):
 admin.site.register(Bill, BillAdmin)
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Order, OrderAdmin)
-admin.site.register(OrderItem)
+admin.site.register(OrderItem, OrderItemAdmin)
 admin.site.register(Plat, PlatAdmin)
 admin.site.register(ProjectTrackingRecord, ProjectRecordAdmin)
 admin.site.register(PercentageRecord, PercentageRecordAdmin)

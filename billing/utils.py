@@ -49,6 +49,7 @@ def get_or_set_order_session(request):
             order = Order.objects.get(id=order_id, ordered=False)
         except Order.DoesNotExist:
             order = Order()
+            order.ordered_date = datetime.now()
             order.save()
             request.session['order_id']= order.id
             
