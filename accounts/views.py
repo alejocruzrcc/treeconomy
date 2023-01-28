@@ -108,10 +108,6 @@ def register(request):
             new_user.is_active = False
             new_user.set_password(user_form.cleaned_data['password'])
             user_form.save()  # guardar el usuario en la base de datos si es válido
-            print(settings.EMAIL_HOST_USER)
-            print(settings.EMAIL_HOST_PASSWORD)
-            print(settings.EMAIL_USE_SSL)
-            print(settings.EMAIL_USE_TLS)
             # Enviar un email de confirmación
             current_site = get_current_site(request)
             email_subject = 'Confirma tu registro en Treeconomy Inc.'
