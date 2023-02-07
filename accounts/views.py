@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import HttpResponse, reverse
 from django.contrib import auth
 from django.contrib.auth import authenticate,login, logout
+from django.contrib.auth.views import PasswordResetView 
 from django.contrib.auth.models import User
 from django.template.context_processors import csrf
 from django.conf import settings
@@ -210,6 +211,7 @@ def profile(request):
         'co2_capturado': co2_consumption, 
         'elementos': elementos,
         })
+
 
 
 class ModifySubscriptionElement(generic.View):

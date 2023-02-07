@@ -27,7 +27,10 @@ urlpatterns = [
     path('edit/',views.edit,name='edit'),
     path('activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
         views.activate_account, name='activate'),
-    path('account/password_reset/', auth_views.PasswordResetView.as_view(form_class=EmailValidationOnForgotPassword), name='password_reset'),
+    path('account/password_reset/', auth_views.PasswordResetView.as_view(form_class=EmailValidationOnForgotPassword,
+        html_email_template_name='registration/password_reset_email.html'
+    ), 
+        name='password_reset'),
     path('account/password_change/', auth_views.PasswordChangeView.as_view(form_class=PasswordChangeForm), name='password_change'),
     #path('your-projects/', ProjectByInvestorView.as_view(), name='projectsbyinvestor'),
     #path('projectsbyinvestor/<int:pk>', ProjectByInvestorDetailView.as_view(), name='project-investor-detail')
