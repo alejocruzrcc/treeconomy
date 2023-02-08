@@ -310,7 +310,7 @@ h3 {
                   <a class="btn btn-sm editables" href="{% url 'eliminar' project.pk %}" role="button">Eliminar</a>
                 {% endif %}
                 <div class="card valores p-2 m-2">
-                  <div><strong>Rentabilidad: </strong><span>12% EA</span></div>
+                  <div><strong>Rentabilidad: </strong><span>{{ project.get_rentabilidad_actual }} % </span></div>
                   <div><strong>Árboles restantes: </strong><span>{{ project.trees_left}}</span></div>
                   <div><strong>Precio: </strong><span>USD {{ project.get_price}}</span> </div> 
                 </div>  
@@ -369,7 +369,7 @@ h3 {
                     <a class="btn btn-sm editables" href="{% url 'eliminar' project.pk %}" role="button">Eliminar</a>
                   {% endif %}
                   <div class="card valores p-2 m-2">
-                    <div><strong>Rentabilidad: </strong><span>12% EA</span></div>
+                    <div><strong>Rentabilidad: </strong><span>{{ project.get_rentabilidad_actual }} %</span></div>
                     <div><strong>Árboles restantes: </strong><span>{{ project.trees_left}}</span></div>
                     <div><strong>Precio: </strong><span>USD {{ project.get_price}}</span> </div> 
                   </div>  

@@ -214,7 +214,16 @@ class Project(models.Model):
             return "FREE"
     
     def get_trees_left_porcent(self):
-        return 100 - ((self.trees_left * 100) / int(self.n_trees or 1)) 
+        return 100 - ((self.trees_left * 100) / int(self.n_trees or 1))
+    
+    def get_rentabilidad_actual(self):
+        month = datetime.now().month
+        year = datetime.now().year
+        rent = Rentabilidad.objects.filter(project= self, year=year, month=month).first()
+        if rent == None:
+            return "0.94"
+        else:
+            return rent.valor
 
 class SubscriptionElement(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
