@@ -3,7 +3,7 @@ from django.urls import path, include, re_path
 from accounts.models import ProjectByInvestor
 from . import views
 from django.contrib.auth import views as auth_views
-from accounts.forms import EmailValidationOnForgotPassword, PasswordChangeForm
+from accounts.forms import UserPasswordResetForm, UserPasswordResetConfirmForm, PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from .views import ModifySubscriptionElement, UserListView, PauseSubscriptionElement
 urlpatterns = [
@@ -27,10 +27,15 @@ urlpatterns = [
     path('edit/',views.edit,name='edit'),
     path('activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
         views.activate_account, name='activate'),
-    path('account/password_reset/', auth_views.PasswordResetView.as_view(form_class=EmailValidationOnForgotPassword,
-        html_email_template_name='registration/password_reset_email.html'
-    ), 
+    path('account/password_reset/', auth_views.PasswordResetView.as_view(
+        template_name='registration/password_reset_form.html',
+        form_class=UserPasswordResetForm,
+        html_email_template_name='registration/password_reset_email.html'), 
         name='password_reset'),
+    path('account/reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(
+        template_name='registration/password_reset_confirm.html',
+        form_class=UserPasswordResetConfirmForm), 
+        name='password_reset_confirm'),
     path('account/password_change/', auth_views.PasswordChangeView.as_view(form_class=PasswordChangeForm), name='password_change'),
     #path('your-projects/', ProjectByInvestorView.as_view(), name='projectsbyinvestor'),
     #path('projectsbyinvestor/<int:pk>', ProjectByInvestorDetailView.as_view(), name='project-investor-detail')

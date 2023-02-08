@@ -7,7 +7,11 @@ from phonenumber_field.formfields import PhoneNumberField
 from phonenumber_field.widgets import PhoneNumberPrefixWidget
 from django.contrib.auth.forms import AuthenticationForm, UsernameField
 
-class EmailValidationOnForgotPassword(PasswordResetForm):
+
+
+class UserPasswordResetForm(PasswordResetForm):
+    def __init__(self, *args, **kwargs):
+        super(UserPasswordResetForm, self).__init__(*args, **kwargs)
 
     def clean_email(self):
         email = self.cleaned_data['email']
@@ -15,6 +19,32 @@ class EmailValidationOnForgotPassword(PasswordResetForm):
             msg = ("No hay un usuario registrado con este correo electrónico")
             self.add_error('email', msg)
         return email
+   
+
+    email = forms.EmailField(label='', widget=forms.EmailInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Correo Electrónico',
+        'type': 'email',
+        'name': 'Correo Electrónico'
+        }))
+    
+
+
+class UserPasswordResetConfirmForm(SetPasswordForm):
+
+    new_password1 = forms.CharField(label='', widget=forms.PasswordInput(attrs={
+        'class': 'form-control my-2',
+        'placeholder': 'Nueva contraseña',
+        'type': 'password',
+        'name': 'Nueva contraseña'
+        }))
+
+    new_password2 = forms.CharField(label='', widget=forms.PasswordInput(attrs={
+        'class': 'form-control my-2',
+        'placeholder': 'Confirme nueva contraseña',
+        'type': 'password',
+        'name': 'Confirme nueva contraseña'
+        }))
 
 
 class LoginForm(AuthenticationForm):
