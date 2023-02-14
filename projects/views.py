@@ -41,8 +41,8 @@ class MapaView(generic.TemplateView):
             if project.geokml != None:
                 #polis = read_kml(settings.BASE_DIR + project.geokml.url)
                 print(settings.MEDIA_ROOT)
-                print(project.geokml.path)
-                lotes = kml2geojson.main.convert(project.geokml.url)
+               
+                lotes = kml2geojson.main.convert('/' + project.geokml.url)
                 geometria = lotes[0]["features"][0]["geometry"]
                 poligono = geometry.Polygon(geometria["coordinates"][0])
                 punto_shapely = generate_random(1, poligono)
@@ -77,7 +77,7 @@ class ProjectDetailListView(LoginRequiredMixin, generic.FormView):
         f = folium.Figure(height=500)
         context = super(ProjectDetailListView, self).get_context_data(*args, **kwargs)
         if self.get_object().geokml != None:
-            lotes = kml2geojson.main.convert(self.get_object().geokml.url)
+            lotes = kml2geojson.main.convert(self.get_object().geokml)
             geometria = lotes[0]["features"][0]["geometry"]
             poligono = geometry.Polygon(geometria["coordinates"][0])
             punto_shapely = generate_random(1, poligono)
