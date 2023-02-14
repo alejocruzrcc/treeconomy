@@ -142,7 +142,9 @@ class Subscription(models.Model):
 class Project(models.Model):
     name                = models.CharField(max_length=120)
     slug                = models.SlugField(unique=True, primary_key=True) 
-    coordinates         = models.CharField(max_length=120)
+    coordinates         = models.CharField(max_length=120, blank=True, null=True)
+    geokml              = models.FileField(upload_to='poligonos/', blank=True, null=True)
+    reg_forestal        = models.FileField(upload_to='registros_forestales/', blank=True, null=True)
     resena              = models.TextField(verbose_name="Descripción", blank=True, null=True)
     n_trees             = models.PositiveIntegerField()
     plantation_date     = models.DateField()

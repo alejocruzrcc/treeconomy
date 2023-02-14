@@ -3,11 +3,12 @@ from django.urls import path
 from django.conf.urls import url, include
 
 from django.contrib.auth.decorators import login_required
-from .views import ProjectListView, ProjectDetailListView, CartView, IncreaseQuantityCartView, DecreaseQuantityCartView, RemoveFromCartView, FacturacionView
+from .views import ProjectListView, MapaView, ProjectDetailListView, CartView, IncreaseQuantityCartView, DecreaseQuantityCartView, RemoveFromCartView, FacturacionView
 from . import views
 
 urlpatterns = [
     path('', ProjectListView.as_view(), name='projects'),
+    path('mapa', MapaView.as_view(), name='mapa'),
     path('cart', CartView.as_view(), name='summary'),
     path('crear', login_required(views.crear), name='crear'),
     path('editar/<str:pk>', login_required(views.editar), name='editar'),

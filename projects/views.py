@@ -7,7 +7,13 @@ from billing.utils import get_or_set_order_session
 from accounts import views 
 from accounts.models import User, Video
 from django.contrib import messages
+import folium
+from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
+from fastkml.kml import KML
+import kml2geojson
+import random
+from shapely import geometry
 
 # Create your views here.
 class ProjectListView(generic.ListView):
@@ -24,6 +30,37 @@ class ProjectListView(generic.ListView):
         context["name"] = 'Proyectos'
         return context
 
+class MapaView(generic.TemplateView):
+    template_name = 'projects_map.html'
+    
+    def get_context_data(self, *args, **kwargs):
+        initialMap = folium.Map(location=[4.6486259,-74.2478921], zoom_start=6, tiles=None)
+        projects = Project.objects.all()
+        for project in projects:
+            if project.geokml != None:
+                #polis = read_kml(settings.BASE_DIR + project.geokml.url)
+                lotes = kml2geojson.main.convert(settings.BASE_DIR + project.geokml.url)
+                geometria = lotes[0]["features"][0]["geometry"]
+                poligono = geometry.Polygon(geometria["coordinates"][0])
+                punto_shapely = generate_random(1, poligono)
+                html = popup_html(project.name, project.resena, project.n_hectares, project.get_absolute_url())
+                popup = folium.Popup(folium.Html(html, script=True), max_width=500)
+                punto = list(punto_shapely[0].coords)[0]
+                folium.Marker(punto, popup=popup).add_to(initialMap)
+                folium.GeoJson(data=geometria).add_to(initialMap)
+        tile = folium.TileLayer(
+            tiles = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+            attr = 'Esri',
+            name = 'Satélite',
+            overlay = False,
+            control = True
+        ).add_to(initialMap)
+        folium.TileLayer('openstreetmap').add_to(initialMap)
+        folium.LayerControl().add_to(initialMap)       
+        context = {
+            "map": initialMap._repr_html_(),
+            "projects":  projects}
+        return context
 
 class ProjectDetailListView(LoginRequiredMixin, generic.FormView):
     model = Project
@@ -34,10 +71,34 @@ class ProjectDetailListView(LoginRequiredMixin, generic.FormView):
         return Project.objects.get_queryset()
     
     def get_context_data(self, *args, **kwargs):
+        f = folium.Figure(height=500)
         context = super(ProjectDetailListView, self).get_context_data(*args, **kwargs)
+        if self.get_object().geokml != None:
+            lotes = kml2geojson.main.convert(settings.BASE_DIR + self.get_object().geokml.url)
+            geometria = lotes[0]["features"][0]["geometry"]
+            poligono = geometry.Polygon(geometria["coordinates"][0])
+            punto_shapely = generate_random(1, poligono)
+            punto = list(punto_shapely[0].coords)[0]
+        else:
+            punto = [4.6486259,-74.2478921]
+
+        detailMap= folium.Map(location=punto, zoom_start=16, tiles=None).add_to(f)
+        folium.GeoJson(data=geometria, name="Polígono").add_to(detailMap)
+        
+        tile = folium.TileLayer(
+            tiles = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+            attr = 'Esri',
+            name = 'Satélite',
+            overlay = False,
+            control = True
+        ).add_to(detailMap)
+        folium.TileLayer('openstreetmap').add_to(detailMap)
+        folium.LayerControl().add_to(detailMap)
+        
         context["project"] = self.get_object()
         context["activo"] = self.get_object().active
         context["order"] = get_or_set_order_session(self.request)
+        context["map_detail"] = detailMap._repr_html_()
         return context
     
     def get_object(self):
@@ -186,8 +247,6 @@ def crear(request):
         return redirect('/projects')
     return render(request, "create.html", {'formulario': formulario})
 
-
-
 @has_role_decorator('admin')  
 def eliminar(request, pk):
   project = Project.objects.get(pk=pk)
@@ -208,5 +267,44 @@ def editar(request, pk):
 
     return render(request, "edit.html", {'formulario': formulario, 'errores': errores})
     
+
+
+
+def generate_random(number, polygon):
+    points = []
+    minx, miny, maxx, maxy = polygon.bounds
+    
+    while len(points) < number:
+        pnt = geometry.Point(random.uniform(minx, maxx), random.uniform(miny, maxy))
+        
+        if polygon.contains(pnt):
+            points.append(geometry.Point(random.uniform(miny, maxy), random.uniform(minx, maxx),))
+    return points
+
+def read_kml(fname='ss.kml'):
+    kml = KML()
+    kml.from_string(open(fname).read().encode())
+    points = dict()
+    
+    for feature in kml.features():
+        for placemark in feature.features():
+            if placemark.styleUrl.startswith('#AREA'):
+                points.update({placemark.name:
+                            (placemark.geometry.y, placemark.geometry.x, )})
+    
+    return points
+    
+def popup_html(nombre, descripcion, hectareas, url):
+    html = f"""
+    <div class="card" style="width: 40rem;">
+        <div class="card-body">
+            <h3 class="card-title">Proyecto {nombre}</h3>
+            <h6 class="card-subtitle mb-2 text-muted">{hectareas} Hectáreas</h6>
+            <p class="card-text">{descripcion}</p>
+            <h4><a href="{ url }" class="card-link" target="_blank">Invertir aquí</a></h4>
+        </div>
+    </div>
+    """
+    return html
 
     

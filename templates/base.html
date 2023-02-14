@@ -329,7 +329,7 @@ a { text-decoration: none;
         
         <li><a href="/billing/cartera"><i class="material-icons">monetization_on</i><span class="icon-text"></span>&nbsp;&nbsp;&nbsp;&nbsp;Cartera<span></a></li>
         <li><a href="/dashboard/invest"><i class="material-icons">auto_graph</i><span class="icon-text"></span>&nbsp;&nbsp;&nbsp;&nbsp;Tu inversión<span></a></li>
-
+          <li><a href="/projects/mapa"><i class="material-icons">location_on</i><span class="icon-text"></span>&nbsp;&nbsp;&nbsp;&nbsp;Mapa<span></a></li>
         <li><a href="{% url 'contact' %}"><i class="material-icons">contact_mail</i><span class="icon-text"></span>&nbsp;&nbsp;&nbsp;&nbsp;Contáctanos<span></a></li>
           {% if request.user.is_authenticated %}
           <a href="{% url "logout" %}"><i class="material-icons">keyboard_backspace</i><span class="icon-text"></span>&nbsp;&nbsp;&nbsp;&nbsp;Salir<span></a>
@@ -344,6 +344,7 @@ a { text-decoration: none;
       <a href="/dashboard"><i class="material-icons">dashboard</i><span class="icon-text"></span>&nbsp;&nbsp;&nbsp;&nbsp;Dashboard</a></span></a><br>
       <a href="/account/calculadora"><i class="material-icons">calculate</i><span class="icon-text"></span>&nbsp;&nbsp;&nbsp;&nbsp;Calculadora</a></span></a><br>
       <a href="/projects"><i class="material-icons">forest</i><span class="icon-text"></span>&nbsp;&nbsp;&nbsp;&nbsp;Proyectos</span></a><br>
+      <a href="/projects/mapa"><i class="material-icons">location_on</i><span class="icon-text"></span>&nbsp;&nbsp;&nbsp;&nbsp;Mapa</span></a><br>
       <a href="/dashboard/invest"><i class="material-icons">auto_graph</i><span class="icon-text"></span>&nbsp;&nbsp;&nbsp;&nbsp;Tu inversión</span></a><br>
       <a href="/billing/cartera"><i class="material-icons">monetization_on</i><span class="icon-text"></span>&nbsp;&nbsp;&nbsp;&nbsp;Cartera<span></a><br>
       <a href="{% url 'contact' %}"><i class="material-icons">contact_mail</i><span class="icon-text"></span>&nbsp;&nbsp;&nbsp;&nbsp;Contáctanos<span></a><br>
