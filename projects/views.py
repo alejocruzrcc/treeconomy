@@ -14,6 +14,7 @@ from fastkml.kml import KML
 import kml2geojson
 import random
 from shapely import geometry
+import os
 
 # Create your views here.
 class ProjectListView(generic.ListView):
@@ -39,7 +40,9 @@ class MapaView(generic.TemplateView):
         for project in projects:
             if project.geokml != None:
                 #polis = read_kml(settings.BASE_DIR + project.geokml.url)
-                lotes = kml2geojson.main.convert(settings.ABSOLUTE_URL + project.geokml.url)
+                print(project.geokml)
+                print(os.path.join(settings.MEDIA_ROOT, project.geokml.url))
+                lotes = kml2geojson.main.convert(project.geokml.url)
                 geometria = lotes[0]["features"][0]["geometry"]
                 poligono = geometry.Polygon(geometria["coordinates"][0])
                 punto_shapely = generate_random(1, poligono)
