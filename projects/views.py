@@ -39,10 +39,7 @@ class MapaView(generic.TemplateView):
         projects = Project.objects.all()
         for project in projects:
             if project.geokml != None:
-                #polis = read_kml(settings.BASE_DIR + project.geokml.url)
-                print(settings.MEDIA_ROOT)
-               
-                lotes = kml2geojson.main.convert('/' + project.geokml.url)
+                lotes = kml2geojson.main.convert(project.geokml)
                 geometria = lotes[0]["features"][0]["geometry"]
                 poligono = geometry.Polygon(geometria["coordinates"][0])
                 punto_shapely = generate_random(1, poligono)
