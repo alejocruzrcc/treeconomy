@@ -268,8 +268,8 @@ h3 {
       {% for project in project_list|activos %}
         <div class="tarjeta card pb-2 ">
           <div class="row">
-            <div class="col-6">
-              <div class="cover">
+            <div class="col-5">
+              <div class="cover mt-2">
                 <img src="{{project.image.url}}">
 
                 <div class="mx-auto mt-1 ovalo"><p>Cosecha en: </br> {{ project.get_tiempo_paracorte }} </p></div>   
@@ -278,7 +278,7 @@ h3 {
                 <div class="textbajo"><strong>Usuario Propietario: </strong><span>Treeconomy Inc. </span> </div>
               </div>
             </div>
-            <div class="col-6">
+            <div class="col-7">
               
                 <div class="row">
                   <div class="col-8">
@@ -310,11 +310,11 @@ h3 {
                   <a class="btn btn-sm editables" href="{% url 'eliminar' project.pk %}" role="button">Eliminar</a>
                 {% endif %}
                 <div class="card valores p-2 m-2">
-                  <div><strong>Rentabilidad: </strong><span>{{ project.get_rentabilidad_actual }} % </span></div>
+                  <div><strong>Rentabilidad: </strong><span>{{ project.get_rentabilidad_actual_anual }} % EA </span></div>
                   <div><strong>Árboles restantes: </strong><span>{{ project.trees_left}}</span></div>
                   <div><strong>Precio: </strong><span>USD {{ project.get_price}}</span> </div> 
                 </div>  
-                <a class="button-plant btn-invert stretched-link" href="{{ project.get_absolute_url }}">Invertir Aquí</a>       
+                <a class="button-plant btn-invert stretched-link" href="{{ project.get_absolute_url }}">Invertir aquí</a>       
             </div>
           </div>
         </div>
@@ -328,8 +328,8 @@ h3 {
         {% for project in project_list|inactivos %}
           <div class="tarjeta card pb-2" style=" filter: grayscale(100%);">
             <div class="row">
-              <div class="col-6">
-                <div class="cover">
+              <div class="col-5">
+                <div class="cover mt-2">
                   <img src="{{project.image.url}}">
                   <div class="mx-auto ovalo">Cortado</div>   
                 </div>
@@ -337,7 +337,7 @@ h3 {
                   <div class="textbajo"><strong>Usuario Propietario: </strong><span>Treeconomy Inc. </span> </div>
                 </div>
               </div>
-              <div class="col-6">
+              <div class="col-7">
                 
                   <div class="row">
                     <div class="col-8">
@@ -369,7 +369,7 @@ h3 {
                     <a class="btn btn-sm editables" href="{% url 'eliminar' project.pk %}" role="button">Eliminar</a>
                   {% endif %}
                   <div class="card valores p-2 m-2">
-                    <div><strong>Rentabilidad: </strong><span>{{ project.get_rentabilidad_actual }} %</span></div>
+                    <div><strong>Rentabilidad: </strong><span>{{ project.get_rentabilidad_actual_anual }} % EA </span></div>
                     <div><strong>Árboles restantes: </strong><span>{{ project.trees_left}}</span></div>
                     <div><strong>Precio: </strong><span>USD {{ project.get_price}}</span> </div> 
                   </div>  

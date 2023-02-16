@@ -225,8 +225,19 @@ class Project(models.Model):
         if rent == None:
             return "0.94"
         else:
-            return rent.valor
+            return "{:.2f}".format(rent.valor)
 
+    def get_rentabilidad_actual_anual(self):
+        month = datetime.now().month
+        year = datetime.now().year
+        rent = Rentabilidad.objects.filter(project= self, year=year, month=month).first()
+        
+        if rent == None:
+            return "12"
+        else:
+            tnominala = rent.valor * 12
+            rent_anual = (((1+((tnominala/100)/12))**12)-1) * 100
+            return "{:.2f}".format(rent_anual)
 class SubscriptionElement(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     stripe_id = models.CharField(max_length=150)
