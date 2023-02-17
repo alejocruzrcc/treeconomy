@@ -9,10 +9,14 @@ register = template.Library()
 
 @register.filter(name='subsItem_created_at')
 def subsItem_created_at(item_id):
-    item = stripe.SubscriptionItem.retrieve(
-        item_id,
-    )
-    fecha = datetime.utcfromtimestamp(item['created']).strftime('%d %b %Y')
+    print(item_id)
+    if item_id != None:
+        item = stripe.SubscriptionItem.retrieve(
+            item_id,
+        )
+        fecha = datetime.utcfromtimestamp(item['created']).strftime('%d %b %Y')
+    else: 
+        fecha= "No Dosponible"
     return fecha
 
 @register.filter(name='subsItem_nextpayment')
