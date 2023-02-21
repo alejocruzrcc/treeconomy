@@ -162,8 +162,6 @@ class ProjectByInvestor(models.Model):
         verbose_name_plural = "Projects by investor"
     
     def n_trees(self):
-        print(self.n_trees_subscription)
-        print(self.n_trees_one_payment)
         if self.n_trees_subscription != None:
             nts = self.n_trees_subscription
         else:

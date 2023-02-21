@@ -109,8 +109,6 @@ def register(request):
             new_user.is_active = False
             new_user.set_password(user_form.cleaned_data['password'])
             user_form.save()  # guardar el usuario en la base de datos si es válido
-            print(settings.EMAIL_USE_SSL)
-            print(settings.EMAIL_USE_TLS)
             # Enviar un email de confirmación
             current_site = get_current_site(request)
             email_subject = 'Confirma tu registro en Treeconomy Inc.'
@@ -220,7 +218,6 @@ class ModifySubscriptionElement(generic.View):
         price = get_object_or_404(Pricing, pk=kwargs['pk'])
         try: 
             selem = SubscriptionElement.objects.get(subscription=subscription, price=price)
-            print(selem)
             items_existentes = stripe.SubscriptionItem.list(
                     subscription = subscription.stripe_subscription_id
                 )
@@ -241,7 +238,6 @@ class PauseSubscriptionElement(generic.View):
         price = get_object_or_404(Pricing, pk=kwargs['pk'])
         try: 
             selem = SubscriptionElement.objects.get(subscription=subscription, price=price)
-            print(selem)
             items_existentes = stripe.SubscriptionItem.list(
                     subscription = subscription.stripe_subscription_id
                 )
@@ -321,7 +317,6 @@ def export_clients_pag(request):
         else:
             data.append([user.username, user.first_name, user.last_name, user.email, "Usuario sin perfil", "Usuario sin perfil"])
     
-    print(type(data))
     return render(request,'account/clientes.html', {
             'data': data, 
             })
