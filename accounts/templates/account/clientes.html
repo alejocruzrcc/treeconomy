@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Clientes{% endblock %}
+
+{% block content %}
+
+
+    
+<h1> Listado de Clientes </h1>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Usuario</th>
+        <th scope="col">Nombres</th>
+        <th scope="col">Apellidos</th>
+        <th scope="col">Correo</th>
+        <th scope="col">Total Árboles</th>
+        <th scope="col">Inversión Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in data %}
+      <tr>
+          <td>{{ user.0 }}</td>
+          <td>{{ user.1 }}</td>
+          <td>{{ user.2 }}</td>
+          <td>{{ user.3 }}</td>
+          <td>{{ user.4 }}</td>
+          <td>{{ user.5 }}</td>
+      </tr>
+      
+      {% endfor %}
+     
+    </tbody>
+  </table>
+
+
+
+
+
+{% endblock %}

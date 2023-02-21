@@ -230,13 +230,27 @@ h3 {
   <hr>
   <div class="opsadmin">
     {% if user|can:'generate_report' %}
-    <div class="opadmin">
-      <a class="button-plant my-3" href="{% url 'exportclientsxls' %}" role="button">Reporte Clientes</a>
-    </div> 
+    <div class="dropdown show opadmin">
+      <a class="button-plant my-3 dropdown-toggle" href="#" role="button" id="dropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Reporte Clientes
+      </a>
+    
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
+        <a class="dropdown-item" href="{% url 'exportclientsxls' %}" role="button">Descarga Excel</a>
+        <a class="dropdown-item" href="/exportclientspag" >Ver en página</a>
+      </div>
+    </div>
     {% endif %}
     {% if user|can:'generate_report' %}
-    <div class="opadmin">
-      <a class="button-plant my-3" href="{% url 'exportordersxls' %}" role="button">Reporte Órdenes</a>
+    <div class="dropdown show opadmin">
+      <a class="button-plant my-3 dropdown-toggle" href="#" role="button" id="dropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Reporte Órdenes
+      </a>
+    
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink2">
+        <a class="dropdown-item" href="{% url 'exportordersxls' %}" role="button">Descarga Excel</a>
+        <a class="dropdown-item" href="/exportorderspag">Ver en página</a>
+      </div>
     </div>
     {% endif %}
     {% if user|can:'view_userlist' %}

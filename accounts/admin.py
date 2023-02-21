@@ -17,8 +17,18 @@ class ProjectByInvestorAdmin(admin.ModelAdmin):
         model = ProjectByInvestor
 
 
+
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ('user', 'tipocliente',)
+   
+    list_filter = ('tipocliente',)
+    #ordering = ('name',)
+    
+    class Meta:
+        model = Profile
+
 admin.site.register(Video)
 
-admin.site.register(Profile)
+admin.site.register(Profile, ProfileAdmin)
 admin.site.register(Permission)
 admin.site.register(ProjectByInvestor, ProjectByInvestorAdmin)

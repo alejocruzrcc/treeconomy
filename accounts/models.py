@@ -53,6 +53,13 @@ class Profile(models.Model):
         (SUBSCRIPTION_INVESTOR, 'Subscription Investment'),
         (ADMIN , 'Admin'),
         ]
+
+    OPCIONES_TIPO = [
+        (1, 'PERSONA'),
+        (2, 'EMPRESA'),
+    ]
+
+
     role = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, blank=True, null=True)
     ## Género
     GENDER_MALE = 1
@@ -62,6 +69,7 @@ class Profile(models.Model):
     # Campos del perfil 
     
     #gender         = models.IntegerField(choices=GENDER_CHOICES, blank=True, null=True)
+    
     country        = CountryField(default="Co")
     city           = models.CharField(max_length=50, blank=True, null=True, verbose_name = "Ciudad")
     state          = models.CharField(max_length=50, blank=True, null=True)
@@ -71,6 +79,7 @@ class Profile(models.Model):
     date_of_birth  = models.DateField(blank=True, null=True)
     rut            = models.CharField(max_length=100, blank=True, null=True)
     tax_register   = models.CharField(max_length=50, blank=True, null=True)
+    tipocliente    = models.IntegerField(choices=OPCIONES_TIPO, default=1)
     facebook       = models.URLField(max_length=200, blank=True, null=True)
     instagram      = models.URLField(max_length=200, blank=True, null=True)
     twitter        = models.URLField(max_length=200, blank=True, null=True)
@@ -141,8 +150,8 @@ class ProjectByInvestor(models.Model):
     investor         = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_investor")
     project          = models.ForeignKey(Project, on_delete=models.CASCADE)
     commission_agent = models.ForeignKey(CommissionAgent, null=True, blank=True, on_delete=models.CASCADE, related_name="user_commission_agent")
-    n_trees_subscription = models.PositiveIntegerField()
-    n_trees_one_payment = models.PositiveIntegerField()
+    n_trees_subscription = models.PositiveIntegerField(default=0, blank=True, null=True)
+    n_trees_one_payment = models.PositiveIntegerField(default=0, blank=True, null=True)
     co2_consumption  = models.FloatField(validators=[MinValueValidator(0.0)], null=True, blank=True)
     active           = models.BooleanField(default=True)
 
@@ -153,11 +162,30 @@ class ProjectByInvestor(models.Model):
         verbose_name_plural = "Projects by investor"
     
     def n_trees(self):
-        return self.n_trees_subscription + self.n_trees_one_payment
+        print(self.n_trees_subscription)
+        print(self.n_trees_one_payment)
+        if self.n_trees_subscription != None:
+            nts = self.n_trees_subscription
+        else:
+            nts = 0
+        if self.n_trees_one_payment != None:
+            nto = self.n_trees_one_payment
+        else:
+            nto = 0
+        
+        return nts + nto
 
     def inversion(self):
-        inversion_s = self.project.price_subscription.price * self.n_trees_subscription
-        inversion_o = self.project.price_onepayment.price * self.n_trees_one_payment
+        if self.n_trees_subscription != None:
+            nts = self.n_trees_subscription
+        else:
+            nts = 0
+        if self.n_trees_one_payment != None:
+            nto = self.n_trees_one_payment
+        else:
+            nto = 0
+        inversion_s = self.project.price_subscription.price * nts
+        inversion_o = self.project.price_onepayment.price * nto
         total = inversion_s + inversion_o
         return total
         

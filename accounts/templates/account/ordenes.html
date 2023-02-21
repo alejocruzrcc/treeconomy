@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Órdenes{% endblock %}
+
+{% block content %}
+
+
+    
+<h1> Listado de Órdenes </h1>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        {% for col in columns %}
+        <th scope="col">{{ col }}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for order in data %}
+      <tr>
+          <td>{{ order.0 }}</td>
+          <td>{{ order.1 }}</td>
+          <td>{{ order.2 }}</td>
+          <td>{{ order.3 }}</td>
+          <td>{{ order.4 }}</td>
+          <td>{{ order.5 }}</td>
+          <td>{{ order.6 }}</td>
+          <td>{{ order.7 }}</td>
+          <td>{{ order.8 }}</td>
+          <td>{{ order.9 }}</td>
+          <td>{{ order.10 }}</td>
+          <td>{{ order.11 }}</td>
+          <td>{{ order.12 }}</td>
+          <td>{{ order.13 }}</td>
+      </tr>
+      
+      {% endfor %}
+     
+    </tbody>
+  </table>
+
+
+
+
+
+{% endblock %}

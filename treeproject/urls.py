@@ -37,6 +37,8 @@ urlpatterns = [
     path('dashboard/', include('dashboard.urls')),
     path('exportclientsxls/', login_required(account_views.export_clients_xls), name='exportclientsxls'),
     path('exportordersxls/', login_required(account_views.export_orders_xls), name='exportordersxls'),
+    path('exportclientspag/', login_required(account_views.export_clients_pag), name='exportclientspag'),
+    path('exportorderspag/', login_required(account_views.export_orders_pag), name='exportorderspag'),
     
 ] 
 if settings.DEBUG:

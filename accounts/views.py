@@ -311,6 +311,22 @@ def export_clients_xls(request):
     return response
     
 @has_role_decorator('admin')   
+def export_clients_pag(request):
+    users = User.objects.all()
+    data = []
+    
+    for user in users:
+        if Profile.objects.filter(user=user).exists():
+            data.append([user.username, user.first_name, user.last_name, user.email, str(user.profile.get_total_trees()), str(user.profile.get_inversion())])
+        else:
+            data.append([user.username, user.first_name, user.last_name, user.email, "Usuario sin perfil", "Usuario sin perfil"])
+    
+    print(type(data))
+    return render(request,'account/clientes.html', {
+            'data': data, 
+            })
+    
+@has_role_decorator('admin')   
 def export_orders_xls(request):
     response = HttpResponse(content_type='application/ms-excel')
     today = datetime.today().date()
@@ -354,3 +370,23 @@ def export_orders_xls(request):
 
 
 
+@has_role_decorator('admin')      
+def export_orders_pag(request):
+    
+
+    columns = ['Id', 'Date', 'Lote', 'Cantidad', 'Precio Unitario', 'Total', 'Status', 'Inversion Type', 'First Name', 'Last Name', 'Customer email', 'Ciudad', 'Año', 'Mes']
+    
+    # Sheet body, remaining rows
+    orderitems = OrderItem.objects.all()
+    data = []
+    
+    for item in orderitems:
+        order = item.order
+        if order.user:
+            data.append([order.id, str(order.ordered_date) if order.ordered_date else "Sin fecha", item.project.name, item.quantity, f"${item.project.get_price()}", item.get_total_item_price(), order.get_status(), item.get_type_inversion_display(), str(order.user.first_name), str(order.user.last_name), str(order.user.email), str(order.user.profile.city), order.ordered_date.strftime('%Y') if order.ordered_date else '', order.ordered_date.strftime('%b') if order.ordered_date else ''])
+   
+    
+    return render(request,'account/ordenes.html', {
+            'columns': columns,
+            'data': data, 
+            })
