@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Manage QR{% endblock %}
+{% load static %}
+{% load permission_tags %}
+{% block content %}
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">Comparte tu inversión con tus clientes</h1>
+      
+      {% if user|can:'generate_qr' %}
+        {% if company.qrcode %}
+          <p class="lead">Actualmente, ya cuentas con tu código QR que redirigirá a tus clientes a tu dashboard de inversión y plantación.</p>
+          <img src="{{ company.qrcode.url }}" width="400px">
+        {% else %}
+          <p class="lead">Crea tu propio código QR para que tus cliente puedan visualizar tu inversión y plantación</p>
+          <a class="btn btn-primary profile-button my-3" href={% url 'createqr' %} role="button">Crear QR</a>
+        {% endif %}
+        
+      {% endif %}
+    </div>
+</div>
+{% endblock %}

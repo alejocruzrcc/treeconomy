@@ -35,7 +35,11 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from datetime import datetime
 import pandas as pd
+import qrcode
 from rolepermissions.mixins import HasRoleMixin
+from django.utils.text import slugify
+from django.core.files import File
+
 
 stripe.api_key = settings.STRIPE_PRIVATE_KEY
 
@@ -108,6 +112,7 @@ def register(request):
             new_user = user_form.save(commit=False)
             new_user.is_active = False
             new_user.set_password(user_form.cleaned_data['password'])
+            print(user_form.cleaned_data)
             user_form.save()  # guardar el usuario en la base de datos si es válido
             # Enviar un email de confirmación
             current_site = get_current_site(request)
@@ -122,6 +127,24 @@ def register(request):
             email = EmailMessage(email_subject, message, to=[to_email])
             email.content_subtype = "html"
             email.send()
+            if not new_user.profile:
+                new_profile = Profile(user=new_user)
+            else: 
+                new_profile = new_user.profile
+
+            is_company = user_form.cleaned_data['is_company']
+            
+            if is_company:
+                new_profile.tipocliente = 2
+                company_name = user_form.cleaned_data['company_name']
+                company = Company(user=new_user, slug=slugify(company_name), name=company_name)
+                company.save()
+                assign_role(new_user, 'company')
+            else:
+                new_profile.tipocliente = 1
+                # Asigna rol inversioniste
+                assign_role(new_user, 'inversor')
+            new_profile.save()
             #return HttpResponse('We have sent you an email, please confirm your email address to complete registration')
             return render(request,'registration/confirm_account.html')
             
@@ -146,8 +169,7 @@ def activate_account(request, uidb64, token, backend='django.contrib.auth.backen
         if not user.profile:
           new_profile = Profile(user=user)
           new_profile.save()
-        # Asigna rol inversioniste
-        assign_role(user, 'inversor')
+        
         
         video_idea_negocio = get_object_or_404(Video, nombre="idea_negocio")
         
@@ -209,7 +231,6 @@ def profile(request):
         'co2_capturado': co2_consumption, 
         'elementos': elementos,
         })
-
 
 
 class ModifySubscriptionElement(generic.View):
@@ -278,7 +299,7 @@ def export_clients_xls(request):
     font_style = xlwt.XFStyle()
     font_style.font.bold = True
 
-    columns = ['Username', 'First Name', 'Last Name', 'Email Address', 'Total Árboles', 'Inversión' ]
+    columns = ['Usuario', 'Nombres', 'Apellidos', 'Correo', "Teléfono", 'Total Árboles', 'Inversión' ]
 
     for col_num in range(len(columns)):
         ws.write(row_num, col_num, columns[col_num], font_style) # at 0 row 0 column 
@@ -292,9 +313,9 @@ def export_clients_xls(request):
     
     for user in users:
         if Profile.objects.filter(user=user).exists():
-            data.append([user.username, user.first_name, user.last_name, user.email, str(user.profile.get_total_trees()), str(user.profile.get_inversion())])
+            data.append([user.username, user.first_name, user.last_name, user.email, str(user.profile.phone), str(user.profile.get_total_trees()), str(user.profile.get_inversion())])
         else:
-            data.append([user.username, user.first_name, user.last_name, user.email, "Usuario sin perfil"])
+            data.append([user.username, user.first_name, user.last_name, user.email, "Usuario sin perfil", "Usuario sin perfil", "Usuario sin perfil"])
     df = pd.DataFrame(data, columns=columns)
     
     for index, row in df.iterrows():
@@ -313,9 +334,9 @@ def export_clients_pag(request):
     
     for user in users:
         if Profile.objects.filter(user=user).exists():
-            data.append([user.username, user.first_name, user.last_name, user.email, str(user.profile.get_total_trees()), str(user.profile.get_inversion())])
+            data.append([user.username, user.first_name, user.last_name, user.email, user.profile.phone, str(user.profile.get_total_trees()), str(user.profile.get_inversion())])
         else:
-            data.append([user.username, user.first_name, user.last_name, user.email, "Usuario sin perfil", "Usuario sin perfil"])
+            data.append([user.username, user.first_name, user.last_name, user.email, "Usuario sin perfil", "Usuario sin perfil", "Usuario sin perfil"])
     
     return render(request,'account/clientes.html', {
             'data': data, 
@@ -363,12 +384,8 @@ def export_orders_xls(request):
 
     return response
 
-
-
 @has_role_decorator('admin')      
 def export_orders_pag(request):
-    
-
     columns = ['Id', 'Date', 'Lote', 'Cantidad', 'Precio Unitario', 'Total', 'Status', 'Inversion Type', 'First Name', 'Last Name', 'Customer email', 'Ciudad', 'Año', 'Mes']
     
     # Sheet body, remaining rows
@@ -385,3 +402,34 @@ def export_orders_pag(request):
             'columns': columns,
             'data': data, 
             })
+
+@has_role_decorator('company')
+def manageqr(request):
+    company = companies= Company.objects.filter(user=request.user)[0] 
+    return render(request,'qrcode/manageqr.html', {
+            'company': company, 
+            })
+
+@has_role_decorator('company')
+def createqr(request):
+    companies= Company.objects.filter(user=request.user)
+    if companies.count() == 1:
+        company= companies[0]
+    else:
+        company = Company(user= request.user, name=f'company-{request.user.first_name}')
+    
+    input = f'{settings.PROTOCOLO}://app.treeconomy.com.co/dashboard/companies/{company.slug}'
+    qr = qrcode.QRCode(version=1, box_size=10, border=5)
+    qr.add_data(input)
+    qr.make(fit=True)    
+    img = qr.make_image(fill='black', back_color='white')
+    ruta = f'{settings.MEDIA_ROOT}qrcodes/{company.slug}.png'
+    img.save(ruta)
+        
+    company.qrcode.save(f'qrcodes/{company.slug}.png', File(open(ruta, 'rb')))
+    company.save()
+    
+    return render(request,'qrcode/manageqr.html', {
+        'company': company
+    })
+            

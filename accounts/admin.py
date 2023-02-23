@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.models import Permission
 
-from .models import Profile, User
+from .models import Profile, User, Company
 
 from .models import ProjectByInvestor
 from .models import Video
@@ -27,8 +27,18 @@ class ProfileAdmin(admin.ModelAdmin):
     class Meta:
         model = Profile
 
+class CompanyAdmin(admin.ModelAdmin):
+    list_display = ('user', 'name',)
+   
+    list_filter = ('user',)
+    #ordering = ('name',)
+    
+    class Meta:
+        model = Profile
+
 admin.site.register(Video)
 
 admin.site.register(Profile, ProfileAdmin)
+admin.site.register(Company)
 admin.site.register(Permission)
 admin.site.register(ProjectByInvestor, ProjectByInvestorAdmin)

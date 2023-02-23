@@ -7,6 +7,7 @@
 {% load float_format %}
 {% load multiplicar %}
 {% load stripe %}
+{% load permission_tags %}
 
 <style>
     body {
@@ -187,6 +188,9 @@
               <div class="col-6">
                 <a name="" id="" class="btn btn-primary profile-button my-3" href="{% url 'edit' %}" role="button">Editar perfil</a>
                 <a class="btn btn-primary profile-button my-3" href="password_change" role="button">Cambiar contraseña</a>
+                {% if user|can:'generate_qr' %}
+                  <a class="btn btn-primary profile-button my-3" href={% url 'manageqr' %} role="button">Gestionar QR</a>
+                {% endif %}
               </div>
             </div>
           </div>
@@ -313,7 +317,6 @@
                         </div>
                       </div>
                       <div class="col-md-4 ">
-                        
                         <a class="btn btn-danger mb-2" href="{% url 'modify-subscription-element' element.price.id %}" class="btn btn-sm btn-outline-secondary" type="button">
                           Cancelar
                         </a>

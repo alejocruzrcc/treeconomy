@@ -15,3 +15,10 @@ class Inversor(AbstractUserRole):
         'view_userlist': False
     }
     
+class Company(AbstractUserRole):
+    available_permissions = {
+        'is_admin': False,
+        'view_project': True,
+        'view_userlist': False,
+        'generate_qr': True        
+    }

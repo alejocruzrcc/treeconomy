@@ -59,10 +59,13 @@ class UserRegistrationForm(forms.ModelForm):
     email=forms.CharField(label='Correo electrónico')
     password=forms.CharField(label='Contraseña',widget=forms.PasswordInput)
     password2=forms.CharField(label='Confirma contraseña',widget=forms.PasswordInput)
+    is_company=forms.BooleanField(label='Represento una empresa', required=False, initial=False)
+    company_name=forms.CharField(label='Nombre de la Empresa')
+    
 
     class Meta:
         model=User
-        fields = ('username','first_name', 'last_name', 'email')
+        fields = ('username','first_name', 'last_name', 'is_company', 'company_name', 'email')
 
     def clean_password2(self):
         cd=self.cleaned_data
@@ -80,7 +83,7 @@ class UserRegistrationForm(forms.ModelForm):
         return email
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        for field in ['username', 'first_name', 'last_name', 'email', 'password', 'password2']:
+        for field in ['username', 'first_name', 'last_name', 'company_name', 'email', 'password', 'password2']:
             self.fields[field].widget.attrs['class'] = 'form-control form-control-lg'
 
 class UserEditForm(forms.ModelForm):
@@ -103,7 +106,7 @@ class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = '__all__'
-        exclude = ['user', 'stripe_customer_id']
+        exclude = ['user', 'stripe_customer_id', 'tipocliente']
         
     def __init__(self, *args, **kwargs):
         super(ProfileEditForm, self).__init__(*args, **kwargs)

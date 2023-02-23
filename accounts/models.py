@@ -24,6 +24,8 @@ CO2_CONSUMPTION_PER_HECTARE_PER_YEAR = 35000
 CO2_CONSUMPTION_PER_TREE_PER_YEAR = (CO2_CONSUMPTION_PER_HECTARE_PER_YEAR / TREES_PER_HECTARE)
 CO2_CONSUMPTION_PER_TREE_PER_DAY = (CO2_CONSUMPTION_PER_TREE_PER_YEAR / DAYS_PER_YEAR)
 
+
+
 class Video(models.Model):
     nombre = models.CharField(max_length=50, blank=True, null=True, verbose_name="Nombre")
     video = models.FileField(upload_to='videos_uploaded',null=True,
@@ -190,6 +192,15 @@ class ProjectByInvestor(models.Model):
     def __str__(self):
         return str(self.pk) + "_" + self.investor.username + "_" + self.project.name
 
+class Company(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    name= models.CharField(max_length=100)
+    slug = models.SlugField(unique=True, primary_key=True)
+    qrcode = models.ImageField(upload_to='qrcodes',blank=True, null=True)
+    nit = models.CharField(max_length=50, blank=True, null=True)
+
+    def __str__(self):
+        return self.name
 
 @receiver(post_save, sender=User)
 def post_email_confirmed(sender, instance, created, **kwargs):

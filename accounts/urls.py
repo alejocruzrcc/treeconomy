@@ -23,6 +23,8 @@ urlpatterns = [
     path('',include('django.contrib.auth.urls')),
     path('register/',views.register,name='register'),
     path('profile',views.profile,name='profile'),
+    path('managecode', login_required(views.manageqr), name='manageqr'),
+    path('createqr', login_required(views.createqr), name='createqr'),
     path('calculadora',views.calculadora,name='calculadora'),
     path('edit/',views.edit,name='edit'),
     path('activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
@@ -44,4 +46,5 @@ urlpatterns = [
     #path('pause-subscription-element/<pk>/', 
          #PauseSubscriptionElement.as_view(), name='pause-subscription-element'),
     path('users/',  login_required(UserListView.as_view()), name='users'),
+    
 ]
