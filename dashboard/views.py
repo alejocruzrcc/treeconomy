@@ -239,6 +239,9 @@ def dashboard(request):
         'utilidad_hoy': utilidad_hoy_str,
         
     })
+
+def dashboard_company(request):
+    return render (request, 'company.html')
     
 
 def dashboard_company(request):
