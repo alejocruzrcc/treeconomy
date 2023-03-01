@@ -240,9 +240,7 @@ def registrar_pbi(investor, project, n_trees_subscription, n_trees_one_payment):
                     obj.save()
                     
                     print("no existe pbi")
-                    
-                    
-     
+                     
             
 def registrar_pbi_sus(investor, project, n_trees_subscription, n_trees_one_payment):   
                 try:

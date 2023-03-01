@@ -197,6 +197,8 @@ class Company(models.Model):
     name= models.CharField(max_length=100)
     slug = models.SlugField(unique=True, primary_key=True)
     qrcode = models.ImageField(upload_to='qrcodes',blank=True, null=True)
+    logotipo = models.ImageField(upload_to='logos_empresa', blank=True, null=True)
+    portadas = models.ImageField(upload_to='portadas_empresa', blank=True, null=True)
     nit = models.CharField(max_length=50, blank=True, null=True)
 
     def __str__(self):

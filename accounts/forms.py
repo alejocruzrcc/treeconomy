@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from .models import Profile
 from django.contrib.auth.forms import PasswordResetForm, SetPasswordForm
-from .models import ProjectByInvestor
+from .models import ProjectByInvestor, Company
 from phonenumber_field.formfields import PhoneNumberField
 from phonenumber_field.widgets import PhoneNumberPrefixWidget
 from django.contrib.auth.forms import AuthenticationForm, UsernameField
@@ -28,8 +28,6 @@ class UserPasswordResetForm(PasswordResetForm):
         'name': 'Correo Electrónico'
         }))
     
-
-
 class UserPasswordResetConfirmForm(SetPasswordForm):
 
     new_password1 = forms.CharField(label='', widget=forms.PasswordInput(attrs={
@@ -45,7 +43,6 @@ class UserPasswordResetConfirmForm(SetPasswordForm):
         'type': 'password',
         'name': 'Confirme nueva contraseña'
         }))
-
 
 class LoginForm(AuthenticationForm):
     username = UsernameField(
@@ -160,4 +157,20 @@ class PasswordChangeForm(SetPasswordForm):
             )
         return old_password
 
+class CompanyForm(forms.ModelForm):
+    name = forms.CharField(label="Nombre de la empresa", max_length=80, required=False)
+    portadas = forms.ImageField(label="Imagen de portada", required=False)
+    logotipo = forms.ImageField(label="Logo de la empresa", required=False)
+    class Meta:
+        model = Company
+        fields = "__all__"
+        exclude = ('slug', 'user', 'qrcode')
 
+    def __init__(self, *args, **kwargs):
+        super(CompanyForm, self).__init__(*args, **kwargs)
+        print(self.visible_fields())
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-control'
+            print(visible)
+    
+    

@@ -267,9 +267,6 @@ def editar(request, pk):
 
     return render(request, "edit.html", {'formulario': formulario, 'errores': errores})
     
-
-
-
 def generate_random(number, polygon):
     points = []
     minx, miny, maxx, maxy = polygon.bounds

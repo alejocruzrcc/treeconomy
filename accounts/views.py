@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 from django.template.context_processors import csrf
 from django.conf import settings
 from projects.forms import ProjectByInvestorForm
-from .forms import LoginForm, UserRegistrationForm,UserEditForm,ProfileEditForm, ContactForm
+from .forms import LoginForm, UserRegistrationForm,UserEditForm,ProfileEditForm, ContactForm, CompanyForm
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.template import RequestContext
@@ -23,7 +23,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
 from .token_generator import account_activation_token
 from django.core.mail import EmailMessage
-from rolepermissions.roles import assign_role
+from rolepermissions.roles import assign_role, remove_role, get_user_roles
 from django.core import serializers
 from django.http import JsonResponse
 from django.views import generic
@@ -39,6 +39,7 @@ import qrcode
 from rolepermissions.mixins import HasRoleMixin
 from django.utils.text import slugify
 from django.core.files import File
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 stripe.api_key = settings.STRIPE_PRIVATE_KEY
@@ -403,33 +404,80 @@ def export_orders_pag(request):
             'data': data, 
             })
 
-@has_role_decorator('company')
 def manageqr(request):
-    company = companies= Company.objects.filter(user=request.user)[0] 
-    return render(request,'qrcode/manageqr.html', {
-            'company': company, 
-            })
+    companies = Company.objects.filter(user= request.user)
+    print(companies.count())
+    if companies.count() > 0:
+        company = companies[0]
+        return render(request, "qrcode/manageqr.html", {'company': company, 'is_company': True})
+    else:
+        return render(request, "qrcode/manageqr.html", {'is_company': False})
+    
+def create_company(request):
+    company_instance = Company(user= request.user)
+
+    if request.method == 'POST':
+
+        # Create a form instance and populate it with data from the request (binding):
+        form = CompanyForm(request.POST or None, request.FILES or None, instance=company_instance)
+
+        # Check if the form is valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required (here we just write it to the model due_back field)
+            company_instance.slug = slugify(form.cleaned_data['name'])
+            company_instance.save()
+            role = get_user_roles(request.user)
+            print(role)
+            remove_role(request.user, 'inversor')
+            assign_role(request.user, 'company')
+            # redirect to a new URL:
+            return HttpResponseRedirect(reverse('manageqr'))
+    else:
+        form = CompanyForm(request.POST or None, request.FILES or None)
+
+    return render(request, "qrcode/create_company.html", {'formulario': form})
+
+@has_role_decorator('company')
+def edit_company(request, pk):
+    company = Company.objects.get(pk=pk)
+    formulario = CompanyForm(request.POST or None, request.FILES or None, instance=company)
+    
+    if formulario.is_valid() and request.POST:
+        #company.logotipo.delete()
+        #company.portadas.delete()  # This will delete your old image
+        formulario.save()
+        return redirect('/account/managecode')
+    else:
+        errores = formulario.errors
+
+    return render(request, "qrcode/edit_company.html", {'formulario': formulario, 'errores': errores})
+
 
 @has_role_decorator('company')
 def createqr(request):
     companies= Company.objects.filter(user=request.user)
     if companies.count() == 1:
         company= companies[0]
+        is_company = True
+        input = f'{settings.PROTOCOLO}://app.treeconomy.com.co/dashboard/companies/{company.slug}'
+        qr = qrcode.QRCode(version=1, box_size=10, border=5)
+        qr.add_data(input)
+        qr.make(fit=True)    
+        img = qr.make_image(fill='black', back_color='white')
+        ruta = f'{settings.MEDIA_ROOT}qrcodes/{company.slug}.png'
+        img.save(ruta)
+            
+        company.qrcode.save(f'qrcodes/{company.slug}.png', File(open(ruta, 'rb')))
+        company.save()
+        return render(request,'qrcode/manageqr.html', {
+        'company': company,
+        'is_company': is_company 
+        })
     else:
-        company = Company(user= request.user, name=f'company-{request.user.first_name}')
+        is_company = False
+        return render(request,'qrcode/manageqr.html', {
+        'is_company': is_company 
+        })
     
-    input = f'{settings.PROTOCOLO}://app.treeconomy.com.co/dashboard/companies/{company.slug}'
-    qr = qrcode.QRCode(version=1, box_size=10, border=5)
-    qr.add_data(input)
-    qr.make(fit=True)    
-    img = qr.make_image(fill='black', back_color='white')
-    ruta = f'{settings.MEDIA_ROOT}qrcodes/{company.slug}.png'
-    img.save(ruta)
-        
-    company.qrcode.save(f'qrcodes/{company.slug}.png', File(open(ruta, 'rb')))
-    company.save()
     
-    return render(request,'qrcode/manageqr.html', {
-        'company': company
-    })
             
