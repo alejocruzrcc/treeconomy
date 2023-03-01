@@ -6,7 +6,7 @@ from django.views.generic import TemplateView
 from django.http import JsonResponse
 from django.shortcuts import render
 from projects.models import Project, Order, Rentabilidad
-from accounts.models import ProjectByInvestor
+from accounts.models import ProjectByInvestor, Company
 from django.core import serializers
 from django.template import loader
 from django.http import JsonResponse
@@ -240,11 +240,13 @@ def dashboard(request):
         
     })
 
-def dashboard_company(request):
-    return render (request, 'company.html')
     
 
-def dashboard_company(request):
+def dashboard_company(request, slug):
+    print(slug)
+    company = Company.objects.get(pk=slug)
+    print(company)
+    company_name = company.name
     usuario = request.user
     projects = Project.objects.all()
     invest = invest_json(request)
@@ -346,7 +348,7 @@ def dashboard_company(request):
             co2_desdecompra += arbol_anio_co2 * diff * item.quantity
             
     progreso_co2 = round((float(co2_consumption) *100)/avion, 3)
-    return render(request, 'argon.html',{
+    return render(request, 'company.html', {
         'projects': projects,
         'user_projects': user_projects,
         'datos': datos,
@@ -366,6 +368,8 @@ def dashboard_company(request):
         'comp_inversion': comp_inversion, 
         'comp_arboles': comp_arboles,
         'utilidad_hoy': utilidad_hoy_str,
-        
+        'company_name': company_name,
+        'tiene_logo': False,
+        'tiene_fondo': False, 
     })
     

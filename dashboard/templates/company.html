@@ -1,42 +1,165 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodigoQR</title>
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;700&family=PT+Sans:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Tu compañia {% endblock title %}
 
-<header class="header">
-    <div class="contenedor">
-        <div class="header__imagen1">
-            <picture>
-                <picture class="">                    
-                    <img loading="lazy" width="200" height="300" src="css/img/logotreeconomy.png" alt="">
-                </picture
-            </picture>
-        </div>
-        <div class="header_imagen2">
-            <picture>
-                <picture>                    
-                    <img loading="lazy" width="200" height="300" src="css/img/logo_crepes.png" alt=""> 
-                </picture>
-            </picture>
-            <div class="header_imagen3">
-                <picture>
-                    <picture>                    
-                        <img loading="lazy" width="200" height="300" src="css/img/image _crepeswafles.png" alt="">
-                    </picture>
-                </picture>
-        </div>
-    </div> 
-</header>
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'dashboard/css/normalize.css' %}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;700&family=PT+Sans:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" type='text/css' href="{% static 'dashboard/css/style.css' %}">
+
+
+
+
+<div class="header">
+    <div class="contenedor1">             
+        <div class="logos">   
+            <div class="logo1">
+                <img src= "{% static 'dashboard/img/company/img/logotreeconomy.png' %}" alt="">
+            </div> 
+            
+            <div class="logo2"> 
+                {% if tiene_logo %}
+                <img src="{% static 'dashboard/img/company/img/logo_crepes.png' %}"alt="">                       
+                {% endif %}
+            </div>
+        </div>  
     
-</body>
-</html>
+        {% if tiene_fondo %}
+        <div class="imagen">
+            <!-- <img src="img/image _crepeswafles.png" alt=""> -->
+            <div class="imagen__texto">
+                <h1 class="no-margin">Crepes & Waffles</h1>
+                <h2 class="no-margin">Inversión en Treeconomy</h2>    
+                <p class="no-margin">30'000.000$</p>
+            </div> 
+        </div> 
+        {% else  %}
+        <div class="imagensinfondo">
+            <!-- <img src="img/image _crepeswafles.png" alt=""> -->
+            <div class="imagen__texto align-items-center">
+                <h1 class="no-margin">Crepes & Waffles</h1>
+                <h2 class="no-margin">Inversión en Treeconomy</h2>    
+                <p class="no-margin">30'000.000$</p>
+            </div> 
+        </div>
+        {% endif %}
+    </div>                                    
+</div>
+<div class="contenedor contenido-principal">
+    <main class="blog">
+        <article class="entrada">
+            <div class="entrada__imagen">
+                <picture>                    
+                    <!-- <img loading="lazy" src="img/image 15.png" alt="imagen blog"> -->
+                    <div class="barra">
+                        <div class="titulo no-margin centrar-texto">
+                            <h2>Árboles sembrados</h2>
+                        </div>
+                        <div class="campo boton no-margin centrar-texto">
+                               <select class="lista" name="Seleccione un año" id="">
+                                <option class="lista1" value="">2019</option>
+                                <option class="lista1" value="">2020</option>
+                                <option class="lista1" value="">2021</option>
+                                <option class="lista1" value="">2022</option>
+                                <option class="lista1" value="">2023</option>
+                               </select>
+                        </div>
+                    </div>
+                     <div class="entrada__imagen-texto">
+                        <h3 class="no-margin centrar-texto">130</h3>
+                        <p class="no-margin">árboles</p>
+                     </div>                                       
+            </div>
+        </article>
+        <article class="entrada2">
+            <h2>Donde sembramos árboles</h2>
+            <div class="entrada2__imagen">
+                <picture>        
+
+                </picture>                     
+            </div>
+        </article>
+        <article class="entrada3">
+            <h2>Equivalencia de CO2 capturado a nivel vehicular</h2>
+            <div class="entrada3__imagen">
+                <div class="card1">
+                </div>
+                <div class="card2">
+                </div>   
+                <div class="card3">
+                </div>   
+                <div class="card4">
+                </div>  
+            </div>
+        </article>
+    </main>
+    <anside class="sidebarqr">
+        <div class="entrada4">
+            <h2>Total de árboles sembrados</h2>
+            <div class="entrada4__grafico">
+                <span class="leyenda_all"></span>
+            </div>
+            <picture class="entrada4__imagenes">
+                <img loading="lazy" src="{% static 'dashboard/img/company/img/manzanares.png' %}" alt="mazanares" >
+                <img loading="lazy" src="{% static 'dashboard/img/company/img/valledupar.png' %}" alt="valledupar" >
+                <img loading="lazy" src="{% static 'dashboard/img/company/img/yali.png' %}" alt="yali" >
+                <img loading="lazy" src="{% static 'dashboard/img/company/img/darien.png' %}" alt="darien" >
+                <img loading="lazy" src="{% static 'dashboard/img/company/img/cesar.png' %}" alt="cesar" >
+                <img loading="lazy" src="{% static 'dashboard/img/company/img/aire.png' %}" alt="aire" >
+            </picture>
+        </div>
+        <div class="entrada5">
+            <h2>Captura de CO2</h2>
+            <div class="entrada5__parte1">
+                    <div
+                    class="entrada5__grafico">
+                    <h1>28k</h1>
+                    <h2>145</h2>
+                    </div>
+                    <div class="entrada5__texto">
+                        <span class="leyenda_all">
+                            <span class="color_captura"></span>
+                            <p>Captura de CO2: 28,965</p>
+                        </span>
+                        <span class="leyenda_all">
+                            <span class="color_emisiones"></span>
+                            <p>Emisiones: 145,583 CO2</p>
+                        </span>
+                    </div>
+             </div>
+             <div class="entrada5__cuadro">
+                <h1>Calcula cuanto CO2 capturan los árboles</h1>
+                <div class="entrada5__cuadro-rectangulo ">
+                </div>
+                <h2>15,456K</h2>
+                <p>co2 capturado</p> 
+             </div>
+        </div>
+        <div class="entrada6">
+            <h2>Contactanos</h2>
+            <form action="" class="formulario">
+                <div class="campo">
+                    <label class="campo__label" for="nombre">Nombre</label>
+                    <input class="campo__field" type="text" placeholder="Tu nombre" id="nombre">
+                </div>
+                <div class="campo">
+                    <label class="campo__label" for="email">Email</label>
+                    <input class="campo__field" type="text" placeholder="Tu Email" id="email">
+                </div>
+                <div class="campo">
+                    <label class="campo__label" for="mensaje">Mensaje</label>
+                    <textarea class="campo__field campo__field--textarea " id="mensaje"></textarea>
+                </div>
+    
+                <div class="campo">
+                    <input type="submit" value="Enviar" class="boton boton--primario"> 
+                </div>
+            </form>
+        </div>
+    </anside>
+    <script src="/treeproject/static/dashboard/js/controladorqr.js"></script>
+</div>
+{% endblock %}
