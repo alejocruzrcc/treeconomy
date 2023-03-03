@@ -893,7 +893,7 @@ var BarsChart = (function() {
 	//
 	Array.from($("#card-bars").find(".chart-canvas-gen")).forEach( elem => {
 		var $chart = $(elem);
-
+		
 		function initChart($chart) {
 
 			datos_simples = $chart.data('chart');
@@ -903,7 +903,7 @@ var BarsChart = (function() {
 			arboles_acumulados = proyectos.map(k=> 
 				parseFloat(datos[k]["total_trees"])
 			)
-			
+			 colores = ["#0c5a42", "#afbf36", "#012623", "#f2622e"]  
 			// Create chart
 			var ordersChart = new Chart($chart, {
 				type: 'bar',
@@ -913,7 +913,7 @@ var BarsChart = (function() {
 						label: ['Árboles'],
 						data: arboles_acumulados,
 						borderColor: "#f2622e",
-			  			backgroundColor: "#f2622e"
+			  			backgroundColor: Object.values(colores)
 					}
 					]
 				}
@@ -932,6 +932,62 @@ var BarsChart = (function() {
 			initChart($chart);
 		}
 	})
+
+	// DOna
+	Array.from($("#card-bars").find(".chartsdona")).forEach( elem => {
+		var $chart = $(elem);
+		
+		function initChart($chart) {
+
+			datos_simples = $chart.data('chart');
+			datos_dobles = datos_simples.replace(/'/g, '"')
+			datos = JSON.parse(datos_dobles)
+			proyectos = Object.keys(datos)
+			arboles_acumulados = proyectos.map(k=> 
+				parseFloat(datos[k]["total_trees"])
+			)
+			colores = [ "#f2622e", "#0c5a42", "#afbf36", "#012623"]  
+			// Create chart
+			var ordersChart = new Chart($chart, {
+				type: 'doughnut',
+				data: {
+					labels: proyectos,
+					datasets: [{
+						label: ['Árboles'],
+						data: arboles_acumulados,
+			  			backgroundColor: Object.values(colores)
+					}
+					]
+				},
+				options: {
+					responsive: true,
+					plugins: {
+					  legend: {
+						position: 'top',
+					  },
+					  title: {
+						display: true,
+						text: 'Chart.js Doughnut Chart'
+					  }
+					}
+				  },
+			});
+			
+
+
+			// Save to jQuery object
+			$chart.data('chart', ordersChart);
+		}
+
+
+		// Init chart
+		
+		if ($chart.length) {
+			initChart($chart);
+		}
+	})
+	
+
     Array.from($("#card-bars").find(".chart-canvas-pro")).forEach( elem => {
 		
 		var $chart = $(elem);

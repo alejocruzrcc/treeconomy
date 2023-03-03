@@ -207,11 +207,11 @@ def profile(request):
     total = user.profile.get_total_trees
     inversion = user.profile.get_inversion
     ## Utilidad
-    invest = invest_json(request)
+    invest = invest_json(request, user)
     resumen = invest[1]
     suma_utilidad = 0
     suma_arboles_acumulados = 0
-    co2_consumption = calculo_co2(request)
+    co2_consumption = calculo_co2(request, user)
     
     ## Suscripciones
     subscription = get_object_or_404(Subscription, user=request.user)

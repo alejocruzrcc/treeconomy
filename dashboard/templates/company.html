@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load get_data_chart %}
 {% block title %} Tu compañia {% endblock title %}
 
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+<script src="https://kit.fontawesome.com/717704dca6.js" crossorigin="anonymous"></script>
 
 {% block content %}
 <link rel="stylesheet" href="{% static 'dashboard/css/normalize.css' %}">
@@ -10,10 +14,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;700&family=PT+Sans:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" type='text/css' href="{% static 'dashboard/css/style.css' %}">
 
-
-
-
-<div class="header">
+<div class="header my-5">
     <div class="contenedor1">             
         <div class="logos">   
             <div class="logo1">
@@ -22,122 +23,132 @@
             
             <div class="logo2"> 
                 {% if tiene_logo %}
-                <img src="{% static 'dashboard/img/company/img/logo_crepes.png' %}"alt="">                       
+                    <img class="rounded-circle shadow-4-strong" src="{{ company.logotipo.url }}" alt="treeconmy-logo" style="object-fit: cover;">                 
                 {% endif %}
             </div>
         </div>  
     
         {% if tiene_fondo %}
-        <div class="imagen">
-            <!-- <img src="img/image _crepeswafles.png" alt=""> -->
-            <div class="imagen__texto">
-                <h1 class="no-margin">Crepes & Waffles</h1>
-                <h2 class="no-margin">Inversión en Treeconomy</h2>    
-                <p class="no-margin">30'000.000$</p>
+            <div style="background-image: linear-gradient(
+                rgba(0, 0, 0, 0.5),
+                rgba(0, 0, 0, 0.5)
+              ), url('{{ company.portadas.url }}');">
+                <div class="imagen__texto">
+                    <h1 class="no-margin">{{ company.name }}</h1>
+                    <h2 class="no-margin">Inversión en Treeconomy</h2>    
+                    <p class="no-margin"> ${{ capital_total }} USD</p>
+                </div> 
             </div> 
-        </div> 
         {% else  %}
         <div class="imagensinfondo">
             <!-- <img src="img/image _crepeswafles.png" alt=""> -->
             <div class="imagen__texto align-items-center">
-                <h1 class="no-margin">Crepes & Waffles</h1>
+                <h1 class="no-margin">Tu empresa</h1>
                 <h2 class="no-margin">Inversión en Treeconomy</h2>    
-                <p class="no-margin">30'000.000$</p>
+                <p class="no-margin">$ 0 USD</p>
             </div> 
         </div>
         {% endif %}
     </div>                                    
 </div>
-<div class="contenedor contenido-principal">
-    <main class="blog">
-        <article class="entrada">
-            <div class="entrada__imagen">
-                <picture>                    
-                    <!-- <img loading="lazy" src="img/image 15.png" alt="imagen blog"> -->
-                    <div class="barra">
-                        <div class="titulo no-margin centrar-texto">
-                            <h2>Árboles sembrados</h2>
-                        </div>
-                        <div class="campo boton no-margin centrar-texto">
-                               <select class="lista" name="Seleccione un año" id="">
-                                <option class="lista1" value="">2019</option>
-                                <option class="lista1" value="">2020</option>
-                                <option class="lista1" value="">2021</option>
-                                <option class="lista1" value="">2022</option>
-                                <option class="lista1" value="">2023</option>
-                               </select>
-                        </div>
-                    </div>
-                     <div class="entrada__imagen-texto">
-                        <h3 class="no-margin centrar-texto">130</h3>
-                        <p class="no-margin">árboles</p>
-                     </div>                                       
-            </div>
-        </article>
-        <article class="entrada2">
-            <h2>Donde sembramos árboles</h2>
-            <div class="entrada2__imagen">
-                <picture>        
 
-                </picture>                     
-            </div>
-        </article>
-        <article class="entrada3">
-            <h2>Equivalencia de CO2 capturado a nivel vehicular</h2>
-            <div class="entrada3__imagen">
-                <div class="card1">
-                </div>
-                <div class="card2">
-                </div>   
-                <div class="card3">
-                </div>   
-                <div class="card4">
-                </div>  
-            </div>
-        </article>
-    </main>
-    <anside class="sidebarqr">
-        <div class="entrada4">
-            <h2>Total de árboles sembrados</h2>
-            <div class="entrada4__grafico">
-                <span class="leyenda_all"></span>
-            </div>
-            <picture class="entrada4__imagenes">
-                <img loading="lazy" src="{% static 'dashboard/img/company/img/manzanares.png' %}" alt="mazanares" >
-                <img loading="lazy" src="{% static 'dashboard/img/company/img/valledupar.png' %}" alt="valledupar" >
-                <img loading="lazy" src="{% static 'dashboard/img/company/img/yali.png' %}" alt="yali" >
-                <img loading="lazy" src="{% static 'dashboard/img/company/img/darien.png' %}" alt="darien" >
-                <img loading="lazy" src="{% static 'dashboard/img/company/img/cesar.png' %}" alt="cesar" >
-                <img loading="lazy" src="{% static 'dashboard/img/company/img/aire.png' %}" alt="aire" >
-            </picture>
-        </div>
-        <div class="entrada5">
-            <h2>Captura de CO2</h2>
-            <div class="entrada5__parte1">
-                    <div
-                    class="entrada5__grafico">
-                    <h1>28k</h1>
-                    <h2>145</h2>
+<div class="row">
+    <div class="col-5">
+        <div class="entrada1 my-4">
+            <div class="entrada__imagen py-3">     
+                    <div class="titulo">
+                        <h2>Árboles sembrados</h2>
                     </div>
-                    <div class="entrada5__texto">
-                        <span class="leyenda_all">
-                            <span class="color_captura"></span>
-                            <p>Captura de CO2: 28,965</p>
-                        </span>
-                        <span class="leyenda_all">
-                            <span class="color_emisiones"></span>
-                            <p>Emisiones: 145,583 CO2</p>
-                        </span>
+                 
+                    <div class="entrada__imagen-texto">
+                        <h3 class="counter" data-target="{{ arboles_total }}">0</h3>
+                        <p class="no-margin">árboles</p>
                     </div>
-             </div>
-             <div class="entrada5__cuadro">
-                <h1>Calcula cuanto CO2 capturan los árboles</h1>
-                <div class="entrada5__cuadro-rectangulo ">
-                </div>
-                <h2>15,456K</h2>
-                <p>co2 capturado</p> 
-             </div>
+                   
+                                              
+            </div>
         </div>
+        
+        <div class="entrada4 py-4 px-2" >
+            <div class="titulo">
+                <h2>Total de árboles sembrados</h2>
+            </div>
+            <div class="row">
+                
+            {% if not resumen_dict|length > 0 %}
+                <div class="col">
+                    <p> Esta compañía aún no invierte en ningún proyecto </p>
+                </div>
+                
+            {% else %}
+                
+                    <div class="col-4">
+                        <div class="entrada4__grafico">
+                            <div id="card-bars" class="card-body">
+                                <canvas id="dona-bars" class="chartsdona"  data-chart='{{ resumen_dict }}'></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-8 px-4">
+                        <div class="row row-cols-1 row-cols-md-3 g-4">
+                        
+                        {% for key, value in resumen_dict.items %}
+                        <div class="col">
+                            <div class="card">
+                                <img src="{% static 'dashboard/img/company/img/paisaje1.png' %}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center">{{key}}</h5>
+                                    <p class="card-text text-center">{{value.total_trees}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        </div>   
+                    </div>
+                
+            {% endif %}
+            </div>
+            
+            
+        </div>
+
+        <div class="entrada3 my-4">
+            <div class="entrada__imagen py-3">   
+                <div class="titulo">
+                    <h2>Equivalencia de CO2 capturado a nivel vehicular</h2>
+                </div>
+                <div class="entrada3__imagen">
+                    <div class="d-flex justify-content-between flex-wrap">
+
+                    
+                    {% for key, value in vehiculos.items %}
+                    
+                    <button type="button" class="btn btn-link" data-toggle="modal" data-target="#{{ value.nombre }}">
+                        <img class="img-collapse shadow-4-strong"  src= "{% static value.url %}" alt="" style="height: 8rem; border-radius: 30%;">
+                    </button>
+                    
+                      <!-- Modal -->
+                      <div class="modal fade" id="{{ value.nombre }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">{{ value.nombre }}</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              ...
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    {% endfor %}
+                </div>
+                </div>    
+            </div>
+        </div>
+
         <div class="entrada6">
             <h2>Contactanos</h2>
             <form action="" class="formulario">
@@ -159,7 +170,76 @@
                 </div>
             </form>
         </div>
-    </anside>
-    <script src="/treeproject/static/dashboard/js/controladorqr.js"></script>
+    </div>
+     
+    <div class="col-7">
+        <div class="entrada5 my-4">
+            <div class="row mb-3">
+                <div class="col">
+                    <h2>Inversión</h2>
+                    <canvas id="myChartPieDb" data-chart='{{ resumen_general }}'></canvas>
+                </div>
+                <div class="col">
+                    <h2>Captura de CO2</h2>
+                    <div><strong>Desde que fueron sembrados, tus árboles han capturado:</strong>
+                        <strong class="colorletra">{{ co2_consumption }} kg de CO<sup>2</sup></strong></div>
+                        <div><strong>Desde que invertistie, tus árboles han capturado:</strong>
+                        <strong class="colorletra">{{ co2_desdecompra }} Kg de CO<sup>2</sup></strong></div>
+                </div>
+            </div>
+            
+            <div class="row">
+             <div class="entrada5__cuadro p-5">
+                <h2>Calcula cuanto CO2 capturan los árboles</h2>
+                <h4 class="text-center"><span id="cont_arboles">1</span> Árboles</h4>
+                <div class="entrada5__cuadro-rectangulo ">
+                    <input type="range" class="form-range" min="0" max="5" step="0.5" id="sliderco2" value="1">
+                </div>
+                <h4 class="text-center"><span id="cont_co2">33.3</span> Kg CO2 capturado</h4>
+             </div>
+            </div>
+        </div>
+
+        <div class="my-4">  
+            {{ map|safe }}
+       </div>
+
+
+    </div>
 </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+<script>
+    const counters = document.querySelectorAll('.counter');
+    
+    const speed = 2; // The lower the slower
+
+    counters.forEach(counter => {
+        
+        const updateCount = () => {
+            const target = +counter.getAttribute('data-target');
+            const count = +counter.innerText;
+
+            // Lower inc to slow and higher to slow
+            const inc = target / speed;
+
+            // Check if target is reached
+            if (count < target) {
+                // Add inc to count and output in counter
+                counter.innerText = Math.floor( count + inc );
+                // Call function every ms
+                setTimeout(updateCount, 1);
+            } else {
+                counter.innerText = target;
+            }
+        };
+
+        updateCount();
+});
+
+</script>
+
+
+<script src="{% static "dashboard/js/argon.js" %}"></script>
 {% endblock %}

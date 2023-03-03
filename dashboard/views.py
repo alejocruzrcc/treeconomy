@@ -18,10 +18,40 @@ import calendar
 from statistics import mean 
 from dateutil.relativedelta import relativedelta
 import pytz
+import folium
+from fastkml.kml import KML
+import kml2geojson
+import random
+from shapely import geometry
 
 
-def invest_json(request):
-    usuario = request.user
+
+def generate_random(number, polygon):
+    points = []
+    minx, miny, maxx, maxy = polygon.bounds
+    
+    while len(points) < number:
+        pnt = geometry.Point(random.uniform(minx, maxx), random.uniform(miny, maxy))
+        
+        if polygon.contains(pnt):
+            points.append(geometry.Point(random.uniform(miny, maxy), random.uniform(minx, maxx),))
+    return points
+
+def popup_html(nombre, descripcion, hectareas, url):
+    html = f"""
+    <div class="card" style="width: 40rem;">
+        <div class="card-body">
+            <h3 class="card-title">Proyecto {nombre}</h3>
+            <h6 class="card-subtitle mb-2 text-muted">{hectareas} Hectáreas</h6>
+            <p class="card-text">{descripcion}</p>
+            <h4><a href="{ url }" class="card-link" target="_blank">Invertir aquí</a></h4>
+        </div>
+    </div>
+    """
+    return html
+
+def invest_json(request, usuario):
+    #usuario = request.user
     pbi= ProjectByInvestor.objects.filter(investor=usuario)
     projects_id= list(map(lambda x: x.project_id, pbi))
     api = {}
@@ -81,7 +111,8 @@ def invest_json(request):
     return [api, resumen, resumen_mes_anterior]
 
 def invest_api(request):
-    datos = invest_json(request)[0]
+    usuario = request.user
+    datos = invest_json(request, usuario)[0]
     return JsonResponse(datos)
 
 
@@ -93,13 +124,12 @@ def invest(request):
             'table': "dat",
         })
     
-def calculo_co2(request):
+def calculo_co2(request, usuario):
     DAYS_PER_YEAR = 365
     TREES_PER_HECTARE = 500
     CO2_CONSUMPTION_PER_HECTARE_PER_YEAR = 35000
     CO2_CONSUMPTION_PER_TREE_PER_YEAR = (CO2_CONSUMPTION_PER_HECTARE_PER_YEAR / TREES_PER_HECTARE)
     CO2_CONSUMPTION_PER_TREE_PER_DAY = (CO2_CONSUMPTION_PER_TREE_PER_YEAR / DAYS_PER_YEAR)
-    usuario = request.user
     pbis = ProjectByInvestor.objects.filter(investor=usuario)
     co2_total = 0
     for pbi in pbis:
@@ -111,14 +141,12 @@ def calculo_co2(request):
         co2_total += co2_op + co2_su
     co2_consumption = "{:.2f}".format(co2_total)
     return co2_consumption    
-        
-        
-    
+          
 
 def dashboard(request):
     usuario = request.user
     projects = Project.objects.all()
-    invest = invest_json(request)
+    invest = invest_json(request, usuario)
     datos = invest[0]
     resumen = invest[1]
     resumen_mes_anterior = invest[2]
@@ -154,7 +182,7 @@ def dashboard(request):
     suma_inversion_str = "{:.2f}".format(suma_inversion)
     suma_utilidad_str = "{:.2f}".format(suma_utilidad)
     suma_capital_str = "{:.2f}".format(suma_capital)
-    co2_consumption = calculo_co2(request)
+    co2_consumption = calculo_co2(request, usuario)
     #suma_arboles_nuevos = "{:.2f}".format(suma_arboles_nuevos)
     #suma_arboles_acumulados = "{:.2f}".format(suma_arboles_acumulados) 
     resumen_general = [suma_inversion_str, suma_utilidad_str, suma_capital_str]
@@ -238,23 +266,29 @@ def dashboard(request):
         'comp_arboles': comp_arboles,
         'utilidad_hoy': utilidad_hoy_str,
         
-    })
-
-    
+    })   
 
 def dashboard_company(request, slug):
-    print(slug)
     company = Company.objects.get(pk=slug)
-    print(company)
+    usuario = company.user
     company_name = company.name
-    usuario = request.user
+
+    if company.logotipo != None:
+        tiene_logo = True
+    else:
+        tiene_logo = False
+    if company.portadas != None:
+        tiene_fondo = True
+    else:
+        tiene_fondo = False
+    
     projects = Project.objects.all()
-    invest = invest_json(request)
+    invest = invest_json(request, usuario)
     datos = invest[0]
     resumen = invest[1]
     resumen_mes_anterior = invest[2]
     rentabilidad= 0.0094
-    print(resumen)  
+    
     ## Gráfca inversion
     user_projects = Project.objects.filter(name__in= list(datos.keys()))
     ## Gráfica torta y  ## Grafica árboles
@@ -285,7 +319,7 @@ def dashboard_company(request, slug):
     suma_inversion_str = "{:.2f}".format(suma_inversion)
     suma_utilidad_str = "{:.2f}".format(suma_utilidad)
     suma_capital_str = "{:.2f}".format(suma_capital)
-    co2_consumption = calculo_co2(request)
+    co2_consumption = calculo_co2(request, usuario)
     #suma_arboles_nuevos = "{:.2f}".format(suma_arboles_nuevos)
     #suma_arboles_acumulados = "{:.2f}".format(suma_arboles_acumulados) 
     resumen_general = [suma_inversion_str, suma_utilidad_str, suma_capital_str]
@@ -348,6 +382,51 @@ def dashboard_company(request, slug):
             co2_desdecompra += arbol_anio_co2 * diff * item.quantity
             
     progreso_co2 = round((float(co2_consumption) *100)/avion, 3)
+
+    ## Mapa 
+    initialMap = folium.Map(location=[4.6486259,-74.2478921], zoom_start=6, tiles=None)
+    projects = Project.objects.all()
+    for project in projects:
+        if project.geokml != None:
+            lotes = kml2geojson.main.convert(project.geokml)
+            geometria = lotes[0]["features"][0]["geometry"]
+            poligono = geometry.Polygon(geometria["coordinates"][0])
+            punto_shapely = generate_random(1, poligono)
+            html = popup_html(project.name, project.resena, project.n_hectares, project.get_absolute_url())
+            popup = folium.Popup(folium.Html(html, script=True), max_width=500)
+            punto = list(punto_shapely[0].coords)[0]
+            folium.Marker(punto, popup=popup).add_to(initialMap)
+            folium.GeoJson(data=geometria).add_to(initialMap)
+    tile = folium.TileLayer(
+        tiles = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+        attr = 'Esri',
+        name = 'Satélite',
+        overlay = False,
+        control = True
+    ).add_to(initialMap)
+    folium.TileLayer('openstreetmap').add_to(initialMap)
+    folium.LayerControl().add_to(initialMap)       
+        
+    ###
+
+    ## Vehículos
+    vehiculos = {}
+    
+    vehiculos["moto"] = { "nombre": "Moto",
+                          "url": 'dashboard/img/company/img/icono_moto.png',
+                          }
+    vehiculos["automovil"] = { "nombre": "Automovil",
+                          "url": 'dashboard/img/company/img/icono_automovil.png',
+                          }
+    vehiculos["bus"] = { "nombre": "Bus",
+                          "url": 'dashboard/img/company/img/icono_bus.png',
+                          }
+    vehiculos["avion"] = { "nombre": "Avión",
+                          "url": 'dashboard/img/company/img/icono_avion.png',
+                          }
+    ###
+    
+    print(user_projects)
     return render(request, 'company.html', {
         'projects': projects,
         'user_projects': user_projects,
@@ -369,7 +448,10 @@ def dashboard_company(request, slug):
         'comp_arboles': comp_arboles,
         'utilidad_hoy': utilidad_hoy_str,
         'company_name': company_name,
-        'tiene_logo': False,
-        'tiene_fondo': False, 
+        'company': company,
+        'tiene_logo': tiene_logo,
+        'tiene_fondo': tiene_fondo, 
+        "map": initialMap._repr_html_(),
+        "vehiculos": vehiculos,
     })
     
