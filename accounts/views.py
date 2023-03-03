@@ -470,6 +470,7 @@ def createqr(request):
         qr.make(fit=True)    
         img = qr.make_image(fill='black', back_color='white')
         ruta = f'{settings.MEDIA_ROOT}qrcodes/{company.slug}.png'
+        print(ruta)
         img.save(ruta)
             
         company.qrcode.save(f'qrcodes/{company.slug}.png', File(open(ruta, 'rb')))
