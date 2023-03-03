@@ -7,6 +7,7 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from projects.models import Project, Order, Rentabilidad
 from accounts.models import ProjectByInvestor, Company
+from accounts.forms import ContactForm
 from django.core import serializers
 from django.template import loader
 from django.http import JsonResponse
@@ -17,6 +18,9 @@ from datetime import date
 import calendar
 from statistics import mean 
 from dateutil.relativedelta import relativedelta
+from django.contrib import messages
+from django.core.mail import send_mail
+from django.conf import settings
 import pytz
 import folium
 from fastkml.kml import KML
@@ -425,7 +429,30 @@ def dashboard_company(request, slug):
                           "url": 'dashboard/img/company/img/icono_avion.png',
                           }
     ###
-    
+    ### Contactanos
+    form_contactanos = ContactForm(request.POST or None, request.FILES or None)
+    if request.method == 'POST':
+        if form_contactanos.is_valid():
+            messages.info(request, "Hemos recibido tu mensaje")
+            name = form_contactanos.cleaned_data.get('name')
+            email = form_contactanos.cleaned_data.get('email')
+            message = form_contactanos.cleaned_data.get('message')
+            phone = form_contactanos.cleaned_data.get('phone')
+            
+            full_message = f"""
+                
+                Mensaje recibido de {name}, {email}, {phone}
+                ------------------------------------
+                
+                {message}
+                """
+            send_mail(
+                subject="Mensaje recibido por contact form",
+                message=full_message,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[settings.NOTIFY_EMAIL]
+            )
+    ###
     print(user_projects)
     return render(request, 'company.html', {
         'projects': projects,
@@ -453,5 +480,6 @@ def dashboard_company(request, slug):
         'tiene_fondo': tiene_fondo, 
         "map": initialMap._repr_html_(),
         "vehiculos": vehiculos,
+        "form_contactanos": form_contactanos,
     })
     
