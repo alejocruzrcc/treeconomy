@@ -186,16 +186,21 @@
             <div class="row">
              <div class="entrada5__cuadro p-5">
                 <h2>Calcula cuanto CO2 capturan los árboles</h2>
-                <h4 class="text-center"><span id="cont_arboles">1</span> Árboles</h4>
                 <div class="entrada5__cuadro-rectangulo ">
-                    <div class="imageneshojas">
-                        <img src="{% static 'dashboard/img/company/img/hoja1.png' %}" alt="imagenhoja" width="30px">
-                        <img src="{% static 'dashboard/img/company/img/hoja2.png' %}" alt="imagenhoja" width="25px">
-                        <img src="{% static 'dashboard/img/company/img/hoja3.png' %}" alt="imagenhoja" width="25px">
+                    <div class="row">
+                        <div class="hojas col-1 column">
+                            <img src="{% static 'dashboard/img/company/img/hoja3.png' %}" alt="imagenhoja" width="30px">
+                            <img src="{% static 'dashboard/img/company/img/hoja2.png' %}" alt="imagenhoja" width="25px">
+                            <img src="{% static 'dashboard/img/company/img/hoja1.png' %}" alt="imagenhoja" width="25px">
+                        </div>
+
+                        <div class="slider col-11 justify-content-center">
+                            <h4 class="text-center"><span id="cont_arboles">1</span> Árboles</h4>
+                            <input type="range" class="form-range" min="0" max="1000" step="50" id="sliderco2" value="1">
+                            <h4 class="text-center"><span id="cont_co2">33.3</span> Kg CO2 capturado</h4>
+                        </div>
                     </div>
-                    <input type="range" class="form-range" min="0" max="5" step="0.5" id="sliderco2" value="1">
-                </div>
-                <h4 class="text-center"><span id="cont_co2">33.3</span> Kg CO2 capturado</h4>
+                </div>            
              </div>
             </div>
         </div>
@@ -237,6 +242,43 @@
 
         updateCount();
 });
+    //Seccion calculo CO2
+    var slider = document.getElementById('sliderco2');
+    var arboles = document.getElementById('cont_arboles');
+    var co2 = document.getElementById('cont_co2');
+
+    function onRangeChange(rangeInputElmt, listener) {
+
+        var inputEvtHasNeverFired = true;
+
+        var rangeValue = {current: undefined, mostRecent: undefined};
+
+        rangeInputElmt.addEventListener("input", function(evt) {
+        inputEvtHasNeverFired = false;
+        rangeValue.current = evt.target.value;
+        if (rangeValue.current !== rangeValue.mostRecent) {
+            listener(evt);
+        }
+        rangeValue.mostRecent = rangeValue.current;
+        });
+
+        rangeInputElmt.addEventListener("change", function(evt) {
+        if (inputEvtHasNeverFired) {
+            listener(evt);
+        }
+        }); 
+
+    }
+
+    function calcularCO2(){
+        var valorslider = slider.value;
+        arboles.innerHTML = valorslider;
+        co2.innerHTML = (valorslider*33.3).toFixed(1);
+    }
+
+    onRangeChange(slider, calcularCO2);
+
+         
 
 </script>
 
