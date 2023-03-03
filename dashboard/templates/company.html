@@ -16,8 +16,13 @@
 <link rel="stylesheet" type='text/css' href="{% static 'dashboard/css/style.css' %}">
 
 <div class="header my-5">
-    <div class="contenedor1">             
-        <div class="logos">   
+    {% if tiene_fondo %}
+    <div class="row" style="background-image: linear-gradient(270deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.1) 91.3%)
+    , url('{{ company.portadas.url }}'); background-repeat: no-repeat; background-size: cover;"> 
+    {% else  %}
+    <div class="row" style=" background-color: var(--secundario);"> 
+    {% endif %}           
+        <div class="col-4 col-lg-6 d-flex justify-content-between logos" >   
             <div class="logo1">
                 <img src= "{% static 'dashboard/img/company/img/logotreeconomy.png' %}" alt="">
             </div> 
@@ -27,34 +32,22 @@
                     <img class="rounded-circle shadow-4-strong" src="{{ company.logotipo.url }}" alt="treeconmy-logo" style="object-fit: cover;">                 
                 {% endif %}
             </div>
-        </div>  
-    
-        {% if tiene_fondo %}
-            <div style="background-image: linear-gradient(
-                rgba(0, 0, 0, 0.5),
-                rgba(0, 0, 0, 0.5)
-              ), url('{{ company.portadas.url }}');">
-                <div class="imagen__texto">
-                    <h1 class="no-margin">{{ company.name }}</h1>
-                    <h2 class="no-margin">Inversión en Treeconomy</h2>    
-                    <p class="no-margin"> ${{ capital_total }} USD</p>
+        </div> 
+        
+        <div class="col-8 col-lg-6 info_principal" >    
+                <div class="imagen__texto d-flex align-items-center justify-content-center">
+                    <div class="">
+                        <h1 class="no-margin">{{ company.name }}</h1>
+                        <h2 class="no-margin">Inversión en Treeconomy</h2>    
+                        <p class="no-margin"> ${{ capital_total }} USD</p>
+                    </div>
                 </div> 
-            </div> 
-        {% else  %}
-        <div class="imagensinfondo">
-            <!-- <img src="img/image _crepeswafles.png" alt=""> -->
-            <div class="imagen__texto align-items-center">
-                <h1 class="no-margin">Tu empresa</h1>
-                <h2 class="no-margin">Inversión en Treeconomy</h2>    
-                <p class="no-margin">$ 0 USD</p>
-            </div> 
         </div>
-        {% endif %}
     </div>                                    
 </div>
 
 <div class="row">
-    <div class="col-5">
+    <div class="col-12 col-lg-5">
         <div class="entrada1 my-4">
             <div class="entrada__imagen py-3">     
                     <div class="titulo">
@@ -167,25 +160,32 @@
         </div>
     </div>
      
-    <div class="col-7">
+    <div class="col-12 col-lg-7">
         <div class="entrada5 my-4">
             <div class="row mb-3">
                 <div class="col">
                     <h2>Inversión</h2>
-                    <canvas id="myChartPieDb" data-chart='{{ resumen_general }}'></canvas>
+                    {% if not resumen_dict|length > 0 %}
+                        <p> Esta empresa muy pronto comenzará a invertir</p>
+                    {% else %}
+                        <canvas id="myChartPieDb" data-chart='{{ resumen_general }}'></canvas>
+                    {% endif %}    
                 </div>
                 <div class="col">
                     <h2>Captura de CO2</h2>
-                    <div><strong>Desde que fueron sembrados, tus árboles han capturado:</strong>
-                        <strong class="colorletra">{{ co2_consumption }} kg de CO<sup>2</sup></strong></div>
-                        <div><strong>Desde que invertistie, tus árboles han capturado:</strong>
-                        <strong class="colorletra">{{ co2_desdecompra }} Kg de CO<sup>2</sup></strong></div>
+                    <div>
+                        <p>Desde que fueron sembrados, sus árboles han capturado:  <strong class="colorletra">{{ co2_consumption }} kg de CO<sup>2</sup></strong></p>
+                       
+                    </div>
+                    <div>
+                        <p>Desde que invertiste, sus árboles han capturado: <strong class="colorletra">{{ co2_desdecompra }} Kg de CO<sup>2</sup></strong></p>
+                    </div>
                 </div>
             </div>
             
             <div class="row">
              <div class="entrada5__cuadro p-5">
-                <h2>Calcula cuanto CO2 capturan los árboles</h2>
+                <h2>Calcula cuánto CO2 capturan los árboles</h2>
                 <div class="entrada5__cuadro-rectangulo ">
                     <div class="row">
                         <div class="hojas col-1 column">
@@ -195,9 +195,9 @@
                         </div>
 
                         <div class="slider col-11 justify-content-center">
-                            <h4 class="text-center"><span id="cont_arboles">1</span> Árboles</h4>
+                            <h3 class="text-center"><span id="cont_arboles">1</span> Árboles</h3>
                             <input type="range" class="form-range" min="0" max="1000" step="50" id="sliderco2" value="1">
-                            <h4 class="text-center"><span id="cont_co2">33.3</span> Kg CO2 capturado</h4>
+                            <h3 class="text-center"><span id="cont_co2">33.3</span> Kg CO2 capturado</h3>
                         </div>
                     </div>
                 </div>            
@@ -218,7 +218,7 @@
 <script>
     const counters = document.querySelectorAll('.counter');
     
-    const speed = 2; // The lower the slower
+    const speed = 1; // The lower the slower
 
     counters.forEach(counter => {
         
@@ -227,7 +227,7 @@
             const count = +counter.innerText;
 
             // Lower inc to slow and higher to slow
-            const inc = target / speed;
+            const inc = target / target;
 
             // Check if target is reached
             if (count < target) {

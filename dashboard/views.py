@@ -277,11 +277,12 @@ def dashboard_company(request, slug):
     usuario = company.user
     company_name = company.name
 
-    if company.logotipo != None:
+    if company.logotipo:
         tiene_logo = True
     else:
         tiene_logo = False
-    if company.portadas != None:
+
+    if company.portadas:
         tiene_fondo = True
     else:
         tiene_fondo = False

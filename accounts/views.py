@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 from django.template.context_processors import csrf
 from django.conf import settings
 from projects.forms import ProjectByInvestorForm
+from django.contrib.auth.models import Permission
 from .forms import LoginForm, UserRegistrationForm,UserEditForm,ProfileEditForm, ContactForm, CompanyForm
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
@@ -428,6 +429,10 @@ def create_company(request):
             company_instance.save()
             role = get_user_roles(request.user)
             print(role)
+            permission_createqr = 'generate_qr'
+            permission = Permission.objects.get(codename=permission_createqr)
+            request.user.user_permissions.remove(permission)
+            request.user.save()
             remove_role(request.user, 'inversor')
             assign_role(request.user, 'company')
             # redirect to a new URL:

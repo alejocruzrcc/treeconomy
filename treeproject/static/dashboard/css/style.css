@@ -90,82 +90,52 @@ img {
     background-size: cover;
     box-shadow: 4px 0px 10px rgba(0, 0, 0, 0.25);
 }
-.contenedor1{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    justify-content: space-between;
-    
 
-}
 .logos{
-    display: flex;
-    position: relative;
     align-items: center;
     background-color: var(--blanco);
-    border: 1rem solid var(--blanco);
     border-radius: 0rem 20rem 20rem 0rem ;
-    margin-right: -12rem;
     box-shadow: 4px 0px 10px rgba(0, 0, 0, 0.25);
     height: 28rem;
 }
-@media (max-width: 1146px) {
-    .logos{
-        display: flex;
-        position: relative;
-        align-items: center;
-        background-color: var(--blanco);
-        border: 1rem solid var(--blanco);
-        border-radius: 0rem 20rem 20rem 0rem ;
-        margin-right: -8rem;
-    }
+
+
+
+.logo2 img{
+    max-height: 26rem;
 }
 
-.logo1{
-    display: flex;
+.logo1 img{
+    max-height: 18rem;
 }
 @media (max-width:1146px) {
     .logo1{
-        width: 0;
-    }
-}
-.logo2 {
-   margin-left: 30%;
-}
-
-@media (max-width:1146px) {
-    .logo2{
-        margin-left: 25%;
+        display: none;
     }
 }
 
-.imagensinfondo{
-    background-color: var(--secundario);
-    background-repeat: no-repeat;
-    background-size: cover;
-    max-width: 100%;
-    height: 28rem;
+@media (max-width: 576px) { 
+    .logo2 img{
+        max-height: 8rem;
+    }
 }
+
+
 
 @media (max-width: 768px ) {
     .imagen {
-        background-image: url(../img/company/img/image\ _crepeswafles.png);
-        background-repeat: no-repeat;
-        background-size: cover;
         max-width: 100%;
         height: 28rem;
         width: 50rem;
     }
 }
 .imagen__texto {
-    display: block;
-    text-align: center;
+    text-align: center; 
     color: var(--blanco); 
     font-size: 4rem;
-    margin-top: 0rem;
-    background: linear-gradient(270deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.1) 91.3%);
-    height: 28rem;  
-    padding: 6rem; 
+    height: 28rem;
+    
+    padding: 2rem; 
     text-shadow: 10px 10px 25px rgb(81,67,21),
     -10px 10px 25px rgb(81,67,21),
     -10px -10px 25px rgb(81,67,21),
@@ -295,8 +265,9 @@ img {
 .entrada5__cuadro-rectangulo{
     margin: 2rem;
     border-radius: 5px; 
-   
 }
+
+
 .hojas img{
     display: block;
 }
@@ -310,7 +281,6 @@ img {
     background-color: var(--blanco);
     box-shadow: 4px 4px 16px rgba(1, 63, 48, 0.15);
     border-radius: 10px;
-    background-size: cover;
     margin-top: 3rem;
 }
 

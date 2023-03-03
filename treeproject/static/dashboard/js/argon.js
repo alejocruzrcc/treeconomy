@@ -1315,50 +1315,53 @@ var Scrollbar = (function() {
 // GRafica circular de utilidades vs inversion
 var PieChart = (function() {
 	var $piechart = $('#myChartPieDb');
-	datos_res = $piechart.data('chart');
-	datos_res_dobles = datos_res.replace(/'/g, '"')
-	datos_resumen = JSON.parse(datos_res_dobles)
-	invertido = (parseFloat(datos_resumen[0]) * 100)/ parseFloat(datos_resumen[2])
-	utilidad = (parseFloat(datos_resumen[1]) * 100)/ parseFloat(datos_resumen[2])
-	function init($piechart) {
-		
-		var myChartPieDb = new Chart($piechart, {
-			type: 'pie',
-			data: {
-					labels: ["Valor invertido", "Utilidad"],
-					datasets: [{
-							label: "Ganancias totales)",
-							backgroundColor: ["#018669", "#F9E09E"],
-							data: [invertido.toFixed(2), utilidad.toFixed(2)]
-					}]
-			},
+	if($piechart.length > 0 ){
+		datos_res = $piechart.data('chart');
+		datos_res_dobles = datos_res.replace(/'/g, '"')
+		datos_resumen = JSON.parse(datos_res_dobles)
+		invertido = (parseFloat(datos_resumen[0]) * 100)/ parseFloat(datos_resumen[2])
+		utilidad = (parseFloat(datos_resumen[1]) * 100)/ parseFloat(datos_resumen[2])
+		function init($piechart) {
 			
-			options: {
-					title: {
-							display: false
-					},
-					legend: {
-							position: 'bottom',
-					},
-					tooltips: {
-						mode: 'label',
-						callbacks: {
-							label: function(tooltipItem, data) { 
-								return " " + data.labels[tooltipItem["index"]] + ": " + data.datasets[0].data[tooltipItem["index"]] + "%";
+			var myChartPieDb = new Chart($piechart, {
+				type: 'pie',
+				data: {
+						labels: ["Valor invertido", "Utilidad"],
+						datasets: [{
+								label: "Ganancias totales)",
+								backgroundColor: ["#018669", "#F9E09E"],
+								data: [invertido.toFixed(2), utilidad.toFixed(2)]
+						}]
+				},
+				
+				options: {
+						title: {
+								display: false
+						},
+						legend: {
+								position: 'bottom',
+						},
+						tooltips: {
+							mode: 'label',
+							callbacks: {
+								label: function(tooltipItem, data) { 
+									return " " + data.labels[tooltipItem["index"]] + ": " + data.datasets[0].data[tooltipItem["index"]] + "%";
+								}
 							}
-						}
-					},
-			}
-		});
-		// Save to jQuery object
+						},
+				}
+			});
+			// Save to jQuery object
 
-		$piechart.data('chart', myChartPieDb);
+			$piechart.data('chart', myChartPieDb);
+		}
+
+		// Events
+
+		if ($piechart.length) {
+			init($piechart);
+		}
 	}
-
-	// Events
-
-	if ($piechart.length) {
-		init($piechart);
-	  }
+	
 })();
 
