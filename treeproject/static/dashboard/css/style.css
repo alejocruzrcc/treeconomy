@@ -294,12 +294,16 @@ img {
 
 .entrada5__cuadro-rectangulo{
     margin: 2rem;
-    padding: 4rem;
     border-radius: 5px; 
+   
+}
+.hojas img{
+    display: block;
 }
 
-
-
+.slider{
+    margin-top: 2rem;
+}
 
 /* Entrada 6 */
 .entrada6 {
