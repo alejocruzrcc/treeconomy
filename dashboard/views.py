@@ -266,7 +266,10 @@ def dashboard(request):
         'comp_arboles': comp_arboles,
         'utilidad_hoy': utilidad_hoy_str,
         
+
     })   
+
+
 
 def dashboard_company(request, slug):
     company = Company.objects.get(pk=slug)
