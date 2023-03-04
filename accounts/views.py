@@ -466,7 +466,6 @@ def createqr(request):
     if companies.count() == 1:
         company= companies[0]
         is_company = True
-        input = f'{settings.PROTOCOLO}://app.treeconomy.com.co/dashboard/companies/{company.slug}'
         out = io.BytesIO()
         qr = qrcode.QRCode(version=1, box_size=10, border=5)
         qr.add_data(input)

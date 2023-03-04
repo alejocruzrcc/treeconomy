@@ -113,7 +113,7 @@
                 {% for key, value in vehiculos.items %}
                 
                 <button type="button" class="btn btn-link py-3" data-toggle="modal" data-target="#{{ value.nombre }}">
-                    <img class="img-collapse shadow-4-strong"  src= "{% static value.url %}" alt="" style="height: 8rem; border-radius: 30%;">
+                    <img class="img-collapse shadow-4-strong"  src= "{% static value.url %}" alt="" style="height: 8rem; border-radius: 30%; object-fit: cover;">
                 </button>
                 
                 <!-- Modal -->
@@ -173,7 +173,6 @@
                     <div class="titulo">
                         <h2>Captura de CO<sup>2</sup></h2>
                     </div>
-                    
                     <div>
                         <p>Desde que fueron sembrados, sus árboles han capturado:  <strong class="colorletra">{{ co2_consumption }} kg de CO<sup>2</sup></strong></p>
                        
