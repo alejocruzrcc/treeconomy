@@ -41,6 +41,8 @@ from rolepermissions.mixins import HasRoleMixin
 from django.utils.text import slugify
 from django.core.files import File
 from django.contrib.auth.mixins import LoginRequiredMixin
+import io
+from django.core.files.base import ContentFile
 
 
 stripe.api_key = settings.STRIPE_PRIVATE_KEY
@@ -465,15 +467,18 @@ def createqr(request):
         company= companies[0]
         is_company = True
         input = f'{settings.PROTOCOLO}://app.treeconomy.com.co/dashboard/companies/{company.slug}'
+        out = io.BytesIO()
         qr = qrcode.QRCode(version=1, box_size=10, border=5)
         qr.add_data(input)
         qr.make(fit=True)    
         img = qr.make_image(fill='black', back_color='white')
-        ruta = f'{settings.MEDIA_ROOT}qrcodes/{company.slug}.png'
-        print(ruta)
-        img.save(ruta)
-            
-        company.qrcode.save(f'qrcodes/{company.slug}.png', File(open(ruta, 'rb')))
+        #ruta = f'{settings.MEDIA_ROOT}qrcodes/{company.slug}.png'
+        
+        filename = f'{company.slug}.png'
+        img.save(out)
+        #img.save(ruta)
+        company.qrcode.save(filename, ContentFile(out.getvalue()), save=False)
+        #company.qrcode.save(f'qrcodes/{company.slug}.png', File(open(ruta, 'rb')))
         company.save()
         return render(request,'qrcode/manageqr.html', {
         'company': company,
