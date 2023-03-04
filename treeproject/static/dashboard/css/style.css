@@ -13,7 +13,7 @@
 
 html {
     box-sizing: border-box;
-    font-size: 62.2%; /* 1rem = 10px*/
+    font-size: 100%; /* 1rem = 10px*/
 }
 *, *::before, *:after {
     box-sizing: inherit;
@@ -21,7 +21,6 @@ html {
 
 body {
     font-family: var(--fuenteParrafos);
-    font-size: 1.6rem;
     line-height: 2;
     
 }
@@ -30,21 +29,15 @@ body {
 a {
     text-decoration: none;
 }
+
+h1{
+ font-size: calc(2rem + .6vw);
+}
+
 h1, h2, h3, h4 {
     font-family: var(--fuenteHeading);
 }
-h1 {
-    font-size: 4rem;
-}
-h2 {
-    font-size: 2.4rem;
-}
-h3 {
-    font-size: 2rem;
-}
-h4 {
-    font-size: 1.6rem
-}
+
 
 img {
     max-width: 100%;
@@ -96,17 +89,17 @@ img {
     background-color: var(--blanco);
     border-radius: 0rem 20rem 20rem 0rem ;
     box-shadow: 4px 0px 10px rgba(0, 0, 0, 0.25);
-    height: 28rem;
+    height: 15rem;
 }
 
 
 
 .logo2 img{
-    max-height: 26rem;
+    max-height: 15rem;
 }
 
 .logo1 img{
-    max-height: 18rem;
+    max-height: 15rem;
 }
 @media (max-width:1146px) {
     .logo1{
@@ -133,8 +126,7 @@ img {
     text-align: center; 
     color: var(--blanco); 
     font-size: 4rem;
-    height: 28rem;
-    
+    max-height: 28rem;
     padding: 2rem; 
     text-shadow: 10px 10px 25px rgb(81,67,21),
     -10px 10px 25px rgb(81,67,21),
@@ -144,20 +136,6 @@ img {
    
 
 
-/* Entrada 1 */
-.entrada__imagen {
-    background-image: linear-gradient(
-        rgba(0, 0, 0, 0.5),
-        rgba(0, 0, 0, 0.5)
-      ), url(../img/company/img/image\ 15.png); 
-    max-width: 100%;    
-    background-size: cover;
-    background-repeat: no-repeat;
-    align-items: center;
-    justify-content: space-between;
-    border-radius: 1rem;
-    
-}
 .entrada__imagen-texto{
     text-align: center;   
     
@@ -176,9 +154,19 @@ img {
 
 .titulo {
     color: var(--blanco);
+    text-shadow: 10px 10px 25px rgb(81,67,21),
+    -10px 10px 25px rgb(81,67,21),
+    -10px -10px 25px rgb(81,67,21),
+    10px -10px 25px rgb(81,67,21);  
     font-size: 2rem;
     font-weight: 700;
-    margin-left: 2rem;
+}
+
+.titulo2 {
+    color: var(--secundario);
+    text-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    font-size: 2rem;
+    font-weight: 700;
 }
 .boton {
     font-size: 2rem;
@@ -197,15 +185,38 @@ img {
 }
 
 
-/* Entrada 2 */
-.entrada1, .entrada3{
-    background-color: var(--secundario);
-    box-shadow: 4px 4px 16px rgba(1, 63, 48, 0.15);
-    border-radius: 10px;
+
+
+.entrada1, .entrada2, .entrada3, .entrada4, .entrada5, .entrada6 {
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    border-radius: 7px;
+    padding: 2rem;
 }
 
-.entrada4{
-    color: var(--blanco);
+/* Entradas con imagen de fondo */
+
+.entrada1, .entrada3{
+    background-image: linear-gradient(
+        rgba(0, 0, 0, 0.5),
+        rgba(0, 0, 0, 0.5)
+      ), url(../img/company/img/image\ 15.png);    
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/* Entradas con fondo verde  */
+
+.entrada2, .entrada4, .entrada5, .entrada6 {
+    background-color: var(--secundario);
+    color: #FFFFFF;
+}
+
+
+/* mapa*/
+
+.entrada2 div {
+    min-height: 30rem;
+    border-radius: 7px;
 }
 
 .entrada4 .card{
@@ -213,13 +224,9 @@ img {
     padding: 2px;
 }
 
-
-.entrada3__imagen{
-    position: relative;
-    margin-left: 5rem;
-    margin: 5rem;
+.entrada3 img{
+    max-height: 6rem;
 }
-
 
 .img-collapse {
     width: 100%;
@@ -229,29 +236,11 @@ img {
 
 
 
-/* Entrada 4 */
-.entrada4 {
-    background-color: var(--secundario);
-    box-shadow: 4px 4px 16px rgba(1, 63, 48, 0.15);
-    background-size: cover;
-    color: var(--blanco);
-}
-
 .card:hover{
     transform: scale(1.1);
     cursor: pointer;
     transition: all 2s ease;
 }
-
-/* Entrada 5 */
-.entrada5 {
-    background-color: var(--primario);
-    box-shadow: 4px 4px 16px rgba(1, 63, 48, 0.15);
-    border-radius: 1rem;
-    padding: 2rem;
-    color: #FFFFFF;
-}
-
 
 
 .entrada5__cuadro{ 
@@ -262,85 +251,12 @@ img {
 
 }
 
-.entrada5__cuadro-rectangulo{
-    margin: 2rem;
-    border-radius: 5px; 
-}
-
 
 .hojas img{
     display: block;
 }
 
-.slider{
-    margin-top: 2rem;
-}
 
-/* Entrada 6 */
-.entrada6 {
-    background-color: var(--blanco);
-    box-shadow: 4px 4px 16px rgba(1, 63, 48, 0.15);
-    border-radius: 10px;
-    margin-top: 3rem;
-}
-
-.entrada6 h2{
-    color: var(--primario);
-}
-.formulario {
-    background-color: var(--blanco);
-    margin: -5rem auto 0 auto;
-    width: 95%;
-    padding: 5rem;  
-}
-.campo {
-    display: flex;
-    margin-bottom: 2rem;
-    gap: 2rem;
-}
-.campo__label {
-    flex: 0 0 9rem;
-    text-align: right;
-}
-.campo__field{
-    flex: 1;
-    border: 1px solid var(--gris);
-}
-.campo__field--textarea {
-    height: 20rem;
-}
-
-
-
-.slider-92911 {
-    position: relative; }
-  
-  /* Carousel 4*/
-  .testimony-29101 .image {
-    width: 40%;
-    background-size: cover;
-    background-position: center center; }
-    @media (max-width: 991.98px) {
-      .testimony-29101 .image {
-        height: 300px; } }
-  
-  .testimony-29101 .text {
-    width: 60%;
-    padding: 7rem 4rem;
-    background: #007bff; }
-    .testimony-29101 .text blockquote {
-      position: relative;
-      padding-bottom: 50px;
-      font-size: 20px; }
-      .testimony-29101 .text blockquote p {
-        color: #fff;
-        line-height: 1.8; }
-      .testimony-29101 .text blockquote .author {
-        font-size: 16px;
-        letter-spacing: .1rem;
-        position: absolute;
-        bottom: 0;
-        color: rgba(255, 255, 255, 0.7); }
   
   @media (max-width: 991.98px) {
     .testimony-29101 .image, .testimony-29101 .text {
