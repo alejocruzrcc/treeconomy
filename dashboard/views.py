@@ -421,7 +421,7 @@ def dashboard_company(request, slug):
                           "url": 'dashboard/img/company/img/icono_moto.png',
                           }
     vehiculos["automovil"] = { "nombre": "Automovil",
-                          "url": 'dashboard/img/company/img/icono_automovil.png',
+                          "url": 'dashboard/img/company/img/auto.png',
                           }
     vehiculos["bus"] = { "nombre": "Bus",
                           "url": 'dashboard/img/company/img/icono_bus.png',
