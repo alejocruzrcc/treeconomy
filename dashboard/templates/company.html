@@ -113,7 +113,7 @@
                 {% for key, value in vehiculos.items %}
                 
                 <button type="button" class="btn btn-link py-3" data-toggle="modal" data-target="#{{ value.nombre }}">
-                    <img class="img-collapse shadow-4-strong"  src= "{% static value.url %}" alt="" style="height: 8rem; border-radius: 30%; object-fit: cover;">
+                    <img class="img-collapse shadow-4-strong"  src= "{% static value.url %}" alt="" style="height: 7rem; border-radius: 30%; object-fit: cover;">
                 </button>
                 
                 <!-- Modal -->
@@ -190,16 +190,16 @@
                 </div>
                 
                 
-                <div class="row mt-4">
-                    <div class="hojas col-1 column">
+                <div class="row mt-4 ">
+                    <div class="hojas col-2 column">
                         <img src="{% static 'dashboard/img/company/img/hoja3.png' %}" alt="imagenhoja" width="30px">
                         <img src="{% static 'dashboard/img/company/img/hoja2.png' %}" alt="imagenhoja" width="25px">
                         <img src="{% static 'dashboard/img/company/img/hoja1.png' %}" alt="imagenhoja" width="25px">
                     </div>
 
-                    <div class="slider col-11 justify-content-center">
+                    <div class="slider col-10">
                         <h3 class="text-center"><span id="cont_arboles">1</span> Árboles</h3>
-                        <input type="range" class="form-range" min="0" max="1000" step="50" id="sliderco2" value="1">
+                        <input type="range" class="barraslider form-range" min="0" max="1000" step="50" id="sliderco2" value="1">
                         <h3 class="text-center"><span id="cont_co2">33.3</span> Kg CO<sup>2</sup>capturado</h3>
                     </div>
                 </div>

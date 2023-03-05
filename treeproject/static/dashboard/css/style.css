@@ -224,9 +224,9 @@ img {
     padding: 2px;
 }
 
-.entrada3 img{
-    max-height: 6rem;
-}
+/* .entrada3 img{
+    max-height: 50rem;
+} */
 
 .img-collapse {
     width: 100%;
@@ -251,11 +251,22 @@ img {
 
 }
 
-
-.hojas img{
-    display: block;
+.hojas img {
+    margin-left: 1rem;
 }
 
+@media (min-width: 768px) {
+    .hojas img{
+        display: block;
+        margin-left: 4rem;
+    }
+}
+
+
+
+.barraslider{
+  
+}
 
   
   @media (max-width: 991.98px) {
