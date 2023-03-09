@@ -39,6 +39,7 @@ STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
 MEDIA_ROOT = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
 MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
 PROTOCOLO='https'
+DOMINIO='app.treeconomy.com.co'
 
 
 DATABASES = {

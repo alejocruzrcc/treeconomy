@@ -116,15 +116,16 @@ def register(request):
             new_user = user_form.save(commit=False)
             new_user.is_active = False
             new_user.set_password(user_form.cleaned_data['password'])
-            print(user_form.cleaned_data)
-            print("primarioooo")
             user_form.save()  # guardar el usuario en la base de datos si es válido
             # Enviar un email de confirmación
+            dominio = settings.DOMINIO
+            protocolo = settings.PROTOCOLO
             current_site = get_current_site(request)
             email_subject = 'Confirma tu registro en Treeconomy Inc.'
             message = render_to_string('registration/activate_account.html', {
                 'user': new_user,
                 'domain': current_site.domain,
+                'protocolo_dominio': f"{protocolo}://{dominio}",
                 'uid': urlsafe_base64_encode(force_bytes(new_user.pk)),
                 'token': account_activation_token.make_token(new_user),
             })

@@ -145,7 +145,7 @@
                                     <td bgcolor="#ffffff" align="center" style="padding: 20px 30px 60px 30px;">
                                         <table border="0" cellspacing="0" cellpadding="0">
                                             <tr>
-                                                <td align="center" style="border-radius: 3px;" bgcolor="rgb(242, 98, 46)"><a href="https://{{ domain }}{% url 'activate' uidb64=uid token=token %}" target="_blank" style="font-size: 20px; font-family: Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; color: #ffffff; text-decoration: none; padding: 15px 25px; border-radius: 2px; display: inline-block;">Confirmar Cuenta</a></td>
+                                                <td align="center" style="border-radius: 3px;" bgcolor="rgb(242, 98, 46)"><a href="{{ protocolo_dominio}}{% url 'activate' uidb64=uid token=token %}" target="_blank" style="font-size: 20px; font-family: Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; color: #ffffff; text-decoration: none; padding: 15px 25px; border-radius: 2px; display: inline-block;">Confirmar Cuenta</a></td>
                                             </tr>
                                         </table>
                                     </td>
@@ -160,7 +160,7 @@
                     </tr> <!-- COPY -->
                     <tr>
                         <td bgcolor="#ffffff" align="left" style="padding: 20px 30px 20px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
-                            <p style="margin: 0;"><a href="#" target="_blank" style="color: rgb(242, 98, 46);"> https://{{ domain }}{% url 'activate' uidb64=uid token=token %}</a></p>
+                            <p style="margin: 0;"><a href="#" target="_blank" style="color: rgb(242, 98, 46);"> {{ protocolo_dominio }}{% url 'activate' uidb64=uid token=token %}</a></p>
                         </td>
                     </tr>
                     <tr>
@@ -182,7 +182,7 @@
                     <tr>
                         <td bgcolor="#f4f4f4" align="center" style="padding: 30px 30px 30px 30px; border-radius: 4px 4px 4px 4px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
                             <h2 style="font-size: 20px; font-weight: 400; color: #111111; margin: 0;">¿Necesitas ayuda?</h2>
-                            <p style="margin: 0;"><a href="https://app.treeconomy.com.co/contact" target="_blank" style="color: rgb(242, 98, 46);">Estamos para ayudarte</a></p>
+                            <p style="margin: 0;"><a href= f"{{protocolo_dominio}}/contact" target="_blank" style="color: rgb(242, 98, 46);">Estamos para ayudarte</a></p>
                         </td>
                     </tr>
                 </table>
