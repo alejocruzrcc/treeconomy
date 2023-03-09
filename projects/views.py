@@ -48,6 +48,7 @@ class MapaView(generic.TemplateView):
                 punto = list(punto_shapely[0].coords)[0]
                 folium.Marker(punto, popup=popup).add_to(initialMap)
                 folium.GeoJson(data=geometria).add_to(initialMap)
+        """
         tile = folium.TileLayer(
             tiles = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
             attr = 'Esri',
@@ -55,8 +56,9 @@ class MapaView(generic.TemplateView):
             overlay = False,
             control = True
         ).add_to(initialMap)
+        """
         folium.TileLayer('openstreetmap').add_to(initialMap)
-        folium.LayerControl().add_to(initialMap)       
+        #folium.LayerControl().add_to(initialMap)       
         context = {
             "map": initialMap._repr_html_(),
             "projects":  projects}
@@ -82,9 +84,10 @@ class ProjectDetailListView(LoginRequiredMixin, generic.FormView):
         else:
             punto = [4.6486259,-74.2478921]
 
-        detailMap= folium.Map(location=punto, zoom_start=16, tiles=None).add_to(f)
+        detailMap= folium.Map(location=punto, zoom_start=14, tiles=None).add_to(f)
         folium.GeoJson(data=geometria, name="Polígono").add_to(detailMap)
         
+        """
         tile = folium.TileLayer(
             tiles = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
             attr = 'Esri',
@@ -92,8 +95,9 @@ class ProjectDetailListView(LoginRequiredMixin, generic.FormView):
             overlay = False,
             control = True
         ).add_to(detailMap)
+        """
         folium.TileLayer('openstreetmap').add_to(detailMap)
-        folium.LayerControl().add_to(detailMap)
+        #folium.LayerControl().add_to(detailMap)
         
         context["project"] = self.get_object()
         context["activo"] = self.get_object().active
