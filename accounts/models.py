@@ -232,7 +232,9 @@ def post_email_confirmed(sender, instance, created, **kwargs):
         subscription.status=stripe_subscription["status"]
         subscription.stripe_subscription_id = stripe_subscription["id"]
         subscription.save()
+        print(stripe_customer["id"])
         profile = Profile.objects.get(user_id=user.id)
         profile.stripe_customer_id=stripe_customer["id"]
         profile.save()
+        print(profile.stripe_customer_id)
 

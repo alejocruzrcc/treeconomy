@@ -54,6 +54,7 @@ stripe.api_key = settings.STRIPE_PRIVATE_KEY
 def generatePdf(request,pk):
     pdf = render_to_pdf('billing/plantilla_bill.html',pk)
     return HttpResponse(pdf, content_type='application/pdf')
+
 class PlantillaOrderView(generic.TemplateView):
     model = Order
     template_name = 'billing/plantilla_bill.html'
@@ -267,6 +268,8 @@ class CreateSubscriptionView(APIView):
         profile = get_object_or_404(Profile, user_id=request.user.id)
         customer_id = profile.stripe_customer_id
         orden =  get_or_set_order_session(self.request)
+        print(data['paymentMethodId'])
+        print("Entra a Create SubscriptionView")
         
         try:
             #vincular el metodo de pago al cliente

@@ -117,6 +117,7 @@ def register(request):
             new_user.is_active = False
             new_user.set_password(user_form.cleaned_data['password'])
             print(user_form.cleaned_data)
+            print("primarioooo")
             user_form.save()  # guardar el usuario en la base de datos si es válido
             # Enviar un email de confirmación
             current_site = get_current_site(request)
@@ -131,11 +132,8 @@ def register(request):
             email = EmailMessage(email_subject, message, to=[to_email])
             email.content_subtype = "html"
             email.send()
-            if not new_user.profile:
-                new_profile = Profile(user=new_user)
-            else: 
-                new_profile = new_user.profile
-
+            print("secundario")
+            new_profile = Profile.objects.get(user_id=new_user.id)
             is_company = user_form.cleaned_data['is_company']
             
             if is_company:
@@ -170,10 +168,9 @@ def activate_account(request, uidb64, token, backend='django.contrib.auth.backen
         login(request, user, backend='django.contrib.auth.backends.ModelBackend')
         #return HttpResponse('Your account has been activate successfully')
         # Crear el perfil del usuario 
-        if not user.profile:
-          new_profile = Profile(user=user)
-          new_profile.save()
-        
+        #if not user.profile:
+        #  new_profile = Profile(user=user)
+        #  new_profile.save()
         
         video_idea_negocio = get_object_or_404(Video, nombre="idea_negocio")
         

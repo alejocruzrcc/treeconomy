@@ -57,7 +57,7 @@ class UserRegistrationForm(forms.ModelForm):
     password=forms.CharField(label='Contraseña',widget=forms.PasswordInput)
     password2=forms.CharField(label='Confirma contraseña',widget=forms.PasswordInput)
     is_company=forms.BooleanField(label='Represento una empresa', required=False, initial=False)
-    company_name=forms.CharField(label='Nombre de la Empresa')
+    company_name=forms.CharField(label='Nombre de la Empresa', required=False)
     
 
     class Meta:
