@@ -85,7 +85,7 @@ def generar_contrato(request, orden, perfil):
     #doc = DocxTemplate("billing/templates/billing/contrato.docx")
     #dochtml = render("billing/templates/billing/plantilla_contrato.html")
     context = {
-        'fecha': str(orden.ordered_date),
+        'fecha': str(orden.ordered_date.date()),
         'orden': orden.id,
         'comprador_nombre': factura.comprador_nombre, 
         'comprador_id': factura.comprador_id,
