@@ -42,7 +42,7 @@ class Video(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
-    stripe_customer_id = models.CharField(max_length=50)
+    stripe_customer_id = models.CharField(max_length=50, blank=True, null=True)
     # ROLES DE USUARIO 
     VISITOR = 1 ## Unicamente ve información y dahboard de ejemplo
     ONETIME_INVESTOR = 2 ## Es inversionista de pago único
@@ -209,18 +209,20 @@ def post_email_confirmed(sender, instance, created, **kwargs):
     print("entro a post email confirmed")
     if created:
         user = instance
+        """
         subscription = Subscription.objects.create(
             user=user,
             status="trialing",
             n_projects=0
         )
-
+        """
         #Crear cliente en stripe
         stripe_customer = stripe.Customer.create(
             email=user.email, 
             name= user.first_name +' ' + user.last_name 
         )
         
+        """
         stripe_subscription = stripe.Subscription.create(
             customer=stripe_customer["id"],
             items=[{'price': settings.STRIPE_FREE_PRICE}],
@@ -228,13 +230,14 @@ def post_email_confirmed(sender, instance, created, **kwargs):
             expand=['latest_invoice.payment_intent'],
             proration_behavior='always_invoice',
         )
-
+        
         subscription.status=stripe_subscription["status"]
         subscription.stripe_subscription_id = stripe_subscription["id"]
         subscription.save()
         print(stripe_customer["id"])
+        """
         profile = Profile.objects.get(user_id=user.id)
         profile.stripe_customer_id=stripe_customer["id"]
         profile.save()
-        print(profile.stripe_customer_id)
+        print("hola")
 
