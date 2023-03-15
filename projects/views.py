@@ -310,7 +310,7 @@ def read_kml(fname='ss.kml'):
     
 def popup_html(nombre, descripcion, hectareas, url):
     html = f"""
-    <div class="card" style="width: 40rem;">
+    <div class="card">
         <div class="card-body">
             <h3 class="card-title">Proyecto {nombre}</h3>
             <h6 class="card-subtitle mb-2 text-muted">{hectareas} Hectáreas</h6>
