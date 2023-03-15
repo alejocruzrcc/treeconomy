@@ -39,7 +39,7 @@
                     <div>
                         <h1 class="my-2">{{ company.name }}</h1>
                         <h4>Inversión en Treeconomy</h4>    
-                        <h2> ${{ capital_total }} USD</h2>
+                        <h2> {{ capital_total }} USD</h2>
                     </div>
                 </div> 
         </div>
@@ -112,12 +112,12 @@
             <div class="d-flex justify-content-between flex-wrap">
                 {% for key, value in vehiculos.items %}
                 
-                <button type="button" class="btn btn-link py-3" data-toggle="modal" data-target="#{{ value.nombre }}">
+                <button type="button" class="btn btn-link py-3" data-toggle="modal" data-target="#{{ key}}">
                     <img class="img-collapse shadow-4-strong"  src= "{% static value.url %}" alt="" style="height: 7rem ; width: 7rem; border-radius: 30%; object-fit: cover;">
                 </button>
                 
                 <!-- Modal -->
-                <div class="modal fade" id="{{ value.nombre }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="{{ key }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -127,7 +127,7 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                ...
+                                {{ value.mensaje }}
                             </div>
                         </div>
                     </div>
@@ -229,7 +229,7 @@
             const count = +counter.innerText;
 
             // Lower inc to slow and higher to slow
-            const inc = target / target;
+            const inc = target / (target / 10);
 
             // Check if target is reached
             if (count < target) {

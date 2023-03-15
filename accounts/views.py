@@ -224,8 +224,8 @@ def profile(request):
         suma_utilidad += float(resumen[key]['utilidad'])
         suma_arboles_acumulados += resumen[key]['total_trees']
     #co2_capturado = CO2_CONSUMPTION_PER_TREE_PER_DAY * suma_arboles_acumulados * 365
-    suma_utilidad_str = "{:.2f}".format(suma_utilidad)
-
+    suma_utilidad_str = "{:,.2f}".format(suma_utilidad)
+  
     return render(request,'account/profile.html', {
         'user': request.user, 
         'total': total, 

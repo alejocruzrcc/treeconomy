@@ -105,7 +105,7 @@ class Profile(models.Model):
     def get_inversion(self):
         pbi = ProjectByInvestor.objects.filter(investor= self.user)
         inversion_int =  sum(list(map(lambda x: x.inversion(), pbi )))
-        inversion = "{:.2f}".format(int(inversion_int or 0) /100)
+        inversion = "{:,.2f}".format(int(inversion_int or 0) /100)
         return inversion
         
     def __str__(self):

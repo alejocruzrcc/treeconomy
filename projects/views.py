@@ -37,7 +37,7 @@ class MapaView(generic.TemplateView):
     
     def get_context_data(self, *args, **kwargs):
         fig = folium.Figure(height="750vh")
-        initialMap = folium.Map(location=[4.6486259,-74.2478921], zoom_start=6).add_to(fig)
+        initialMap = folium.Map(location=[4.6486259,-74.2478921], min_zoom=6, zoom_start=6, ).add_to(fig)
         projects = Project.objects.all()
         mCluster = MarkerCluster(name="proyectos").add_to(initialMap)
         for project in projects:

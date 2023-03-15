@@ -183,9 +183,9 @@ def dashboard(request):
         #suma_arboles_nuevos += float(resumen[key]['new_trees'])
         suma_arboles_acumulados_mes_anterior += resumen_mes_anterior[key]['total_trees']
     
-    suma_inversion_str = "{:.2f}".format(suma_inversion)
-    suma_utilidad_str = "{:.2f}".format(suma_utilidad)
-    suma_capital_str = "{:.2f}".format(suma_capital)
+    suma_inversion_str = "{:,.2f}".format(suma_inversion)
+    suma_utilidad_str = "{:,.2f}".format(suma_utilidad)
+    suma_capital_str = "{:,.2f}".format(suma_capital)
     co2_consumption = calculo_co2(request, usuario)
     #suma_arboles_nuevos = "{:.2f}".format(suma_arboles_nuevos)
     #suma_arboles_acumulados = "{:.2f}".format(suma_arboles_acumulados) 
@@ -258,7 +258,7 @@ def dashboard(request):
         'resumen_dict': resumen,
         'inversion_total': resumen_general[0],
         'utilidad_total': resumen_general[1],
-        'capital_total': resumen_general[2],
+        'capital_total': '{:,.2f} USD'.format(float(resumen_general[2])),
         'arboles_total': suma_arboles_acumulados,
         'rentabilidad': renta_promedio,
         'rentabilidades': rentabilidades,
@@ -322,9 +322,9 @@ def dashboard_company(request, slug):
         #suma_arboles_nuevos += float(resumen[key]['new_trees'])
         suma_arboles_acumulados_mes_anterior += resumen_mes_anterior[key]['total_trees']
     
-    suma_inversion_str = "{:.2f}".format(suma_inversion)
-    suma_utilidad_str = "{:.2f}".format(suma_utilidad)
-    suma_capital_str = "{:.2f}".format(suma_capital)
+    suma_inversion_str = "{:,.2f}".format(suma_inversion)
+    suma_utilidad_str = "{:,.2f}".format(suma_utilidad)
+    suma_capital_str = "{:,.2f}".format(suma_capital)
     co2_consumption = calculo_co2(request, usuario)
     #suma_arboles_nuevos = "{:.2f}".format(suma_arboles_nuevos)
     #suma_arboles_acumulados = "{:.2f}".format(suma_arboles_acumulados) 
@@ -393,7 +393,7 @@ def dashboard_company(request, slug):
     initialMap = folium.Map(location=[4.6486259,-74.2478921], zoom_start=6, tiles=None)
     projects = Project.objects.all()
     for project in projects:
-        if project.geokml != None:
+        if project.geokml:
             lotes = kml2geojson.main.convert(project.geokml)
             geometria = lotes[0]["features"][0]["geometry"]
             poligono = geometry.Polygon(geometria["coordinates"][0])
@@ -401,8 +401,17 @@ def dashboard_company(request, slug):
             html = popup_html(project.name, project.resena, project.n_hectares, project.get_absolute_url())
             popup = folium.Popup(folium.Html(html, script=True), max_width=500)
             punto = list(punto_shapely[0].coords)[0]
-            folium.Marker(punto, popup=popup).add_to(initialMap)
+            folium.Marker(punto, popup=popup,   icon=folium.Icon(color='lightgreen', icon_color='darkgreen', icon='tree', prefix='fa')).add_to(initialMap)
             folium.GeoJson(data=geometria).add_to(initialMap)
+    mapbox_token = settings.MAPBOX_TOKEN
+    tile = folium.TileLayer(
+        tiles= f'https://api.mapbox.com/styles/v1/alejocruzrcc/clf96goiq000401mnwfmleh76/tiles/256/{{z}}/{{x}}/{{y}}@2x?access_token={mapbox_token}',
+        attr = 'Mapbox Satelite',
+        name = 'Satélite',
+        overlay = False,
+        control = True
+    ).add_to(initialMap)
+    """
     tile = folium.TileLayer(
         tiles = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
         attr = 'Esri',
@@ -410,25 +419,33 @@ def dashboard_company(request, slug):
         overlay = False,
         control = True
     ).add_to(initialMap)
+
     folium.TileLayer('openstreetmap').add_to(initialMap)
     folium.LayerControl().add_to(initialMap)       
-        
+    """   
     ###
 
     ## Vehículos
     vehiculos = {}
     
-    vehiculos["moto"] = { "nombre": "Moto",
-                          "url": 'dashboard/img/company/img/icono_moto.png',
+    
+    vehiculos["transporte-publico"] = { "nombre": "Transporte Público",
+                          "url": 'dashboard/img/company/img/icono_bus.png',
+                          "mensaje": '¡Bien hecho! Ha plantado 13 árboles, con esto has logrado contrarrestar el CO2 al usar trasporte publico. obtuviste tu primera insignia. ¡Sigue así y ayuda a hacer del mundo un lugar más verde y saludable!"',
                           }
+    
     vehiculos["automovil"] = { "nombre": "Automovil",
                           "url": 'dashboard/img/company/img/auto.png',
+                          "mensaje": "¡Felicidades! con la siembra de 76 arboles lograste capturar el CO2 que genera un carro. Sigue así y pronto tendrás tu segunda insignia.",
                           }
-    vehiculos["bus"] = { "nombre": "Bus",
-                          "url": 'dashboard/img/company/img/icono_bus.png',
+    vehiculos["moto"] = { "nombre": "Moto",
+                          "url": 'dashboard/img/company/img/icono_moto.png',
+                          "mensaje": "¡Muy bien! Has plantado 10 árboles mas y lograste capturar el equivalente de emisión de CO2 de una Moto, Continúa cuidando de ellos, pronto obtendrás mas insignias.",
                           }
+    
     vehiculos["avion"] = { "nombre": "Avión",
                           "url": 'dashboard/img/company/img/icono_avion.png',
+                          "mensaje": "¡Eres un verdadero héroe del medio ambiente! Has plantado más de 100 árboles y con eso estas contrarrestado en CO2 que produce un avión. Tu dedicación para combatir el cambio climático y proteger nuestro planeta es inspiradora. ¡Sigue así!",
                           }
     ###
     ### Contactanos
@@ -464,7 +481,7 @@ def dashboard_company(request, slug):
         'resumen_dict': resumen,
         'inversion_total': resumen_general[0],
         'utilidad_total': resumen_general[1],
-        'capital_total': resumen_general[2],
+        'capital_total': '{:,.2f} USD'.format(float(resumen_general[2])),
         'arboles_total': suma_arboles_acumulados,
         'rentabilidad': renta_promedio,
         'rentabilidades': rentabilidades,
