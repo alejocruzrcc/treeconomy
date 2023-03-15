@@ -248,7 +248,8 @@ def dashboard(request):
         for item in order.items.all():
             co2_desdecompra += arbol_anio_co2 * diff * item.quantity
             
-    progreso_co2 = round((float(co2_consumption) *100)/avion, 3)
+    progreso_co2 = str(round((float(co2_consumption) *100)/avion, 3))
+  
     return render(request, 'argon.html',{
         'projects': projects,
         'user_projects': user_projects,
@@ -386,7 +387,7 @@ def dashboard_company(request, slug):
         for item in order.items.all():
             co2_desdecompra += arbol_anio_co2 * diff * item.quantity
             
-    progreso_co2 = round((float(co2_consumption) *100)/avion, 3)
+    progreso_co2 = str(round((float(co2_consumption) *100)/avion, 3))
 
     ## Mapa 
     initialMap = folium.Map(location=[4.6486259,-74.2478921], zoom_start=6, tiles=None)
