@@ -46,7 +46,7 @@ class MapaView(generic.TemplateView):
                 html = popup_html(project.name, project.resena, project.n_hectares, project.get_absolute_url())
                 popup = folium.Popup(folium.Html(html, script=True), max_width=500)
                 punto = list(punto_shapely[0].coords)[0]
-                folium.Marker(punto, popup=popup).add_to(initialMap)
+                folium.Marker(punto, popup=popup,  icon=folium.Icon(color='lightgreen', icon_color='darkgreen', icon='tree', prefix='fa')).add_to(initialMap)
                 folium.GeoJson(data=geometria).add_to(initialMap)
         
         mapbox_token = settings.MAPBOX_TOKEN
