@@ -37,6 +37,7 @@
 
 .footer {
   flex-wrap: wrap;
+  bottom: 0px;
   padding: 3rem 3rem 1rem;
   text-align: center;
   min-height: 20vh;

@@ -8,6 +8,7 @@ from accounts import views
 from accounts.models import User, Video
 from django.contrib import messages
 import folium
+from folium.plugins import MarkerCluster
 from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
 from fastkml.kml import KML
@@ -35,10 +36,12 @@ class MapaView(generic.TemplateView):
     template_name = 'projects_map.html'
     
     def get_context_data(self, *args, **kwargs):
-        initialMap = folium.Map(location=[4.6486259,-74.2478921], zoom_start=6, tiles=None)
+        fig = folium.Figure(height="750vh")
+        initialMap = folium.Map(location=[4.6486259,-74.2478921], zoom_start=6).add_to(fig)
         projects = Project.objects.all()
+        mCluster = MarkerCluster(name="proyectos").add_to(initialMap)
         for project in projects:
-            if project.geokml != None:
+            if project.geokml:
                 lotes = kml2geojson.main.convert(project.geokml)
                 geometria = lotes[0]["features"][0]["geometry"]
                 poligono = geometry.Polygon(geometria["coordinates"][0])
@@ -46,8 +49,9 @@ class MapaView(generic.TemplateView):
                 html = popup_html(project.name, project.resena, project.n_hectares, project.get_absolute_url())
                 popup = folium.Popup(folium.Html(html, script=True), max_width=500)
                 punto = list(punto_shapely[0].coords)[0]
-                folium.Marker(punto, popup=popup,  icon=folium.Icon(color='lightgreen', icon_color='darkgreen', icon='tree', prefix='fa')).add_to(initialMap)
+                folium.Marker(punto, popup=popup,  icon=folium.Icon(color='lightgreen', icon_color='darkgreen', icon='tree', prefix='fa')).add_to(mCluster)
                 folium.GeoJson(data=geometria).add_to(initialMap)
+        
         
         mapbox_token = settings.MAPBOX_TOKEN
         tile = folium.TileLayer(
