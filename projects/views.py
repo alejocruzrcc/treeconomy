@@ -48,16 +48,17 @@ class MapaView(generic.TemplateView):
                 punto = list(punto_shapely[0].coords)[0]
                 folium.Marker(punto, popup=popup).add_to(initialMap)
                 folium.GeoJson(data=geometria).add_to(initialMap)
-        """
+        
+        mapbox_token = settings.MAPBOX_TOKEN
         tile = folium.TileLayer(
-            tiles = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-            attr = 'Esri',
+            tiles= f'https://api.mapbox.com/styles/v1/alejocruzrcc/clf96goiq000401mnwfmleh76/tiles/256/{{z}}/{{x}}/{{y}}@2x?access_token={mapbox_token}',
+            attr = 'Mapbox Satelite',
             name = 'Satélite',
             overlay = False,
             control = True
         ).add_to(initialMap)
-        """
-        folium.TileLayer('openstreetmap').add_to(initialMap)
+        
+        #folium.TileLayer('openstreetmap').add_to(initialMap)
         #folium.LayerControl().add_to(initialMap)       
         context = {
             "map": initialMap._repr_html_(),
@@ -87,6 +88,14 @@ class ProjectDetailListView(LoginRequiredMixin, generic.FormView):
         detailMap= folium.Map(location=punto, zoom_start=14, tiles=None).add_to(f)
         folium.GeoJson(data=geometria, name="Polígono").add_to(detailMap)
         
+        mapbox_token = settings.MAPBOX_TOKEN
+        tile = folium.TileLayer(
+            tiles= f'https://api.mapbox.com/styles/v1/alejocruzrcc/clf96goiq000401mnwfmleh76/tiles/256/{{z}}/{{x}}/{{y}}@2x?access_token={mapbox_token}',
+            attr = 'Mapbox Satelite',
+            name = 'Satélite',
+            overlay = False,
+            control = True
+        ).add_to(detailMap)
         """
         tile = folium.TileLayer(
             tiles = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
@@ -96,7 +105,7 @@ class ProjectDetailListView(LoginRequiredMixin, generic.FormView):
             control = True
         ).add_to(detailMap)
         """
-        folium.TileLayer('openstreetmap').add_to(detailMap)
+        #folium.TileLayer('openstreetmap').add_to(detailMap)
         #folium.LayerControl().add_to(detailMap)
         
         context["project"] = self.get_object()
