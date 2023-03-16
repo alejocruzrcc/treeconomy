@@ -74,14 +74,14 @@
                 
             {% else %}
                 
-                    <div class="col-4">
+                    <div class="col-12 col-md-4 mb-3">
                         <div class="entrada4__grafico">
                             <div id="card-bars" class="card-body">
                                 <canvas id="dona-bars" class="chartsdona"  data-chart='{{ resumen_dict }}'></canvas>
                             </div>
                         </div>
                     </div>
-                    <div class="col-8 px-4">
+                    <div class="col-12 col-md-8 px-4">
                         <div class="row row-cols-1 row-cols-md-3 g-4">
                         
                         {% for key, value in resumen_dict.items %}
@@ -89,7 +89,7 @@
                             <div class="card">
                                 <img src="{% static 'dashboard/img/company/img/paisaje1.png' %}" class="card-img-top" alt="...">
                                 <div class="card-body">
-                                    <h5 class="card-title text-center">{{key}}</h5>
+                                    <h5 class="card-title text-center">{{key}}:</h5>
                                     <p class="card-text text-center">{{value.total_trees}}</p>
                                 </div>
                             </div>
