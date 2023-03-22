@@ -335,7 +335,7 @@ def export_clients_xls(request):
     font_style = xlwt.XFStyle()
 
     rows = User.objects.all().values_list('username', 'first_name', 'last_name', 'email')
-    users = User.objects.all()
+    users = User.objects.all().order_by('-date_joined')
     data = []
     
     for user in users:
@@ -356,7 +356,7 @@ def export_clients_xls(request):
     
 @has_role_decorator('admin')   
 def export_clients_pag(request):
-    users = User.objects.all()
+    users = User.objects.all().order_by('-date_joined')
     data = []
     
     for user in users:
@@ -392,7 +392,7 @@ def export_orders_xls(request):
     # Sheet body, remaining rows
     font_style = xlwt.XFStyle()
 
-    orderitems = OrderItem.objects.all()
+    orderitems = OrderItem.objects.all().order_by('-order__ordered_date')
     data = []
     
     for item in orderitems:
@@ -416,7 +416,7 @@ def export_orders_pag(request):
     columns = ['Id', 'Date', 'Lote', 'Cantidad', 'Precio Unitario', 'Total', 'Status', 'Inversion Type', 'First Name', 'Last Name', 'Customer email', 'Ciudad', 'Año', 'Mes']
     
     # Sheet body, remaining rows
-    orderitems = OrderItem.objects.all()
+    orderitems = OrderItem.objects.all().order_by('-order__ordered_date')
     data = []
     
     for item in orderitems:
