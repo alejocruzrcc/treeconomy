@@ -43,6 +43,7 @@ from django.core.files import File
 from django.contrib.auth.mixins import LoginRequiredMixin
 import io
 from django.core.files.base import ContentFile
+from django.utils.translation import activate, get_language
 
 
 stripe.api_key = settings.STRIPE_PRIVATE_KEY
@@ -110,6 +111,10 @@ def user_logout(request):
     return render(request,'registration/logged_out.html', {'video_idea_negocio': video_idea_negocio})
 
 def register(request):
+    # Establecer el idioma actual del usuario
+    language = request.POST.get('language', None) or get_language()
+    activate(language)
+    print(language)
     if request.method == 'POST':
         user_form = UserRegistrationForm(request.POST)
         if user_form.is_valid():
@@ -155,6 +160,7 @@ def register(request):
          
     else:
         user_form=UserRegistrationForm()
+    
     return render(request,'account/register.html',{'user_form': user_form})
     
 def activate_account(request, uidb64, token, backend='django.contrib.auth.backends.ModelBackend'):

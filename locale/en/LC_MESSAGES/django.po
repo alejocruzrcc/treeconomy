@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-29 17:18-0500\n"
+"POT-Creation-Date: 2023-03-29 23:04-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,18 +18,302 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: accounts/views.py:93 projects/views.py:320
-msgid "hello"
+#: accounts/forms.py:54
+msgid "Nombre de usuario"
+msgstr "Username"
+
+#: accounts/forms.py:55
+msgid "Nombres"
+msgstr "Full name"
+
+#: accounts/forms.py:56
+msgid "Apellidos"
+msgstr "Last Name"
+
+#: accounts/forms.py:57
+msgid "Correo electrónico"
+msgstr "E-mail"
+
+#: accounts/forms.py:58
+msgid "Contraseña"
+msgstr "Password"
+
+#: accounts/forms.py:59
+msgid "Confirma contraseña"
+msgstr "Confirm password"
+
+#: accounts/forms.py:60
+msgid "Represento una empresa"
+msgstr "Represent a company"
+
+#: accounts/forms.py:61
+msgid "Nombre de la Empresa"
+msgstr "Company name"
+
+#: accounts/templates/account/register.html:17
+#: accounts/templates/registration/login.html:23
+msgid "Plataforma de inversión sostenible"
+msgstr "Sustainable investment platform"
+
+#: accounts/templates/account/register.html:18
+#: accounts/templates/registration/login.html:26
+msgid "El mundo de la reforestación en tus manos"
+msgstr "The world of reforestation in your hands"
+
+#: accounts/templates/account/register.html:19
+#: accounts/templates/registration/login.html:28
+msgid "y mucho más rentable"
+msgstr "and much more profitable"
+
+#: accounts/templates/account/register.html:32
+msgid "Crea tu cuenta"
+msgstr "Create an account"
+
+#: accounts/templates/account/register.html:55
+msgid "Aceptar"
+msgstr "Accept"
+
+#: accounts/templates/account/register.html:55
+msgid "Términos y condiciones"
+msgstr "Terms & Conditions"
+
+#: accounts/templates/account/register.html:58
+msgid "Debes aceptar términos y condiciones para el registro."
 msgstr ""
 
-#: projects/templates/project_list.html:227
+#: accounts/templates/account/register.html:64
+msgid "Registrar"
+msgstr "Register"
+
+#: accounts/templates/account/register.html:67
+msgid "¿Ya tienes una cuenta?"
+msgstr "Do you already have an account?"
+
+#: accounts/templates/account/register.html:67
+msgid "Inicia sesión"
+msgstr "Login"
+
+#: accounts/templates/registration/login.html:3
+msgid "Inicio sesión"
+msgstr "Login"
+
+#: accounts/templates/registration/login.html:42
+msgid "Tu cuenta"
+msgstr "Your account"
+
+#: accounts/templates/registration/login.html:57
+msgid "Utiliza el siguiente formulario para iniciar sesión."
+msgstr "Use the following form to login"
+
+#: accounts/templates/registration/login.html:80
+msgid "Recordar contraseña?"
+msgstr "Remember password"
+
+#: accounts/templates/registration/login.html:81
+msgid "Registrarse aquí"
+msgstr "Register now"
+
+#: accounts/templates/registration/login.html:84
+msgid "Iniciar Sesión"
+msgstr "Login"
+
+#: projects/templates/project_list.html:225
 msgid "Inicio"
 msgstr "Home"
 
-#: projects/views.py:36
+#: projects/templates/project_list.html:236
+msgid "Reporte Clientes"
+msgstr "Customers report"
+
+#: projects/templates/project_list.html:240
+#: projects/templates/project_list.html:252
+msgid "Descarga Excel"
+msgstr "Excel download"
+
+#: projects/templates/project_list.html:241
+#: projects/templates/project_list.html:253
+msgid "Ver en página"
+msgstr "See in app"
+
+#: projects/templates/project_list.html:248
+msgid "Reporte Órdenes"
+msgstr "Orders report"
+
+#: projects/templates/project_list.html:259
+msgid "Usuarios"
+msgstr "Users"
+
+#: projects/templates/project_list.html:273
+msgid "Crear proyecto"
+msgstr "Create projects"
+
+#: projects/templates/project_list.html:280
+msgid "Invierte en uno de nuestros proyectos"
+msgstr "Invest in one of our projects"
+
+#: projects/templates/project_list.html:290
+msgid "Cosecha en"
+msgstr "Harvest in"
+
+#: projects/templates/project_list.html:293
+#: projects/templates/project_list.html:350
+msgid "Usuario propietario"
+msgstr "Owner user"
+
+#: projects/templates/project_list.html:309
+#: projects/templates/project_list.html:367
+msgid "Copiar a portapapeles"
+msgstr "Copy to clipboard"
+
+#: projects/templates/project_list.html:322
+#: projects/templates/project_list.html:380
+msgid "Editar"
+msgstr "Edit"
+
+#: projects/templates/project_list.html:323
+#: projects/templates/project_list.html:381
+msgid "Eliminar"
+msgstr "Delete"
+
+#: projects/templates/project_list.html:326
+#: projects/templates/project_list.html:384
+msgid "Rentabilidad"
+msgstr "Profitability"
+
+#: projects/templates/project_list.html:327
+#: projects/templates/project_list.html:385
+msgid "Árboles restantes"
+msgstr "Left over trees"
+
+#: projects/templates/project_list.html:328
+#: projects/templates/project_list.html:386
+msgid "Precio"
+msgstr "Price"
+
+#: projects/templates/project_list.html:330
+msgid "Invertir aquí"
+msgstr "Invest here"
+
+#: projects/templates/project_list.html:339
+msgid "Proyectos cerrados"
+msgstr "Closed projects"
+
+#: projects/templates/project_list.html:347
+msgid "Cortado"
+msgstr "cut down"
+
+#: projects/templates/project_list.html:388
+msgid "Ver más"
+msgstr "See more"
+
+#: projects/templates/project_list.html:396
+msgid "No hay proyectos disponibles"
+msgstr "No projects available"
+
+#: projects/views.py:36 templates/base.html:265 templates/base.html:374
 msgid "Proyectos"
 msgstr "Projects"
 
-#: templates/base.html:302
+#: projects/views.py:320
+msgid "hello"
+msgstr "hello"
+
+#: templates/base.html:271 templates/base.html:373
+msgid "Calculadora"
+msgstr "Calculator"
+
+#: templates/base.html:277 templates/base.html:372
+msgid "Tablero"
+msgstr "Dashboard"
+
+#: templates/base.html:283
+msgid "Menú"
+msgstr "Menu"
+
+#: templates/base.html:300
+msgid "¡Planta árboles ahora!"
+msgstr "Plant trees now!"
+
+#: templates/base.html:309
 msgid " Lenguaje "
 msgstr "Language"
+
+#: templates/base.html:347
+msgid "Iniciar sesión"
+msgstr "Login"
+
+#: templates/base.html:356 templates/base.html:371
+msgid "Perfil"
+msgstr "Profile"
+
+#: templates/base.html:358 templates/base.html:377
+msgid "Cartera"
+msgstr "Portfolio"
+
+#: templates/base.html:359 templates/base.html:376
+msgid "Tu inversión"
+msgstr "Your investment"
+
+#: templates/base.html:360 templates/base.html:375
+msgid "Mapa"
+msgstr "Map"
+
+#: templates/base.html:361 templates/base.html:378 templates/base.html:426
+msgid "Contacto"
+msgstr "Contact"
+
+#: templates/base.html:363 templates/base.html:380
+msgid "Salir"
+msgstr "Logout"
+
+#: templates/base.html:413
+msgid "Mantente informado sobre las inversiones de reforestación"
+msgstr "Stay informed about reforestation investments"
+
+#: templates/base.html:422
+msgid "¿Quiénes somos?"
+msgstr "Who are we?"
+
+#: templates/base.html:423
+msgid "¿Cómo funciona?"
+msgstr "How it works?"
+
+#: templates/base.html:424
+msgid "Negocios"
+msgstr "Business"
+
+#: templates/base.html:425
+msgid "Noticias"
+msgstr "Notices"
+
+#: templates/base.html:453
+msgid "Derechos Reservados"
+msgstr "Copyrights"
+
+#: templates/base.html:454
+msgid "Terminos y condiciones"
+msgstr "Terms & Conditions"
+
+#: templates/videos.html:17
+msgid ""
+"Bienvenido a la plataforma de inversión Treeconomy. Aquí puedes invertir en "
+"nuestros proyectos de dos formas diferentes: haciendo una única inversión, o "
+"suscribiéndote a una inversion mensual donde irás adquiriendo nuevos árboles "
+"cada mes, ampliando tus capacidades futuras."
+msgstr ""
+"Welcome to the Treeconomy investment platform. Here you can invest in our "
+"projects in two different ways: investing one time, or subscribing to a "
+"monthly investment where you will be acquiring new trees every month, "
+"expanding your future capabilities. "
+
+#: templates/videos.html:20
+msgid "Visitar página web"
+msgstr "Visit webpage"
+
+#: templates/videos.html:31
+msgid "¿Qué es Treeconomy?"
+msgstr "What is Treeconomy?"
+
+#: templates/videos.html:46
+msgid "Impacto"
+msgstr "Effect"

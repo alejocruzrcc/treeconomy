@@ -6,6 +6,7 @@ from .models import ProjectByInvestor, Company
 from phonenumber_field.formfields import PhoneNumberField
 from phonenumber_field.widgets import PhoneNumberPrefixWidget
 from django.contrib.auth.forms import AuthenticationForm, UsernameField
+from django.utils.translation import ugettext_lazy as _
 
 
 
@@ -50,14 +51,14 @@ class LoginForm(AuthenticationForm):
     )
 
 class UserRegistrationForm(forms.ModelForm):
-    username=forms.CharField(label='Nombre de usuario')
-    first_name=forms.CharField(label='Nombres')
-    last_name=forms.CharField(label='Apellidos')
-    email=forms.CharField(label='Correo electrónico')
-    password=forms.CharField(label='Contraseña',widget=forms.PasswordInput)
-    password2=forms.CharField(label='Confirma contraseña',widget=forms.PasswordInput)
-    is_company=forms.BooleanField(label='Represento una empresa', required=False, initial=False)
-    company_name=forms.CharField(label='Nombre de la Empresa', required=False)
+    username=forms.CharField(label=_("Nombre de usuario"))
+    first_name=forms.CharField(label=_('Nombres'))
+    last_name=forms.CharField(label=_('Apellidos'))
+    email=forms.CharField(label=_('Correo electrónico'))
+    password=forms.CharField(label=_('Contraseña'),widget=forms.PasswordInput)
+    password2=forms.CharField(label=_('Confirma contraseña'),widget=forms.PasswordInput)
+    is_company=forms.BooleanField(label=_('Represento una empresa'), required=False, initial=False)
+    company_name=forms.CharField(label=_('Nombre de la Empresa'), required=False)
     
 
     class Meta:

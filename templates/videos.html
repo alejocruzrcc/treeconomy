@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <style>
     video, .inicial {
       border: 0px;
@@ -12,10 +13,11 @@
     <div class="card inicial">
         <div class="card-body text-center" >
             <h4 class="card-title "><img style="height: 100px;" src="https://treeconomyapp-crm-bucket.s3.amazonaws.com/static/img/image/logo_treeconomy.png" alt="treeconomy" ></h4>
-            <p style="text-align: justify;">Bienvenido a la plataforma de inversión Treeconomy. Aquí puedes invertir en nuestros proyectos de dos formas diferentes: haciendo una única inversión, o suscribiéndote a una inversion mensual donde irás adquiriendo nuevos árboles cada mes, ampliando tus capacidades futuras.</p>
+            <p style="text-align: justify;">
+              {% trans "Bienvenido a la plataforma de inversión Treeconomy. Aquí puedes invertir en nuestros proyectos de dos formas diferentes: haciendo una única inversión, o suscribiéndote a una inversion mensual donde irás adquiriendo nuevos árboles cada mes, ampliando tus capacidades futuras." %}</p>
             <div class="row">
                 <div class="col pb-2">
-                    <a href="https://treeconomy.com.co/es/"  target="_blank" class="button-plant">Visitar página web</a>
+                    <a href="https://treeconomy.com.co/es/"  target="_blank" class="button-plant">{% trans "Visitar página web" %}</a>
                 </div>
             </div>
         </div>
@@ -26,7 +28,7 @@
 
 <div class="row videos" style="text-align: center;">
   <div class="col-lg-6">
-    <h3>¿Qué es Treeconomy?</h3>
+    <h3>{% trans "¿Qué es Treeconomy?" %}</h3>
     {% if video_que_es %}
       <video  
       style="width: 100%;" 
@@ -41,7 +43,7 @@
     {% endif %}
   </div>
   <div class="col-lg-6">
-    <h3>Impacto...</h3>
+    <h3>{% trans "Impacto" %}</h3>
     {% if video_que_es %}
       <video  style="width: 100%;" controls
       {% if video_impacto.thumb %}

@@ -34,192 +34,190 @@
     background-image: ;
   }
 
-.tarjetas {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: grid;
-  grid-gap: 1rem;
+  .tarjetas {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-gap: 1rem;
+    
+  }
+  .tarjeta {
+    background: #012623;
+    background-image: url({% static 'img/image/fondotar.png' %});
+    border-radius: 20px;
+    overflow: hidden;
+    background-size: cover;
+    box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+  }
+
+  h5 {
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-16)/20px Lato;
+    letter-spacing: var(--unnamed-character-spacing-0);
+    text-align: left;
+    letter-spacing: 0px;
+    color: #FFFFFF;
+  }
+  .titulo1{
+    color: #FFFFFF;
+    opacity: 1;
+    margin-top: 10px;
+  }
+  /* Medium Devices, Desktops */
+  @media only screen and (min-width : 992px) {
+    .titulo1 {
+      font-size: 20px;
+    }
+  }
+
+  /* Large Devices, Wide Screens */
+  @media only screen and (min-width : 1200px) {
+    .titulo1 {
+      font-size: 20px;
+    }
+  }
+
+  @media all and (max-width: 1200px) and (min-width: 800px) {
+    /* tablets o media pantalla */
+    .titulo1 {
+      font-size: 13px;
+    }
+  }
+
+
+  @media (max-width: 800px) {
+    /* Celulares*/
+    .titulo1 {
+      font-size: 18px;
+    }
+  }
   
-}
-.tarjeta {
-  background: #012623;
-  background-image: url({% static 'img/image/fondotar.png' %});
-  border-radius: 20px;
-  overflow: hidden;
-  background-size: cover;
-  box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
-}
+  @media (min-width: 600px) {
+    .tarjetas { grid-template-columns: repeat(2, 1fr); }
+    
+    }
 
-h5 {
-  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-16)/20px Lato;
-  letter-spacing: var(--unnamed-character-spacing-0);
-  text-align: left;
-  letter-spacing: 0px;
-  color: #FFFFFF;
-}
-.titulo1{
-  color: #FFFFFF;
-  opacity: 1;
-  margin-top: 10px;
-}
-/* Medium Devices, Desktops */
-@media only screen and (min-width : 992px) {
-  .titulo1 {
-    font-size: 20px;
-  }
-}
-
-/* Large Devices, Wide Screens */
-@media only screen and (min-width : 1200px) {
-  .titulo1 {
-    font-size: 20px;
-  }
-}
-
-@media all and (max-width: 1200px) and (min-width: 800px) {
-  /* tablets o media pantalla */
-  .titulo1 {
-    font-size: 13px;
-  }
-}
-
-
-@media (max-width: 800px) {
-  /* Celulares*/
-  .titulo1 {
-    font-size: 18px;
-  }
-}
- 
-@media (min-width: 600px) {
-   .tarjetas { grid-template-columns: repeat(2, 1fr); }
-   
-  }
-
-@media (min-width: 900px){
-   .tarjetas {grid-template-columns: repeat(3, 0.4fr); }
-   
-  }
- span{
+  @media (min-width: 900px){
+    .tarjetas {grid-template-columns: repeat(3, 0.4fr); }
+    
+    }
+  span{
    color: #FFFFFF;
- }
- .btn-invert{
-  font-size: 14px;
-  text-align: center;
-  margin-top: 12px;
   }
+  .btn-invert{
+    font-size: 14px;
+    text-align: center;
+    margin-top: 12px;
+    }
 
-
- .editables {
+  .editables {
   background-color: #008CBA !important;
   border-radius: 25px;
   color: #fff;
   font-size: 10px;
-}
-.cover img{
-  margin: 5px;
-  border-radius: 10px;
-  object-fit: cover;
-  height: 8.5em;
-  width: 7.5em;
-}
-.cover{
-  object-fit: cover;
-}
-h1{
-  font-size: 26px;
-}
-.tarjeta h3{
-  
-  font-size: 14px;
-  display: flex;
-  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-16)/20px Lato;
-  letter-spacing: var(--unnamed-character-spacing-0);
+  }
 
-  color: var(--unnamed-color-f9e09e);
-  text-align: left;
-  letter-spacing: 0px;
-  color: #F9E09E;
-  opacity: 1;
-}
-h4{
-  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-16)/20px Lato;
-  letter-spacing: var(--unnamed-character-spacing-0);
-  font: normal normal normal 16px/24px Lato;
-  color: var(--white);
-  letter-spacing: 0px;
-  color: #FFFFFF;
-  opacity: 1;
-}
-strong{
-  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-16)/20px Lato;
-  letter-spacing: var(--unnamed-character-spacing-0);
-  color: var(--white);
-  letter-spacing: 0px;
-  color: #FFFFFF;
-}
-.valores span{
-  letter-spacing: var(--unnamed-character-spacing-0);
-  letter-spacing: 0px;
-  opacity: 1;
-  color: #EE6635;
+  .cover img{
+    margin: 5px;
+    border-radius: 10px;
+    object-fit: cover;
+    height: 8.5em;
+    width: 7.5em;
+  }
+  .cover{
+    object-fit: cover;
+  }
+  h1{
+    font-size: 26px;
+  }
+  .tarjeta h3{
+    
+    font-size: 14px;
+    display: flex;
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-16)/20px Lato;
+    letter-spacing: var(--unnamed-character-spacing-0);
 
-}
+    color: var(--unnamed-color-f9e09e);
+    text-align: left;
+    letter-spacing: 0px;
+    color: #F9E09E;
+    opacity: 1;
+  }
+  h4{
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-16)/20px Lato;
+    letter-spacing: var(--unnamed-character-spacing-0);
+    font: normal normal normal 16px/24px Lato;
+    color: var(--white);
+    letter-spacing: 0px;
+    color: #FFFFFF;
+    opacity: 1;
+  }
+  strong{
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-16)/20px Lato;
+    letter-spacing: var(--unnamed-character-spacing-0);
+    color: var(--white);
+    letter-spacing: 0px;
+    color: #FFFFFF;
+  }
+  .valores span{
+    letter-spacing: var(--unnamed-character-spacing-0);
+    letter-spacing: 0px;
+    opacity: 1;
+    color: #EE6635;
 
-.textbajo span{
+  }
 
-  color: #EE6635;
-  
+  .textbajo span{
 
-}
-.valores{
-  text-align: left;
-  font-size: 0.9rem;
-  box-shadow: 0 15px 25px rgba(129, 124, 124, 0.2);
-  border-radius: 15px;
-  backdrop-filter: blur(14px);
-  background-color: rgba(255, 255, 255, 0.1);
-}
+    color: #EE6635;
+    
 
-.ovalo{
-  border-radius: 10px;
-  color: #013F30;
-  background-color: #F9E09E;
-  font-size: small;
-  width: 80%;
-}
+  }
+  .valores{
+    text-align: left;
+    font-size: 0.9rem;
+    box-shadow: 0 15px 25px rgba(129, 124, 124, 0.2);
+    border-radius: 15px;
+    backdrop-filter: blur(14px);
+    background-color: rgba(255, 255, 255, 0.1);
+  }
 
-.textbajo{
-  text-align: left;
-  margin-left: 20px;
-  font-size:0.8rem;
-}
-.fondob{
-  background-color: #f4f4f4;
-}
+  .ovalo{
+    border-radius: 10px;
+    color: #013F30;
+    background-color: #F9E09E;
+    font-size: small;
+    width: 80%;
+  }
 
-h3 {
-  font-family: "comfortaa-bold";
-  color: #035941;
-}
-.opsadmin{
-  display: grid;
-}
+  .textbajo{
+    text-align: left;
+    margin-left: 20px;
+    font-size:0.8rem;
+  }
+  .fondob{
+    background-color: #f4f4f4;
+  }
 
-.opadmin{
-  padding: 5px;
-  margin: 0 auto;
-}
+  h3 {
+    font-family: "comfortaa-bold";
+    color: #035941;
+  }
+  .opsadmin{
+    display: grid;
+  }
 
-@media (min-width: 600px){
-  .opsadmin { grid-template-columns: repeat(2, 1fr); }
-}
-@media (min-width: 900px){
-  .opsadmin { grid-template-columns: repeat(3, 1fr); }
-}
+  .opadmin{
+    padding: 5px;
+    margin: 0 auto;
+  }
 
+  @media (min-width: 600px){
+    .opsadmin { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 900px){
+    .opsadmin { grid-template-columns: repeat(3, 1fr); }
+  }
 </style>
-
 
   <nav class="fondob" aria-label="breadcrumb">
     <ol class="breadcrumb">
@@ -235,30 +233,30 @@ h3 {
     {% if user|can:'generate_report' %}
     <div class="dropdown show opadmin">
       <a class="button-plant my-3 dropdown-toggle" href="#" role="button" id="dropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Reporte Clientes
+        {% trans "Reporte Clientes" %}
       </a>
     
       <div class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
-        <a class="dropdown-item" href="{% url 'exportclientsxls' %}" role="button">Descarga Excel</a>
-        <a class="dropdown-item" href="/exportclientspag" >Ver en página</a>
+        <a class="dropdown-item" href="{% url 'exportclientsxls' %}" role="button">{% trans "Descarga Excel" %}</a>
+        <a class="dropdown-item" href="/exportclientspag">{% trans "Ver en página" %}</a>
       </div>
     </div>
     {% endif %}
     {% if user|can:'generate_report' %}
     <div class="dropdown show opadmin">
       <a class="button-plant my-3 dropdown-toggle" href="#" role="button" id="dropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Reporte Órdenes
+        {% trans "Reporte Órdenes" %}
       </a>
     
       <div class="dropdown-menu" aria-labelledby="dropdownMenuLink2">
-        <a class="dropdown-item" href="{% url 'exportordersxls' %}" role="button">Descarga Excel</a>
-        <a class="dropdown-item" href="/exportorderspag">Ver en página</a>
+        <a class="dropdown-item" href="{% url 'exportordersxls' %}" role="button">{% trans "Descarga Excel" %}</a>
+        <a class="dropdown-item" href="/exportorderspag">{% trans "Ver en página" %}</a>
       </div>
     </div>
     {% endif %}
     {% if user|can:'view_userlist' %}
     <div class="opadmin">
-      <a class="button-plant my-3" href="/account/users" role="button">Usuarios</a>
+      <a class="button-plant my-3" href="/account/users" role="button">{% trans "Usuarios" %}</a>
     </div>
     {% endif %}
   </div>
@@ -272,14 +270,14 @@ h3 {
 
   {% if user|can:'manage_a_project' %}
   <div class="mx-auto" style="width: 200px;">
-    <a name="" class="button-plant" id="" href="{% url 'crear' %}" role="button"> Crear proyecto</a>
+    <a name="" class="button-plant" id="" href="{% url 'crear' %}" role="button">{% trans "Crear proyecto" %}</a>
   </div>
   {% endif %}
   
   <hr>
   {% if project_list %}
     {% if project_list|activos|length > 0 %}
-    <h3>Invierte en uno de nuestros proyectos...</h3>
+    <h3>{% trans "Invierte en uno de nuestros proyectos" %} ...</h3>
     {% endif %}
     <div class="tarjetas text-center">
       {% for project in project_list|activos %}
@@ -289,14 +287,13 @@ h3 {
               <div class="cover mt-2">
                 <img src="{{project.image.url}}">
 
-                <div class="mx-auto mt-1 ovalo"><p>Cosecha en: </br> {{ project.get_tiempo_paracorte }} </p></div>   
+                <div class="mx-auto mt-1 ovalo"><p>{% trans "Cosecha en" %} : </br> {{ project.get_tiempo_paracorte }} </p></div>   
               </div>
               <div class="my-2">
-                <div class="textbajo"><strong>Usuario Propietario: </strong><span>Treeconomy Inc. </span> </div>
+                <div class="textbajo"><strong>{% trans "Usuario propietario" %} : </strong><span>Treeconomy Inc. </span> </div>
               </div>
             </div>
             <div class="col-7">
-              
                 <div class="row">
                   <div class="col-8">
                     <h2 class="titulo1">{{ project.name }}</h2>
@@ -309,8 +306,7 @@ h3 {
                       </a>
                       <ul class="dropdown-menu" aria-labelledby="shareProject">
                         {% with request.build_absolute_uri|add:project.name as varname %}
-                          <li><a class="dropdown-item shareButton copy-btn" data-project={{ varname }}>Copiar a portapapeles</a></li>
-                                        
+                          <li><a class="dropdown-item shareButton copy-btn" data-project={{ varname }}>{% trans "Copiar a portapapeles" %}</a></li>
                           {% load social_share %}
                           <li>{% post_to_whatsapp varname "Comparte por Whatsapp" "dropdown-item" %}</li>
                           <li>{% post_to_twitter "Invierte en este proyecto: {{project.name}}!" varname "Postear en Twitter" "dropdown-item" %}</li>
@@ -323,15 +319,15 @@ h3 {
                 
                 {% load permission_tags %}
                 {% if user|can:'manage_a_project' %}
-                  <a class="btn btn-sm editables" href="{% url 'editar' project.pk  %}"role="button">Editar</a>
-                  <a class="btn btn-sm editables" href="{% url 'eliminar' project.pk %}" role="button">Eliminar</a>
+                  <a class="btn btn-sm editables" href="{% url 'editar' project.pk  %}"role="button">{% trans "Editar" %}</a>
+                  <a class="btn btn-sm editables" href="{% url 'eliminar' project.pk %}" role="button">{% trans "Eliminar" %}</a>
                 {% endif %}
                 <div class="card valores p-2 m-2">
-                  <div><strong>Rentabilidad: </strong><span>{{ project.get_rentabilidad_actual_anual }} % EA </span></div>
-                  <div><strong>Árboles restantes: </strong><span>{{ project.trees_left}}</span></div>
-                  <div><strong>Precio: </strong><span>USD {{ project.get_price}}</span> </div> 
+                  <div><strong>{% trans "Rentabilidad" %} :</strong><span>{{ project.get_rentabilidad_actual_anual }} % EA </span></div>
+                  <div><strong>{% trans "Árboles restantes" %} :</strong><span>{{ project.trees_left}}</span></div>
+                  <div><strong>{% trans "Precio" %} :</strong><span>USD {{ project.get_price}}</span> </div> 
                 </div>  
-                <a class="button-plant btn-invert stretched-link" href="{{ project.get_absolute_url }}">Invertir aquí</a>       
+                <a class="button-plant btn-invert stretched-link" href="{{ project.get_absolute_url }}">{% trans "Invertir aquí" %}</a>       
             </div>
           </div>
         </div>
@@ -340,7 +336,7 @@ h3 {
     <hr>
     
     {% if project_list|inactivos|length > 0 %}
-      <h3>Proyectos cerrados...</h3>
+      <h3>{% trans "Proyectos cerrados" %}...</h3>
       <div class="tarjetas text-center">
         {% for project in project_list|inactivos %}
           <div class="tarjeta card pb-2" style=" filter: grayscale(100%);">
@@ -348,10 +344,10 @@ h3 {
               <div class="col-5">
                 <div class="cover mt-2">
                   <img src="{{project.image.url}}">
-                  <div class="mx-auto ovalo">Cortado</div>   
+                  <div class="mx-auto ovalo">{% trans "Cortado" %}</div>   
                 </div>
                 <div class="my-2">
-                  <div class="textbajo"><strong>Usuario Propietario: </strong><span>Treeconomy Inc. </span> </div>
+                  <div class="textbajo"><strong>{% trans "Usuario propietario" %} :</strong><span>Treeconomy Inc. </span> </div>
                 </div>
               </div>
               <div class="col-7">
@@ -368,8 +364,7 @@ h3 {
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="shareProject">
                           {% with request.build_absolute_uri|add:project.name as varname %}
-                            <li><a class="dropdown-item shareButton copy-btn" data-project={{ varname }}>Copiar a portapapeles</a></li>
-                                          
+                            <li><a class="dropdown-item shareButton copy-btn" data-project={{ varname }}>{% trans "Copiar a portapapeles" %}</a></li>       
                             {% load social_share %}
                             <li>{% post_to_whatsapp varname "Comparte por Whatsapp" "dropdown-item" %}</li>
                             <li>{% post_to_twitter "Invierte en este proyecto: {{project.name}}!" varname "Postear en Twitter" "dropdown-item" %}</li>
@@ -382,15 +377,15 @@ h3 {
                   
                   {% load permission_tags %}
                   {% if user|can:'manage_a_project' %}
-                    <a class="btn btn-sm editables" href="{% url 'editar' project.pk  %}"role="button">Editar</a>
-                    <a class="btn btn-sm editables" href="{% url 'eliminar' project.pk %}" role="button">Eliminar</a>
+                    <a class="btn btn-sm editables" href="{% url 'editar' project.pk  %}"role="button">{% trans "Editar" %}</a>
+                    <a class="btn btn-sm editables" href="{% url 'eliminar' project.pk %}" role="button">{% trans "Eliminar" %}</a>
                   {% endif %}
                   <div class="card valores p-2 m-2">
-                    <div><strong>Rentabilidad: </strong><span>{{ project.get_rentabilidad_actual_anual }} % EA </span></div>
-                    <div><strong>Árboles restantes: </strong><span>{{ project.trees_left}}</span></div>
-                    <div><strong>Precio: </strong><span>USD {{ project.get_price}}</span> </div> 
+                    <div><strong>{% trans "Rentabilidad" %} : </strong><span>{{ project.get_rentabilidad_actual_anual }} % EA </span></div>
+                    <div><strong>{% trans "Árboles restantes" %} : </strong><span>{{ project.trees_left}}</span></div>
+                    <div><strong>{% trans "Precio" %} : </strong><span>USD {{ project.get_price}}</span> </div> 
                   </div>  
-                  <a class="button-plant btn-invert stretched-link" href="{{ project.get_absolute_url }}">Ver más</a>       
+                  <a class="button-plant btn-invert stretched-link" href="{{ project.get_absolute_url }}">{% trans "Ver más" %}</a>       
               </div>
             </div>
           </div>
@@ -398,7 +393,7 @@ h3 {
       </div>
     {% endif %}
   {% else %}
-    <p>No hay proyectos disponibles</p>
+    <p>{% trans "No hay proyectos disponibles" %}</p>
   {% endif %}      
 
 {% endblock %}

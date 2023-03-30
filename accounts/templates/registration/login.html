@@ -1,6 +1,6 @@
 {% extends "base.html" %}
-
-{% block title %}Inicio sesión{% endblock %}
+{% load i18n %}
+{% block title %}{% trans "Inicio sesión" %}{% endblock %}
 
 {% block content %}
 {% load widget_tweaks %}
@@ -19,10 +19,13 @@
 					<div class="col-md-7 d-none d-lg-block">
 						<div class="centradito">
 							<div class="texto-tree">
-								<h2 style="text-align: center; font-family: 'comfortaa-light'; font-size: 21px;">Plataforma de inversión sostenible
+								<h2 style="text-align: center; font-family: 'comfortaa-light'; font-size: 21px;">
+                  {% trans "Plataforma de inversión sostenible" %}
                  </h2>
-                <h2 class="ms-1" style="text-align: center;  font-family: 'comfortaa-light'; font-size: 39px;">El mundo de la reforestación en tus manos</h2>
-                <h2 style="text-align: center;  font-family: 'comfortaa-bold'; font-size: 66px">y mucho más rentable</h2>
+                <h2 class="ms-1" style="text-align: center;  font-family: 'comfortaa-light'; font-size: 39px;">
+                  {% trans "El mundo de la reforestación en tus manos" %}</h2>
+                <h2 style="text-align: center;  font-family: 'comfortaa-bold'; font-size: 66px">
+                  {% trans "y mucho más rentable" %}</h2>
                 <div  style="display: flex;
 				align-items: center;
 				justify-content: center;">
@@ -36,15 +39,22 @@
           	<div class="card shadow-2-strong texto-tree" style="border-radius: 1rem;">
             <div class="card-body p-5 text-center">
 
-            <h2>Tu cuenta</h2>
+            <h2>{% trans "Tu cuenta" %}</h2>
 
             {% if form.errors %}
-              <div class="alert alert-danger" role="alert">
-                  <p>Su nombre de usuario y contraseña no coinciden. Inténtalo de nuevo.</p>
-              </div>   
-              
+                {% for error in form.errors %}
+                <div class="alert alert-danger">
+                  <ul>
+                    {% for field, errors in form.errors.items %}
+                      {% for error in errors %}
+                        <li>{{ error }}</li>
+                      {% endfor %}
+                    {% endfor %}
+                  </ul>
+                </div>
+                {% endfor %}        
             {% else %}
-              <p>Utiliza el siguiente formulario para iniciar sesión. </p>
+              <p>{% trans "Utiliza el siguiente formulario para iniciar sesión." %}</p>
             {% endif %}
             
             
@@ -64,16 +74,14 @@
                   </div>
               {% endfor %}
 
-             
-
               <input type="hidden" name="next" value="{{ next }}" />
         
             <div class="forgot">
-                <p><a class="enlace-naranja" href="{% url "password_reset" %}">Recordar contraseña?</a></p>
-                <p><a class="enlace-naranja" href="{% url "register" %}">Registrarse aquí</a></p>
+                <p><a class="enlace-naranja" href="{% url "password_reset" %}">{% trans "Recordar contraseña?" %}</a></p>
+                <p><a class="enlace-naranja" href="{% url "register" %}">{% trans "Registrarse aquí" %}</a></p>
             </div>
 
-            <button class="btn-lg button-plant " type="submit">Iniciar Sesión</button>
+            <button class="btn-lg button-plant " type="submit">{% trans "Iniciar Sesión" %}</button>
             </form>
             <div>
             <hr class="my-4">
