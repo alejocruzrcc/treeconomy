@@ -16,7 +16,11 @@ import kml2geojson
 import random
 from shapely import geometry
 import os
+from django.utils.translation import gettext as _
+from django.utils.translation import get_language, activate
+   
 
+       
 # Create your views here.
 class ProjectListView(generic.ListView):
     model = Project
@@ -29,7 +33,7 @@ class ProjectListView(generic.ListView):
         context = super(ProjectListView, self).get_context_data(*args, **kwargs)
         context["video_que_es"] = get_object_or_404(Video, nombre= "que_es_treeconomy")
         context["video_impacto"] = get_object_or_404(Video, nombre= "impacto")
-        context["name"] = 'Proyectos'
+        context["name"] = _('Proyectos')
         return context
 
 class MapaView(generic.TemplateView):
@@ -308,6 +312,17 @@ def read_kml(fname='ss.kml'):
     
     return points
     
+
+def translate(language):
+    cur_language = get_language()
+    try:
+        activate(language)
+        text = gettext('hello')
+    finally:
+        activate(cur_language)
+    return text
+
+
 def popup_html(nombre, descripcion, hectareas, url):
     html = f"""
     <div class="card">

@@ -1,5 +1,11 @@
+{% load i18n %}
 {% load static %}
 {% load cart_template_tags %}
+
+
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
+{% get_language_info_list for LANGUAGES as languages %}
 
 <!DOCTYPE html>
 <html>
@@ -78,170 +84,175 @@
     z-index: 4;
     vertical-align: middle;
     
-}
+  }
 
-.button i {
-  /*horizontal and vertical centering*/
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  font-size: 24px;
-  transform: translate(-50%, -50%);
-}
-.button:hover {
-  background-color: #F2622E;
-  color: white !important;
-}
- 
-.button:active i{
-    /*for push effect on click*/
-    transform: translate(-45%, -45%);
-}
+  .button i {
+    /*horizontal and vertical centering*/
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 24px;
+    transform: translate(-50%, -50%);
+    }
+  .button:hover {
+    background-color: #F2622E;
+    color: white !important;
+    }
+  
+  .button:active i{
+      /*for push effect on click*/
+      transform: translate(-45%, -45%);
+    }
 
-.menu-down ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    background-color: #fff;
-}
-.menu-down ul li {
-    display: inline-block;
-    padding: 5px 10px;
+  .menu-down ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background-color: #fff;
+  }
+
+  .menu-down ul li {
+      display: inline-block;
+      padding: 5px 10px;
+      
+  }
+
+  .navbarmenuabajo {
+    background-color: #f4f4f4 !important;
+    border-radius: 15px 15px 0 0;
+    box-shadow: 0px -6px 17px -2px rgb(0 0 0 / 22%);
+  }
+
+  #navbarText a{
+    color: #fff;
+  }
+
+  .dropdown-item{
+    color: #000 !important;
+  }
+
+  li a {
+    color: #013f30;
+    text-decoration: none;
+  }
+  a .palabra {
+    color: #013f30;
+    font-family: "comfortaa-bold";
+    text-decoration:none;
+  }
+  .material-icons.md-15 { font-size: 15px; }
+
+  .fa {
+    font-size: 15px;
+  }
+  a { text-decoration: none; 
+    color: black;} 
+
+  @media screen and (min-width:767px){
+    .sidebar{
+      position: fixed;
+    }
+  }
+  @media (max-width: 1200px){
+
+    .kb-toggle-button__pulse{
+      top: 290px;
+    }
+    .kb-toggle-button-message-right{
+      top: 310px;
+      height: 30px;
+    }
+
     
-}
+    
+  }
+  .navbar-toggler{
+    margin: 8px;
+    padding: 3px;
+  }
+  .navbar-toggler-icon{
+    margin: auto;
+  }
 
-.navbarmenuabajo {
-  background-color: #f4f4f4 !important;
-  border-radius: 15px 15px 0 0;
-  box-shadow: 0px -6px 17px -2px rgb(0 0 0 / 22%);
-}
+  .letra{
+    font-size:0.3vw;
+  }
 
-#navbarText a{
-  color: #fff;
-}
-li a {
-  color: #013f30;
-  text-decoration: none;
-}
-a .palabra {
-  color: #013f30;
-  font-family: "comfortaa-bold";
-  text-decoration:none;
-}
-.material-icons.md-15 { font-size: 15px; }
+  .fa, .fas {
+    font-weight: 900 !important;
+  }
+  #menulat {
+    background-color: #fff important;
+  }
 
-.fa {
-  font-size: 15px;
-}
-a { text-decoration: none; 
-  color: black;} 
+  .navega-abajo a{
+    color: #013f30;
+  }
 
-@media screen and (min-width:767px){
-  .sidebar{
+  .navega-abajo p{
+    font-size: 2.6vw !important;
+    color: #013f30;
+    text-align: center;
+  }
+
+  /* Keyframes */
+  @keyframes wiggle {
+    0%, 7% {
+      transform: rotateZ(0);
+    }
+    15% {
+      transform: rotateZ(-15deg);
+    }
+    20% {
+      transform: rotateZ(10deg);
+    }
+    25% {
+      transform: rotateZ(-10deg);
+    }
+    30% {
+      transform: rotateZ(6deg);
+    }
+    35% {
+      transform: rotateZ(-4deg);
+    }
+    40%, 100% {
+      transform: rotateZ(0);
+    }
+  }
+
+  .btn-flotante {
+    animation: wiggle 2s linear infinite;
+    font-size: 14px; /* Cambiar el tamaño de la tipografia */
+    text-transform: uppercase; /* Texto en mayusculas */
+    font-weight: bold; /* Fuente en negrita o bold */
+    color: #ffffff; /* Color del texto */
+    border-radius: 5px; /* Borde del boton */
+    letter-spacing: 1px; /* Espacio entre letras */
+    background-color: #f2622e; /* Color de fondo */
+    padding: 10px 15px; /* Relleno del boton */
     position: fixed;
-  }
-}
-@media (max-width: 1200px){
-
-  .kb-toggle-button__pulse{
-    top: 290px;
-  }
-  .kb-toggle-button-message-right{
-    top: 310px;
-    height: 30px;
-  }
-
-  
-  
-}
-.navbar-toggler{
-  margin: 8px;
-  padding: 3px;
-}
-.navbar-toggler-icon{
-  margin: auto;
-}
-
-.letra{
-  font-size:0.3vw;
-}
-
-.fa, .fas {
-  font-weight: 900 !important;
-}
-#menulat {
-  background-color: #fff important;
-}
-
-.navega-abajo a{
-  color: #013f30;
-}
-
-.navega-abajo p{
-  font-size: 2.6vw !important;
-  color: #013f30;
-  text-align: center;
-}
-
-/* Keyframes */
-@keyframes wiggle {
-  0%, 7% {
-    transform: rotateZ(0);
-  }
-  15% {
-    transform: rotateZ(-15deg);
-  }
-  20% {
-    transform: rotateZ(10deg);
-  }
-  25% {
-    transform: rotateZ(-10deg);
-  }
-  30% {
-    transform: rotateZ(6deg);
-  }
-  35% {
-    transform: rotateZ(-4deg);
-  }
-  40%, 100% {
-    transform: rotateZ(0);
-  }
-}
-
-.btn-flotante {
-  animation: wiggle 2s linear infinite;
-	font-size: 14px; /* Cambiar el tamaño de la tipografia */
-	text-transform: uppercase; /* Texto en mayusculas */
-	font-weight: bold; /* Fuente en negrita o bold */
-	color: #ffffff; /* Color del texto */
-	border-radius: 5px; /* Borde del boton */
-	letter-spacing: 1px; /* Espacio entre letras */
-	background-color: #f2622e; /* Color de fondo */
-	padding: 10px 15px; /* Relleno del boton */
-	position: fixed;
-	top: 10px;
-	right: 10px;
-	transition: all 300ms ease 0ms;
-	box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-	z-index: 4;
-}
-
-@media only screen and (max-width: 600px) {
- 	.btn-flotante {
-		font-size: 14px;
-		top: 10px;
-		right: 10px;
+    top: 10px;
+    right: 10px;
+    transition: all 300ms ease 0ms;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
     z-index: 4;
-	}
-} 
+  }
+
+  @media only screen and (max-width: 600px) {
+    .btn-flotante {
+      font-size: 14px;
+      top: 10px;
+      right: 10px;
+      z-index: 4;
+    }
+  } 
 
 </style>
 <body class="minimizar">
-  
   <nav class="navbar navbul navbarmenuabajo fixed-bottom d-block d-sm-none">
       <div class="nav navbar-nav">
         <div class="container-fluid">
@@ -280,7 +291,9 @@ a { text-decoration: none;
   <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
       <a class="navbar-brand" href="/"><img
-        src="https://treeconomy.com.co/wp-content/themes/Treeconomy/img/app/icons/Logo-Blanco.svg" alt=""></a>
+        src="https://treeconomy.com.co/wp-content/themes/Treeconomy/img/app/icons/Logo-Blanco.svg" alt="">
+      </a>
+
       <div class=" navbar-collapse" id="navbarText">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <div class="d-none d-md-flex btn-group">
@@ -291,7 +304,21 @@ a { text-decoration: none;
               <i class="material-icons" >monetization_on</i>
             </a>
           </div>
-         
+          <div class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              {% trans " Lenguaje " %}
+            </a>
+            <ul class="dropdown-menu">
+              {% for lang in languages%}
+                <li>
+                  <a class="dropdown-item" href="{% url 'set-language' lang.code %}">
+                    {{ lang.name_local}} - {{ lang.code }}
+                  </a>
+                    
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
         </ul>
         <div style="margin-top: 20px">
           <a href="{% url 'summary'%}" type="button" class="position-relative">
@@ -301,7 +328,6 @@ a { text-decoration: none;
             <span class="visually-hidden">mensajes no leídos</span>
           </span>
            </a>
-        
           
           <span class="user name-user" style=margin-left:10px >
           {% if request.user.is_authenticated %}
@@ -321,7 +347,9 @@ a { text-decoration: none;
             <a class="enlace-naranja"  href="{% url "login" %}">Iniciar Sesión</a>
           {% endif %}
         </div>
+      
       </div>
+      
     </div>
     <div class="collapse navbar-collapse sidebarMovil pr-3 py-3" id="menu-db">
       <ul class="list-group d-block d-sm-none">

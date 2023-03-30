@@ -19,11 +19,11 @@ from django.conf import settings
 from django.views import static
 from django.conf.urls.static import static
 import accounts
-
+from .views import *
 from projects.views import ProjectListView
 from django.contrib.auth.decorators import login_required
 from accounts import views as account_views
-
+from django.conf.urls.i18n import i18n_patterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -40,7 +40,14 @@ urlpatterns = [
     path('exportclientspag/', login_required(account_views.export_clients_pag), name='exportclientspag'),
     path('exportorderspag/', login_required(account_views.export_orders_pag), name='exportorderspag'),
     
-] 
+]
+
+
+urlpatterns = [
+    *i18n_patterns(*urlpatterns, prefix_default_language=True),
+    path("set_language/<str:language>", set_language, name="set-language"),
+    ]
+
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

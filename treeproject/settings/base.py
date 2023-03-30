@@ -20,6 +20,7 @@ from pathlib import Path
 import os
 import environ
 import mimetypes
+from django.utils.translation import gettext_lazy as _
 
 mimetypes.add_type("text/css", ".css", True)
 
@@ -83,6 +84,7 @@ REST_FRAMEWORK = {
 }
 
 MIDDLEWARE = [
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.security.SecurityMiddleware',
     "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -111,6 +113,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
+                'django.template.context_processors.i18n',
             ],
         },
     },
@@ -145,11 +148,14 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'es-CO'
-LANGUAGES = [
-  ('es-CO', 'Spanish'),
-  ('en-US', 'English'),
-]
+#LANGUAGE_CODE = 'en'
+LANGUAGE_CODE = 'es-co'
+
+
+LANGUAGES = (
+  ('en', 'English'),
+  ('es-co', 'Español'),
+)
 
 TIME_ZONE = 'America/Bogota'
 
@@ -159,7 +165,9 @@ USE_L10N = True
 
 USE_TZ = True
 
-
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, '..', 'locale'),
+]
 
 
 # Static files (CSS, JavaScript, Images)

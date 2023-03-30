@@ -1,6 +1,8 @@
 {% extends "base.html" %}
-
-{% block title %}Treeconomy{% endblock %}
+{% load i18n %}
+{% block title %} 
+  Treeconomy
+{% endblock %}
 
 {% block content %}
 
@@ -221,10 +223,11 @@ h3 {
 
   <nav class="fondob" aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item active" aria-current="page"><a href="/">Inicio</a> / Proyectos</li>
+      <li class="breadcrumb-item active" aria-current="page">
+        <a href="/">{% trans 'Inicio' %}</a> / {{ name }} 
+       </li>
     </ol>
   </nav>
-  
 
   {% if user|can:'is_admin' %}
   <hr>
