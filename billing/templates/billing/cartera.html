@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 {% block title %} Cartera {% endblock title %}
 
 
@@ -8,7 +9,7 @@
 <link rel="stylesheet"  href="{% static "dashboard/css/argon.css" %}" type="text/css">
 {% include "includes/scripts.html" %}
 
-<h1 style="background-color: #012623; font-family: comfortaa-bold; background-color: #f8f9fe; color: var(--bs-breadcrumb-item-active-color); font-size: var(--bs-breadcrumb-font-size)" >Cartera</h1>
+{% include "navpage.html" with niveles=2 n1="Inicio" n2=title %}
 <div>
 
       <div class="card">

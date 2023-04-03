@@ -33,7 +33,7 @@ class ProjectListView(generic.ListView):
         context = super(ProjectListView, self).get_context_data(*args, **kwargs)
         context["video_que_es"] = get_object_or_404(Video, nombre= "que_es_treeconomy")
         context["video_impacto"] = get_object_or_404(Video, nombre= "impacto")
-        context["name"] = _('Proyectos')
+        context["title"] = _('Proyectos')
         return context
 
 class MapaView(generic.TemplateView):
@@ -69,6 +69,7 @@ class MapaView(generic.TemplateView):
         #folium.TileLayer('openstreetmap').add_to(initialMap)
         #folium.LayerControl().add_to(initialMap)       
         context = {
+            "title": _('Mapa'),
             "map": initialMap._repr_html_(),
             "projects":  projects}
         return context

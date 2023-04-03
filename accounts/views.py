@@ -44,12 +44,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 import io
 from django.core.files.base import ContentFile
 from django.utils.translation import activate, get_language
-
+from django.utils.translation import gettext as _
 
 stripe.api_key = settings.STRIPE_PRIVATE_KEY
 
 def calculadora(request):
-    return render(request,'account/calculadora.html',{'section':'calculadora'})
+    return render(request,'account/calculadora.html',{'section':'calculadora', 'title': _('Calculadora')})
 
 class ContactView(generic.FormView):
     form_class = ContactForm
@@ -239,6 +239,7 @@ def profile(request):
         'utilidad': suma_utilidad_str,
         'co2_capturado': co2_consumption, 
         'elementos': elementos,
+        'title': _("Perfil")
         })
 
 

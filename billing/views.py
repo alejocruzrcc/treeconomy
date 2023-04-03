@@ -44,7 +44,7 @@ import os
 from django.utils.crypto import get_random_string
 from django.core.files.storage import default_storage
 from rolepermissions.decorators import has_role_decorator
-# pdf
+from django.utils.translation import gettext as _
 
 
 
@@ -153,6 +153,7 @@ class CarteraView(generic.TemplateView):
     def get_context_data(self, *args, **kwargs):
         context = super(CarteraView, self).get_context_data(**kwargs)
         orders_list  = Order.objects.filter(user=self.request.user)
+        context['title'] = _('Cartera')
         context["orders_list"] = orders_list
         return context
     

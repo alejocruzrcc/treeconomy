@@ -219,13 +219,8 @@
   }
 </style>
 
-  <nav class="fondob" aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item active" aria-current="page">
-        <a href="/">{% trans 'Inicio' %}</a> / {{ name }} 
-       </li>
-    </ol>
-  </nav>
+  {% include "navpage.html" with niveles=2 n1="Inicio" n2=title %}
+
 
   {% if user|can:'is_admin' %}
   <hr>
@@ -264,8 +259,6 @@
   {% endif %}
   
  
-
-
   {% include "videos.html" with video_que_es=video_que_es video_impacto=video_impacto %}
 
   {% if user|can:'manage_a_project' %}

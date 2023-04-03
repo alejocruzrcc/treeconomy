@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load i18n %}
 {% block title %}Perfil{% endblock %}
 
 {% block content %}
@@ -170,26 +170,29 @@
 }
 </style>
 
-<nav class="fondob"aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item active" aria-current="page">Perfil</li>
-  </ol>
-</nav>
+{% include "navpage.html" with niveles=2 n1="Inicio" n2=title %}
 
 <section>
     <section class="section about-section gray-bg" id="about">
         <div class="container">
           <div class="about-text text-center">
             <div class="row">
-              <div class="col-6">
-                <h3 class="dark-color my-3">{{ user.first_name }} {{ user.last_name }}</h3>
-                <h6 class="theme-color lead">Inversor</h6>
+              <div class="col-12 col-md-12 col-lg-6 ">
+                <h3 class="dark-color mb-1">{{ user.first_name }} {{ user.last_name }}</h3>
+                <h6 class="theme-color lead">{% trans "Inversionista" %}</h6>
               </div>
-              <div class="col-6">
-                <a name="" id="" class="btn btn-primary profile-button my-3" href="{% url 'edit' %}" role="button">Editar perfil</a>
-                <a class="btn btn-primary profile-button my-3" href="password_change" role="button">Cambiar contraseña</a>
-                <a class="btn btn-primary profile-button my-3" href={% url 'manageqr' %} role="button">Sección empresa</a>
-                
+              <div class="col-12 col-md-12 col-lg-6">
+                <div class="row">
+                  <div class="col-12 col-md-4 my-1">
+                    <a name="" id="" class="btn btn-primary profile-button" href="{% url 'edit' %}" role="button">{% trans "Editar perfil" %}</a>
+                  </div>
+                  <div class="col-12 col-md-4 my-1">
+                    <a class="btn btn-primary profile-button" href="password_change" role="button">{% trans "Cambiar contraseña" %}</a>
+                  </div>
+                  <div class="col-12 col-md-4 my-1">
+                    <a class="btn btn-primary profile-button" href={% url 'manageqr' %} role="button">{% trans "Sección empresa" %}</a>   
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -210,13 +213,13 @@
                     <div class="col-6 col-lg-6">
                         <div class="count-data text-center">
                             <h6 class="count h2" data-to="500" data-speed="500">{{total}}</h6>
-                            <p class="m-0px font-w-600">Árboles</p>
+                            <p class="m-0px font-w-600">{% trans "Árboles" %}</p>
                         </div>
                     </div>
                     <div class="col-6 col-lg-6">
                         <div class="count-data text-center">
                             <h6 class="count h2" data-to="150" data-speed="150">{{ utilidad }} USD</h6>
-                            <p class="m-0px font-w-600">Utilidad</p>
+                            <p class="m-0px font-w-600">{% trans "Utilidad" %}</p>
                         </div>
                     </div>
                   </div>
@@ -224,13 +227,13 @@
                     <div class="col-6 col-lg-6">
                         <div class="count-data text-center">
                             <h6 class="count h2" data-to="850" data-speed="850">{{inversion}} USD</h6>
-                            <p class="m-0px font-w-600">Inversión</p>
+                            <p class="m-0px font-w-600">{% trans "Inversión" %}</p>
                         </div>
                     </div>
                     <div class="col-6 col-lg-6">
                         <div class="count-data text-center">
                             <h6 class="count h2" data-to="190" data-speed="190">{{ co2_capturado }} Kg</h6>
-                            <p class="m-0px font-w-600">CO2 capturado</p>
+                            <p class="m-0px font-w-600">{% trans "CO2 capturado" %}</p>
                         </div>
                     </div>
                   </div> 
@@ -243,40 +246,37 @@
             <div class="row about-list">
               <div class="col-md-4">
                 <div class="media">
-                    <label>Nacimiento</label>
+                    <label>{% trans "Nacimiento" %}</label>
                     <p>{{ user.profile.date_of_birth }}</p>
                 </div>
                 <div class="media">
-                    <label>Edad</label>
+                    <label>{% trans "Edad" %}</label>
                     <p>22 años</p>
                 </div>
                 <div class="media">
-                    <label>Residencia</label>
-                    <p>{{ user.profile.country }}, {{ user.profile.state}}, {{ user.profile.city }}</p>
+                  <label>{% trans "Correo electrónico" %}</label>
+                  <p>{{ user.email }}</p>
                 </div>
-                <div class="media">
-                    <label>Dirección</label>
-                    <p>{{ user.profile.adress }}</p>
-                </div>
-                
               </div>
               <div class="col-md-4">
-                  <div class="media">
-                      <label>E-mail</label>
-                      <p>{{ user.email }}</p>
-                  </div>
-                  <div class="media">
-                      <label>Teléfono</label>
-                      <p>{{ user.profile.phone }}</p>
-                  </div>
-                  <div class="media">
-                    <label>Zip code</label>
-                    <p>{{ user.profile.zipcode }}</p>
-                  </div>
-                  <div class="media">
-                    <label>{{ user.profile|verbose_name:"city" }}</label>
-                    <p>{{ user.profile.city }}</p>
-                  </div>
+                  
+                <div class="media">
+                  <label>{% trans "Residencia" %}</label>
+                  <p>{{ user.profile.country }}, {{ user.profile.state}}, {{ user.profile.city }}</p>
+                </div>
+                <div class="media">
+                    <label>{% trans "Dirección>" %}</label>
+                    <p>{{ user.profile.adress }}</p>
+                </div>
+                <div class="media">
+                    <label>{% trans "Teléfono" %}</label>
+                    <p>{{ user.profile.phone }}</p>
+                </div>
+                <div class="media">
+                  <label>{% trans "Zip code" %}</label>
+                  <p>{{ user.profile.zipcode }}</p>
+                </div>
+                  
               </div>
               <div class="col-md-4">
                 <div class="media">
@@ -294,12 +294,12 @@
               </div>
           </div>
         </br>
-          <div class="container"  style="width: 30rem;">
+          <div class="container"  style="max-width: 30rem;">
             <div class="row justify-content-md-center" >
               <div class="col">
                 {% if elementos %}
-                <h2> Tus Suscripciones </h2>
-                <h3>Fecha próximo pago: <span class="badge bg-secondary">{{ user|subsItem_nextpayment }}</span></h4>
+                <h2> {% trans "Suscripciones" %} </h2>
+                <h3>{% trans "Fecha próximo pago" %} : <span class="badge bg-secondary">{{ user|subsItem_nextpayment }}</span></h4>
                 <ul class="list-group">
                   {% for element in elementos %}
                   <li class="list-group-item justify-content-between my-2 py-2"> 
@@ -307,17 +307,17 @@
                       <div class="col-md-8">
                         <div class="ms-2 me-auto">
                           <div class="fw-bold">{{ element.project.name }}</div>
-                          Precio del árbol: {{ element.price.price|float_format }} USD.
-                          <p class="p-0">Pago mensual: {{ element.price.price|multiplicar:element.quantity }} USD.</p>
-                          <p class="p-0">Creada en: {{ element.stripe_id|subsItem_created_at }} </p>
-                          Árboles al mes:
-                          
+                          {% trans "Precio del árbol" %}: {{ element.price.price|float_format }} USD.
+                          <p class="p-0">{% trans "Pago mensual" %}: {{ element.price.price|multiplicar:element.quantity }} USD.</p>
+                          <p class="p-0">{% trans "Creada en" %}: {{ element.stripe_id|subsItem_created_at }} </p>
+                          {% trans "Árboles al mes" %}:
+                
                           <span class="badge bg-primary rounded-pill">{{ element.quantity }}</span>
                         </div>
                       </div>
                       <div class="col-md-4 ">
-                        <a class="btn btn-danger mb-2" href="{% url 'modify-subscription-element' element.price.id %}" class="btn btn-sm btn-outline-secondary" type="button">
-                          Cancelar
+                        <a class="btn btn-danger my-2" href="{% url 'modify-subscription-element' element.price.id %}" class="btn btn-sm btn-outline-secondary" type="button">
+                          {% trans "Cancelar" %}
                         </a>
                         <!--<a class="btn btn-warning mb-2" href="{% url 'modify-subscription-element' element.price.id %}" class="btn btn-sm btn-outline-secondary" type="button">
                           Pausar

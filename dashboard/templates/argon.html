@@ -167,7 +167,7 @@ h5{
 
 </style>
 <div class="btn-flotante">Hoy ganaste {{ utilidad_hoy }} USD</div>
-<h1 style="background-color: #012623; font-family: comfortaa-bold; background-color: #f8f9fe; color: var(--bs-breadcrumb-item-active-color); font-size: var(--bs-breadcrumb-font-size)" >Dashboard</h1>
+{% include "navpage.html" with niveles=2 n1="Inicio" n2=title %}
     {% include "includes/scripts.html" %}
     <!-- Header -->
     <div class="header bg-primary pb-6">

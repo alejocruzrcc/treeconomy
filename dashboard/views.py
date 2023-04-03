@@ -27,6 +27,7 @@ from fastkml.kml import KML
 import kml2geojson
 import random
 from shapely import geometry
+from django.utils.translation import gettext as _
 
 
 
@@ -125,6 +126,7 @@ def invest(request):
     
     #df = json_normalize(datos)
     return render(request, 'invest.html',{
+            'title': _('Tu inversión'),
             'table': "dat",
         })
     
@@ -251,6 +253,7 @@ def dashboard(request):
     progreso_co2 = str(round((float(co2_consumption) *100)/avion, 3))
   
     return render(request, 'argon.html',{
+        'title': _('Tablero'),
         'projects': projects,
         'user_projects': user_projects,
         'datos': datos,
