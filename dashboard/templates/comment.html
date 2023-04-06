@@ -1,0 +1,38 @@
+<div class="container">
+  <h1 class="display-4 text-center mb-5">Comentarios</h1>
+  
+  {% for comment in comments %}
+    <div class="card mb-4">
+      <div class="card-body">
+        <h3 class="card-title">{{ comment.name }}</h3>
+        <p class="card-text">{{ comment.body }}</p>
+        <small class="text-muted">Publicado el {{ comment.created_on }}</small>
+      </div>
+    </div>
+  {% empty %}
+    <p>No hay comentarios.</p>
+  {% endfor %}
+
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h3 class="display-4 text-center mb-5">Agregar comentario</h3>
+      <form method="post" class="mb-5">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="{{ form.name.id_for_label }}">Nombre:</label>
+          {{ form.name }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.email.id_for_label }}">Correo electrónico:</label>
+          {{ form.email }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.body.id_for_label }}">Comentario:</label>
+          {{ form.body }}
+        </div>
+        <button type="submit" class="btn btn-primary btn-block mt-4">Enviar comentario</button>
+      </form>
+    </div>
+  </div>
+
+</div>
