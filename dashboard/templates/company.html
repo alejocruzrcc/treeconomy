@@ -99,9 +99,7 @@
                     </div>
                 
             {% endif %}
-            </div>
-            
-            
+            </div>     
         </div>
 
         <div class="entrada3 my-3">
@@ -215,6 +213,11 @@
     </div>
 </div>
 
+<div class="row">
+    <div class="col-12">
+        {% include "comment.html" with comments=comments form=form %}
+    </div>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 <script>
@@ -243,7 +246,7 @@
         };
 
         updateCount();
-});
+    });
     //Seccion calculo CO2
     var slider = document.getElementById('sliderco2');
     var arboles = document.getElementById('cont_arboles');
@@ -283,7 +286,6 @@
          
 
 </script>
-
 
 <script src="{% static "dashboard/js/argon.js" %}"></script>
 {% endblock %}

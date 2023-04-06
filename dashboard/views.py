@@ -4,7 +4,6 @@ import numpy as np
 import json
 from django.views.generic import TemplateView
 from django.http import JsonResponse
-from django.shortcuts import render
 from projects.models import Project, Order, Rentabilidad
 from accounts.models import ProjectByInvestor, Company
 from accounts.forms import ContactForm
@@ -28,7 +27,9 @@ import kml2geojson
 import random
 from shapely import geometry
 from django.utils.translation import gettext as _
-
+from django.shortcuts import render, redirect, reverse
+from .models import CommentCompany
+from .forms import CommentCompanyForm
 
 
 def generate_random(number, polygon):
@@ -120,7 +121,6 @@ def invest_api(request):
     datos = invest_json(request, usuario)[0]
     return JsonResponse(datos)
 
-
 def invest(request): 
     datos = invest_api(request)
     
@@ -148,7 +148,6 @@ def calculo_co2(request, usuario):
     co2_consumption = "{:.2f}".format(co2_total)
     return co2_consumption    
           
-
 def dashboard(request):
     usuario = request.user
     projects = Project.objects.all()
@@ -476,6 +475,22 @@ def dashboard_company(request, slug):
             )
     ###
     print(user_projects)
+
+    ## Comentarios
+    comments = company.comments.filter(approved_comment=True)
+    form = CommentCompanyForm()
+    if request.method == 'POST':
+        form = CommentCompanyForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.company = company
+            comment.approved_comment = True
+            comment.save()
+            return redirect('dashboard_company', slug=company.slug)
+
+    else:
+        form = CommentCompanyForm()
+        
     return render(request, 'company.html', {
         'projects': projects,
         'user_projects': user_projects,
@@ -503,5 +518,7 @@ def dashboard_company(request, slug):
         "map": initialMap._repr_html_(),
         "vehiculos": vehiculos,
         "form_contactanos": form_contactanos,
+        "comments": comments,
+        "form": form
     })
     
