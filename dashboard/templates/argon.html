@@ -1,5 +1,6 @@
 
 {% extends 'base.html' %}
+{% load i18n %}
 {% load static %}
 {% load get_data_chart %}
 {% block title %} Dashboard {% endblock title %}
@@ -166,8 +167,14 @@ h5{
 }
 
 </style>
-<div class="btn-flotante">Hoy ganaste {{ utilidad_hoy }} USD</div>
+<div class="btn-flotante">
+  {% blocktrans %} 
+    "Hoy ganaste" {{ utilidad_hoy }} USD 
+  {% endblocktrans %}  
+</div>
+
 {% include "navpage.html" with niveles=2 n1="Inicio" n2=title %}
+
     {% include "includes/scripts.html" %}
     <!-- Header -->
     <div class="header bg-primary pb-6">
@@ -181,7 +188,7 @@ h5{
                 <div class="card-body">
                   <div class="row">
                     <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Inversión total</h5>
+                      <h5 class="card-title text-uppercase text-muted mb-0">{% trans "Inversión total" %}</h5>
                       <span class="h2 font-weight-bold mb-0">{{ inversion_total }} USD</span>
                     </div>
                     <div class="col-auto">

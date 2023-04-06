@@ -10,6 +10,7 @@ from django.utils.translation import ugettext_lazy as _
 
 
 
+
 class UserPasswordResetForm(PasswordResetForm):
     def __init__(self, *args, **kwargs):
         super(UserPasswordResetForm, self).__init__(*args, **kwargs)
@@ -79,8 +80,23 @@ class UserRegistrationForm(forms.ModelForm):
             else:
                 pass
         return email
+    
+    def clean_username(self):
+        data = self.cleaned_data['username']
+        errores = []
+        if not data.islower():
+             errores.append("El nombre de usuario debe ser en minusculas")
+            #raise forms.ValidationError()
+        if ' ' in data:
+            errores.append('No se permiten espacios en el nombre de usuario')
+            #raise forms.ValidationError('No se permiten espacios en el nombre de usuario')
+        if errores:
+            raise forms.ValidationError(errores)
+        return data
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        
         for field in ['username', 'first_name', 'last_name', 'company_name', 'email', 'password', 'password2']:
             self.fields[field].widget.attrs['class'] = 'form-control form-control-lg'
 
@@ -113,20 +129,20 @@ class ProfileEditForm(forms.ModelForm):
 
 class ContactForm(forms.Form):
     
-    name = forms.CharField(label="Nombre",  max_length=100, widget=forms.TextInput(attrs={
+    name = forms.CharField(label=_("Nombre"),  max_length=100, widget=forms.TextInput(attrs={
 
-        'placeholder': "Nombre"
+        'placeholder': _("Nombre")
         
     }))    
-    email = forms.EmailField(label="Correo", widget=forms.TextInput(attrs={
-        'placeholder': "Correo"
+    email = forms.EmailField(label=_("Correo elctrónico"), widget=forms.TextInput(attrs={
+        'placeholder': _("Correo elctrónico")
     }))
-    phone = PhoneNumberField(label="Telefono", widget=forms.TextInput(attrs={
-        'placeholder': "Telefono"
+    phone = PhoneNumberField(label=_("Teléfono"), widget=forms.TextInput(attrs={
+        'placeholder': _("Teléfono")
     }))  
-    message = forms.CharField(label="Mensaje", widget=forms.TextInput(attrs={
+    message = forms.CharField(label=_("Mensaje"), widget=forms.TextInput(attrs={
         
-        'placeholder': "Escribenos"
+        'placeholder': _("Escribenos")
     }))
     
 class PasswordChangeForm(SetPasswordForm):

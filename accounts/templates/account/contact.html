@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load crispy_forms_tags %}
 {% block title %}Contacto{% endblock %}
 {% load static %}
@@ -158,7 +159,7 @@
             <div class="col-md-6 col-sm-16">
             <h3>¿Todavía tienes preguntas?</h3>
             <h2>Charlemos</h2>
-            <p>Hola Treeconomy Investor, Nuestro equipo de asesores de inversión siempre está aquí para ayudarlo, háganos saber cualquier pregunta que pueda tener y nos pondremos en contacto en las próximas horas.</p>
+            <p>{% trans "Hola Treeconomy Investor, Nuestro equipo de asesores de inversión siempre está aquí para ayudarlo, háganos saber cualquier pregunta que pueda tener y nos pondremos en contacto en las próximas horas." %}</p>
             <a href="#">+57 321 579 4062</a>
                                 <img src="{% static 'img/image/imgcontac.png' %}" alt="">
             </div>
@@ -168,7 +169,7 @@
                 {{ form|crispy}}
                 <br>
                 <br>
-                <input type="submit" value="Enviar" />
+                <input type="submit" value={{nombre_boton}} />
             </form>
             </div>
             

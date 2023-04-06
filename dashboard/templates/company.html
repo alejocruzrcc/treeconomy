@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% load static %}
 {% load crispy_forms_tags %}
 {% load get_data_chart %}
@@ -38,7 +39,7 @@
                 <div class="imagen__texto d-flex align-items-center justify-content-center">
                     <div>
                         <h1 class="my-2">{{ company.name }}</h1>
-                        <h4>Inversión en Treeconomy</h4>    
+                        <h4>{% trans "Inversión en Treeconomy" %}</h4>    
                         <h2> {{ capital_total }} USD</h2>
                     </div>
                 </div> 
@@ -51,25 +52,25 @@
         <div class="entrada1 my-3">
              
             <div class="titulo">
-                <h2>Árboles sembrados</h2>
+                <h2>{% trans "Árboles sembrados"%}</h2>
             </div>
             
             <div class="entrada__imagen-texto">
                 <h3 class="counter" data-target="{{ arboles_total }}">0</h3>
-                <p class="no-margin">árboles</p>
+                <p class="no-margin">{% trans "árboles"%}</p>
             </div>                             
            
         </div>
         
         <div class="entrada4 my-3" >
             <div class="titulo">
-                <h2>Total de árboles sembrados</h2>
+                <h2>{% trans "Total de árboles sembrados"%}</h2>
             </div>
             <div class="row">
                 
             {% if not resumen_dict|length > 0 %}
                 <div class="col">
-                    <p> Esta compañía aún no invierte en ningún proyecto </p>
+                    <p> {% trans "Esta compañía aún no invierte en ningún proyecto"%}  </p>
                 </div>
                 
             {% else %}
@@ -104,7 +105,7 @@
 
         <div class="entrada3 my-3">
             <div class="titulo">
-                <h2>Equivalencia de CO<sup>2</sup> capturado a nivel vehicular</h2>
+                <h2>{% trans "Equivalencia de CO"%}<sup>2</sup>{% trans "capturado a nivel vehicular"%}</h2>
             </div>
             
             <div class="d-flex justify-content-between flex-wrap">
@@ -138,7 +139,7 @@
 
         <div class="entrada6 my-3">
             <div class="titulo">
-                <h2>Contáctanos</h2>
+                <h2>{% trans "Contáctanos"%}</h2>
             </div>
             
             <div class="p-4">
@@ -158,25 +159,25 @@
             <div class="row mb-3">
                 <div class="col-12 col-md-6 mb-4">
                     <div class="titulo">
-                        <h2>Inversión</h2>
+                        <h2>{% trans "Inversión"%}</h2>
                     </div>
                     
                     {% if not resumen_dict|length > 0 %}
-                        <p> Esta empresa muy pronto comenzará a invertir</p>
+                        <p> {% trans "Esta empresa muy pronto comenzará a invertir"%}</p>
                     {% else %}
                         <canvas id="myChartPieDb" data-chart='{{ resumen_general }}'></canvas>
                     {% endif %}    
                 </div>
                 <div class="col-12 col-md-6 mb-4">
                     <div class="titulo">
-                        <h2>Captura de CO<sup>2</sup></h2>
+                        <h2>{% trans "Captura de CO"%}<sup>2</sup></h2>
                     </div>
                     <div>
-                        <p>Desde que fueron sembrados, sus árboles han capturado:  <strong class="colorletra">{{ co2_consumption }} kg de CO<sup>2</sup></strong></p>
+                        <p>{% trans "Desde que fueron sembrados, sus árboles han capturado:"%}  <strong class="colorletra">{{ co2_consumption }} kg de CO<sup>2</sup></strong></p>
                        
                     </div>
                     <div>
-                        <p>Desde que invertiste, sus árboles han capturado: <strong class="colorletra">{{ co2_desdecompra }} Kg de CO<sup>2</sup></strong></p>
+                        <p>{% trans "Desde que invertiste, sus árboles han capturado:"%} <strong class="colorletra">{{ co2_desdecompra }} Kg de CO<sup>2</sup></strong></p>
                     </div>
                 </div>
             </div>
@@ -184,7 +185,7 @@
             <div class="row">
              <div class="entrada5__cuadro py-2">
                 <div class="titulo2 d-flex justify-content-center">
-                    <h2>Calcula cuánto CO<sup>2</sup> capturan los árboles</h2>
+                    <h2>{% trans "Calcula cuánto CO"%}<sup>2</sup>{% trans "capturan los árboles"%} </h2>
                 </div>
                 
                 
@@ -196,9 +197,9 @@
                     </div>
 
                     <div class="slider col-10">
-                        <h3 class="text-center"><span id="cont_arboles">1</span> Árboles</h3>
+                        <h3 class="text-center"><span id="cont_arboles">1</span>{% trans "Árboles"%} </h3>
                         <input type="range" class="barraslider form-range" min="0" max="1000" step="50" id="sliderco2" value="1">
-                        <h3 class="text-center"><span id="cont_co2">33.3</span> Kg CO<sup>2</sup>capturado</h3>
+                        <h3 class="text-center"><span id="cont_co2">33.3</span> Kg CO<sup>2</sup>{% trans "capturado"%}</h3>
                     </div>
                 </div>
                     

@@ -58,6 +58,11 @@ class ContactView(generic.FormView):
     def get_success_url(self):
         return reverse("contact")
     
+    def get_context_data(self, *args, **kwargs):
+        context = super(ContactView, self).get_context_data(**kwargs)
+        context["nombre_boton"] = _("Enviar")
+        return context
+    
     def form_valid(self, form):
         messages.info(self.request, "Hemos recibido tu mensaje")
         name = form.cleaned_data.get('name')

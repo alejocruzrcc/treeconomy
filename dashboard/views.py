@@ -253,6 +253,7 @@ def dashboard(request):
   
     return render(request, 'argon.html',{
         'title': _('Tablero'),
+        'mensaje': _("Hola, como estas?"),
         'projects': projects,
         'user_projects': user_projects,
         'datos': datos,
@@ -431,23 +432,23 @@ def dashboard_company(request, slug):
     vehiculos = {}
     
     
-    vehiculos["transporte-publico"] = { "nombre": "Transporte Público",
+    vehiculos["transporte-publico"] = { "nombre": _("Transporte Público"),
                           "url": 'dashboard/img/company/img/icono_bus.png',
-                          "mensaje": '¡Bien hecho! Ha plantado 13 árboles, con esto has logrado contrarrestar el CO2 al usar trasporte publico. obtuviste tu primera insignia. ¡Sigue así y ayuda a hacer del mundo un lugar más verde y saludable!"',
+                          "mensaje": _('¡Bien hecho! Ha plantado 13 árboles, con esto has logrado contrarrestar el CO2 al usar transporte publico. obtuviste tu primera insignia. ¡Sigue así y ayuda a hacer del mundo un lugar más verde y saludable!'),
                           }
     
-    vehiculos["automovil"] = { "nombre": "Automovil",
+    vehiculos["automovil"] = { "nombre": _("Automovil"),
                           "url": 'dashboard/img/company/img/auto.png',
-                          "mensaje": "¡Felicidades! con la siembra de 76 arboles lograste capturar el CO2 que genera un carro. Sigue así y pronto tendrás tu segunda insignia.",
+                          "mensaje": _("¡Felicidades! con la siembra de 76 arboles lograste capturar el CO2 que genera un carro. Sigue así y pronto tendrás tu segunda insignia."),
                           }
-    vehiculos["moto"] = { "nombre": "Moto",
+    vehiculos["moto"] = { "nombre": _("Moto"),
                           "url": 'dashboard/img/company/img/icono_moto.png',
-                          "mensaje": "¡Muy bien! Has plantado 10 árboles mas y lograste capturar el equivalente de emisión de CO2 de una Moto, Continúa cuidando de ellos, pronto obtendrás mas insignias.",
+                          "mensaje": _("¡Muy bien! Has plantado 10 árboles mas y lograste capturar el equivalente de emisión de CO2 de una Moto, Continúa cuidando de ellos, pronto obtendrás mas insignias."),
                           }
     
-    vehiculos["avion"] = { "nombre": "Avión",
+    vehiculos["avion"] = { "nombre": _("Avión"),
                           "url": 'dashboard/img/company/img/icono_avion.png',
-                          "mensaje": "¡Eres un verdadero héroe del medio ambiente! Has plantado más de 100 árboles y con eso estas contrarrestado en CO2 que produce un avión. Tu dedicación para combatir el cambio climático y proteger nuestro planeta es inspiradora. ¡Sigue así!",
+                          "mensaje": _("¡Eres un verdadero héroe del medio ambiente! Has plantado más de 100 árboles y con eso estas contrarrestado en CO2 que produce un avión. Tu dedicación para combatir el cambio climático y proteger nuestro planeta es inspiradora. ¡Sigue así!"),
                           }
     ###
     ### Contactanos
