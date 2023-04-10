@@ -5,6 +5,9 @@ from django.contrib.auth.decorators import login_required
 from .views import generatePdf as GeneratePdf
 from .views import *
 from . import views
+from treeproject.views import *
+from django.conf.urls.i18n import i18n_patterns
+
 
 app_name = "billing"
 urlpatterns = [ 
@@ -20,6 +23,6 @@ urlpatterns = [
     path('cancelled/', PaymentCancelledView.as_view(), name='cancelled'),
     path('failed/', PaymentFailedView.as_view(), name='failed'),
     path('history/', OrderHistoryListView.as_view(), name='history'),
-    path('webhook/', views.webhook, name='webhook'),
 ]
-  
+
+

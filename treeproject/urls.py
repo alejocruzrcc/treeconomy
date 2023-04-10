@@ -20,6 +20,7 @@ from django.views import static
 from django.conf.urls.static import static
 import accounts
 from .views import *
+from billing.views import *
 from projects.views import ProjectListView
 from django.contrib.auth.decorators import login_required
 from accounts import views as account_views
@@ -42,11 +43,14 @@ urlpatterns = [
     
 ]
 
-
 urlpatterns = [
     *i18n_patterns(*urlpatterns, prefix_default_language=True),
     path("set_language/<str:language>", set_language, name="set-language"),
     ]
+
+urlpatterns += [
+    path('billing/webhook/', webhook, name='webhook'),
+]
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
