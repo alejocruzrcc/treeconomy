@@ -16,7 +16,7 @@
         <div class="card-header border-0">
           <div class="row align-items-center">
             <div class="col">
-              <h3 class="mb-0">Historial de pagos</h3>
+              <h3 class="mb-0">{% trans "Historial de pagos" %}</h3>
             </div>
             <div class="col text-right">
               <!--
@@ -31,14 +31,14 @@
           <table class="table align-items-center table-flush">
             <thead class="thead-light">
               <tr>
-                <th scope="col">Referencia</th>
-                <th scope="col">Fecha de orden</th>
-                <th scope="col">Árboles</th>
-                <th scope="col">Pago total</th>
-                <th scope="col">Estado</th>
+                <th scope="col">{% trans "Referencia" %}</th>
+                <th scope="col">{% trans "Fecha de orden" %}</th>
+                <th scope="col">{% trans "Árboles" %}</th>
+                <th scope="col">{% trans "Pago total" %}</th>
+                <th scope="col">{% trans "Estado" %}</th>
                 <!--<th scope="col">Tasa de crecimiento</th>-->
-                <th scope="col">Recibo de pago</th>
-                <th scope="col">Contrato</th>
+                <th scope="col">{% trans "Recibo de pago" %}</th>
+                <th scope="col">{% trans "Contrato" %}</th>
               </tr>
             </thead>
             <tbody>
@@ -51,7 +51,7 @@
                   {% if order.ordered_date %}
                     {{ order.ordered_date}}  
                   {% else %}
-                    Sin fecha
+                  {% trans "Sin fecha" %}
                   {% endif %}
                 </td>
                 <td>
@@ -63,9 +63,9 @@
                 </td>
                 <td>
                   {% if order.ordered %}
-                    COMPLETADO
+                  {% trans "COMPLETADO" %}
                   {% else %}
-                    FALLIDO O INCOMPLETO
+                  {% trans "FALLIDO O INCOMPLETO" %}
                   {% endif%}
                 </td>
                 <!--
@@ -82,14 +82,14 @@
                   <a href="{% url 'billing:order-detail' pk=order.id %}" target="_blank"><i class="fa-solid fa-file-arrow-down mr-3"></i></a>
                  
                   {% else %}
-                  No Disponible
+                  {% trans "No Disponible" %}
                   {% endif%}
                 </td>
                 <td>
                   {% if order.contrato %}
                   <a href="{{ order.contrato.url}}" target="_blank"><i class="fa-solid fa-file-arrow-down mr-3"></i></a>
                   {% else %}
-                  No Disponible
+                  {% trans "No Disponible" %}
                   {% endif%}
                 </td>
               </tr>
@@ -99,7 +99,7 @@
         </div>
         {% else %}
         <div class="card-body">
-        <p>Aún no se registran pagos.</p>
+        <p>{% trans "Aún no se registran pagos." %}</p>
         </div>
       {% endif %}
       </div>

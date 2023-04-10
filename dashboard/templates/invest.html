@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% load static %}
 {% block title %} Tu inversión {% endblock title %}
 
@@ -15,13 +16,13 @@
         <div id="header-invest" class="card-header border-0">
           <div class="row align-items-center">
             <div class="col-sm col-md-8">
-              <h2 class="mb-0">Tu inversión</h2>
-              <p>Los datos están presentados desde la fecha de plantación del proyecto, mensualmente, hasta el mes actual.</p>
+              <h2 class="mb-0">{% trans "Tu inversión" %}</h2>
+              <p>{% trans "Los datos están presentados desde la fecha de plantación del proyecto, mensualmente, hasta el mes actual." %}</p>
             </div>
             <div class="col-sm col-md-4">
                 
                 <div role="tablist">
-                    <h5>Proyectos en los que haz invertido:</h5>
+                    <h5>{% trans "Proyectos en los que haz invertido:" %}</h5>
                     <ul class="nav" role="tablist" id="botones-proyectos">
                     </ul>
                 </div>

@@ -169,7 +169,7 @@ h5{
 </style>
 <div class="btn-flotante">
   {% blocktrans %} 
-    "Hoy ganaste" {{ utilidad_hoy }} USD 
+    Hoy ganaste {{ utilidad_hoy }} USD 
   {% endblocktrans %}  
 </div>
 
@@ -199,11 +199,11 @@ h5{
                   </div>
                   <p class="mb-3 text-sm">
                     <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> {{ comp_inversion }}%</span>
-                    <span class="text-nowrap">Desde el mes pasado</span>
+                    <span class="text-nowrap">{% trans "Desde el mes pasado "%}</span>
                   </p>
                   <p>
                     <a class="button-plant" data-bs-toggle="collapse" href="#collapseInversion" role="button" aria-expanded="false" aria-controls="collapseInversion">
-                      Detalle...
+                      {% trans "Detalle..." %} 
                     </a>
                   </p>
                   <div class="collapse" id="collapseInversion">
@@ -224,7 +224,7 @@ h5{
                 <div class="card-body">
                   <div class="row">
                     <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Capital actual</h5>
+                      <h5 class="card-title text-uppercase text-muted mb-0">{% trans "Capital actual" %}</h5>
                       <span class="h2 font-weight-bold mb-0">{{ capital_total }} USD</span>
                     </div>
                     <div class="col-auto">
@@ -235,11 +235,11 @@ h5{
                   </div>
                   <p class="mb-3 text-sm">
                     <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> {{ comp_capital }}%</span>
-                    <span class="text-nowrap">Desde el mes pasado</span>
+                    <span class="text-nowrap">{% trans "Desde el mes pasado"%}</span>
                   </p>
                   <p>
                     <a class="button-plant" data-bs-toggle="collapse" href="#collapseCapital" role="button" aria-expanded="false" aria-controls="collapseCapital">
-                      Detalle...
+                      {% trans "Detalle..."%}
                     </a>
                   </p>
                   <div class="collapse" id="collapseCapital">
@@ -260,8 +260,8 @@ h5{
                 <div class="card-body">
                   <div class="row">
                     <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Tus Árboles</h5>
-                      <span class="h2 font-weight-bold mb-0">Total: {{ arboles_total }}</span>
+                      <h5 class="card-title text-uppercase text-muted mb-0">{% trans "Tus Árboles"%}</h5>
+                      <span class="h2 font-weight-bold mb-0">{% trans "Total:"%} {{ arboles_total }}</span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
@@ -271,11 +271,11 @@ h5{
                   </div>
                   <p class="mb-3 text-sm">
                     <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> {{  comp_arboles }}%</span>
-                    <span class="text-nowrap">Desde el mes pasado</span>
+                    <span class="text-nowrap">{% trans "Desde el mes pasado"%}</span>
                   </p>
                   <p>
                     <a class="button-plant" data-bs-toggle="collapse" href="#collapseArboles" role="button" aria-expanded="false" aria-controls="collapseArboles">
-                      Detalle...
+                      {% trans "Detalle..." %}
                     </a>
                   </p>
                   <div class="collapse" id="collapseArboles">
@@ -298,8 +298,8 @@ h5{
                 <div class="card-body">
                   <div class="row">
                     <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Rentabilidad este mes</h5>
-                      <span class="h2 font-weight-bold mb-0">Promedio: {{ rentabilidad }} %</span>
+                      <h5 class="card-title text-uppercase text-muted mb-0">{% trans "Rentabilidad este mes"%}</h5>
+                      <span class="h2 font-weight-bold mb-0">{% trans "Promedio:"%} {{ rentabilidad }} %</span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
@@ -308,12 +308,12 @@ h5{
                     </div>
                   </div>
                   <p class="mb-3 text-sm">
-                    <span class="text-success mr-2">Sin cambios</span>
-                    <span class="text-nowrap">Desde el mes pasado</span>
+                    <span class="text-success mr-2">{% trans "Sin cambios"%}</span>
+                    <span class="text-nowrap">{% trans "Desde el mes pasado"%}</span>
                   </p>
                   <p>
                     <a class="button-plant" data-bs-toggle="collapse" href="#collapseRenta" role="button" aria-expanded="false" aria-controls="collapseRenta">
-                      Detalle...
+                      {% trans "Detalle..."%}
                     </a>
                   </p>
                   <div class="collapse" id="collapseRenta">
@@ -337,7 +337,7 @@ h5{
             <div class="card-body h-auto">
               <div class="row">
                 <div class="col co2">
-                  <h5>Indica tu progreso a equivalencia de CO2 capturado a nivel vehicular, ¡Sigue avanzando!</h5>
+                  <h5>{% trans "Indica tu progreso a equivalencia de CO2 capturado a nivel vehicular, ¡Sigue avanzando!"%}</h5>
                 </div>
                   <div class="col-auto">
                     <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
@@ -392,21 +392,21 @@ h5{
                       </div>
                   </div>
                   <div class="contenbur">
-                  <div class="burbuja"><span>Con tu inversión puedes lograr reducir lo equivalente en <strong>CO2</strong> que emite un <strong>Camión</strong>, ¡genial!</span></div>
+                  <div class="burbuja"><span>{% trans "Con tu inversión puedes lograr reducir lo equivalente "%}en <strong>CO2</strong>{% trans "que emite un"%}  <strong>{% trans "Camión"%}</strong>, {% trans "¡genial!"%}</span></div>
                 </div>
                 <br>
                     <div class="row">
                       
-                      <div><strong>Desde que fueron sembrados, tus árboles han capturado:</strong>
-                      <strong class="colorletra">{{ co2_consumption }} kg de CO<sup>2</sup></strong></div>
-                      <div><strong>Desde que invertiste, tus árboles han capturado:</strong>
-                      <strong class="colorletra">{{ co2_desdecompra }} Kg de CO<sup>2</sup></strong></div>
+                      <div><strong>{% trans "Desde que fueron sembrados, tus árboles han capturado:"%}</strong>
+                      <strong class="colorletra">{{ co2_consumption }} {% trans "kg de CO" %} <sup>2</sup></strong></div>
+                      <div><strong>{% trans "Desde que invertiste, tus árboles han capturado:"%}</strong>
+                      <strong class="colorletra">{{ co2_desdecompra }} {% trans "Kg de CO"%} <sup>2</sup></strong></div>
                     </div>
                 </div>
                 <div class="rectanguloup">
                   <p class="mt-3 mb-0 text-sm">
                   <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                  <span class="text-nowrap">Desde el mes pasado</span>
+                  <span class="text-nowrap">{% trans "Desde el mes pasado"%}</span>
                   </p>
               </div>
               </div>
@@ -425,8 +425,8 @@ h5{
             <div id="header-sales" class="card-header bg-transparent">
               <div class="row align-items-center">
                 <div class="col">
-                  <h6 class="text-verde text-uppercase ls-1 mb-1">Reporte</h6>
-                  <h5 class="h3 text-verde mb-0">Utilidades</h5>
+                  <h6 class="text-verde text-uppercase ls-1 mb-1">{% trans "Reporte"%}</h6>
+                  <h5 class="h3 text-verde mb-0">{% trans "Utilidades"%}</h5>
                 </div>
                 <div class="col">
                   <ul class="nav nav-pills justify-content-end">
@@ -448,7 +448,7 @@ h5{
                     </div>
                   
                   {% empty %}
-                    <p> Aún no cuentas con inversiones en ninguno de nuestros proyectos </p>
+                    <p> {% trans "Aún no cuentas con inversiones en ninguno de nuestros proyectos " %} </p>
                   {% endfor %}
                 
               </div>
@@ -459,9 +459,9 @@ h5{
         <div class="col-xl-4">
           <div class="card bg-default">
             <div class="card-body">
-              <h5 class="h3 text-verde mb-0">Ingresos totales generados</h5>
-              <strong>Capital: {{ capital_total }} USD</strong>
-              <p>Valor invertido: {{ inversion_total }} USD, Utilidad: {{ utilidad_total }} USD</p>
+              <h5 class="h3 text-verde mb-0">{% trans "Ingresos totales generados"%}</h5>
+              <strong>{% trans "Capital:"%} {{ capital_total }} USD</strong>
+              <p>{% trans "Valor invertido:"%} {{ inversion_total }} USD, {% trans "Utilidad:"%} {{ utilidad_total }} USD</p>
               
               <div class="box-chart-pie mt-5">
                 <canvas id="myChartPieDb" height="0" style="display: block; width: 0px; height: 0px;" width="0" data-chart='{{ resumen_general }}'></canvas>
@@ -478,12 +478,12 @@ h5{
             <div id="header-bars" class="card-header bg-transparent">
               <div class="row align-items-center">
                 <div class="col-4">
-                  <h6 class="text-uppercase text-muted ls-1 mb-1">Compras</h6>
-                  <h5 class="h3 mb-0">Total de árboles</h5>
+                  <h6 class="text-uppercase text-muted ls-1 mb-1">{% trans "Compras"%}</h6>
+                  <h5 class="h3 mb-0">{% trans "Total de árboles"%}</h5>
                 </div>
                 <div class="col-8">
                   <ul class="nav nav-pills justify-content-end">
-                    <li class='nav-item mr-1'><a class='button-plant button-bars' href="#div-bars-gen" data-toggle='tab' role='tab' aria-controls="nav-gen" aria-selected='false'>General</a></li>
+                    <li class='nav-item mr-1'><a class='button-plant button-bars' href="#div-bars-gen" data-toggle='tab' role='tab' aria-controls="nav-gen" aria-selected='false'>{% trans "General" %}</a></li>
                     {% for upro in user_projects %}
                         <li class='nav-item mr-1'><a class='button-plant button-bars' href="#div-bars-{{ upro.slug }}" data-toggle='tab' role='tab' aria-controls="nav-{{ upro.slug}}" aria-selected='false'>{{ upro }}</a></li>
                     {% endfor %} 
@@ -506,7 +506,7 @@ h5{
                     
                   
                   {% empty %}
-                      <p> Aún no cuentas con inversiones en ninguno de nuestros proyectos </p>
+                      <p>{% trans "Aún no cuentas con inversiones en ninguno de nuestros proyectos"%}</p>
                     {% endfor %}
                   
                 </div>
@@ -521,10 +521,10 @@ h5{
               <div class="card-header border-0">
                 <div class="row align-items-center">
                   <div class="col">
-                    <h3 class="mb-0">Disponibilidad de árboles</h3>
+                    <h3 class="mb-0">{% trans "Disponibilidad de árboles"%}</h3>
                   </div>
                   <div class="col text-right">
-                    <a href="/projects" class="btn btn-sm btn-primary">Ver proyectos</a>
+                    <a href="/projects" class="btn btn-sm btn-primary">{% trans "Ver proyectos" %}</a>
                   </div>
                 </div>
               </div>
@@ -533,8 +533,8 @@ h5{
                 <table class="table align-items-center table-flush">
                   <thead class="thead-light">
                     <tr>
-                      <th scope="col">Proyecto</th>
-                      <th scope="col">Árboles disponibles</th>
+                      <th scope="col">{% trans "Proyecto"%}</th>
+                      <th scope="col">{% trans "Árboles disponibles"%}</th>
                       <th scope="col"></th>
                     </tr>
                   </thead>
@@ -568,15 +568,15 @@ h5{
           <div class="row">
             <div class="card">
               <div class="card-body">
-                <h2>Descargue documentos de su interés</h2>
+                <h2>{% trans "Descargue documentos de su interés"%}</h2>
                 <div class="row mb-3">
-                  <a href="{% static "account/css/terminoses.pdf" %}" class="btn border-light boton-documento avt" type="button" target="_blank">Tu contrato 
+                  <a href="{% static "account/css/terminoses.pdf" %}" class="btn border-light boton-documento avt" type="button" target="_blank">{% trans "Tu contrato" %} 
                     <i class="material-icons position-absolute end-0">file_download</i></a>            
-                  <a href="{% static "account/css/terminoses.pdf" %}" class="btn border-light boton-documento avt" type="button" target="_blank">Certificado ICA
+                  <a href="{% static "account/css/terminoses.pdf" %}" class="btn border-light boton-documento avt" type="button" target="_blank">{% trans "Certificado ICA" %}
                     <i class="material-icons position-absolute end-0">file_download</i></a>
-                  <a href="{% static "account/css/contrarrendat.pdf" %}" class="btn border-light boton-documento avt" type="button" target="_blank">Arrendamiento tierras 
+                  <a href="{% static "account/css/contrarrendat.pdf" %}" class="btn border-light boton-documento avt" type="button" target="_blank">{% trans "Arrendamiento tierras " %}
                     <i class="material-icons position-absolute end-0">file_download</i></a>
-                  <a href="{% static "account/css/PEMFTREECONOMYDILUVIO.pdf" %}" class="btn border-light text-star boton-documento avt" type="button" target="_blank">Plan Establec. Forestal
+                  <a href="{% static "account/css/PEMFTREECONOMYDILUVIO.pdf" %}" class="btn border-light text-star boton-documento avt" type="button" target="_blank">{% trans "Plan Establec. Forestal"%}
                     <i class="material-icons position-absolute end-0">file_download</i></a>   
                     
                 </div>  

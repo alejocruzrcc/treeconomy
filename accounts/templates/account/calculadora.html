@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load crispy_forms_tags %}
 {% load static %}
 {% block title %}Calculadora{% endblock %}
@@ -255,16 +256,16 @@ canvas {
 </style>
 {% include "navpage.html" with niveles=2 n1="Inicio" n2=title %}
 
-    <h2>Calculadora de sueños</h2>
-    <p class="text-center">¿Sabes cuánto debes ahorrar para cumplir tus sueños? ¡Compruébalo con nuestra Calculadora de inversiones!</p>
-    <p class="paso-1">Paso 1: Escoge tu tipo de inversión</p>
+    <h2>{% trans "Calculadora de sueños" %}</h2>
+    <p class="text-center">{% trans "¿Sabes cuánto debes ahorrar para cumplir tus sueños? ¡Compruébalo con nuestra Calculadora de inversiones" %}!</p>
+    <p class="paso-1">{% trans "Paso 1: Escoge tu tipo de inversión" %}</p>
 <div class="col-xl-12">
     <ul class="calc-items-month nav">
         <li id="home-item" class="my-4">
-            <a data-toggle="tab" href="#nav-monthly" role="tab" class="active p-2">Inversión mensual</a>
+            <a data-toggle="tab" href="#nav-monthly" role="tab" class="active p-2">{% trans "Inversión mensual" %}</a>
         </li>
         <li id="university-item" class="my-4">
-            <a data-toggle="tab" href="#nav-onetime" role="tab" class="p-2">Única inversión</a>
+            <a data-toggle="tab" href="#nav-onetime" role="tab" class="p-2">{% trans "Única inversión" %}</a>
         </li>
     </ul>
 
@@ -296,7 +297,7 @@ canvas {
 <div class="row">
     <div class="col-xl-12">
         <div class="info-inicial info-2">
-            <p class="paso-1">Paso 2: Calcula tu inversión</p>
+            <p class="paso-1">{% trans "Paso 2: Calcula tu inversión" %}</p>
         </div>
     </div>
 </div>
@@ -310,30 +311,30 @@ canvas {
                             <ul class="formulario-chart">
                                 <li>
 
-                                    <label for="Pricetwo">Inversión mensual:</label><br>
+                                    <label for="Pricetwo">{% trans "Inversión mensual:" %}</label><br>
                                     <input type="text" name="currency-field" id="valor_mensual" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="$100" data-type="currency">
 
                                 </li>
                                 <li>
-                                    <label for="PriceThree">Total meses:</label><br>
+                                    <label for="PriceThree">{% trans "Total meses:" %}</label><br>
                                     <input type="number" id="meses_global" value="120" disabled="true">
                                 </li>
                                 <li style="display: none;">
-                                    <label for="PriceFour">Valor total anual</label><br>
+                                    <label for="PriceFour">{% trans "Valor total anual" %}</label><br>
                                     <input type="text" name="currency-field" id="valor_anual" class="currency-field" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="$9,999.96" data-type="currency">
                                 </li>
                                 <li>
-                                    <label for="PriceFive">Rentabilidad anual: 12% recomendado</label><br>
+                                    <label for="PriceFive">{% trans "Rentabilidad anual: 12% recomendado" %}</label><br>
                                     <input type="number" id="rentabilidad" value="12">
                                 </li>
                                 <li>
                                     <div class="calcular">
-                                        <button type="button" onclick="updateChart()">Calcular</button>
+                                        <button type="button" onclick="updateChart()">{% trans "Calcular" %}</button>
                                     </div>
                                 </li>
                                 <li>
 
-                                    <label for="PriceOne">Capital total generado</label><br>
+                                    <label for="PriceOne">{% trans "Capital total generado" %}</label><br>
                                     <input type="text" name="currency-field" id="valor_global" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="$23,585.50" data-type="currency">
 
                                 </li>
@@ -344,14 +345,14 @@ canvas {
                
                 <div class="row graficas-op">
                     <div class="col-xl-7 col-12">
-                        <h3 class="tittle-graph">Línea de tiempo de rentabilidad</h3>
-                        <p style="font-size: 15px">Nota: La inversion anual tiene un incremento del 3% de la inflación del año anterior</p>
+                        <h3 class="tittle-graph">{% trans "Línea de tiempo de rentabilidad" %}</h3>
+                        <p style="font-size: 15px">{% trans "Nota: La inversion anual tiene un incremento del 3% de la inflación del año anterior" %}</p>
                         <div class="box-chart-bar">
                             <canvas id="myChartBar" class="chartjs-render-monitor" style="display: block;"></canvas>
                         </div>
                     </div>
                     <div class="col-xl-5 col-12">
-                        <h3 class="tittle-graph">Ingresos totales generados</h3>
+                        <h3 class="tittle-graph">{% trans "Ingresos totales generados" %}</h3>
                         <div class="box-chart-pie mt-5">
                             <canvas id="myChartPie" height="0" style="display: block; width: 0px; height: 0px;" width="0"></canvas>
                         </div>
@@ -362,13 +363,13 @@ canvas {
                     
                     <li class="m-3">
                            
-                        <button type="button" class="estilo-2" data-toggle="modal" data-target="#exampleModalCenter">Revisa tu plan de inversión</button>
+                        <button type="button" class="estilo-2" data-toggle="modal" data-target="#exampleModalCenter">{% trans "Revisa tu plan de inversión" %}</button>
                         <!-- Modal month-->
                         <div class="modal" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle">
                             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title">Plan de inversión</h5>
+                                        <h5 class="modal-title">{% trans "Plan de inversión" %}</h5>
                                         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
@@ -379,19 +380,19 @@ canvas {
                                                         
                                                         <ul class="formulario-chart centered-wea">
                                                             <li>
-                                                                <label for="Pricetwo">Valor del aporte</label><br>
+                                                                <label for="Pricetwo">{% trans "Valor del aporte" %}</label><br>
                                                                 <input type="text" name="currency-field" id="valor_mensual_month_pop" disabled="disabled" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="$833.33">
                                                             </li>
                                                             <li>
-                                                                <label for="PriceFive">Número de meses</label><br>
+                                                                <label for="PriceFive">{% trans "Número de meses" %}</label><br>
                                                                 <input type="number" id="rentabilidad_pop" value="12" placeholder="12" disabled="disabled">
                                                             </li>
                                                             <li>
-                                                                <label for="PriceOne">Total ingreso</label><br>
+                                                                <label for="PriceOne">{% trans "Total ingreso" %}</label><br>
                                                                 <input type="text" name="currency-field" id="valor_global_pop" disabled="disabled" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="$100,000.00">
                                                             </li>
                                                             <li>
-                                                                <button type="button" class="Button-descargar" disabled="disabled">Descargar</button>
+                                                                <button type="button" class="Button-descargar" disabled="disabled">{% trans "Descargar" %}</button>
                                                             </li>
                                                         </ul>
                                                     </form>
@@ -399,16 +400,16 @@ canvas {
                                             </div>
                                             
                                             <div class="row">
-                                                <p style="font-size: 15px;">*La inversion anual tiene un incremento del 3% de la inflación del año anterior</p>
+                                                <p style="font-size: 15px;">{% trans "*La inversion anual tiene un incremento del 3% de la inflación del año anterior" %}</p>
                                                 <table class="table">
                                                     <thead class="thead-dark">
                                                         <tr>
                                                             <!-- <th scope="col">Inflación</th> -->
-                                                            <th scope="col">Año</th>
-                                                            <th scope="col">Inversión anual*</th>
-                                                            <th scope="col">Inversión acumulada</th>
-                                                            <th scope="col">Utilidad</th>
-                                                            <th scope="col">Capital final del periodo</th>
+                                                            <th scope="col">{% trans "Año" %}</th>
+                                                            <th scope="col">{% trans "Inversión anual*" %}</th>
+                                                            <th scope="col">{% trans "Inversión acumulada" %}</th>
+                                                            <th scope="col">{% trans "Utilidad" %}</th>
+                                                            <th scope="col">{% trans "Capital final del periodo" %}</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -504,8 +505,8 @@ canvas {
                     
                     <ul>
                         <li class="m-3">
-                            <p class="paso-1">Paso 3: Comienza a plantar tus árboles</p>
-                            <a class="estilo-1" href="{% url 'projects' %}">¡A plantar! </a>
+                            <p class="paso-1">{% trans "Paso 3: Comienza a plantar tus árboles" %}</p>
+                            <a class="estilo-1" href="{% url 'projects' %}">{% trans "¡A plantar!" %} </a>
                         </li>
                     </ul>
                 </div>
@@ -517,28 +518,28 @@ canvas {
                         <form action="">
                             <ul class="formulario-chart">
                                 <li>
-                                    <label for="Pricetwo">Valor a invertir</label><br>
+                                    <label for="Pricetwo">{% trans "Valor a invertir" %}</label><br>
                                     <input type="text" name="currency-field" id="valor_mensual_one" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="$833.33" data-type="currency">
                                 </li>
                                 <li class="hide-this">
-                                    <label for="PriceThree">Total meses:</label><br>
+                                    <label for="PriceThree">{% trans "Total meses:" %}</label><br>
                                     <input type="number" id="meses_global" value="120" disabled="true">
                                 </li>
                                 <li class="hide-this">
-                                    <label for="PriceFour">Valor total anual</label><br>
+                                    <label for="PriceFour">{% trans "Valor total anual" %}</label><br>
                                     <input type="text" name="currency-field" id="valor_anual" class="currency-field" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="$9,999.96" data-type="currency">
                                 </li>
                                 <li>
-                                    <label for="PriceFive">Rentabilidad anual: 12% recomendado</label><br>
+                                    <label for="PriceFive">{% trans "Rentabilidad anual: 12% recomendado" %}</label><br>
                                     <input type="number" id="rentabilidad_one" value="12">
                                 </li>
                                 <li>
                                     <div class="calcular">
-                                        <button type="button" onclick="updateChartOne()">Calcular</button>
+                                        <button type="button" onclick="updateChartOne()">{% trans "Calcular" %}</button>
                                     </div>
                                 </li>
                                 <li>
-                                    <label for="PriceOne">Ingresos totales generados</label><br>
+                                    <label for="PriceOne">{% trans "Ingresos totales generados" %}</label><br>
                                     <input type="text" name="currency-field" id="valor_global_one" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="$2,588.19" data-type="currency">
                                 </li>
                             </ul>
@@ -548,13 +549,13 @@ canvas {
 
                 <div class="row graficas-op">
                     <div class="col-xl-7 col-12">
-                        <h3 class="tittle-graph">Línea de tiempo de rentabilidad</h3>
+                        <h3 class="tittle-graph">{% trans "Línea de tiempo de rentabilidad" %}</h3>
                         <div class="box-chart-bar">
                             <canvas id="myChartBarOne"></canvas>
                         </div>
                     </div>
                     <div class="col-xl-5 col-12">
-                        <h3 class="tittle-graph">Ingresos totales generados</h3>
+                        <h3 class="tittle-graph">{% trans "Ingresos totales generados" %}</h3>
                         <div class="box-chart-pie mt-5">
                             <canvas id="myChartPieOne" height="0" style="display: block; width: 0px; height: 0px;" width="0"></canvas>
                         </div>
@@ -563,13 +564,13 @@ canvas {
 
                 <div class="contenedor-botones-inversion">
                     <li class="m-2">
-                        <button type="button" class="estilo-2" data-toggle="modal" data-target="#exampleModalCenterOne">Revisa tu plan de inversión</button>
+                        <button type="button" class="estilo-2" data-toggle="modal" data-target="#exampleModalCenterOne">{% trans "Revisa tu plan de inversión" %}</button>
                         <!-- one time modal -->
                         <div class="modal" id="exampleModalCenterOne" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title">Plan de inversión</h5>
+                                        <h5 class="modal-title">{% trans "Plan de inversión" %}</h5>
                                         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
@@ -579,19 +580,19 @@ canvas {
                                                     <form action="">
                                                         <ul class="formulario-chart centered-wea">
                                                             <li>
-                                                                <label for="Pricetwo">Valor del aporte</label><br>
+                                                                <label for="Pricetwo">{% trans "Valor del aporte" %}</label><br>
                                                                 <input type="text" name="currency-field" id="valor_mensual_one_pop" disable="disable" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="$833.33">
                                                             </li>
                                                             <li>
-                                                                <label for="PriceFive">Número de meses</label><br>
+                                                                <label for="PriceFive">{% trans "Número de meses" %}</label><br>
                                                                 <input type="number" id="rentabilidad_one_pop" value="12" placeholder="12" disable="disable">
                                                             </li>
                                                             <li>
-                                                                <label for="PriceOne">Total ingreso</label><br>
+                                                                <label for="PriceOne">{% trans "Total ingreso" %}</label><br>
                                                                 <input type="text" name="currency-field" id="valor_global_one_pop" disable="disable" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="$100,000.00">
                                                             </li>
                                                             <li>
-                                                                <button type="button" class="Button-descargar" disabled="disabled" >Descargar</button>
+                                                                <button type="button" class="Button-descargar" disabled="disabled" >{% trans "Descargar" %}</button>
                                                             </li>
                                                         </ul>
                                                     </form>
@@ -601,10 +602,10 @@ canvas {
                                                 <table class="table">
                                                     <thead class="thead-dark">
                                                         <tr>
-                                                            <th scope="col">Año</th>
-                                                            <th scope="col">Inversión</th>
-                                                            <th scope="col">Utilidad</th>
-                                                            <th scope="col">Saldo</th>
+                                                            <th scope="col">{% trans "Año" %}</th>
+                                                            <th scope="col">{% trans "Inversión" %}</th>
+                                                            <th scope="col">{% trans "Utilidad" %}</th>
+                                                            <th scope="col">{% trans "Saldo" %}</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -680,8 +681,8 @@ canvas {
 
                     <ul>
                         <li class="m-2">
-                            <p class="paso-1">Paso 3: Comienza a plantar tus árboles</p>
-                            <a class="estilo-1" href="{% url 'projects' %}">¡A plantar!</a>
+                            <p class="paso-1">{% trans "Paso 3: Comienza a plantar tus árboles" %}</p>
+                            <a class="estilo-1" href="{% url 'projects' %}">{% trans "¡A plantar!" %}</a>
                         </li>
                     </ul>
                 </div>
