@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load crispy_forms_tags %}
 {% block title %}Contacto{% endblock %}
 {% load static %}
@@ -127,22 +128,22 @@
                 <div class="col-xl-4 col-sm-16">
                     <div class="card-contact">
                                                 <img src="{% static 'img/image/celugrand.png' %}" alt="">
-                                            <p>Chatea con uno de nuestros asesores de inversión..</p>
-                        <a href="https://web.whatsapp.com/send?phone=12027666468">Escribenos</a>
+                                            <p>{% trans "Chatea con uno de nuestros asesores de inversión..." %}</p>
+                        <a href="https://web.whatsapp.com/send?phone=12027666468">{% trans "Escribenos" %}</a>
                     </div>
                 </div>
                 <div class="col-xl-4 col-sm-16">
                     <div class="card-contact">
                                                 <img src="{% static 'img/image/parejapregunta.png' %}" alt="">
-                                            <p>La inversión sostenible puede ser abrumadora, vea lo que otros han preguntado antes</p>
-                        <a href="https://treeconomy.com.co/en/faqs/">Mira otros</a>
+                                            <p>{% trans "La inversión sostenible puede ser abrumadora, vea lo que otros han preguntado antes" %}</p>
+                        <a href="https://treeconomy.com.co/en/faqs/">{% trans "Mira otros" %}</a>
                     </div>
                 </div>
                 <div class="col-xl-4 col-sm-16">
                     <div class="card-contact">
                                                 <img src="{% static 'img/image/sentado.png' %}" alt="">
-                                            <p>Algunos de nuestros artículos están hechos para resolver algunas de sus preguntas, ¡échales un vistazo!</p>
-                        <a href="https://treeconomy.com.co/en/news/">Ver noticias</a>
+                                            <p>{% trans "Algunos de nuestros artículos están hechos para resolver algunas de sus preguntas, ¡échales un vistazo!" %}</p>
+                        <a href="https://treeconomy.com.co/en/news/">{% trans "Ver noticias" %}</a>
                     </div>
                 </div>
             </div>
@@ -156,9 +157,9 @@
     <div class="container">
         <div class="row d-flex align-items-center">
             <div class="col-md-6 col-sm-16">
-            <h3>¿Todavía tienes preguntas?</h3>
-            <h2>Charlemos</h2>
-            <p>Hola Treeconomy Investor, Nuestro equipo de asesores de inversión siempre está aquí para ayudarlo, háganos saber cualquier pregunta que pueda tener y nos pondremos en contacto en las próximas horas.</p>
+            <h3>{% trans "¿Todavía tienes preguntas?" %}</h3>
+            <h2>{% trans "Charlemos" %}</h2>
+            <p>{% trans "Hola Treeconomy Investor, Nuestro equipo de asesores de inversión siempre está aquí para ayudarlo, háganos saber cualquier pregunta que pueda tener y nos pondremos en contacto en las próximas horas." %}</p>
             <a href="#">+57 321 579 4062</a>
                                 <img src="{% static 'img/image/imgcontac.png' %}" alt="">
             </div>
@@ -168,7 +169,7 @@
                 {{ form|crispy}}
                 <br>
                 <br>
-                <input type="submit" value="Enviar" />
+                <input type="submit" value={{nombre_boton}} />
             </form>
             </div>
             
