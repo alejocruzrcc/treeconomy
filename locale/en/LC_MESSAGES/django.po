@@ -73,7 +73,7 @@ msgstr "Type here"
 
 #: .\accounts\templates\account\calculadora.html:259
 msgid "Calculadora de sueños"
-msgstr "dream calculator"
+msgstr "Dreams calculator"
 
 #: .\accounts\templates\account\calculadora.html:260
 msgid ""
@@ -570,7 +570,7 @@ msgstr "great!"
 
 #: .\dashboard\templates\argon.html:400
 msgid "Desde que fueron sembrados, tus árboles han capturado:"
-msgstr "Since they were planted, their trees have captured:"
+msgstr "Since they were planted, your trees have captured:"
 
 #: .\dashboard\templates\argon.html:401
 msgid "kg de CO"
@@ -578,7 +578,7 @@ msgstr "kg of CO"
 
 #: .\dashboard\templates\argon.html:402
 msgid "Desde que invertiste, tus árboles han capturado:"
-msgstr "Since they were planted, their trees have captured:"
+msgstr "Since you invested, your trees have captured:"
 
 #: .\dashboard\templates\argon.html:403
 msgid "Kg de CO"
