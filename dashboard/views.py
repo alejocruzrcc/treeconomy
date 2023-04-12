@@ -30,6 +30,8 @@ from django.utils.translation import gettext as _
 from django.shortcuts import render, redirect, reverse
 from .models import CommentCompany
 from .forms import CommentCompanyForm
+from django.views import generic
+from rolepermissions.mixins import HasRoleMixin
 
 
 def generate_random(number, polygon):
@@ -523,3 +525,14 @@ def dashboard_company(request, slug):
         "form": form
     })
     
+
+class CompanyListView(HasRoleMixin, generic.TemplateView):
+    allowed_roles = 'admin'
+    model = Company
+    template_name = 'companies.html'
+
+    
+    def get_context_data(self, *args, **kwargs):
+        context = super(CompanyListView, self).get_context_data(*args, **kwargs) 
+        context['companies'] = Company.objects.all().order_by('-created_at')     
+        return context

@@ -5,7 +5,8 @@ class Admin(AbstractUserRole):
         'is_admin': True,
         'manage_a_project': True,
         'generate_report': True,
-        'view_userlist': True
+        'view_userlist': True,
+        'view_companylist': True
     }
 
 class Inversor(AbstractUserRole):

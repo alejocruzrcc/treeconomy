@@ -215,7 +215,7 @@
     .opsadmin { grid-template-columns: repeat(2, 1fr); }
   }
   @media (min-width: 900px){
-    .opsadmin { grid-template-columns: repeat(3, 1fr); }
+    .opsadmin { grid-template-columns: repeat(4, 1fr); }
   }
 </style>
 
@@ -252,6 +252,11 @@
     {% if user|can:'view_userlist' %}
     <div class="opadmin">
       <a class="button-plant my-3" href="/account/users" role="button">{% trans "Usuarios" %}</a>
+    </div>
+    {% endif %}
+    {% if user|can:'view_companylist' %}
+    <div class="opadmin">
+      <a class="button-plant my-3" href="/dashboard/companies" role="button">{% trans "Empresas" %}</a>
     </div>
     {% endif %}
   </div>

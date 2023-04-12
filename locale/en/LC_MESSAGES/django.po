@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-10 17:17-0500\n"
+"POT-Creation-Date: 2023-04-12 13:24-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,64 +18,64 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\accounts\forms.py:55
+#: accounts/forms.py:55
 msgid "Nombre de usuario"
 msgstr "Username"
 
-#: .\accounts\forms.py:56
+#: accounts/forms.py:56
 msgid "Nombres"
 msgstr "Full name"
 
-#: .\accounts\forms.py:57
+#: accounts/forms.py:57
 msgid "Apellidos"
 msgstr "Last Name"
 
-#: .\accounts\forms.py:58 .\accounts\templates\account\profile.html:257
+#: accounts/forms.py:58 accounts/templates/account/profile.html:257
 msgid "Correo electrónico"
 msgstr "E-mail"
 
-#: .\accounts\forms.py:59
+#: accounts/forms.py:59
 msgid "Contraseña"
 msgstr "Password"
 
-#: .\accounts\forms.py:60
+#: accounts/forms.py:60
 msgid "Confirma contraseña"
 msgstr "Confirm password"
 
-#: .\accounts\forms.py:61
+#: accounts/forms.py:61
 msgid "Represento una empresa"
 msgstr "Represent a company"
 
-#: .\accounts\forms.py:62
+#: accounts/forms.py:62
 msgid "Nombre de la Empresa"
 msgstr "Company name"
 
-#: .\accounts\forms.py:132 .\accounts\forms.py:134
+#: accounts/forms.py:132 accounts/forms.py:134
 msgid "Nombre"
 msgstr "Full name"
 
-#: .\accounts\forms.py:137 .\accounts\forms.py:138
+#: accounts/forms.py:137 accounts/forms.py:138
 msgid "Correo elctrónico"
 msgstr "E-mail"
 
-#: .\accounts\forms.py:140 .\accounts\forms.py:141
-#: .\accounts\templates\account\profile.html:272
+#: accounts/forms.py:140 accounts/forms.py:141
+#: accounts/templates/account/profile.html:272
 msgid "Teléfono"
 msgstr "Phone"
 
-#: .\accounts\forms.py:143
+#: accounts/forms.py:143
 msgid "Mensaje"
 msgstr "Message"
 
-#: .\accounts\forms.py:145 .\accounts\templates\account\contact.html:132
+#: accounts/forms.py:145 accounts/templates/account/contact.html:132
 msgid "Escribenos"
 msgstr "Type here"
 
-#: .\accounts\templates\account\calculadora.html:259
+#: accounts/templates/account/calculadora.html:259
 msgid "Calculadora de sueños"
 msgstr "Dreams calculator"
 
-#: .\accounts\templates\account\calculadora.html:260
+#: accounts/templates/account/calculadora.html:260
 msgid ""
 "¿Sabes cuánto debes ahorrar para cumplir tus sueños? ¡Compruébalo con "
 "nuestra Calculadora de inversiones"
@@ -83,58 +83,58 @@ msgstr ""
 "Do you know how much you should save to fulfill your dreams? Check it out "
 "withour Investment Calculator!"
 
-#: .\accounts\templates\account\calculadora.html:261
+#: accounts/templates/account/calculadora.html:261
 msgid "Paso 1: Escoge tu tipo de inversión"
 msgstr "Step 1: Choose your type of investment"
 
-#: .\accounts\templates\account\calculadora.html:265
+#: accounts/templates/account/calculadora.html:265
 msgid "Inversión mensual"
 msgstr "Monthly inevestment"
 
-#: .\accounts\templates\account\calculadora.html:268
+#: accounts/templates/account/calculadora.html:268
 msgid "Única inversión"
 msgstr "Single investment"
 
-#: .\accounts\templates\account\calculadora.html:300
+#: accounts/templates/account/calculadora.html:300
 msgid "Paso 2: Calcula tu inversión"
 msgstr "Step 2: Calculate your investment"
 
-#: .\accounts\templates\account\calculadora.html:314
+#: accounts/templates/account/calculadora.html:314
 msgid "Inversión mensual:"
 msgstr "Monthly investment:"
 
-#: .\accounts\templates\account\calculadora.html:319
-#: .\accounts\templates\account\calculadora.html:525
+#: accounts/templates/account/calculadora.html:319
+#: accounts/templates/account/calculadora.html:525
 msgid "Total meses:"
 msgstr "Total months:"
 
-#: .\accounts\templates\account\calculadora.html:323
-#: .\accounts\templates\account\calculadora.html:529
+#: accounts/templates/account/calculadora.html:323
+#: accounts/templates/account/calculadora.html:529
 msgid "Valor total anual"
 msgstr "Total annual value"
 
-#: .\accounts\templates\account\calculadora.html:327
-#: .\accounts\templates\account\calculadora.html:533
+#: accounts/templates/account/calculadora.html:327
+#: accounts/templates/account/calculadora.html:533
 #, fuzzy, python-format
 #| msgid "Rentabilidad anual: 12%% recomendado"
 msgid "Rentabilidad anual: 12%% recomendado"
 msgstr "Annual profitability: 12% recommended"
 
-#: .\accounts\templates\account\calculadora.html:332
-#: .\accounts\templates\account\calculadora.html:538
+#: accounts/templates/account/calculadora.html:332
+#: accounts/templates/account/calculadora.html:538
 msgid "Calcular"
 msgstr "Calculate"
 
-#: .\accounts\templates\account\calculadora.html:337
+#: accounts/templates/account/calculadora.html:337
 msgid "Capital total generado"
 msgstr "Total capital generated"
 
-#: .\accounts\templates\account\calculadora.html:348
-#: .\accounts\templates\account\calculadora.html:552
+#: accounts/templates/account/calculadora.html:348
+#: accounts/templates/account/calculadora.html:552
 msgid "Línea de tiempo de rentabilidad"
 msgstr "Profitability timeline"
 
-#: .\accounts\templates\account\calculadora.html:349
+#: accounts/templates/account/calculadora.html:349
 #, python-format
 msgid ""
 "Nota: La inversion anual tiene un incremento del 3%% de la inflación del año "
@@ -143,44 +143,44 @@ msgstr ""
 "Note: Annual investment has an increase of 3%% of the the previous year's "
 "inflation."
 
-#: .\accounts\templates\account\calculadora.html:355
-#: .\accounts\templates\account\calculadora.html:542
-#: .\accounts\templates\account\calculadora.html:558
-#: .\dashboard\templates\argon.html:462
+#: accounts/templates/account/calculadora.html:355
+#: accounts/templates/account/calculadora.html:542
+#: accounts/templates/account/calculadora.html:558
+#: dashboard/templates/argon.html:462
 msgid "Ingresos totales generados"
 msgstr "Total revenues generated"
 
-#: .\accounts\templates\account\calculadora.html:366
-#: .\accounts\templates\account\calculadora.html:567
+#: accounts/templates/account/calculadora.html:366
+#: accounts/templates/account/calculadora.html:567
 msgid "Revisa tu plan de inversión"
 msgstr "Review your investment plan"
 
-#: .\accounts\templates\account\calculadora.html:372
-#: .\accounts\templates\account\calculadora.html:573
+#: accounts/templates/account/calculadora.html:372
+#: accounts/templates/account/calculadora.html:573
 msgid "Plan de inversión"
 msgstr "Investment plan"
 
-#: .\accounts\templates\account\calculadora.html:383
-#: .\accounts\templates\account\calculadora.html:583
+#: accounts/templates/account/calculadora.html:383
+#: accounts/templates/account/calculadora.html:583
 msgid "Valor del aporte"
 msgstr "Contribution value"
 
-#: .\accounts\templates\account\calculadora.html:387
-#: .\accounts\templates\account\calculadora.html:587
+#: accounts/templates/account/calculadora.html:387
+#: accounts/templates/account/calculadora.html:587
 msgid "Número de meses"
 msgstr "Number of months"
 
-#: .\accounts\templates\account\calculadora.html:391
-#: .\accounts\templates\account\calculadora.html:591
+#: accounts/templates/account/calculadora.html:391
+#: accounts/templates/account/calculadora.html:591
 msgid "Total ingreso"
 msgstr "Total revenues"
 
-#: .\accounts\templates\account\calculadora.html:395
-#: .\accounts\templates\account\calculadora.html:595
+#: accounts/templates/account/calculadora.html:395
+#: accounts/templates/account/calculadora.html:595
 msgid "Descargar"
 msgstr "Download"
 
-#: .\accounts\templates\account\calculadora.html:403
+#: accounts/templates/account/calculadora.html:403
 #, python-format
 msgid ""
 "*La inversion anual tiene un incremento del 3%% de la inflación del año "
@@ -188,90 +188,89 @@ msgid ""
 msgstr ""
 "*Annual investment has an increase of 3%% of the previous year'sinflation."
 
-#: .\accounts\templates\account\calculadora.html:408
-#: .\accounts\templates\account\calculadora.html:605
+#: accounts/templates/account/calculadora.html:408
+#: accounts/templates/account/calculadora.html:605
 msgid "Año"
 msgstr "Year"
 
-#: .\accounts\templates\account\calculadora.html:409
+#: accounts/templates/account/calculadora.html:409
 msgid "Inversión anual*"
 msgstr "Annual investment*"
 
-#: .\accounts\templates\account\calculadora.html:410
+#: accounts/templates/account/calculadora.html:410
 msgid "Inversión acumulada"
 msgstr "Accumulated investment"
 
-#: .\accounts\templates\account\calculadora.html:411
-#: .\accounts\templates\account\calculadora.html:607
-#: .\accounts\templates\account\profile.html:222
+#: accounts/templates/account/calculadora.html:411
+#: accounts/templates/account/calculadora.html:607
+#: accounts/templates/account/profile.html:222
 msgid "Utilidad"
 msgstr "Utility"
 
-#: .\accounts\templates\account\calculadora.html:412
+#: accounts/templates/account/calculadora.html:412
 msgid "Capital final del periodo"
 msgstr "Capital at the end of the period"
 
-#: .\accounts\templates\account\calculadora.html:508
-#: .\accounts\templates\account\calculadora.html:684
+#: accounts/templates/account/calculadora.html:508
+#: accounts/templates/account/calculadora.html:684
 msgid "Paso 3: Comienza a plantar tus árboles"
 msgstr "Step 3: Start planting your trees"
 
-#: .\accounts\templates\account\calculadora.html:509
-#: .\accounts\templates\account\calculadora.html:685
+#: accounts/templates/account/calculadora.html:509
+#: accounts/templates/account/calculadora.html:685
 msgid "¡A plantar!"
 msgstr "Let's plant!"
 
-#: .\accounts\templates\account\calculadora.html:521
+#: accounts/templates/account/calculadora.html:521
 msgid "Valor a invertir"
 msgstr "Value to be invested:"
 
-#: .\accounts\templates\account\calculadora.html:606
-#: .\accounts\templates\account\profile.html:230
-#: .\dashboard\templates\company.html:164
+#: accounts/templates/account/calculadora.html:606
+#: accounts/templates/account/profile.html:230
+#: dashboard/templates/company.html:162
 msgid "Inversión"
 msgstr "Investment"
 
-#: .\accounts\templates\account\calculadora.html:608
+#: accounts/templates/account/calculadora.html:608
 msgid "Saldo"
 msgstr "Balance"
 
-#: .\accounts\templates\account\contact.html:131
+#: accounts/templates/account/contact.html:131
 msgid "Chatea con uno de nuestros asesores de inversión..."
 msgstr "Chat with one of our investment advisors..."
 
-#: .\accounts\templates\account\contact.html:138
+#: accounts/templates/account/contact.html:138
 msgid ""
 "La inversión sostenible puede ser abrumadora, vea lo que otros han "
 "preguntado antes"
 msgstr ""
-"Sustainable investing can be overwhelming, see what others "
-"have asked before."
+"Sustainable investing can be overwhelming, see what others have asked before."
 
-#: .\accounts\templates\account\contact.html:139
+#: accounts/templates/account/contact.html:139
 msgid "Mira otros"
 msgstr "See others"
 
-#: .\accounts\templates\account\contact.html:145
+#: accounts/templates/account/contact.html:145
 msgid ""
 "Algunos de nuestros artículos están hechos para resolver algunas de sus "
 "preguntas, ¡échales un vistazo!"
 msgstr ""
-"Some of our articles are made to solve some of your "
-"questions, check them out!"
+"Some of our articles are made to solve some of your questions, check them "
+"out!"
 
-#: .\accounts\templates\account\contact.html:146
+#: accounts/templates/account/contact.html:146
 msgid "Ver noticias"
 msgstr "See news"
 
-#: .\accounts\templates\account\contact.html:160
+#: accounts/templates/account/contact.html:160
 msgid "¿Todavía tienes preguntas?"
 msgstr "Still have questions?"
 
-#: .\accounts\templates\account\contact.html:161
+#: accounts/templates/account/contact.html:161
 msgid "Charlemos"
 msgstr "Let's talk"
 
-#: .\accounts\templates\account\contact.html:162
+#: accounts/templates/account/contact.html:162
 msgid ""
 "Hola Treeconomy Investor, Nuestro equipo de asesores de inversión siempre "
 "está aquí para ayudarlo, háganos saber cualquier pregunta que pueda tener y "
@@ -281,217 +280,217 @@ msgstr ""
 "help you, let us know any questions you may haveand we will be in contact in "
 "the next few hours."
 
-#: .\accounts\templates\account\profile.html:182
+#: accounts/templates/account/profile.html:182
 msgid "Inversionista"
 msgstr "Investor"
 
-#: .\accounts\templates\account\profile.html:187
+#: accounts/templates/account/profile.html:187
 msgid "Editar perfil"
 msgstr "Edit profile"
 
-#: .\accounts\templates\account\profile.html:190
+#: accounts/templates/account/profile.html:190
 msgid "Cambiar contraseña"
 msgstr "Change password"
 
-#: .\accounts\templates\account\profile.html:193
+#: accounts/templates/account/profile.html:193
 msgid "Sección empresa"
 msgstr "Company section"
 
-#: .\accounts\templates\account\profile.html:216
-#: .\billing\templates\billing\cartera.html:36
-#: .\dashboard\templates\company.html:202
+#: accounts/templates/account/profile.html:216
+#: billing/templates/billing/cartera.html:36
+#: dashboard/templates/company.html:200
 msgid "Árboles"
 msgstr "Trees"
 
-#: .\accounts\templates\account\profile.html:236
+#: accounts/templates/account/profile.html:236
 msgid "CO2 capturado"
 msgstr "CO2 Captured"
 
-#: .\accounts\templates\account\profile.html:249
+#: accounts/templates/account/profile.html:249
 msgid "Nacimiento"
 msgstr "Date of birth"
 
-#: .\accounts\templates\account\profile.html:253
+#: accounts/templates/account/profile.html:253
 msgid "Edad"
 msgstr "Age"
 
-#: .\accounts\templates\account\profile.html:264
+#: accounts/templates/account/profile.html:264
 msgid "Residencia"
 msgstr "Residence"
 
-#: .\accounts\templates\account\profile.html:268
+#: accounts/templates/account/profile.html:268
 msgid "Dirección>"
 msgstr "Address"
 
-#: .\accounts\templates\account\profile.html:276
+#: accounts/templates/account/profile.html:276
 msgid "Zip code"
 msgstr "Zip code"
 
-#: .\accounts\templates\account\profile.html:301
+#: accounts/templates/account/profile.html:301
 msgid "Suscripciones"
 msgstr "Subscriptions"
 
-#: .\accounts\templates\account\profile.html:302
+#: accounts/templates/account/profile.html:302
 msgid "Fecha próximo pago"
 msgstr "Date next payment"
 
-#: .\accounts\templates\account\profile.html:310
+#: accounts/templates/account/profile.html:310
 msgid "Precio del árbol"
 msgstr "Tree price"
 
-#: .\accounts\templates\account\profile.html:311
+#: accounts/templates/account/profile.html:311
 msgid "Pago mensual"
 msgstr "Monthly payment"
 
-#: .\accounts\templates\account\profile.html:312
+#: accounts/templates/account/profile.html:312
 msgid "Creada en"
 msgstr "Created at"
 
-#: .\accounts\templates\account\profile.html:313
+#: accounts/templates/account/profile.html:313
 msgid "Árboles al mes"
 msgstr "Trees per month"
 
-#: .\accounts\templates\account\profile.html:320
+#: accounts/templates/account/profile.html:320
 msgid "Cancelar"
 msgstr "Cancel"
 
-#: .\accounts\templates\account\register.html:17
-#: .\accounts\templates\registration\login.html:23
+#: accounts/templates/account/register.html:17
+#: accounts/templates/registration/login.html:23
 msgid "Plataforma de inversión sostenible"
 msgstr "Sustainable investment platform"
 
-#: .\accounts\templates\account\register.html:18
-#: .\accounts\templates\registration\login.html:26
+#: accounts/templates/account/register.html:18
+#: accounts/templates/registration/login.html:26
 msgid "El mundo de la reforestación en tus manos"
 msgstr "The world of reforestation in your hands"
 
-#: .\accounts\templates\account\register.html:19
-#: .\accounts\templates\registration\login.html:28
+#: accounts/templates/account/register.html:19
+#: accounts/templates/registration/login.html:28
 msgid "y mucho más rentable"
 msgstr "and much more profitable"
 
-#: .\accounts\templates\account\register.html:32
+#: accounts/templates/account/register.html:32
 msgid "Crea tu cuenta"
 msgstr "Create an account"
 
-#: .\accounts\templates\account\register.html:55
+#: accounts/templates/account/register.html:55
 msgid "Aceptar"
 msgstr "Accept"
 
-#: .\accounts\templates\account\register.html:55
+#: accounts/templates/account/register.html:55
 msgid "Términos y condiciones"
 msgstr "Terms & Conditions"
 
-#: .\accounts\templates\account\register.html:58
+#: accounts/templates/account/register.html:58
 msgid "Debes aceptar términos y condiciones para el registro."
 msgstr "You must agree to terms and conditions for registration."
 
-#: .\accounts\templates\account\register.html:64
+#: accounts/templates/account/register.html:64
 msgid "Registrar"
 msgstr "Register"
 
-#: .\accounts\templates\account\register.html:67
+#: accounts/templates/account/register.html:67
 msgid "¿Ya tienes una cuenta?"
 msgstr "Do you already have an account?"
 
-#: .\accounts\templates\account\register.html:67
+#: accounts/templates/account/register.html:67
 msgid "Inicia sesión"
 msgstr "Login"
 
-#: .\accounts\templates\registration\login.html:3
+#: accounts/templates/registration/login.html:3
 msgid "Inicio sesión"
 msgstr "Login"
 
-#: .\accounts\templates\registration\login.html:42
+#: accounts/templates/registration/login.html:42
 msgid "Tu cuenta"
 msgstr "Your account"
 
-#: .\accounts\templates\registration\login.html:57
+#: accounts/templates/registration/login.html:57
 msgid "Utiliza el siguiente formulario para iniciar sesión."
 msgstr "Use the following form to login"
 
-#: .\accounts\templates\registration\login.html:80
+#: accounts/templates/registration/login.html:80
 msgid "Recordar contraseña?"
 msgstr "Remember password"
 
-#: .\accounts\templates\registration\login.html:81
+#: accounts/templates/registration/login.html:81
 msgid "Registrarse aquí"
 msgstr "Register now"
 
-#: .\accounts\templates\registration\login.html:84
+#: accounts/templates/registration/login.html:84
 msgid "Iniciar Sesión"
 msgstr "Login"
 
-#: .\accounts\views.py:52 .\templates\base.html:271 .\templates\base.html:373
+#: accounts/views.py:52 templates/base.html:271 templates/base.html:373
 msgid "Calculadora"
 msgstr "Calculator"
 
-#: .\accounts\views.py:63
+#: accounts/views.py:63
 msgid "Enviar"
 msgstr "Send"
 
-#: .\accounts\views.py:247 .\templates\base.html:356 .\templates\base.html:371
+#: accounts/views.py:247 templates/base.html:356 templates/base.html:371
 msgid "Perfil"
 msgstr "Profile"
 
-#: .\billing\templates\billing\cartera.html:19
+#: billing/templates/billing/cartera.html:19
 msgid "Historial de pagos"
 msgstr "Payment history"
 
-#: .\billing\templates\billing\cartera.html:34
+#: billing/templates/billing/cartera.html:34
 msgid "Referencia"
 msgstr "Reference"
 
-#: .\billing\templates\billing\cartera.html:35
+#: billing/templates/billing/cartera.html:35
 msgid "Fecha de orden"
 msgstr "Order date"
 
-#: .\billing\templates\billing\cartera.html:37
+#: billing/templates/billing/cartera.html:37
 msgid "Pago total"
 msgstr "Payment in full"
 
-#: .\billing\templates\billing\cartera.html:38
+#: billing/templates/billing/cartera.html:38
 #, fuzzy
 #| msgid "Cortado"
 msgid "Estado"
 msgstr "State"
 
-#: .\billing\templates\billing\cartera.html:40
+#: billing/templates/billing/cartera.html:40
 msgid "Recibo de pago"
 msgstr "Receipt of payment"
 
-#: .\billing\templates\billing\cartera.html:41
+#: billing/templates/billing/cartera.html:41
 msgid "Contrato"
 msgstr "Contract"
 
-#: .\billing\templates\billing\cartera.html:54
+#: billing/templates/billing/cartera.html:54
 #, fuzzy
 #| msgid "Sin cambios"
 msgid "Sin fecha"
 msgstr "No date"
 
-#: .\billing\templates\billing\cartera.html:66
+#: billing/templates/billing/cartera.html:66
 msgid "COMPLETADO"
 msgstr "COMPLETED"
 
-#: .\billing\templates\billing\cartera.html:68
+#: billing/templates/billing/cartera.html:68
 msgid "FALLIDO O INCOMPLETO"
 msgstr "FAILED OR INCOMPLETE"
 
-#: .\billing\templates\billing\cartera.html:85
-#: .\billing\templates\billing\cartera.html:92
+#: billing/templates/billing/cartera.html:85
+#: billing/templates/billing/cartera.html:92
 msgid "No Disponible"
 msgstr "Not Available"
 
-#: .\billing\templates\billing\cartera.html:102
+#: billing/templates/billing/cartera.html:102
 msgid "Aún no se registran pagos."
 msgstr "No payments have been recorded yet."
 
-#: .\billing\views.py:156 .\templates\base.html:358 .\templates\base.html:377
+#: billing/views.py:156 templates/base.html:358 templates/base.html:377
 msgid "Cartera"
 msgstr "Portfolio"
 
-#: .\dashboard\templates\argon.html:171
+#: dashboard/templates/argon.html:171
 #, python-format
 msgid ""
 " \n"
@@ -502,49 +501,49 @@ msgstr ""
 "    Today you earned  %(utilidad_hoy)s USD \n"
 "  "
 
-#: .\dashboard\templates\argon.html:191
+#: dashboard/templates/argon.html:191
 msgid "Inversión total"
 msgstr "Inevestment"
 
-#: .\dashboard\templates\argon.html:202
+#: dashboard/templates/argon.html:202
 msgid "Desde el mes pasado "
 msgstr "Since last month"
 
-#: .\dashboard\templates\argon.html:206 .\dashboard\templates\argon.html:242
-#: .\dashboard\templates\argon.html:278 .\dashboard\templates\argon.html:316
+#: dashboard/templates/argon.html:206 dashboard/templates/argon.html:242
+#: dashboard/templates/argon.html:278 dashboard/templates/argon.html:316
 msgid "Detalle..."
 msgstr "Detail..."
 
-#: .\dashboard\templates\argon.html:227
+#: dashboard/templates/argon.html:227
 msgid "Capital actual"
 msgstr "Current capital"
 
-#: .\dashboard\templates\argon.html:238 .\dashboard\templates\argon.html:274
-#: .\dashboard\templates\argon.html:312 .\dashboard\templates\argon.html:409
+#: dashboard/templates/argon.html:238 dashboard/templates/argon.html:274
+#: dashboard/templates/argon.html:312 dashboard/templates/argon.html:409
 msgid "Desde el mes pasado"
 msgstr "Since last month"
 
-#: .\dashboard\templates\argon.html:263
+#: dashboard/templates/argon.html:263
 msgid "Tus Árboles"
 msgstr "Trees"
 
-#: .\dashboard\templates\argon.html:264
+#: dashboard/templates/argon.html:264
 msgid "Total:"
 msgstr "Total:"
 
-#: .\dashboard\templates\argon.html:301
+#: dashboard/templates/argon.html:301
 msgid "Rentabilidad este mes"
 msgstr "Profitability this month"
 
-#: .\dashboard\templates\argon.html:302
+#: dashboard/templates/argon.html:302
 msgid "Promedio:"
 msgstr "Average:"
 
-#: .\dashboard\templates\argon.html:311
+#: dashboard/templates/argon.html:311
 msgid "Sin cambios"
 msgstr "No change"
 
-#: .\dashboard\templates\argon.html:340
+#: dashboard/templates/argon.html:340
 msgid ""
 "Indica tu progreso a equivalencia de CO2 capturado a nivel vehicular, ¡Sigue "
 "avanzando!"
@@ -552,180 +551,180 @@ msgstr ""
 "Indicate your progress towards CO2 equivalence captured at the vehicle "
 "level, keep moving forward!"
 
-#: .\dashboard\templates\argon.html:395
+#: dashboard/templates/argon.html:395
 msgid "Con tu inversión puedes lograr reducir lo equivalente "
 msgstr "With your investment you can reduce the equivalent"
 
-#: .\dashboard\templates\argon.html:395
+#: dashboard/templates/argon.html:395
 msgid "que emite un"
 msgstr "which issues a"
 
-#: .\dashboard\templates\argon.html:395
+#: dashboard/templates/argon.html:395
 msgid "Camión"
 msgstr "Truck"
 
-#: .\dashboard\templates\argon.html:395
+#: dashboard/templates/argon.html:395
 msgid "¡genial!"
 msgstr "great!"
 
-#: .\dashboard\templates\argon.html:400
+#: dashboard/templates/argon.html:400
 msgid "Desde que fueron sembrados, tus árboles han capturado:"
 msgstr "Since they were planted, your trees have captured:"
 
-#: .\dashboard\templates\argon.html:401
+#: dashboard/templates/argon.html:401
 msgid "kg de CO"
 msgstr "kg of CO"
 
-#: .\dashboard\templates\argon.html:402
+#: dashboard/templates/argon.html:402
 msgid "Desde que invertiste, tus árboles han capturado:"
 msgstr "Since you invested, your trees have captured:"
 
-#: .\dashboard\templates\argon.html:403
+#: dashboard/templates/argon.html:403
 msgid "Kg de CO"
 msgstr "kg of CO"
 
-#: .\dashboard\templates\argon.html:428
+#: dashboard/templates/argon.html:428
 msgid "Reporte"
 msgstr "Report"
 
-#: .\dashboard\templates\argon.html:429
+#: dashboard/templates/argon.html:429
 msgid "Utilidades"
 msgstr "Utility"
 
-#: .\dashboard\templates\argon.html:451
+#: dashboard/templates/argon.html:451
 msgid "Aún no cuentas con inversiones en ninguno de nuestros proyectos "
 msgstr "You have not yet invested in any of our projects."
 
-#: .\dashboard\templates\argon.html:463
+#: dashboard/templates/argon.html:463
 msgid "Capital:"
 msgstr "invested capital:"
 
-#: .\dashboard\templates\argon.html:464
+#: dashboard/templates/argon.html:464
 msgid "Valor invertido:"
 msgstr "Invested value:"
 
-#: .\dashboard\templates\argon.html:464
+#: dashboard/templates/argon.html:464
 msgid "Utilidad:"
 msgstr "Utility"
 
-#: .\dashboard\templates\argon.html:481
+#: dashboard/templates/argon.html:481
 msgid "Compras"
 msgstr "Shopping"
 
-#: .\dashboard\templates\argon.html:482
+#: dashboard/templates/argon.html:482
 msgid "Total de árboles"
 msgstr "Total trees"
 
-#: .\dashboard\templates\argon.html:486
+#: dashboard/templates/argon.html:486
 msgid "General"
 msgstr "General"
 
-#: .\dashboard\templates\argon.html:509
+#: dashboard/templates/argon.html:509
 msgid "Aún no cuentas con inversiones en ninguno de nuestros proyectos"
 msgstr "You have not yet invested in any of our projects."
 
-#: .\dashboard\templates\argon.html:524
+#: dashboard/templates/argon.html:524
 msgid "Disponibilidad de árboles"
 msgstr "Availability of trees"
 
-#: .\dashboard\templates\argon.html:527
+#: dashboard/templates/argon.html:527
 msgid "Ver proyectos"
 msgstr "See projects"
 
-#: .\dashboard\templates\argon.html:536
+#: dashboard/templates/argon.html:536
 msgid "Proyecto"
 msgstr "Project"
 
-#: .\dashboard\templates\argon.html:537
+#: dashboard/templates/argon.html:537
 msgid "Árboles disponibles"
 msgstr "Trees available"
 
-#: .\dashboard\templates\argon.html:571
+#: dashboard/templates/argon.html:571
 msgid "Descargue documentos de su interés"
 msgstr "Download documents of interest"
 
-#: .\dashboard\templates\argon.html:573
+#: dashboard/templates/argon.html:573
 msgid "Tu contrato"
 msgstr "Your contract"
 
-#: .\dashboard\templates\argon.html:575
+#: dashboard/templates/argon.html:575
 msgid "Certificado ICA"
 msgstr "ICA Certificate"
 
-#: .\dashboard\templates\argon.html:577
+#: dashboard/templates/argon.html:577
 msgid "Arrendamiento tierras "
 msgstr "Land leasing "
 
-#: .\dashboard\templates\argon.html:579
+#: dashboard/templates/argon.html:579
 msgid "Plan Establec. Forestal"
 msgstr "Forestry Plan"
 
-#: .\dashboard\templates\company.html:42
+#: dashboard/templates/company.html:42
 msgid "Inversión en Treeconomy"
 msgstr "Investment in Treeconomy?"
 
-#: .\dashboard\templates\company.html:55
+#: dashboard/templates/company.html:55
 msgid "Árboles sembrados"
 msgstr "Trees planted"
 
-#: .\dashboard\templates\company.html:60
+#: dashboard/templates/company.html:60
 msgid "árboles"
 msgstr "Trees"
 
-#: .\dashboard\templates\company.html:67
+#: dashboard/templates/company.html:67
 msgid "Total de árboles sembrados"
 msgstr "Total trees planted"
 
-#: .\dashboard\templates\company.html:73
+#: dashboard/templates/company.html:73
 msgid "Esta compañía aún no invierte en ningún proyecto"
 msgstr "This company has not yet invested in any project"
 
-#: .\dashboard\templates\company.html:110
+#: dashboard/templates/company.html:108
 msgid "Equivalencia de CO"
 msgstr "CO equivalence"
 
-#: .\dashboard\templates\company.html:110
+#: dashboard/templates/company.html:108
 msgid "capturado a nivel vehicular"
 msgstr "captured at the vehicle level"
 
-#: .\dashboard\templates\company.html:144
+#: dashboard/templates/company.html:142
 msgid "Contáctanos"
 msgstr "Contact with us"
 
-#: .\dashboard\templates\company.html:168
+#: dashboard/templates/company.html:166
 msgid "Esta empresa muy pronto comenzará a invertir"
 msgstr "This company will soon begin to invest"
 
-#: .\dashboard\templates\company.html:175
+#: dashboard/templates/company.html:173
 msgid "Captura de CO"
 msgstr "CO2 Captured"
 
-#: .\dashboard\templates\company.html:178
+#: dashboard/templates/company.html:176
 msgid "Desde que fueron sembrados, sus árboles han capturado:"
 msgstr "Since they were planted, their trees have captured:"
 
-#: .\dashboard\templates\company.html:182
+#: dashboard/templates/company.html:180
 msgid "Desde que invertiste, sus árboles han capturado:"
 msgstr "Since they were planted, their trees have captured:"
 
-#: .\dashboard\templates\company.html:190
+#: dashboard/templates/company.html:188
 msgid "Calcula cuánto CO"
 msgstr "Calculate how much CO"
 
-#: .\dashboard\templates\company.html:190
+#: dashboard/templates/company.html:188
 msgid "capturan los árboles"
 msgstr "capture the trees"
 
-#: .\dashboard\templates\company.html:204
+#: dashboard/templates/company.html:202
 msgid "capturado"
 msgstr "CO2 Captured"
 
-#: .\dashboard\templates\invest.html:19 .\dashboard\views.py:129
-#: .\templates\base.html:359 .\templates\base.html:376
+#: dashboard/templates/invest.html:19 dashboard/views.py:131
+#: templates/base.html:359 templates/base.html:376
 msgid "Tu inversión"
 msgstr "Your investment"
 
-#: .\dashboard\templates\invest.html:20
+#: dashboard/templates/invest.html:20
 msgid ""
 "Los datos están presentados desde la fecha de plantación del proyecto, "
 "mensualmente, hasta el mes actual."
@@ -733,23 +732,23 @@ msgstr ""
 "Data are presented from the date of project planting, monthly, through the "
 "current month."
 
-#: .\dashboard\templates\invest.html:25
+#: dashboard/templates/invest.html:25
 msgid "Proyectos en los que haz invertido:"
 msgstr "Projects in which you have invested:"
 
-#: .\dashboard\views.py:256 .\templates\base.html:277 .\templates\base.html:372
+#: dashboard/views.py:257 templates/base.html:277 templates/base.html:372
 msgid "Tablero"
 msgstr "Dashboard"
 
-#: .\dashboard\views.py:257
+#: dashboard/views.py:258
 msgid "Hola, como estas?"
 msgstr "Hello, how are you"
 
-#: .\dashboard\views.py:436
+#: dashboard/views.py:437
 msgid "Transporte Público"
 msgstr "Public Transport"
 
-#: .\dashboard\views.py:438
+#: dashboard/views.py:439
 msgid ""
 "¡Bien hecho! Ha plantado 13 árboles, con esto has logrado contrarrestar el "
 "CO2 al usar transporte publico. obtuviste tu primera insignia. ¡Sigue así y "
@@ -759,11 +758,11 @@ msgstr ""
 "counteract theCO2 from using public transportation. You've earned your first "
 "badge. Keep it up andhelp make the world a greener and healthier place!"
 
-#: .\dashboard\views.py:441
+#: dashboard/views.py:442
 msgid "Automovil"
 msgstr "Car"
 
-#: .\dashboard\views.py:443
+#: dashboard/views.py:444
 msgid ""
 "¡Felicidades! con la siembra de 76 arboles lograste capturar el CO2 que "
 "genera un carro. Sigue así y pronto tendrás tu segunda insignia."
@@ -772,11 +771,11 @@ msgstr ""
 "CO2 generated by one car. Keep it up and soon you will have your second "
 "badge."
 
-#: .\dashboard\views.py:445
+#: dashboard/views.py:446
 msgid "Moto"
 msgstr "Motorcycle"
 
-#: .\dashboard\views.py:447
+#: dashboard/views.py:448
 msgid ""
 "¡Muy bien! Has plantado 10 árboles mas y lograste capturar el equivalente de "
 "emisión de CO2 de una Moto, Continúa cuidando de ellos, pronto obtendrás mas "
@@ -786,11 +785,11 @@ msgstr ""
 "equivalent  CO2 emission of a Motorcycle, Continue taking care of them, soon "
 "you will get more badges"
 
-#: .\dashboard\views.py:450
+#: dashboard/views.py:451
 msgid "Avión"
 msgstr "Aircraft"
 
-#: .\dashboard\views.py:452
+#: dashboard/views.py:453
 msgid ""
 "¡Eres un verdadero héroe del medio ambiente! Has plantado más de 100 árboles "
 "y con eso estas contrarrestado en CO2 que produce un avión. Tu dedicación "
@@ -802,161 +801,164 @@ msgstr ""
 "dedication to fighting climate change and protecting our planet is inspiring."
 "Keep it up!"
 
-#: .\projects\templates\project_list.html:231
+#: projects/templates/project_list.html:231
 msgid "Reporte Clientes"
 msgstr "Customers report"
 
-#: .\projects\templates\project_list.html:235
-#: .\projects\templates\project_list.html:247
+#: projects/templates/project_list.html:235
+#: projects/templates/project_list.html:247
 msgid "Descarga Excel"
 msgstr "Excel download"
 
-#: .\projects\templates\project_list.html:236
-#: .\projects\templates\project_list.html:248
+#: projects/templates/project_list.html:236
+#: projects/templates/project_list.html:248
 msgid "Ver en página"
 msgstr "See in app"
 
-#: .\projects\templates\project_list.html:243
+#: projects/templates/project_list.html:243
 msgid "Reporte Órdenes"
 msgstr "Orders report"
 
-#: .\projects\templates\project_list.html:254
+#: projects/templates/project_list.html:254
 msgid "Usuarios"
 msgstr "Users"
 
-#: .\projects\templates\project_list.html:266
+#: projects/templates/project_list.html:259
+msgid "Empresas"
+msgstr "Companies"
+
+#: projects/templates/project_list.html:271
 msgid "Crear proyecto"
 msgstr "Create projects"
 
-#: .\projects\templates\project_list.html:273
+#: projects/templates/project_list.html:278
 msgid "Invierte en uno de nuestros proyectos"
 msgstr "Invest in one of our projects"
 
-#: .\projects\templates\project_list.html:283
+#: projects/templates/project_list.html:288
 msgid "Cosecha en"
 msgstr "Harvest in"
 
-#: .\projects\templates\project_list.html:286
-#: .\projects\templates\project_list.html:343
+#: projects/templates/project_list.html:291
+#: projects/templates/project_list.html:348
 msgid "Usuario propietario"
 msgstr "Owner user"
 
-#: .\projects\templates\project_list.html:302
-#: .\projects\templates\project_list.html:360
+#: projects/templates/project_list.html:307
+#: projects/templates/project_list.html:365
 msgid "Copiar a portapapeles"
 msgstr "Copy to clipboard"
 
-#: .\projects\templates\project_list.html:315
-#: .\projects\templates\project_list.html:373
+#: projects/templates/project_list.html:320
+#: projects/templates/project_list.html:378
 msgid "Editar"
 msgstr "Edit"
 
-#: .\projects\templates\project_list.html:316
-#: .\projects\templates\project_list.html:374
+#: projects/templates/project_list.html:321
+#: projects/templates/project_list.html:379
 msgid "Eliminar"
 msgstr "Delete"
 
-#: .\projects\templates\project_list.html:319
-#: .\projects\templates\project_list.html:377
+#: projects/templates/project_list.html:324
+#: projects/templates/project_list.html:382
 msgid "Rentabilidad"
 msgstr "Profitability"
 
-#: .\projects\templates\project_list.html:320
-#: .\projects\templates\project_list.html:378
+#: projects/templates/project_list.html:325
+#: projects/templates/project_list.html:383
 msgid "Árboles restantes"
 msgstr "Left over trees"
 
-#: .\projects\templates\project_list.html:321
-#: .\projects\templates\project_list.html:379
+#: projects/templates/project_list.html:326
+#: projects/templates/project_list.html:384
 msgid "Precio"
 msgstr "Price"
 
-#: .\projects\templates\project_list.html:323
+#: projects/templates/project_list.html:328
 msgid "Invertir aquí"
 msgstr "Invest here"
 
-#: .\projects\templates\project_list.html:332
+#: projects/templates/project_list.html:337
 msgid "Proyectos cerrados"
 msgstr "Closed projects"
 
-#: .\projects\templates\project_list.html:340
+#: projects/templates/project_list.html:345
 msgid "Cortado"
 msgstr "cut down"
 
-#: .\projects\templates\project_list.html:381
+#: projects/templates/project_list.html:386
 msgid "Ver más"
 msgstr "See more"
 
-#: .\projects\templates\project_list.html:389
+#: projects/templates/project_list.html:394
 msgid "No hay proyectos disponibles"
 msgstr "No projects available"
 
-#: .\projects\views.py:36 .\templates\base.html:265 .\templates\base.html:374
+#: projects/views.py:36 templates/base.html:265 templates/base.html:374
 msgid "Proyectos"
 msgstr "Projects"
 
-#: .\projects\views.py:72 .\templates\base.html:360 .\templates\base.html:375
+#: projects/views.py:72 templates/base.html:360 templates/base.html:375
 msgid "Mapa"
 msgstr "Map"
 
-#: .\projects\views.py:321
+#: projects/views.py:321
 msgid "hello"
 msgstr "hello"
 
-#: .\templates\base.html:283
+#: templates/base.html:283
 msgid "Menú"
 msgstr "Menu"
 
-#: .\templates\base.html:300
+#: templates/base.html:300
 msgid "¡Planta árboles ahora!"
 msgstr "Plant trees now!"
 
-#: .\templates\base.html:309
+#: templates/base.html:309
 msgid " Lenguaje "
 msgstr "Language"
 
-#: .\templates\base.html:347
+#: templates/base.html:347
 msgid "Iniciar sesión"
 msgstr "Login"
 
-#: .\templates\base.html:361 .\templates\base.html:378
-#: .\templates\base.html:426
+#: templates/base.html:361 templates/base.html:378 templates/base.html:426
 msgid "Contacto"
 msgstr "Contact"
 
-#: .\templates\base.html:363 .\templates\base.html:380
+#: templates/base.html:363 templates/base.html:380
 msgid "Salir"
 msgstr "Logout"
 
-#: .\templates\base.html:413
+#: templates/base.html:413
 msgid "Mantente informado sobre las inversiones de reforestación"
 msgstr "Stay informed about reforestation investments"
 
-#: .\templates\base.html:422
+#: templates/base.html:422
 msgid "¿Quiénes somos?"
 msgstr "Who are we?"
 
-#: .\templates\base.html:423
+#: templates/base.html:423
 msgid "¿Cómo funciona?"
 msgstr "How it works?"
 
-#: .\templates\base.html:424
+#: templates/base.html:424
 msgid "Negocios"
 msgstr "Business"
 
-#: .\templates\base.html:425
+#: templates/base.html:425
 msgid "Noticias"
 msgstr "Notices"
 
-#: .\templates\base.html:453
+#: templates/base.html:453
 msgid "Derechos Reservados"
 msgstr "Copyrights"
 
-#: .\templates\base.html:454
+#: templates/base.html:454
 msgid "Terminos y condiciones"
 msgstr "Terms & Conditions"
 
-#: .\templates\videos.html:17
+#: templates/videos.html:17
 msgid ""
 "Bienvenido a la plataforma de inversión Treeconomy. Aquí puedes invertir en "
 "nuestros proyectos de dos formas diferentes: haciendo una única inversión, o "
@@ -968,15 +970,15 @@ msgstr ""
 "monthly investment where you will be acquiring new trees every month, "
 "expanding your future capabilities. "
 
-#: .\templates\videos.html:20
+#: templates/videos.html:20
 msgid "Visitar página web"
 msgstr "Visit webpage"
 
-#: .\templates\videos.html:31
+#: templates/videos.html:31
 msgid "¿Qué es Treeconomy?"
 msgstr "What is Treeconomy?"
 
-#: .\templates\videos.html:46
+#: templates/videos.html:46
 msgid "Impacto"
 msgstr "Effect"
 

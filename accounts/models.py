@@ -194,6 +194,7 @@ class ProjectByInvestor(models.Model):
 
 class Company(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
     name= models.CharField(max_length=100)
     slug = models.SlugField(unique=True, primary_key=True)
     qrcode = models.ImageField(upload_to='qrcodes',blank=True, null=True)
