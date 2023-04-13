@@ -16,6 +16,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;700&family=PT+Sans:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" type='text/css' href="{% static 'dashboard/css/style.css' %}">
 
+<style>
+    #divcanvas{
+        width: 100%;
+    }
+    
+    #myChartPieDb{
+        width: 100%;
+        height: 100%;
+    }
+</style>
 <div class="header my-2">
     {% if tiene_fondo %}
     <div class="row" style="background-image: linear-gradient(270deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.1) 91.3%)
@@ -75,29 +85,28 @@
                 
             {% else %}
                 
-                    <div class="col-12 col-md-4 mb-3">
-                        <div class="entrada4__grafico">
-                            <div id="card-bars" class="card-body">
-                                <canvas id="dona-bars" class="chartsdona"  data-chart='{{ resumen_dict }}'></canvas>
-                            </div>
+                <div class="col-12 col-md-5 mb-3">
+                    <div class="entrada4__grafico">
+                        <div id="card-bars" class="card-body">
+                            <canvas id="dona-bars" class="chartsdona"  data-chart='{{ resumen_dict }}'></canvas>
                         </div>
                     </div>
-                    <div class="col-12 col-md-8 px-4">
-                        <div class="row row-cols-1 row-cols-md-3 g-4">
-                        
-                        {% for key, value in resumen_dict.items %}
-                        <div class="col">
-                            <div class="card">
-                                <img src="{% static 'dashboard/img/company/img/paisaje1.png' %}" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title text-center">{{key}}:</h5>
-                                    <p class="card-text text-center">{{value.total_trees}}</p>
-                                </div>
+                </div>
+                <div class="col-12 col-md-7 px-4">
+                    <div class="row row-cols-1 row-cols-md-2 g-4">
+                    
+                    {% for key, value in resumen_dict.items %}
+                    <div class="col">
+                        <div class="card bg-success text-white">
+                            <div class="card-body">
+                              <h5 class="card-title text-center">{{key}}:</h5>
+                              <h3 class="card-text text-center">{{value.total_trees}}</h3>
                             </div>
-                        </div>
-                        {% endfor %}
-                        </div>   
+                          </div>
                     </div>
+                    {% endfor %}
+                    </div>   
+                </div>
                 
             {% endif %}
             </div>     
@@ -109,32 +118,20 @@
             </div>
             
             <div class="d-flex justify-content-between flex-wrap">
-                {% for key, value in vehiculos.items %}
-                
-                <button type="button" class="btn btn-link py-3" data-toggle="modal" data-target="#{{ key}}">
-                    <img class="img-collapse shadow-4-strong"  src= "{% static value.url %}" alt="" style="height: 7rem ; width: 7rem; border-radius: 30%; object-fit: cover;">
-                </button>
-                
-                <!-- Modal -->
-                <div class="modal fade" id="{{ key }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">{{ value.nombre }}</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                {{ value.mensaje }}
-                            </div>
+                <div class="card border-0">
+                    <div class="row no-gutters">
+                        <div class="col-md-2 d-flex align-items-center justify-content-center">
+                            <img class="img-collapse shadow-4-strong" src="{% static vehiculo.url %}" alt="" style="height: 7rem; width: 7rem; border-radius: 30%; object-fit: cover;">
                         </div>
+                      <div class="col-md-10">
+                        <div class="card-body">
+                          <h5 class="card-title">{{ vehiculo.nombre }}</h5>
+                          <p class="card-text"> {{ vehiculo.mensaje }}</p>
+                        </div>
+                      </div>
                     </div>
                 </div>
-                {% endfor %}
-            
             </div>    
-
         </div>
 
         <div class="entrada6 my-3">
@@ -158,26 +155,29 @@
         <div class="entrada5 my-3">
             <div class="row mb-3">
                 <div class="col-12 col-md-6 mb-4">
-                    <div class="titulo">
-                        <h2>{% trans "Inversión"%}</h2>
+                    <div class="card bg-transparent">
+                        <div class="card-body">
+                          <h5 class="card-title titulo">{% trans "Distribución del capital"%}</h5>
+                          <br>
+                          {% if resumen_dict|length > 0 %}
+                          <div id="divcanvas"> 
+                            <canvas id="myChartPieDb" data-chart='{{ resumen_general }}'></canvas>
+                          </div>
+                          {% else %}
+                            <p>{% trans "Esta empresa muy pronto comenzará a invertir"%}</p>
+                          {% endif %}  
+                        </div>  
                     </div>
-                    
-                    {% if not resumen_dict|length > 0 %}
-                        <p> {% trans "Esta empresa muy pronto comenzará a invertir"%}</p>
-                    {% else %}
-                        <canvas id="myChartPieDb" data-chart='{{ resumen_general }}'></canvas>
-                    {% endif %}    
                 </div>
                 <div class="col-12 col-md-6 mb-4">
-                    <div class="titulo">
-                        <h2>{% trans "Captura de CO"%}<sup>2</sup></h2>
-                    </div>
-                    <div>
-                        <p>{% trans "Desde que fueron sembrados, sus árboles han capturado:"%}  <strong class="colorletra">{{ co2_consumption }} kg de CO<sup>2</sup></strong></p>
-                       
-                    </div>
-                    <div>
-                        <p>{% trans "Desde que invertiste, sus árboles han capturado:"%} <strong class="colorletra">{{ co2_desdecompra }} Kg de CO<sup>2</sup></strong></p>
+                    <div class="card bg-transparent">
+                        <div class="card-body">
+                          <h5 class="card-title titulo">{% trans "Impacto ambiental" %}</h5>
+                          <p class="card-text">{% trans "Desde que fueron sembrados, sus árboles han capturado:" %}</p>
+                          <h2 class="card-text mb-4"><strong class="colorletra">{{ co2_consumption }} kg de CO<sup>2</sup></strong></h2>
+                          <p class="card-text">{% trans "Desde que invertiste, sus árboles han capturado:" %}</p>
+                          <h2 class="card-text mb-4"><strong class="colorletra">{{ co2_desdecompra }} kg de CO<sup>2</sup></strong></h2>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -185,22 +185,23 @@
             <div class="row">
              <div class="entrada5__cuadro py-2">
                 <div class="titulo2 d-flex justify-content-center">
-                    <h2>{% trans "Calcula cuánto CO"%}<sup>2</sup>{% trans "capturan los árboles"%} </h2>
+                    <h3><i class="fas fa-calculator fa"></i> {% trans "Calcula cuánto CO"%}<sup>2</sup>{% trans "capturan los árboles"%} </h3>
                 </div>
                 
-                
                 <div class="row mt-4 ">
-                    <div class="hojas col-2 column">
-                        <img src="{% static 'dashboard/img/company/img/hoja3.png' %}" alt="imagenhoja" width="30px">
-                        <img src="{% static 'dashboard/img/company/img/hoja2.png' %}" alt="imagenhoja" width="25px">
-                        <img src="{% static 'dashboard/img/company/img/hoja1.png' %}" alt="imagenhoja" width="25px">
-                    </div>
-
-                    <div class="slider col-10">
-                        <h3 class="text-center"><span id="cont_arboles">1</span>{% trans "Árboles"%} </h3>
-                        <input type="range" class="barraslider form-range" min="0" max="1000" step="50" id="sliderco2" value="1">
-                        <h3 class="text-center"><span id="cont_co2">33.3</span> Kg CO<sup>2</sup>{% trans "capturado"%}</h3>
-                    </div>
+                    <div class="slider col-12">
+                        <div class="row align-items-center">
+                          <div class="col-md-3">
+                            <h3 class="text-center"><span id="cont_arboles">1</span> {% trans "Árboles"%} </h3>
+                          </div>
+                          <div class="col-md-6">
+                            <input type="range" class="barraslider form-range" min="0" max="1000" step="25" id="sliderco2" value="1">
+                          </div>
+                          <div class="col-md-3">
+                            <h3 class="text-center"><span id="cont_co2">33.3</span> Kg CO<sup>2</sup>{% trans "capturado"%}</h3>
+                          </div>
+                        </div>
+                      </div>
                 </div>
                     
              </div>

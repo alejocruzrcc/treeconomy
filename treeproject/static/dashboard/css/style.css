@@ -195,7 +195,7 @@ h1, h2, h3, h4 {
 
 /* Entradas con imagen de fondo */
 
-.entrada1, .entrada3{
+.entrada1, .entrada3 {
     background-image: linear-gradient(
         rgba(0, 0, 0, 0.5),
         rgba(0, 0, 0, 0.5)
@@ -264,11 +264,6 @@ h1, h2, h3, h4 {
 
 
 
-.barraslider{
-  
-}
-
-  
   @media (max-width: 991.98px) {
     .testimony-29101 .image, .testimony-29101 .text {
       width: 100%;

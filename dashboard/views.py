@@ -436,22 +436,46 @@ def dashboard_company(request, slug):
     
     vehiculos["transporte-publico"] = { "nombre": _("Transporte Público"),
                           "url": 'dashboard/img/company/img/icono_bus.png',
-                          "mensaje": _('¡Bien hecho! Ha plantado 13 árboles, con esto has logrado contrarrestar el CO2 al usar transporte publico. obtuviste tu primera insignia. ¡Sigue así y ayuda a hacer del mundo un lugar más verde y saludable!'),
+                          "mensaje": _('Un autobús de transporte público promedio que funciona con diesel emite alrededor de 104.6 toneladas métricas de CO2 por año. Esta cifra se basa en la suposición de que el autobús recorre una distancia promedio de 50,000 millas (aproximadamente 80,500 kilómetros) por año, y su eficiencia de combustible es de 4.6 millas por galón (aproximadamente 2 kilómetros por litro).'),
                           }
     
     vehiculos["automovil"] = { "nombre": _("Automovil"),
                           "url": 'dashboard/img/company/img/auto.png',
-                          "mensaje": _("¡Felicidades! con la siembra de 76 arboles lograste capturar el CO2 que genera un carro. Sigue así y pronto tendrás tu segunda insignia."),
+                          "mensaje": _("La cantidad de dióxido de carbono (CO2) emitido por un automóvil promedio al año depende de varios factores, como el modelo del automóvil, la eficiencia de su motor, la distancia recorrida y las condiciones de conducción. Sin embargo, se puede proporcionar una estimación aproximada de la cantidad de CO2 que emite un automóvil promedio al año equivalente a 2145 Kg"),
                           }
     vehiculos["moto"] = { "nombre": _("Moto"),
                           "url": 'dashboard/img/company/img/icono_moto.png',
-                          "mensaje": _("¡Muy bien! Has plantado 10 árboles mas y lograste capturar el equivalente de emisión de CO2 de una Moto, Continúa cuidando de ellos, pronto obtendrás mas insignias."),
+                          "mensaje": _("Una motocicleta promedio emite alrededor de 4.6 toneladas métricas de CO2 por año. Esta cifra se basa en la suposición de que la motocicleta recorre una distancia promedio de 4,000 millas (aproximadamente 6,400 kilómetros) por año y su eficiencia de combustible es de 50 millas por galón (aproximadamente 21 kilómetros por litro)."),
                           }
     
     vehiculos["avion"] = { "nombre": _("Avión"),
                           "url": 'dashboard/img/company/img/icono_avion.png',
-                          "mensaje": _("¡Eres un verdadero héroe del medio ambiente! Has plantado más de 100 árboles y con eso estas contrarrestado en CO2 que produce un avión. Tu dedicación para combatir el cambio climático y proteger nuestro planeta es inspiradora. ¡Sigue así!"),
+                          "mensaje": _("Un vuelo promedio de un avión comercial de pasajeros de larga distancia que recorre una distancia de 7,500 millas (aproximadamente 12,070 kilómetros) emite alrededor de 3,933 kilogramos de CO2. Si asumimos que un avión comercial promedio realiza alrededor de 3 vuelos al día y 300 días al año, entonces la cantidad de CO2 que emite en un año sería de alrededor de 3.54 millones de kilogramos (o 3,540 toneladas métricas) de CO2."),
                           }
+    
+    ## Rangos de Carbono por vehículo al año:
+
+    # Carro: 2145 kg
+    # Avión: 3900 Kg
+    # Moto: 4600 Kg
+    # Bus transportte público: 104.600
+
+    vehiculo_nombre = ""
+
+    # Switch case para asignar vehículo según el valor de co2_desdecompra
+    if co2_desdecompra <= 2145:
+        vehiculo_nombre = "automovil"
+    elif co2_desdecompra <= 3900:
+        vehiculo_nombre = "avion"
+    elif co2_desdecompra <= 4600:
+        vehiculo_nombre = "moto"
+    else:
+        vehiculo_nombre = "transporte-publico"
+
+    vehiculo = vehiculos[vehiculo_nombre]
+
+    print(vehiculo["url"])
+
     ###
     ### Contactanos
     form_contactanos = ContactForm(request.POST or None, request.FILES or None)
@@ -519,13 +543,13 @@ def dashboard_company(request, slug):
         'tiene_logo': tiene_logo,
         'tiene_fondo': tiene_fondo, 
         "map": initialMap._repr_html_(),
-        "vehiculos": vehiculos,
+        "vehiculo": vehiculo,
+        "vehiculo_nombre": vehiculo_nombre,
         "form_contactanos": form_contactanos,
         "comments": comments,
         "form": form
     })
     
-
 class CompanyListView(HasRoleMixin, generic.TemplateView):
     allowed_roles = 'admin'
     model = Company

@@ -7,13 +7,15 @@
 
     
 <h1> Listado de Empresas</h1>
+<div class="table-responsive">
 <table class="table table-striped">
     <thead>
       <tr>
         <th scope="col">Nombre</th>
         <th scope="col">Nit</th>
         <th scope="col">Propietario</th>
-        <th scope="col">Fecha de creación</th>
+        <th scope="col">Se unió</th>
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
@@ -23,12 +25,14 @@
             <td>{{company.nit}}</td>
             <td>{{company.user.first_name}}</td>
             <td>{{company.created_at}}</td>
-          </tr>
+            <td><a class="button-plant" href="{{ company.get_absolute_url }}">Visitar</a></td>
+        </tr>
         
         {% endfor %}
      
     </tbody>
   </table>
+</div>
 
 
 

@@ -14,6 +14,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django_extensions.db.models import TimeStampedModel
 from django.db.models import F
+from django.urls import reverse
 import stripe
 
 
@@ -201,6 +202,9 @@ class Company(models.Model):
     logotipo = models.ImageField(upload_to='logos_empresa', blank=True, null=True)
     portadas = models.ImageField(upload_to='portadas_empresa', blank=True, null=True)
     nit = models.CharField(max_length=50, blank=True, null=True)
+
+    def get_absolute_url(self):
+        return reverse("dashboard_company", kwargs={"slug": self.slug})
 
     def __str__(self):
         return self.name
