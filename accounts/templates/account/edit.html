@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load add_attr %}
 {% block title %}Edit your account{% endblock %}
 
@@ -52,8 +53,8 @@
 </style>
 <nav class="fondob" aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="{% url 'profile' %}">Perfil</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Editar Perfil</li>
+      <li class="breadcrumb-item"><a href="{% url 'profile' %}">{% trans "Perfil" %} </a></li>
+      <li class="breadcrumb-item active" aria-current="page">{% trans "Editar Perfil" %} </li>
     </ol>
   </nav>
 <form method="post" enctype="multipart/form-data" novalidate>
@@ -83,10 +84,10 @@
         <div class="col-md-5 border-right">
             <div class="p-3 py-5">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4 class="text-right">Configuracion perfil</h4>
+                    <h4 class="text-right">{% trans "Configuracion perfil" %} </h4>
                 </div>
                 <div class="row mt-2">
-                    <div class="col-md-6"><label class="labels">Nombres</label> 
+                    <div class="col-md-6"><label class="labels">{% trans "Nombres" %} </label> 
                         {% if user_form.first_name.errors %}
                             {{ user_form.first_name|add_attr:'is-invalid'}}
                         {% else %}
@@ -96,7 +97,7 @@
                             {{ user_form.first_name.errors }}
                         </div>
                     </div>
-                    <div class="col-md-6"><label class="labels">Apellidos</label> 
+                    <div class="col-md-6"><label class="labels">{% trans "Apellidos" %} </label> 
                         {% if user_form.last_name.errors %}
                             {{ user_form.last_name|add_attr:'is-invalid'}}
                         {% else %}
@@ -108,7 +109,7 @@
                     </div>
                 </div>
                 <div class="row mt-3">
-                    <div class="col-md-12"><label class="labels">Numero de Teléfono</label>
+                    <div class="col-md-12"><label class="labels">{% trans "Numero de Teléfono" %} </label>
                         {% if profile_form.phone.errors %}
                             {{ profile_form.phone|add_attr:'is-invalid'}}
                         {% else %}
@@ -118,7 +119,7 @@
                             {{ profile_form.phone.errors }}
                         </div>
                     </div>
-                    <div class="col-md-12"><label class="labels">Fecha nacimiento</label>
+                    <div class="col-md-12"><label class="labels">{% trans "Fecha nacimiento" %} </label>
                         {% if profile_form.date_of_birth.errors %}
                             {{ profile_form.date_of_birth|add_attr:'is-invalid'}}
                         {% else %}
@@ -128,7 +129,7 @@
                             {{ profile_form.date_of_birth.errors }}
                         </div>
                     </div>
-                    <div class="col-md-12"><label class="labels">Direccion</label>
+                    <div class="col-md-12"><label class="labels">{% trans "Direccion" %} </label>
                         {% if profile_form.adress.errors %}
                             {{ profile_form.adress|add_attr:'is-invalid'}}
                         {% else %}
@@ -148,7 +149,7 @@
                             {{ profile_form.zipcode.errors }}
                         </div>
                     </div>
-                    <div class="col-md-12"> <label class="labels">registro de impuestos</label>
+                    <div class="col-md-12"> <label class="labels">{% trans "registro de impuestos" %} </label>
                         {% if profile_form.tax_register.errors %}
                             {{ profile_form.tax_register|add_attr:'is-invalid'}}
                         {% else %}
@@ -158,7 +159,7 @@
                             {{ profile_form.tax_register.errors }}
                         </div>
                     </div>
-                    <div class="col-md-12"><label class="labels">Ruta</label>
+                    <div class="col-md-12"><label class="labels">{% trans "Ruta" %} </label>
                         {% if profile_form.rut.errors %}
                             {{ profile_form.rut|add_attr:'is-invalid'}}
                         {% else %}
@@ -168,7 +169,7 @@
                             {{ profile_form.rut.errors }}
                         </div>
                     </div>
-                    <div class="col-md-12"><label class="labels">Correo</label>
+                    <div class="col-md-12"><label class="labels">{% trans "Correo" %} </label>
                         {% if user_form.email.errors %}
                             {{ user_form.email|add_attr:'is-invalid'}}
                         {% else %}
@@ -180,7 +181,7 @@
                     </div>
                 </div>
                 <div class="row mt-3">
-                    <div class="col-md-4"><label class="labels">País</label> 
+                    <div class="col-md-4"><label class="labels">{% trans "País" %} </label> 
                         {% if profile_form.country.errors %}
                             {{ profile_form.country|add_attr:'is-invalid'}}
                         {% else %}
@@ -191,7 +192,7 @@
                         </div>
                     </div>
                     
-                    <div class="col-md-4"><label class="labels">Estado/Región</label>
+                    <div class="col-md-4"><label class="labels">{% trans "Estado/Región" %} </label>
                         {% if profile_form.state.errors %}
                             {{ profile_form.state|add_attr:'is-invalid'}}
                         {% else %}
@@ -202,7 +203,7 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <label class="labels">Ciudad</label>
+                        <label class="labels">{% trans "Ciudad" %}</label>
                         {% if profile_form.city.errors %}
                             {{ profile_form.city|add_attr:'is-invalid'}}
                         {% else %}

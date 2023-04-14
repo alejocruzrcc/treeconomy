@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block title %}Usuarios{% endblock %}
 
@@ -6,16 +7,16 @@
 
 
     
-<h1> Listado de Usuarios </h1>
+<h1> {% trans "Listado de Usuarios" %}</h1>
 <table class="table table-striped">
     <thead>
       <tr>
-        <th scope="col">Usuario</th>
-        <th scope="col">Nombres</th>
-        <th scope="col">Apellidos</th>
-        <th scope="col">Correo</th>
-        <th scope="col">Creación</th>
-        <th scope="col">Último ingreso</th>
+        <th scope="col">{% trans "Usuario" %}</th>
+        <th scope="col">{% trans "Nombres" %}</th>
+        <th scope="col">{% trans "Apellidos" %}</th>
+        <th scope="col">{% trans "Correo" %}</th>
+        <th scope="col">{% trans "Creación" %}</th>
+        <th scope="col">{% trans "Último ingreso" %}</th>
       </tr>
     </thead>
     <tbody>
