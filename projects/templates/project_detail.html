@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load crispy_forms_tags %}
 {% load add_attr %}
 {% block title %}Proyecto{% endblock %}
@@ -196,7 +197,7 @@
       <div class="col-xl-8">
         <div class="contenedor-datos">
           <h2 class="titulo-producto">{{ project.name }}</h2>
-          <p class="descripcion-producto">{{ project.resena }}</p>
+          <p class="descripcion-producto">{% trans project.resena %}</p>
           <div class="container">
             <div class="row d-flex align-items-center">
               <div class="col-xl-9 col-12 p-0">
