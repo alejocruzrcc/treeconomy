@@ -50,7 +50,7 @@ class MapaView(generic.TemplateView):
                 geometria = lotes[0]["features"][0]["geometry"]
                 poligono = geometry.Polygon(geometria["coordinates"][0])
                 punto_shapely = generate_random(1, poligono)
-                html = popup_html(project.name, project.resena, project.n_hectares, project.get_absolute_url())
+                html = popup_html(project.name, project.get_price(), project.n_hectares, project.get_absolute_url())
                 popup = folium.Popup(folium.Html(html, script=True), max_width=500)
                 punto = list(punto_shapely[0].coords)[0]
                 folium.Marker(punto, popup=popup,  icon=folium.Icon(color='lightgreen', icon_color='darkgreen', icon='tree', prefix='fa')).add_to(mCluster)
@@ -324,16 +324,23 @@ def translate(language):
     return text
 
 
-def popup_html(nombre, descripcion, hectareas, url):
+def popup_html(nombre, precio, hectareas, url):
     html = f"""
-    <div class="card">
-        <div class="card-body">
-            <h3 class="card-title">Proyecto {nombre}</h3>
-            <h6 class="card-subtitle mb-2 text-muted">{hectareas} Hectáreas</h6>
-            <p class="card-text">{descripcion}</p>
-            <h4><a href="{ url }" class="card-link" target="_blank">Invertir aquí</a></h4>
+        <div>
+                <h5 class="card-title">{nombre}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{hectareas} Hectáreas</h6>
+                <h4 class="card-text">{precio} USD</h4>
+                <a href="{url}" style="
+                background-color: #f2622e;
+                border-radius: 5px;
+                color: #fff;
+                font-size: 18px;
+                padding: 5px 15px;
+                text-decoration: none;
+                transition: all 0.3s; " 
+                target="_blank">Invertir aquí</a>
+            
         </div>
-    </div>
     """
     return html
 

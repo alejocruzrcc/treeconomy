@@ -13,26 +13,44 @@
     <p>No hay comentarios.</p>
   {% endfor %}
 
-  <div class="jumbotron jumbotron-fluid">
-    <div class="container">
-      <h3 class="display-4 text-center mb-5">Agregar comentario</h3>
-      <form method="post" class="mb-5">
-        {% csrf_token %}
-        <div class="form-group">
-          <label for="{{ form.name.id_for_label }}">Nombre:</label>
-          {{ form.name }}
+
+  <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Agregar comentario
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form method="post">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Nuevo comentario</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="form-group">
-          <label for="{{ form.email.id_for_label }}">Correo electrónico:</label>
-          {{ form.email }}
+        <div class="modal-body">
+          
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="{{ form.name.id_for_label }}">Nombre:</label>
+              {{ form.name }}
+            </div>
+            <div class="form-group">
+              <label for="{{ form.email.id_for_label }}">Correo electrónico:</label>
+              {{ form.email }}
+            </div>
+            <div class="form-group">
+              <label for="{{ form.body.id_for_label }}">Comentario:</label>
+              {{ form.body }}
+            </div>
+ 
         </div>
-        <div class="form-group">
-          <label for="{{ form.body.id_for_label }}">Comentario:</label>
-          {{ form.body }}
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary  btn-block mt-4">Enviar comentario</button>
         </div>
-        <button type="submit" class="btn btn-primary btn-block mt-4">Enviar comentario</button>
-      </form>
-    </div>
+      </div>
+    </form>
   </div>
+</div>
 
 </div>
