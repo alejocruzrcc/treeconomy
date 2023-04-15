@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load static %}
 {% block title %}Carrito{% endblock %}
 
@@ -42,12 +43,12 @@
                   <table class="table table-sm">
                     <thead>
                       <tr>
-                        <th>Tipo de inversión</th>
-                        <th>Proyecto</th>
-                        <th>Precio</th>
-                        <th>Cantidad</th>
-                        <th>Total</th>
-                        <th>Acciones</th>
+                        <th>{%trans "Tipo de inversión" %}</th>
+                        <th>{%trans "Proyecto" %}</th>
+                        <th>{%trans "Precio" %}</th>
+                        <th>{%trans "Cantidad" %}</th>
+                        <th>{%trans "Total" %}</th>
+                        <th>{%trans "Acciones" %}</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -86,15 +87,15 @@
                     {% else %}
                     <div class="jumbotron">
                         {% if request.user.is_anonymous %}
-                            <h1 class="display-4">Hola, Inversor</h1>
+                            <h1 class="display-4">{%trans "Hola, Inversor" %}</h1>
                         {% else %}
-                            <h1 class="display-4">Hola, {{ request.user  }}</h1>
+                            <h1 class="display-4">{%trans "Hola," %} {{ request.user  }}</h1>
                         {% endif %}
-                        <p class="lead">No hay árboles en su carrito. </p>
+                        <p class="lead">{%trans "No hay árboles en su carrito." %} </p>
                         <hr class="my-4">
-                        <p>Para comenzar a invertir en reforestación, échale un vistazo a los proyectos que tenemos disponibles</p>
+                        <p>{%trans "Para comenzar a invertir en reforestación, échale un vistazo a los proyectos que tenemos disponibles" %}</p>
                         <p class="lead">
-                            <a class="button-plant" href="{% url 'projects' %}">Ir a comprar</a>
+                            <a class="button-plant" href="{% url 'projects' %}">{%trans "Ir a comprar" %}</a>
                         </p>
                     </div> 
                     {% endif %}   
@@ -112,12 +113,12 @@
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-12 text-right border-bottom mb-5">
-                                <h3 class="text-black h4 text-uppercase">Carrito Total</h3>
+                                <h3 class="text-black h4 text-uppercase">{%trans "Carrito Total" %}</h3>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                <span class="text-black">Subtotal</span>
+                                <span class="text-black">{%trans "Subtotal" %}</span>
                             </div>
                             <div class="col-md-6 text-right">
                                 <strong class="text-black">${{ order.get_subtotal }}</strong>
@@ -125,7 +126,7 @@
                         </div>
                         <div class="row mb-5">
                             <div class="col-md-6">
-                                <span class="text-black">Total</span>
+                                <span class="text-black">{%trans "Total" %}</span>
                             </div>
                             <div class="col-md-6 text-right">
                                 <strong class="text-black">${{ order.get_total }}</strong>
@@ -134,8 +135,8 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="d-grid gap-2">
-                                    <a class="button-plant btn-lg py-3 text-center" href="{% url 'facturacion'%}">Continúa con tu pago</a>
-                                    <a href="{% url 'projects' %}"><i class="material-icons">keyboard_backspace</i>Regresar</a>   
+                                    <a class="button-plant btn-lg py-3 text-center" href="{% url 'facturacion'%}">{%trans "Continúa con tu pago" %}</a>
+                                    <a href="{% url 'projects' %}"><i class="material-icons">keyboard_backspace</i>{%trans "Regresar" %}</a>   
                                 </div>
                             </div>
                         </div>

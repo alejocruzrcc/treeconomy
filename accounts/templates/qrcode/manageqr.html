@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load i18n %}
 {% block title %}Manage QR{% endblock %}
 {% load static %}
 {% load permission_tags %}
@@ -9,25 +9,25 @@
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
       {% if is_company %}
-      <h1 class="display-4">Comparte tu inversión con tus clientes</h1>
+      <h1 class="display-4">{% trans "Comparte tu inversión con tus clientes" %}</h1>
       <div class="row">
         <div class="col">
-          <p class="lead">Actualiza la información de tu empresa</p>
-          <a class="btn btn-primary profile-button my-3" href={% url 'edit_company' company.pk %} role="button">Actualizar información</a>
+          <p class="lead">{% trans "Actualiza la información de tu empresa" %}</p>
+          <a class="btn btn-primary profile-button my-3" href={% url 'edit_company' company.pk %} role="button">{% trans "Actualizar información" %}</a>
         </div>
         <div class="col">
           {% if user|can:'generate_qr' %}
             {% if company.qrcode %}
-              <p class="lead">Actualmente, ya cuentas con tu código QR que redirigirá a tus clientes a tu dashboard de inversión y plantación.</p>
+              <p class="lead">{% trans "Actualmente, ya cuentas con tu código QR que redirigirá a tus clientes a tu dashboard de inversión y plantación." %}</p>
               <img src="{{ company.qrcode.url }}" width="400px">
             {% else %}
-              <p class="lead">Crea tu propio código QR para que tus cliente puedan visualizar tu inversión y plantación</p>
-              <a class="btn btn-primary profile-button my-3" href={% url 'createqr' %} role="button">Crear QR</a>
+              <p class="lead">{% trans "Crea tu propio código QR para que tus cliente puedan visualizar tu inversión y plantación" %}</p>
+              <a class="btn btn-primary profile-button my-3" href={% url 'createqr' %} role="button">{% trans "Crear QR" %}</a>
             {% endif %}
           {% endif %}
       {% else %}
-          <h5> Aún no registras tu empresa </h5>
-          <a class="button-plant" href="/account/companies/create">Registrar mi empresa</a>
+          <h5> {% trans "Aún no registras tu empresa" %} </h5>
+          <a class="button-plant" href="/account/companies/create">{% trans "Registrar mi empresa" %}</a>
       {% endif %}
         </div>
       </div>

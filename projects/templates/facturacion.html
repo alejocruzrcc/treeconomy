@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load crispy_forms_tags %}
 {% load add_attr %}
 {% load static %}
@@ -11,12 +12,12 @@
         <div class="row mb-5">
             <div class="col-md-12">
                 <div class="border p-4 rounded" role="alert">
-                    Estás cerca de completar tu orden.
-                    Para finalizar, <a href="">Inicia sesión</a> o <a href="">Regístrate</a>
+                    {%trans "Estás cerca de completar tu orden.
+                    Para finalizar," %} <a href="">{%trans "Inicia sesión" %}</a> o <a href="">{%trans "Regístrate" %}</a>
                 </div>
                 <div class="progress">
                     <div class="progress-bar" role="prohressbar" style="width: 90%;" aria-label="90" aria-valuemin="0" aria-valuemax="100">
-                        90% Completado
+                        {%trans "90% Completado" %}
                     </div>
                 </div>
             </div>
@@ -27,16 +28,16 @@
             {% csrf_token %}
             <div class="row">
                 <div class="col-md-6 mb-md-0">
-                    <h2 class="h3 mb-3 text-black text-center">Detalles de la factura</h2>
+                    <h2 class="h3 mb-3 text-black text-center">{%trans "Detalles de la factura" %}</h2>
                     <hr />
-                    <p style="font-size: 12px">Información guardada de tu última orden de compra, puedes editar o llenarlo si es tu primera vez</p>
+                    <p style="font-size: 12px">{%trans "Información guardada de tu última orden de compra, puedes editar o llenarlo si es tu primera vez" %}</p>
                     
                     
                     
                     <div class="p-2 p-lg-2">
                         <div class="card">
                             <div class="card-header">
-                               Información del comprador
+                                {%trans "Información del comprador" %}
                             </div>
                             <div class="card-body">
                                 <div class="row">
@@ -78,13 +79,13 @@
                         </br>
                         <div class="card">
                             <div class="card-header">
-                               Información del Tercero de confianza
+                                {%trans "Información del Tercero de confianza" %} 
                             </div>
                             <div class="card-body">
                                 <!-- Button trigger modal -->
                                 <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                     <i style="margin-right: 0px !important" class="material-icons">info</i>
-                                    ¿Quién es el tercero de confianza?
+                                    {%trans "¿Quién es el tercero de confianza?" %}
                                 </button>
                                 
                                 <!-- Modal -->
@@ -92,12 +93,12 @@
                                     <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Tercero de confianza</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">{%trans "Tercero de confianza" %}</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                        Al invertir en nuestros árboles se crea un contrato con tu información y Treeconomy Inc.
-                                        El tercero de confianza es la persona a quién le cedes tus árboles en caso de que algo te ocurra.
+                                            {%trans "Al invertir en nuestros árboles se crea un contrato con tu información y Treeconomy Inc.
+                                            El tercero de confianza es la persona a quién le cedes tus árboles en caso de que algo te ocurra." %}
                                         </div>
                                     </div>
                                     </div>
@@ -125,14 +126,14 @@
                     </div>
                     <div class="form-group p-2 p-lg-2">
                         <button type="submit" class="btn btn-success btn-lg py-3 btn-block">
-                            Procede a realizar tu pago
+                            {%trans "Procede a realizar tu pago" %} 
                         </button>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="row" mb-5>
                         <div class="col-md-12">
-                           <h2 class="h3 mb-3 text-black teext-center">Tu orden</h2>
+                           <h2 class="h3 mb-3 text-black teext-center">{%trans "Tu orden" %}</h2>
                            <hr>
                            <div class="col-12 p-5">
                             <img src="https://d1wqzb5bdbcre6.cloudfront.net/6be7f28f283df8ac445ca75302a594914ad20665cd4eb42af4aa1bcb2c3d4d59/68747470733a2f2f66696c65732e7374726970652e636f6d2f6c696e6b732f666c5f746573745f474b446a514a36375a7651314c50526f6c35664c71543343"
@@ -142,8 +143,8 @@
                             <table class="table site-block-order-table mb-5">
                                 <thead>
                                   <tr>
-                                    <th>Árboles</th>
-                                    <th>Total</th>
+                                    <th>{%trans "Árboles" %}</th>
+                                    <th>{%trans "Total" %}</th>
                                   </tr>
                                 </thead>
                                 <tbody>
@@ -161,11 +162,11 @@
                                     
                                     {% endfor %}
                                     <tr>
-                                        <td><strong>Subtotal</strong></td>
+                                        <td><strong>{%trans "Subtotal" %}</strong></td>
                                         <td>${{ order.get_subtotal }}</td>
                                     </tr>
                                     <tr>
-                                        <td><strong>Total</strong></td>
+                                        <td><strong>{%trans "Total" %}</strong></td>
                                         <td><strong class="text-black font-weight-bold">${{ order.get_total }}</strong></td>
                                     </tr>
                                 </tbody>  
@@ -173,7 +174,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <p> Si recibiste asesoria de algún vendedor, indícalo aquí </P>
+                        <p> {%trans "Si recibiste asesoria de algún vendedor, indícalo aquí" %} </P>
                         <div class="col-md-6 mb-0">
                           {{ form.vendedor|as_crispy_field }}
                         </div>

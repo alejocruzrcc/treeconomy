@@ -19,7 +19,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 import stripe
 import uuid
 from djongo import models as mdjongo
-
+from django.utils.translation import gettext_lazy as _
     
 
 stripe.api_key = settings.STRIPE_PRIVATE_KEY
@@ -145,7 +145,7 @@ class Project(models.Model):
     coordinates         = models.CharField(max_length=120, blank=True, null=True)
     geokml              = models.FileField(upload_to='poligonos/', blank=True, null=True)
     reg_forestal        = models.FileField(upload_to='registros_forestales/', blank=True, null=True)
-    resena              = models.TextField(verbose_name="Descripción", blank=True, null=True)
+    resena              = models.TextField(verbose_name=_("Descripción"), blank=True, null=True)
     n_trees             = models.PositiveIntegerField()
     plantation_date     = models.DateField()
     inicioventa_date    = models.DateField()
@@ -164,6 +164,10 @@ class Project(models.Model):
     image               = models.ImageField(verbose_name= "Imagen" ,upload_to="images/projects", null=True, blank=True)
     
     objects = ProjectManager()
+
+    class Meta:
+        verbose_name = _("Proyecto")
+        verbose_name_plural = _("Proyectos")
 
     def save(self, *args, **kwargs):
         if self.trees_left is None:

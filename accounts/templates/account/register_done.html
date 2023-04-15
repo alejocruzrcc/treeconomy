@@ -1,12 +1,13 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block title %}Welcome{% endblock %}
 {% load static %}
 {% block content %}
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
-      <h1 class="display-4">Bienvenido {{ new_user.first_name }}!</h1>
-      <p class="lead">Tu cuenta ha sido creada con éxito.</p>
+      <h1 class="display-4">{% trans "Bienvenido" %}  {{ new_user.first_name }}!</h1>
+      <p class="lead">{% trans "Tu cuenta ha sido creada con éxito." %} </p>
   
       {% include "registration/info.html" with video_idea_negocio=video_idea_negocio %}
     </div>

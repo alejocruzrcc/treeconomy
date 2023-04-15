@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load i18n %}
 {% load static %}
 {% block title %}Rechazado{% endblock %}
 {% block extra_head %}
@@ -10,6 +10,6 @@
 
 <section class="section">
   
-  <p>Lo sentimos, no fue posible procesar su pago </p>
+  <p>{%trans "Lo sentimos, no fue posible procesar su pago"%} </p>
 </section>
 {% endblock content %}
