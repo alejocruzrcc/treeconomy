@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-13 22:56-0500\n"
+"POT-Creation-Date: 2023-04-14 19:08-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -400,7 +400,10 @@ msgstr "Company section"
 
 #: .\accounts\templates\account\profile.html:216
 #: .\billing\templates\billing\cartera.html:36
+#: .\billing\templates\billing\checkout.html:40
+#: .\billing\templates\billing\success.html:21
 #: .\dashboard\templates\company.html:195
+#: .\projects\templates\facturacion.html:146
 msgid "Árboles"
 msgstr "Trees"
 
@@ -496,86 +499,80 @@ msgid "¿Ya tienes una cuenta?"
 msgstr "Do you already have an account?"
 
 #: .\accounts\templates\account\register.html:67
+#: .\billing\templates\billing\checkout.html:22
+#: .\projects\templates\facturacion.html:16
 msgid "Inicia sesión"
 msgstr "Login"
 
 #: .\accounts\templates\account\register_done.html:9
 msgid "Bienvenido"
-msgstr ""
+msgstr "Welcome"
 
 #: .\accounts\templates\account\register_done.html:10
 msgid "Tu cuenta ha sido creada con éxito."
-msgstr ""
+msgstr "Your account has been successfully created."
 
 #: .\accounts\templates\account\users.html:10
-#, fuzzy
-#| msgid "Nombre de usuario"
 msgid "Listado de Usuarios"
-msgstr "Username"
+msgstr "List of Users"
 
 #: .\accounts\templates\account\users.html:18
-#, fuzzy
-#| msgid "Dirección>"
 msgid "Creación"
-msgstr "Address"
+msgstr "Creation"
 
 #: .\accounts\templates\account\users.html:19
-#, fuzzy
-#| msgid "Total ingreso"
 msgid "Último ingreso"
-msgstr "Total revenues"
+msgstr "Last entry"
 
 #: .\accounts\templates\qrcode\create_company.html:11
 #: .\accounts\templates\qrcode\edit_company.html:11
-#, fuzzy
-#| msgid "Sección empresa"
 msgid "Información de tu empresa"
-msgstr "Company section"
+msgstr "Company information"
 
 #: .\accounts\templates\qrcode\create_company.html:38
 #: .\accounts\templates\qrcode\edit_company.html:38
 msgid "Guardar"
-msgstr ""
+msgstr "Save"
 
 #: .\accounts\templates\qrcode\manageqr.html:12
 msgid "Comparte tu inversión con tus clientes"
-msgstr ""
+msgstr "Share your investment with your customers"
 
 #: .\accounts\templates\qrcode\manageqr.html:15
 msgid "Actualiza la información de tu empresa"
-msgstr ""
+msgstr "Update your company information"
 
 #: .\accounts\templates\qrcode\manageqr.html:16
 msgid "Actualizar información"
-msgstr ""
+msgstr "Update information"
 
 #: .\accounts\templates\qrcode\manageqr.html:21
 msgid ""
 "Actualmente, ya cuentas con tu código QR que redirigirá a tus clientes a tu "
 "dashboard de inversión y plantación."
 msgstr ""
+"Currently, you already have your QR code that will redirect your customers "
+"to your investment and planting dashboard."
 
 #: .\accounts\templates\qrcode\manageqr.html:24
 msgid ""
 "Crea tu propio código QR para que tus cliente puedan visualizar tu inversión "
 "y plantación"
 msgstr ""
+"Create your own QR code so your customers can visualize your investment and "
+"plantation."
 
 #: .\accounts\templates\qrcode\manageqr.html:25
 msgid "Crear QR"
-msgstr ""
+msgstr "Create QR"
 
 #: .\accounts\templates\qrcode\manageqr.html:29
-#, fuzzy
-#| msgid "Aún no se registran pagos."
 msgid "Aún no registras tu empresa"
-msgstr "No payments have been recorded yet."
+msgstr "You have not yet registered your company"
 
 #: .\accounts\templates\qrcode\manageqr.html:30
-#, fuzzy
-#| msgid "Registrar"
 msgid "Registrar mi empresa"
-msgstr "Register"
+msgstr "Register my company"
 
 #: .\accounts\templates\registration\login.html:3
 msgid "Inicio sesión"
@@ -610,6 +607,7 @@ msgid "Enviar"
 msgstr "Send"
 
 #: .\billing\templates\billing\cartera.html:19
+#: .\billing\templates\billing\success.html:53
 msgid "Historial de pagos"
 msgstr "Payment history"
 
@@ -626,8 +624,7 @@ msgid "Pago total"
 msgstr "Payment in full"
 
 #: .\billing\templates\billing\cartera.html:38
-#, fuzzy
-#| msgid "Cortado"
+
 msgid "Estado"
 msgstr "State"
 
@@ -640,8 +637,7 @@ msgid "Contrato"
 msgstr "Contract"
 
 #: .\billing\templates\billing\cartera.html:54
-#, fuzzy
-#| msgid "Sin cambios"
+
 msgid "Sin fecha"
 msgstr "No date"
 
@@ -661,6 +657,88 @@ msgstr "Not Available"
 #: .\billing\templates\billing\cartera.html:102
 msgid "Aún no se registran pagos."
 msgstr "No payments have been recorded yet."
+
+#: .\billing\templates\billing\checkout.html:22
+#: .\projects\templates\facturacion.html:16
+msgid "Regístrate"
+msgstr "Register"
+
+#: .\billing\templates\billing\checkout.html:26
+#: .\projects\templates\facturacion.html:20
+#, fuzzy, python-format
+#| msgid "90% Completado"
+msgid "90% Completado"
+msgstr "90% Completed"
+
+#: .\billing\templates\billing\checkout.html:35
+#: .\projects\templates\facturacion.html:136
+msgid "Tu orden"
+msgstr "Your order"
+
+#: .\billing\templates\billing\checkout.html:41
+#: .\billing\templates\billing\checkout.html:65
+#: .\billing\templates\billing\success.html:22
+#: .\projects\templates\cart.html:50 .\projects\templates\cart.html:129
+#: .\projects\templates\facturacion.html:147
+#: .\projects\templates\facturacion.html:169
+msgid "Total"
+msgstr "Total:"
+
+#: .\billing\templates\billing\checkout.html:61
+#: .\billing\templates\billing\success.html:42
+#: .\projects\templates\cart.html:121 .\projects\templates\facturacion.html:165
+msgid "Subtotal"
+msgstr "Subtotal"
+
+#: .\billing\templates\billing\checkout.html:71
+#, fuzzy
+#| msgid "Sección empresa"
+msgid "Información de la Tarjeta:"
+msgstr "Card Information:"
+
+#: .\billing\templates\billing\checkout.html:78
+#: .\projects\templates\cart.html:138
+msgid "Continúa con tu pago"
+msgstr "Continue with your payment"
+
+#: .\billing\templates\billing\failed.html:13
+msgid "Lo sentimos, no fue posible procesar su pago"
+msgstr "Sorry, it was not possible to process your payment"
+
+#: .\billing\templates\billing\payment.html:20
+#, fuzzy
+#| msgid "Suscripciones"
+msgid "Suscripciones:"
+msgstr "Subscriptions"
+
+#: .\billing\templates\billing\payment.html:21
+msgid "$8.00 / mes"
+msgstr "$8.00 / month"
+
+#: .\billing\templates\billing\payment.html:27
+msgid "Verificar"
+msgstr "Check"
+
+#: .\billing\templates\billing\success.html:13
+msgid "¡Felicidades! Ya eres un inversionista Treeconomy"
+msgstr "Congratulations! You are already a Treeconomy investor"
+
+#: .\billing\templates\billing\success.html:16
+msgid "Tu factura de compra ha sido enviada a tu correo electrónico"
+msgstr "Your purchase invoice has been sent to your e-mail address."
+
+#: .\billing\templates\billing\success.html:17
+msgid "Resumen de compra:"
+msgstr "Purchase summary:"
+
+#: .\billing\templates\billing\success.html:52
+msgid "Información de tu inversión"
+msgstr "Information about your investment"
+
+#: .\billing\templates\billing\success.html:54
+#: .\dashboard\templates\argon.html:573
+msgid "Tu contrato"
+msgstr "Your contract"
 
 #: .\billing\views.py:156 .\templates\base.html:358 .\templates\base.html:377
 msgid "Cartera"
@@ -704,6 +782,7 @@ msgid "Tus Árboles"
 msgstr "Trees"
 
 #: .\dashboard\templates\argon.html:264
+#: .\projects\templates\project_detail.html:312
 msgid "Total:"
 msgstr "Total:"
 
@@ -808,6 +887,7 @@ msgid "Ver proyectos"
 msgstr "See projects"
 
 #: .\dashboard\templates\argon.html:536 .\projects\models.py:169
+#: .\projects\templates\cart.html:47
 msgid "Proyecto"
 msgstr "Project"
 
@@ -818,10 +898,6 @@ msgstr "Trees available"
 #: .\dashboard\templates\argon.html:571
 msgid "Descargue documentos de su interés"
 msgstr "Download documents of interest"
-
-#: .\dashboard\templates\argon.html:573
-msgid "Tu contrato"
-msgstr "Your contract"
 
 #: .\dashboard\templates\argon.html:575
 msgid "Certificado ICA"
@@ -869,7 +945,7 @@ msgstr "Contact with us"
 
 #: .\dashboard\templates\company.html:160
 msgid "Distribución del capital"
-msgstr ""
+msgstr "Distribution of capital"
 
 #: .\dashboard\templates\company.html:167
 msgid "Esta empresa muy pronto comenzará a invertir"
@@ -877,7 +953,7 @@ msgstr "This company will soon begin to invest"
 
 #: .\dashboard\templates\company.html:175
 msgid "Impacto ambiental"
-msgstr ""
+msgstr "Environmental impact"
 
 #: .\dashboard\templates\company.html:176
 msgid "Desde que fueron sembrados, sus árboles han capturado:"
@@ -937,6 +1013,11 @@ msgid ""
 "combustible es de 4.6 millas por galón (aproximadamente 2 kilómetros por "
 "litro)."
 msgstr ""
+"An average diesel-powered public transport bus emits about  104.6 metric "
+"tons of CO2 per year. This figure is based on theassumption that the bus "
+"travels an average distance of 50,000  miles (approximately 80,500 "
+"kilometers) per year, and its fuel  efficiency is 4.6 miles per gallon "
+"(approximately 2 kilometers per liter)."
 
 #: .\dashboard\views.py:442
 msgid "Automovil"
@@ -950,6 +1031,11 @@ msgid ""
 "embargo, se puede proporcionar una estimación aproximada de la cantidad de "
 "CO2 que emite un automóvil promedio al año equivalente a 2145 Kg"
 msgstr ""
+"The amount of carbon dioxide (CO2) emitted by an average automobile per year "
+"depends on several factors, such as the model of the car, the efficiency of "
+"its engine, the distance traveled, and driving conditions. However However, "
+"it is possible to provide a rough estimate of the amount of CO2 emitted by "
+"an average car per year equivalent to 2145 kg."
 
 #: .\dashboard\views.py:446
 msgid "Moto"
@@ -963,6 +1049,10 @@ msgid ""
 "por año y su eficiencia de combustible es de 50 millas por galón "
 "(aproximadamente 21 kilómetros por litro)."
 msgstr ""
+"An average motorcycle emits about 4.6 metric tons of CO2per year. This "
+"figure is based on the assumption that themotorcycle travels an average "
+"distance of 4,000 miles(approximately 6,400 kilometers) per year and its "
+"fuelefficiency is 50 miles per gallon (approximately 21 kilometersper liter)."
 
 #: .\dashboard\views.py:451
 msgid "Avión"
@@ -977,17 +1067,239 @@ msgid ""
 "entonces la cantidad de CO2 que emite en un año sería de alrededor de 3.54 "
 "millones de kilogramos (o 3,540 toneladas métricas) de CO2."
 msgstr ""
+"An average long-haul commercial passenger jet flighttraveling a distance of "
+"7,500 miles (approximately 12,070 kilometers)emits about 3,933 kilograms of "
+"CO2. If we assumethat an average commercial airliner makes about 3 flights "
+"aday and 300 days a year, then the amount of CO2 it emits in ayear would be "
+"about 3.54 million kilograms (or 3,540 metrictons) of CO2."
 
 #: .\projects\models.py:148
-#, fuzzy
-#| msgid "Dirección>"
 msgid "Descripción"
-msgstr "Address"
+msgstr "Description"
 
-#: .\projects\models.py:170 .\projects\views.py:36 .\templates\base.html:265
-#: .\templates\base.html:374
+#: .\projects\models.py:170 .\projects\templates\project_detail.html:179
+#: .\projects\views.py:36 .\templates\base.html:265 .\templates\base.html:374
 msgid "Proyectos"
 msgstr "Projects"
+
+#: .\projects\templates\cart.html:46
+msgid "Tipo de inversión"
+msgstr "Type of investment"
+
+#: .\projects\templates\cart.html:48 .\projects\templates\project_list.html:326
+#: .\projects\templates\project_list.html:384
+msgid "Precio"
+msgstr "Price"
+
+#: .\projects\templates\cart.html:49
+msgid "Cantidad"
+msgstr "Quantity"
+
+#: .\projects\templates\cart.html:51
+msgid "Acciones"
+msgstr "Shares"
+
+#: .\projects\templates\cart.html:90
+msgid "Hola, Inversor"
+msgstr "Hello, Investor"
+
+#: .\projects\templates\cart.html:92
+msgid "Hola,"
+msgstr "Hello,"
+
+#: .\projects\templates\cart.html:94
+msgid "No hay árboles en su carrito."
+msgstr "There are no trees in your cart."
+
+#: .\projects\templates\cart.html:96
+msgid ""
+"Para comenzar a invertir en reforestación, échale un vistazo a los proyectos "
+"que tenemos disponibles"
+msgstr ""
+"To start investing in reforestation, take a look at the projectswe have "
+"available."
+
+#: .\projects\templates\cart.html:98
+msgid "Ir a comprar"
+msgstr "Go to purchase"
+
+#: .\projects\templates\cart.html:116
+msgid "Carrito Total"
+msgstr "Total Cart"
+
+#: .\projects\templates\cart.html:139
+msgid "Regresar"
+msgstr "Return to"
+
+#: .\projects\templates\facturacion.html:31
+msgid "Detalles de la factura"
+msgstr "Invoice details"
+
+#: .\projects\templates\facturacion.html:33
+msgid ""
+"Información guardada de tu última orden de compra, puedes editar o llenarlo "
+"si es tu primera vez"
+msgstr ""
+"Saved information from your last purchase order, you can edit or fill it if "
+"this is your first time"
+
+#: .\projects\templates\facturacion.html:40
+msgid "Información del comprador"
+msgstr "Buyer's information"
+
+#: .\projects\templates\facturacion.html:82
+#, fuzzy
+#| msgid "Sección empresa"
+msgid "Información del Tercero de confianza"
+msgstr "Trusted Third Party Information"
+
+#: .\projects\templates\facturacion.html:88
+msgid "¿Quién es el tercero de confianza?"
+msgstr "Who is the trusted third party?"
+
+#: .\projects\templates\facturacion.html:96
+msgid "Tercero de confianza"
+msgstr "Trusted third party"
+
+#: .\projects\templates\facturacion.html:129
+msgid "Procede a realizar tu pago"
+msgstr "Proceed to make your payment"
+
+#: .\projects\templates\facturacion.html:177
+msgid "Si recibiste asesoria de algún vendedor, indícalo aquí"
+msgstr "If you received advice from a salesperson, please indicate it here."
+
+#: .\projects\templates\project_detail.html:186
+#: .\projects\templates\project_list.html:320
+#: .\projects\templates\project_list.html:378
+msgid "Editar"
+msgstr "Edit"
+
+#: .\projects\templates\project_detail.html:187
+#: .\projects\templates\project_list.html:321
+#: .\projects\templates\project_list.html:379
+msgid "Eliminar"
+msgstr "Delete"
+
+#: .\projects\templates\project_detail.html:205
+msgid "Carbono capturado:"
+msgstr "Captured carbon:"
+
+#: .\projects\templates\project_detail.html:205
+msgid "31 kg por arbol/Año"
+msgstr ""
+
+#: .\projects\templates\project_detail.html:206
+msgid "Rentabilidad este mes:"
+msgstr "Profitability this month:"
+
+#: .\projects\templates\project_detail.html:207
+msgid "Fecha de plantación:"
+msgstr "Planting date:"
+
+#: .\projects\templates\project_detail.html:208
+msgid "Hectarias:"
+msgstr "Hectaries:"
+
+#: .\projects\templates\project_detail.html:209
+msgid "Fecha de corte:"
+msgstr "Cut-off date:"
+
+#: .\projects\templates\project_detail.html:211
+msgid "Descargar registro forestal"
+msgstr "Download forest register"
+
+#: .\projects\templates\project_detail.html:213
+msgid "Registro forestal No Disponible"
+msgstr "Forestry registration Not available"
+
+#: .\projects\templates\project_detail.html:215
+msgid "Ver en mapa"
+msgstr "See on page"
+
+#: .\projects\templates\project_detail.html:220
+msgid "Costo por arbol:"
+msgstr "Cost per tree:"
+
+#: .\projects\templates\project_detail.html:226
+msgid "Árboles disponibles en este lote"
+msgstr "Trees available in this lot"
+
+#: .\projects\templates\project_detail.html:227
+msgid "Árboles Disponibles"
+msgstr "Trees available"
+
+#: .\projects\templates\project_detail.html:232
+msgid "Edad:"
+msgstr "Age"
+
+#: .\projects\templates\project_detail.html:243
+msgid "Tipo de inversión:"
+msgstr "Type of investment:"
+
+#: .\projects\templates\project_detail.html:255
+msgid "info"
+msgstr "info"
+
+#: .\projects\templates\project_detail.html:256
+msgid "¿Necesitas ayuda?"
+msgstr "Do you need help?"
+
+#: .\projects\templates\project_detail.html:263
+#, fuzzy
+#| msgid "Plan de inversión"
+msgid "Tipos de inversión"
+msgstr "Types of investments"
+
+#: .\projects\templates\project_detail.html:267
+msgid "¿Qué es una inversión recurrente y una inversión única?"
+msgstr "What is a recurring investment and a one-time investment?"
+
+#: .\projects\templates\project_detail.html:271
+msgid "Son dos formas de inversión que ofrecemos en nuestra plataforma:"
+msgstr "These are two forms of investment that we offer on our platform:"
+
+#: .\projects\templates\project_detail.html:272
+msgid ""
+"Bajo el modelo de inversión recurrente o suscripción mensual decides un "
+"monto a invertir o cantidad de árboles mensuales a adquirir y este será "
+"cargado a tú tarjeta de crédito mes a mes de forma automática."
+msgstr ""
+"Under the recurrent investment or monthly subscription model you decide a "
+"amount to invest or number of monthly trees to acquire and this will be "
+"charged to your credit card month by month automatically."
+
+#: .\projects\templates\project_detail.html:273
+msgid ""
+"Por otro lado, con la inversión de pago único se realiza una sola "
+"transacción, requiriendo volver a realizar el proceso de compra manualmente "
+"para adquirir árboles adicionales."
+msgstr ""
+"On the other hand, with single-payment reversal, a single transaction, "
+"requiring you to go through the purchase process again manually to purchase "
+"additional trees."
+
+#: .\projects\templates\project_detail.html:285
+#, fuzzy
+#| msgid "Utilidad:"
+msgid "Cantidad:"
+msgstr "Quantity:"
+
+#: .\projects\templates\project_detail.html:317
+msgid "Añadir al carrito"
+msgstr "Add to cart"
+
+#: .\projects\templates\project_detail.html:322
+msgid "Este proyecto se encuentra cerrado para invertir"
+msgstr "This project is closed for investment"
+
+#: .\projects\templates\project_detail.html:339
+msgid "Galería"
+msgstr "Gallery"
+
+#: .\projects\templates\project_detail.html:340
+msgid "Observa todos los avances de este proyecto."
+msgstr "Watch all the progress of this project."
 
 #: .\projects\templates\project_list.html:231
 msgid "Reporte Clientes"
@@ -1037,16 +1349,6 @@ msgstr "Owner user"
 msgid "Copiar a portapapeles"
 msgstr "Copy to clipboard"
 
-#: .\projects\templates\project_list.html:320
-#: .\projects\templates\project_list.html:378
-msgid "Editar"
-msgstr "Edit"
-
-#: .\projects\templates\project_list.html:321
-#: .\projects\templates\project_list.html:379
-msgid "Eliminar"
-msgstr "Delete"
-
 #: .\projects\templates\project_list.html:324
 #: .\projects\templates\project_list.html:382
 msgid "Rentabilidad"
@@ -1056,11 +1358,6 @@ msgstr "Profitability"
 #: .\projects\templates\project_list.html:383
 msgid "Árboles restantes"
 msgstr "Left over trees"
-
-#: .\projects\templates\project_list.html:326
-#: .\projects\templates\project_list.html:384
-msgid "Precio"
-msgstr "Price"
 
 #: .\projects\templates\project_list.html:328
 msgid "Invertir aquí"

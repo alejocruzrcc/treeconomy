@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load crispy_forms_tags %}
 {% load static %} <!-- new -->
 {% block title %}Payment{% endblock %}
@@ -16,14 +17,14 @@
 <section>
   <div class="product">
     <div class="description">
-      <h3>Suscripciones:</h3>
-      <h5>$8.00 / mes</h5>
+      <h3>{%trans "Suscripciones:"%}</h3>
+      <h5>{%trans "$8.00 / mes"%}</h5>
     </div>
   </div>
   <form action="/create-checkout-session" method="POST">
     <!-- Add a hidden field with the lookup_key of your Price -->
     <input type="hidden" name="lookup_key" value="{{ }}" />
-    <button id="checkout-and-portal-button" type="submit">Verificar</button>
+    <button id="checkout-and-portal-button" type="submit">{%trans "Verificar"%}</button>
   </form>
 </section>
 

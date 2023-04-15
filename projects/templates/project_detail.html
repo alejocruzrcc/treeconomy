@@ -176,15 +176,15 @@
 </style>
 <nav class="fondob" aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/projects">Proyectos</a></li>
+    <li class="breadcrumb-item"><a href="/projects">{%trans "Proyectos" %}</a></li>
     <li class="breadcrumb-item active" aria-current="page">{{ project.name }}</li>
   </ol>
 </nav>
 <div class="banner-producto">
   <div class="container">
     {% if user|can:'manage_a_project' %}
-      <a class="btn btn-success" href="{% url 'editar' project.pk %}" role="button">Editar</a>
-      <a class="btn btn-danger" href="{% url 'eliminar' project.pk %}" role="button">Eliminar</a>
+      <a class="btn btn-success" href="{% url 'editar' project.pk %}" role="button">{%trans "Editar" %}</a>
+      <a class="btn btn-danger" href="{% url 'eliminar' project.pk %}" role="button">{%trans "Eliminar" %}</a>
     {% endif %}
     <br>
     <div class="row d-flex align-items-center">
@@ -202,34 +202,34 @@
             <div class="row d-flex align-items-center">
               <div class="col-xl-9 col-12 p-0">
                 <ul class="datos-producto">
-                  <li id="co2_consumed">Carbono capturado: <span>31 kg por arbol/Año</span></li>
-                  <li>Rentabilidad este mes: <span>{{ project.get_rentabilidad_actual }} %</span> </li>
-                  <li>Fecha de plantación: <span>{{ project.plantation_date }}</span> </li>
-                  <li>Hectarias: <span>{{ project.n_hectares }}</span> </li>
-                  <li>Fecha de corte: <span>{{ project.corte_date }}</span> </li>
+                  <li id="co2_consumed">{%trans "Carbono capturado:" %} <span>{%trans "31 kg por arbol/Año" %}</span></li>
+                  <li>{%trans "Rentabilidad este mes:" %} <span>{{ project.get_rentabilidad_actual }} %</span> </li>
+                  <li>{%trans "Fecha de plantación:" %} <span>{{ project.plantation_date }}</span> </li>
+                  <li>{%trans "Hectarias:" %} <span>{{ project.n_hectares }}</span> </li>
+                  <li>{%trans "Fecha de corte:" %} <span>{{ project.corte_date }}</span> </li>
                   {% if project.reg_forestal %}
-                  <li><a href="{{ project.reg_forestal.url}}" target="_blank"><i class="fa-solid fa-file-arrow-down mr-3"></i> Descargar registro forestal</a></li>
+                  <li><a href="{{ project.reg_forestal.url}}" target="_blank"><i class="fa-solid fa-file-arrow-down mr-3"></i>{%trans "Descargar registro forestal" %} </a></li>
                   {% else %}
-                    Registro forestal No Disponible
+                  {%trans "Registro forestal No Disponible" %} 
                   {% endif%}
-                  <li><a class="btn" href="{{ project.project_link }}" target="_blank">Ver en mapa</a></li>
+                  <li><a class="btn" href="{{ project.project_link }}" target="_blank">{%trans "Ver en mapa" %}</a></li>
                   <!-- <li><a class="btn" href="{{ project.coordinates }}" target="_blank"> Ver coordenadas en mapa...</a></li> -->
                 </ul>
               </div>
               <div class="col-xl-3 col-12">
-                <span  class="costo">Costo por arbol: $<span id="costo">{{ project.get_price }}</span>USD.</span>
+                <span  class="costo">{%trans "Costo por arbol:" %} $<span id="costo">{{ project.get_price }}</span>USD.</span>
                  
               </div>
             </div>
             <div class="row">
               <div class="col-md-8 p-0">
-                <p class="gift-check">Lote {{ project.n_trees }} Árboles disponibles en este lote</p>
-                <p class="gift-check"> {{ project.trees_left }} Árboles Disponibles</p>
+                <p class="gift-check">Lote {{ project.n_trees }}{%trans "Árboles disponibles en este lote" %} </p>
+                <p class="gift-check"> {{ project.trees_left }} {%trans "Árboles Disponibles" %}</p>
                 
               </div>
               <div class="col-md-4">
                 <div class="duracion p-2">
-                  Edad:</br>
+                  {%trans "Edad:" %}</br>
                   {{ project.get_tree_age_years }}
                 </div>
               </div>
@@ -240,7 +240,7 @@
           <div class="row align-items-center">
             <div class="col-md-8">
               {% csrf_token %}
-              <p>Tipo de inversión:</p>
+              <p>{%trans "Tipo de inversión:" %}</p>
               {% if form.errors %}
                   {{ form.type_inversion|add_attr:'is-invalid'}}
               {% else %}
@@ -252,25 +252,25 @@
             </div>
             <div class="col-md-4">
               <a style="cursor: help;" data-bs-toggle="modal" data-bs-target="#necesitasAyuda">
-                <i style="margin-right: 0px !important" class="material-icons">info</i>
-                ¿Necesitas ayuda?
+                <i style="margin-right: 0px !important" class="material-icons">{%trans "info" %}</i>
+                {%trans "¿Necesitas ayuda?" %}
               </a>
               <!-- Modal -->
               <div class="modal fade" id="necesitasAyuda" tabindex="-1" aria-labelledby="necesitasAyudaLabel" aria-hidden="true">
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="necesitasAyudaLabel">Tipos de inversión</h5>
+                      <h5 class="modal-title" id="necesitasAyudaLabel">{%trans "Tipos de inversión" %}</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                      <strong>¿Qué es una inversión recurrente y una inversión única?</strong>
+                      <strong>{%trans "¿Qué es una inversión recurrente y una inversión única?" %}</strong>
                     </br>
                       <p style="text-align: justify;">
                         <ul>
-                          Son dos formas de inversión que ofrecemos en nuestra plataforma:
-                          <li>Bajo el modelo de inversión recurrente o suscripción mensual decides un monto a invertir o cantidad de árboles mensuales a adquirir y este será cargado a tú tarjeta de crédito mes a mes de forma automática. </li>
-                          <li>Por otro lado, con la inversión de pago único se realiza una sola transacción, requiriendo volver a realizar el proceso de compra manualmente para adquirir árboles adicionales.</li>
+                          {%trans "Son dos formas de inversión que ofrecemos en nuestra plataforma:" %}
+                          <li>{%trans "Bajo el modelo de inversión recurrente o suscripción mensual decides un monto a invertir o cantidad de árboles mensuales a adquirir y este será cargado a tú tarjeta de crédito mes a mes de forma automática." %} </li>
+                          <li>{%trans "Por otro lado, con la inversión de pago único se realiza una sola transacción, requiriendo volver a realizar el proceso de compra manualmente para adquirir árboles adicionales." %}</li>
                     
                       </p>
                     </div>
@@ -282,7 +282,7 @@
            <br>
           <div class="row  align-items-center">
             <div class="col-6 col-md-auto col-sm-6">
-              Cantidad:
+              {%trans "Cantidad:" %}
               <div class="input-group mb-3" style="max-width: 120px;">
                 
                 <div class="input-group-pretend">
@@ -309,17 +309,17 @@
             </div>
             
             <div class="col-6 col-md-auto col-sm-6 text-right">
-                <span class="text-black">Total: </span>
+                <span class="text-black">{%trans "Total:" %} </span>
                 <strong>$<span id="total_pdetail" class="text-black">0</span>USD.</strong>
             </div>
           
           </div>
-          <button type="submit" class="btn-sm button-plant buy-now">Añadir al carrito</button>
+          <button type="submit" class="btn-sm button-plant buy-now">{%trans "Añadir al carrito" %}</button>
 
           </form>
         {% else %}
           <div class="alert alert-danger" role="alert">
-            Este proyecto se encuentra cerrado para invertir
+            {%trans "Este proyecto se encuentra cerrado para invertir" %}
           </div>
         {% endif %}
        </div>
@@ -336,8 +336,8 @@
 
  <div class="card-galery">
    <div class="card-body-galery">
-    <h2>Galería</h2>
-    <span>Observa todos los avances de este proyecto.</span>
+    <h2>{%trans "Galería" %}</h2>
+    <span>{%trans "Observa todos los avances de este proyecto." %}</span>
      <div class="row">
       <div id="carousel" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
