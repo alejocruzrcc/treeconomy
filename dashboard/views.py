@@ -45,18 +45,26 @@ def generate_random(number, polygon):
             points.append(geometry.Point(random.uniform(miny, maxy), random.uniform(minx, maxx),))
     return points
 
-def popup_html(nombre, descripcion, hectareas, url):
+def popup_html(nombre, precio, hectareas, url):
     html = f"""
-    <div class="card" style="width: 40rem;">
-        <div class="card-body">
-            <h3 class="card-title">Proyecto {nombre}</h3>
-            <h6 class="card-subtitle mb-2 text-muted">{hectareas} Hectáreas</h6>
-            <p class="card-text">{descripcion}</p>
-            <h4><a href="{ url }" class="card-link" target="_blank">Invertir aquí</a></h4>
+        <div>
+                <h5 class="card-title">{nombre}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{hectareas} Hectáreas</h6>
+                <h4 class="card-text">{precio} USD</h4>
+                <a href="{url}" style="
+                background-color: #f2622e;
+                border-radius: 5px;
+                color: #fff;
+                font-size: 18px;
+                padding: 5px 15px;
+                text-decoration: none;
+                transition: all 0.3s; " 
+                target="_blank">Invertir aquí</a>
+            
         </div>
-    </div>
     """
     return html
+
 
 def invest_json(request, usuario):
     #usuario = request.user
@@ -403,7 +411,7 @@ def dashboard_company(request, slug):
             geometria = lotes[0]["features"][0]["geometry"]
             poligono = geometry.Polygon(geometria["coordinates"][0])
             punto_shapely = generate_random(1, poligono)
-            html = popup_html(project.name, project.resena, project.n_hectares, project.get_absolute_url())
+            html = popup_html(project.name, project.get_price(), project.n_hectares, project.get_absolute_url())
             popup = folium.Popup(folium.Html(html, script=True), max_width=500)
             punto = list(punto_shapely[0].coords)[0]
             folium.Marker(punto, popup=popup,   icon=folium.Icon(color='lightgreen', icon_color='darkgreen', icon='tree', prefix='fa')).add_to(initialMap)
@@ -434,22 +442,34 @@ def dashboard_company(request, slug):
     vehiculos = {}
     
     
-    vehiculos["transporte-publico"] = { "nombre": _("Transporte Público"),
+    vehiculos["transporte-publico"] = { 
+                          "id": "transporte-publico",
+                          "nombre": _("Transporte Público"),                  
                           "url": 'dashboard/img/company/img/icono_bus.png',
+                          "icono": "<i class='fas fa-bus fa-3x'></i>",
                           "mensaje": _('Un autobús de transporte público promedio que funciona con diesel emite alrededor de 104.6 toneladas métricas de CO2 por año. Esta cifra se basa en la suposición de que el autobús recorre una distancia promedio de 50,000 millas (aproximadamente 80,500 kilómetros) por año, y su eficiencia de combustible es de 4.6 millas por galón (aproximadamente 2 kilómetros por litro).'),
                           }
     
-    vehiculos["automovil"] = { "nombre": _("Automovil"),
+    vehiculos["automovil"] = { 
+                          "id": "automovil",
+                          "nombre": _("Automóvil"),
                           "url": 'dashboard/img/company/img/auto.png',
+                          "icono": "<i class='fas fa-car fa-3x'></i>",
                           "mensaje": _("La cantidad de dióxido de carbono (CO2) emitido por un automóvil promedio al año depende de varios factores, como el modelo del automóvil, la eficiencia de su motor, la distancia recorrida y las condiciones de conducción. Sin embargo, se puede proporcionar una estimación aproximada de la cantidad de CO2 que emite un automóvil promedio al año equivalente a 2145 Kg"),
                           }
-    vehiculos["moto"] = { "nombre": _("Moto"),
+    vehiculos["moto"] = { 
+                          "id": "moto",  
+                          "nombre": _("Moto"),
                           "url": 'dashboard/img/company/img/icono_moto.png',
+                          "icono": "<i class='fas fa-motorcycle fa-3x'></i>",
                           "mensaje": _("Una motocicleta promedio emite alrededor de 4.6 toneladas métricas de CO2 por año. Esta cifra se basa en la suposición de que la motocicleta recorre una distancia promedio de 4,000 millas (aproximadamente 6,400 kilómetros) por año y su eficiencia de combustible es de 50 millas por galón (aproximadamente 21 kilómetros por litro)."),
                           }
     
-    vehiculos["avion"] = { "nombre": _("Avión"),
+    vehiculos["avion"] = { 
+                          "id": "avion",
+                          "nombre": _("Avión"),
                           "url": 'dashboard/img/company/img/icono_avion.png',
+                          "icono": "<i class='fas fa-plane fa-3x'></i>",
                           "mensaje": _("Un vuelo promedio de un avión comercial de pasajeros de larga distancia que recorre una distancia de 7,500 millas (aproximadamente 12,070 kilómetros) emite alrededor de 3,933 kilogramos de CO2. Si asumimos que un avión comercial promedio realiza alrededor de 3 vuelos al día y 300 días al año, entonces la cantidad de CO2 que emite en un año sería de alrededor de 3.54 millones de kilogramos (o 3,540 toneladas métricas) de CO2."),
                           }
     
