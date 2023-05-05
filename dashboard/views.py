@@ -446,7 +446,7 @@ def dashboard_company(request, slug):
                           "id": "transporte-publico",
                           "nombre": _("Transporte Público"),                  
                           "url": 'dashboard/img/company/img/icono_bus.png',
-                          "icono": "<i class='fas fa-bus fa-3x'></i>",
+                          "icono": "<i class='fas fa-bus fa-2x'></i>",
                           "mensaje": _('Un autobús de transporte público promedio que funciona con diesel emite alrededor de 104.6 toneladas métricas de CO2 por año. Esta cifra se basa en la suposición de que el autobús recorre una distancia promedio de 50,000 millas (aproximadamente 80,500 kilómetros) por año, y su eficiencia de combustible es de 4.6 millas por galón (aproximadamente 2 kilómetros por litro).'),
                           }
     
@@ -454,14 +454,14 @@ def dashboard_company(request, slug):
                           "id": "automovil",
                           "nombre": _("Automóvil"),
                           "url": 'dashboard/img/company/img/auto.png',
-                          "icono": "<i class='fas fa-car fa-3x'></i>",
+                          "icono": "<i class='fas fa-car fa-2x'></i>",
                           "mensaje": _("La cantidad de dióxido de carbono (CO2) emitido por un automóvil promedio al año depende de varios factores, como el modelo del automóvil, la eficiencia de su motor, la distancia recorrida y las condiciones de conducción. Sin embargo, se puede proporcionar una estimación aproximada de la cantidad de CO2 que emite un automóvil promedio al año equivalente a 2145 Kg"),
                           }
     vehiculos["moto"] = { 
                           "id": "moto",  
                           "nombre": _("Moto"),
                           "url": 'dashboard/img/company/img/icono_moto.png',
-                          "icono": "<i class='fas fa-motorcycle fa-3x'></i>",
+                          "icono": "<i class='fas fa-motorcycle fa-2x'></i>",
                           "mensaje": _("Una motocicleta promedio emite alrededor de 4.6 toneladas métricas de CO2 por año. Esta cifra se basa en la suposición de que la motocicleta recorre una distancia promedio de 4,000 millas (aproximadamente 6,400 kilómetros) por año y su eficiencia de combustible es de 50 millas por galón (aproximadamente 21 kilómetros por litro)."),
                           }
     
@@ -469,7 +469,7 @@ def dashboard_company(request, slug):
                           "id": "avion",
                           "nombre": _("Avión"),
                           "url": 'dashboard/img/company/img/icono_avion.png',
-                          "icono": "<i class='fas fa-plane fa-3x'></i>",
+                          "icono": "<i class='fas fa-plane fa-2x'></i>",
                           "mensaje": _("Un vuelo promedio de un avión comercial de pasajeros de larga distancia que recorre una distancia de 7,500 millas (aproximadamente 12,070 kilómetros) emite alrededor de 3,933 kilogramos de CO2. Si asumimos que un avión comercial promedio realiza alrededor de 3 vuelos al día y 300 días al año, entonces la cantidad de CO2 que emite en un año sería de alrededor de 3.54 millones de kilogramos (o 3,540 toneladas métricas) de CO2."),
                           }
     
