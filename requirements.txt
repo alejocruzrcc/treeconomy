@@ -21,7 +21,7 @@ colorama==0.4.4
 convertapi==1.4.0
 cryptography==36.0.1
 cssselect2==0.4.1
-cupshelpers==1.0
+#cupshelpers==1.0
 dataclasses==0.6
 DateTime==4.3
 dbus-python==1.2.18
