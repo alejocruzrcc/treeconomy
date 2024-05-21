@@ -92,7 +92,7 @@ def invest_json(request, usuario):
         while fecha < hoy:
             rent =  Rentabilidad.objects.filter(year=fecha.year, month=fecha.month, project=Project.objects.get(pk=project_id))
             if rent.count() > 0:
-                rentabilidad = Rentabilidad.objects.filter(year=fecha.year, month=fecha.month, project=Project.objects.get(pk=project_id))[0].valor
+                rentabilidad = (Rentabilidad.objects.filter(year=fecha.year, month=fecha.month, project=Project.objects.get(pk=project_id))[0].valor)/100
             else:
                 rentabilidad= 0.0094
             fechafin = fecha + relativedelta(months=1)
