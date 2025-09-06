@@ -88,7 +88,7 @@ CSRF_TRUSTED_ORIGINS = [
     'app.treeconomy.com',
 ]
 
-django_on_heroku.settings(locals(), staticfiles=False, databases=False),
+##django_on_heroku.settings(locals(), staticfiles=False, databases=False),
 
 DOMINIO_URL = "https://app.treeconomy.com" 
 

@@ -1,6 +1,6 @@
-arabic-reshaper==2.1.3
+arabic-reshaper==2.1.4
 asgiref==3.4.1
-aspose-words==22.7.0
+aspose-words==23.1.0
 Babel==2.10.3
 beautifulsoup4==4.10.0
 boto3==1.21.26
@@ -61,10 +61,10 @@ kml2geojson==5.1.0
 lxml==4.9.1
 MarkupSafe==2.0.1
 mongoengine==0.23.1
-numpy==1.19.5
+numpy==1.26.4
 oauthlib==3.1.1
 palettable==3.3.0
-pandas==1.1.5
+pandas==2.2.2
 phonenumbers==8.12.44
 phonenumberslite==8.12.45
 Pillow==8.4.0
