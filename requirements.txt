@@ -61,10 +61,10 @@ kml2geojson==5.1.0
 lxml==4.9.1
 MarkupSafe==2.0.1
 mongoengine==0.23.1
-numpy==1.26.4
+numpy>=1.21,<1.25
 oauthlib==3.1.1
 palettable==3.3.0
-pandas==2.2.2
+pandas==2.0.3
 phonenumbers==8.12.44
 phonenumberslite==8.12.45
 Pillow==8.4.0

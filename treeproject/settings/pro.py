@@ -7,12 +7,8 @@ DEBUG = False
 SECRET_KEY = os.environ['SECRET_KEY']
 
 
-ALLOWED_HOSTS = ["treeconomyapp.herokuapp.com",
-"app.treeconomy.com.co"]
-CSRF_TRUSTED_ORIGINS = ['https://treeconomyapp.herokuapp.com',
-'https://app.treeconomy.com.co']
-
-
+ALLOWED_HOSTS = ["190.60.255.83", "app.treeconomy.com.co"]
+CSRF_TRUSTED_ORIGINS = ['https://app.treeconomy.com.co']
 
 
 AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
