@@ -1,4 +1,4 @@
-# Render Blueprint — Treeconomy staging (Free + Atlas M0 externo)
+# Render Blueprint — Treeconomy (Free + Atlas producción)
 # Docs: https://render.com/docs/blueprint-spec
 services:
   - type: web
@@ -15,8 +15,8 @@ services:
       - key: SECRET_KEY
         generateValue: true
       - key: DB_NAME_PRO
-        value: treeconomy_staging
+        value: treeconomy_pro
       # Set these in the Render dashboard (do not commit secrets):
-      # DB_HOST_PRO, DB_USER_PRO, DB_PASSWORD_PRO
+      # DB_HOST_PRO, DB_USER_PRO, DB_PASSWORD_PRO  → Atlas producción (cluster0)
       # ALLOWED_HOSTS, CSRF_TRUSTED_ORIGINS, DOMINIO, DOMINIO_URL
       # AWS_*, EMAIL_*, SOCIAL_*, STRIPE_*, CONVERTAPI_SECRET_KEY, MAPBOX_TOKEN

@@ -1,33 +1,36 @@
-# Despliegue Treeconomy en Render Free + MongoDB Atlas M0
+# Despliegue Treeconomy en Render Free + MongoDB Atlas (producción)
 
-Guía paso a paso. **No uses la BD de producción** (`treeconomy_pro`). Este entorno apunta a un cluster Atlas **M0 staging**.
+Guía paso a paso. Este entorno puede apuntar al **cluster Atlas de producción**
+(`cluster0.xhm1v` / BD `treeconomy_pro`), el mismo que usa la app en prod.
+
+**Riesgo:** cualquier migrate o cambio de datos desde Render afecta datos reales.
+Asegúrate de Network Access abierto para Render (`0.0.0.0/0` en ese cluster).
 
 ---
 
-## Fase 1 — Crear cluster Atlas M0
+## Fase 1 — Atlas (cluster de producción existente)
 
-1. Entra a [cloud.mongodb.com](https://cloud.mongodb.com).
-2. **Create Project** → nombre: `treeconomy-staging`.
-3. **Build a Database** → plan **M0 Free** → región cercana a Render (ej. `Virginia (us-east-1)`).
-4. Crea un usuario de base de datos:
-   - Username: `tree_staging` (o el que prefieras)
-   - Password: genéralo y **guárdalo**
-5. **Network Access** → **Add IP Address** → **Allow Access from Anywhere** (`0.0.0.0/0`).  
-   Necesario porque las IPs de Render Free cambian.
-6. **Connect** → **Drivers** → copia el URI, por ejemplo:
-   ```
-   mongodb+srv://tree_staging:<password>@cluster0.xxxxx.mongodb.net/?retryWrites=true&w=majority
-   ```
-7. Nombre de base de datos a usar en Render: `treeconomy_staging`.
+Usar el cluster que ya tienes (no el proyecto `treeconomy-staging` / M0):
 
-Valores a guardar para Render:
+| Dato | Valor esperado |
+|------|----------------|
+| Cluster host | `cluster0.xhm1v.mongodb.net` |
+| Usuario | `treeadmin` (o el vigente en Atlas) |
+| Base de datos | `treeconomy_pro` |
+| URI típica | `mongodb+srv://...@cluster0.xhm1v.mongodb.net/treeconomy_pro?retryWrites=true&w=majority` |
+
+1. En Atlas → ese cluster → **Network Access** → permite `0.0.0.0/0` (IPs de Render Free cambian).
+2. Confirma usuario/password en **Database Access**.
+3. **Connect** → Drivers → copia el URI si necesitas refrescarlo.
+
+Valores para Render:
 
 | Variable | Valor |
 |----------|--------|
-| `DB_HOST_PRO` | URI `mongodb+srv://...` (puede incluir user/pass o solo el host; la app también envía user/password por separado) |
-| `DB_USER_PRO` | Usuario Atlas M0 |
-| `DB_PASSWORD_PRO` | Password Atlas M0 |
-| `DB_NAME_PRO` | `treeconomy_staging` |
+| `DB_HOST_PRO` | URI `mongodb+srv://...` del cluster de producción |
+| `DB_USER_PRO` | Usuario Atlas (ej. `treeadmin`) |
+| `DB_PASSWORD_PRO` | Password de ese usuario |
+| `DB_NAME_PRO` | `treeconomy_pro` |
 
 ---
 
@@ -61,10 +64,10 @@ En el Web Service → **Environment** → añade:
 | `DJANGO_SETTINGS_MODULE` | `treeproject.settings.pro` |
 | `PYTHON_VERSION` | `3.10.14` |
 | `SECRET_KEY` | Generate (Render) o una clave larga aleatoria |
-| `DB_HOST_PRO` | URI `mongodb+srv://...` del M0 |
-| `DB_USER_PRO` | Usuario M0 |
-| `DB_PASSWORD_PRO` | Password M0 |
-| `DB_NAME_PRO` | `treeconomy_staging` |
+| `DB_HOST_PRO` | URI producción `mongodb+srv://...@cluster0.xhm1v.mongodb.net/...` |
+| `DB_USER_PRO` | Usuario Atlas prod (ej. `treeadmin`) |
+| `DB_PASSWORD_PRO` | Password de ese usuario |
+| `DB_NAME_PRO` | `treeconomy_pro` |
 | `ALLOWED_HOSTS` | `tu-servicio.onrender.com` (sin `https://`) |
 | `CSRF_TRUSTED_ORIGINS` | `https://tu-servicio.onrender.com` |
 | `DOMINIO` | `tu-servicio.onrender.com` |
@@ -83,8 +86,8 @@ En el Web Service → **Environment** → añade:
 | `SOCIAL_AUTH_FACEBOOK_SECRET` | De `.env` |
 | `SOCIAL_AUTH_GOOGLE_OAUTH2_KEY` | De `.env` |
 | `SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET` | De `.env` |
-| `STRIPE_PUBLIC_KEY_PRO` | Preferible clave **test** en staging |
-| `STRIPE_PRIVATE_KEY_PRO` | Preferible clave **test** en staging |
+| `STRIPE_PUBLIC_KEY_PRO` | De `.env` (live o test, según quieras) |
+| `STRIPE_PRIVATE_KEY_PRO` | De `.env` |
 | `STRIPE_FREE_PRICE` | De `.env` |
 | `CONVERTAPI_SECRET_KEY` | De `.env` |
 | `MAPBOX_TOKEN` | De `.env` |
@@ -119,7 +122,7 @@ Alternativa: **New** → **Blueprint** y usa [`render.yaml`](render.yaml); igual
    ```bash
    python manage.py createsuperuser
    ```
-4. En Atlas → Browse Collections → confirma colecciones en `treeconomy_staging`.
+4. En Atlas → Browse Collections → confirma actividad en `treeconomy_pro`.
 5. Prueba login y que los estáticos carguen desde S3.
 
 ### Si algo falla
