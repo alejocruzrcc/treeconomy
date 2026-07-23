@@ -5,6 +5,8 @@
 __pycache__
 db.sqlite3
 media
+staticfiles/
+treeproject/staticfiles/
 
 # Distribution / packaging 
 .Python build/ 
@@ -27,3 +29,4 @@ wheels/
 
 # Enviroment 
 .env
+tree_venv/
