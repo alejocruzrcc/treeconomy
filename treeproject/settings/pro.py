@@ -43,7 +43,7 @@ AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400'
 }
 AWS_LOCATION = 'static'
-# Bucket returns 403 for anonymous reads; signed URLs required for media.
+# Bucket returns 403 for anonymous reads; signed URLs for FileField media.
 # Custom domain breaks querystring signatures — leave unset.
 AWS_QUERYSTRING_AUTH = True
 AWS_S3_CUSTOM_DOMAIN = None
@@ -55,19 +55,11 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 _s3_public_base = f'https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 
-# Render Free: serve collected static via WhiteNoise (S3 public GET is 403).
-# Set USE_S3_STATIC=1 only if the bucket allows public static reads.
-_use_s3_static = os.environ.get('USE_S3_STATIC', '').lower() in ('1', 'true', 'yes')
-_on_render = bool(os.environ.get('RENDER'))
-
-if _on_render and not _use_s3_static:
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-    STATIC_URL = '/static/'
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
-else:
-    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-    STATIC_URL = f'{_s3_public_base}/static/'
+# App CSS/JS/fonts: always WhiteNoise + local STATIC_ROOT.
+# (S3 public GET is 403; collecting to S3 left disk empty and caused /static/* 404 on Render.)
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 MEDIA_URL = f'{_s3_public_base}/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
