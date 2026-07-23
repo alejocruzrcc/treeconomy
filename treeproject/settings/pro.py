@@ -59,7 +59,8 @@ _s3_public_base = f'https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 # (S3 public GET is 403; collecting to S3 left disk empty and caused /static/* 404 on Render.)
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+# Plain storage avoids CompressedStaticFilesStorage edge cases on PaaS.
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 MEDIA_URL = f'{_s3_public_base}/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
