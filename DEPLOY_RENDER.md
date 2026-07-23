@@ -38,7 +38,7 @@ Valores a guardar para Render:
 - [`treeproject/settings/pro.py`](treeproject/settings/pro.py) — hosts/CSRF/dominio/DB dinámicos
 - [`requirements.txt`](requirements.txt) — sin `aspose-words` (rompe el build)
 - [`Procfile`](Procfile) — `waitress-serve --port=$PORT ...`
-- [`runtime.txt`](runtime.txt) — `python-3.9.18`
+- [`runtime.txt`](runtime.txt) / [`.python-version`](.python-version) — `python-3.10.14`
 
 Sube estos cambios a GitHub (`main`) antes de crear el servicio en Render.
 
@@ -59,7 +59,7 @@ En el Web Service → **Environment** → añade:
 | Key | Valor ejemplo / notas |
 |-----|------------------------|
 | `DJANGO_SETTINGS_MODULE` | `treeproject.settings.pro` |
-| `PYTHON_VERSION` | `3.9.18` |
+| `PYTHON_VERSION` | `3.10.14` |
 | `SECRET_KEY` | Generate (Render) o una clave larga aleatoria |
 | `DB_HOST_PRO` | URI `mongodb+srv://...` del M0 |
 | `DB_USER_PRO` | Usuario M0 |
