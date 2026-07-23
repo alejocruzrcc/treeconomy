@@ -40,7 +40,9 @@ Valores para Render:
 - [`render.yaml`](render.yaml) — Blueprint opcional
 - [`treeproject/settings/pro.py`](treeproject/settings/pro.py) — hosts/CSRF/dominio/DB dinámicos
 - [`requirements.txt`](requirements.txt) — sin `aspose-words` (rompe el build)
-- [`Procfile`](Procfile) — `waitress-serve --port=$PORT ...`
+- [`Procfile`](Procfile) / [`start.sh`](start.sh) — arranque con collectstatic de respaldo
+...
+   - **Start Command:** `./start.sh`
 - [`runtime.txt`](runtime.txt) / [`.python-version`](.python-version) — `python-3.10.14`
 
 Sube estos cambios a GitHub (`main`) antes de crear el servicio en Render.
@@ -106,7 +108,7 @@ Render también inyecta `RENDER_EXTERNAL_HOSTNAME`; `pro.py` lo añade solo a `A
    - **Language:** Python 3
    - **Plan:** Free
    - **Build Command:** `./build.sh`
-   - **Start Command:** `waitress-serve --port=$PORT treeproject.wsgi:application`
+   - **Start Command:** `./start.sh`
 4. Pega las variables de entorno → **Create Web Service**.
 5. Espera el deploy. Si falla, revisa **Logs** (`pip`, `collectstatic` o `migrate`).
 
