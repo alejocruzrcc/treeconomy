@@ -38,25 +38,39 @@ AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
 AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
 AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
 
-AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-AWS_DEFAULT_ACL = 'public-read'
+AWS_DEFAULT_ACL = None  # Bucket may block ACLs / public access
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400'
 }
 AWS_LOCATION = 'static'
-AWS_QUERYSTRING_AUTH = False
+# Bucket returns 403 for anonymous reads; signed URLs required for media.
+# Custom domain breaks querystring signatures — leave unset.
+AWS_QUERYSTRING_AUTH = True
+AWS_S3_CUSTOM_DOMAIN = None
 AWS_HEADERS = {
     'Access-Control-Allow-Origin': '*',
 }
 ABSOLUTE_URL = ''
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
+_s3_public_base = f'https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 
-STATIC_ROOT = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
-STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
-MEDIA_ROOT = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
-MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
+# Render Free: serve collected static via WhiteNoise (S3 public GET is 403).
+# Set USE_S3_STATIC=1 only if the bucket allows public static reads.
+_use_s3_static = os.environ.get('USE_S3_STATIC', '').lower() in ('1', 'true', 'yes')
+_on_render = bool(os.environ.get('RENDER'))
+
+if _on_render and not _use_s3_static:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    STATIC_URL = '/static/'
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+else:
+    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    STATIC_URL = f'{_s3_public_base}/static/'
+
+MEDIA_URL = f'{_s3_public_base}/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 PROTOCOLO = 'https'
 DOMINIO = os.environ.get('DOMINIO') or _render_host or 'app.treeconomy.com.co'
 
