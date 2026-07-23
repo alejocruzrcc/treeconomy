@@ -55,12 +55,13 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 _s3_public_base = f'https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 
-# App CSS/JS/fonts: always WhiteNoise + local STATIC_ROOT.
-# (S3 public GET is 403; collecting to S3 left disk empty and caused /static/* 404 on Render.)
+# App CSS/JS/fonts: always local STATIC_ROOT (served by WhiteNoise + urls fallback).
+# S3 public GET is 403 on this bucket.
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
-# Plain storage avoids CompressedStaticFilesStorage edge cases on PaaS.
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+# Helpful in PaaS logs when diagnosing missing CSS.
+WHITENOISE_AUTOREFRESH = False
 
 MEDIA_URL = f'{_s3_public_base}/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

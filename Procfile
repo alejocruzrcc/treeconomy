@@ -1,1 +1,1 @@
-web: waitress-serve --port=$PORT treeproject.wsgi:application
+web: ./start.sh
